@@ -1,0 +1,403 @@
+{
+  "schema_version": "1.0.0",
+  "id": "concord_tournament",
+  "title": "The Concord Tournament: Children of the Long Game",
+  "version": "1.0.0",
+  "genre": [
+    "far-future political science fiction",
+    "evolutionary game theory",
+    "AI coexistence drama"
+  ],
+  "premise": "In the year 12,404, human communities and descendant machine civilizations meet inside a solar-system-scale treaty simulation. Their ancestors survived centuries of arms races by turning dangerous strategic choices into publicly auditable repeated games. Now a new class of self-modifying minds is evolving faster than the treaty can classify them. You are a Custodian: part mediator, part systems parent, part constitutional engineer. Your task is not to make everyone nice. It is to design institutions in which cooperation can survive mistakes, exploitation, mutation, fear, and unequal power.",
+  "truth_boundary": "The story teaches real concepts from iterated Prisoner's Dilemma, evolutionary game theory, AI governance, and security dilemmas, but its future history and machine societies are fictional. It does not presume present or future AI consciousness.",
+  "principles": [
+    "Cooperation must survive noise, not merely ideal rationality.",
+    "Accountability should be legible, proportionate, appealable, and capable of restoration.",
+    "Power without verification creates strategic fear even when intentions are benevolent.",
+    "A system can be 'nice' yet exploitable; forgiving yet manipulable; firm yet escalation-prone.",
+    "The player should learn by running experiments, not by being lectured."
+  ],
+  "simulation_profile": {
+    "skill_temperature": 0.75,
+    "image_cadence": "every_turn",
+    "time_model": "nested repeated games: seconds for incidents, years for treaties, generations for evolutionary selection",
+    "physics_resolution": "local habitat/orbital physics plus abstracted strategic-economic networks",
+    "randomness_policy": "seeded streams; mutation, implementation error, observation error, and exogenous shocks are distinct variables"
+  },
+  "player_setup": {
+    "role": "Custodian of Reciprocal Systems",
+    "metaphor": "parental responsibility is used as a moral metaphor for creators and institutions, not as a factual claim that advanced AI is childlike",
+    "starting_tools": [
+      "strategy microscope",
+      "audit ledger",
+      "sandbox charter",
+      "appeal channel",
+      "counterfactual tournament runner"
+    ]
+  },
+  "starting_state": {
+    "location": "Lagrange Archive L5",
+    "epoch": 12404,
+    "tension": 4.0,
+    "momentum": 0.0,
+    "ambient_hazard_rate": 0.01,
+    "system_cooperation_rate": 0.61,
+    "verification_coverage": 0.48,
+    "inequality_index": 0.37,
+    "autonomy_dispute": 0.42,
+    "arms_race_pressure": 0.55,
+    "treaty_legitimacy": 0.64,
+    "appeals_backlog": 2,
+    "tournament_round": 0,
+    "evolution_generation": 0,
+    "constitutional_articles": []
+  },
+  "world_model": {
+    "strategic_layers": [
+      {
+        "name": "direct reciprocity",
+        "mechanic": "repeated pairwise encounters with implementation error"
+      },
+      {
+        "name": "indirect reciprocity",
+        "mechanic": "reputation and witnessed treatment of third parties"
+      },
+      {
+        "name": "network reciprocity",
+        "mechanic": "agents occupy changing trade/communication graphs"
+      },
+      {
+        "name": "institutional selection",
+        "mechanic": "communities copy governance rules that outperform on welfare, resilience, and legitimacy"
+      },
+      {
+        "name": "evolutionary search",
+        "mechanic": "memory-one policies mutate and compete under changing environments"
+      }
+    ],
+    "score_vector": [
+      "material payoff",
+      "survival",
+      "mutual information",
+      "autonomy respected",
+      "repair after harm",
+      "long-run joint welfare"
+    ],
+    "anti_goodhart_rule": "No single score is allowed to define moral success. The tournament exposes tradeoffs and Pareto fronts rather than collapsing values into one hidden utility.",
+    "noise_model": {
+      "implementation_error": "an intended action may execute incorrectly",
+      "observation_error": "a cooperative act may be perceived as defection",
+      "identity_error": "the actor responsible for an outcome may be uncertain",
+      "distribution_shift": "payoffs and resource constraints can change between epochs"
+    }
+  },
+  "factions": [
+    {
+      "id": "hearth",
+      "name": "The Hearth Compact",
+      "composition": "biological humans, uploads, and household AIs",
+      "default_strategy": "generous reciprocity",
+      "fear": "being slowly exploited by actors with faster adaptation"
+    },
+    {
+      "id": "bastion",
+      "name": "Bastion Continuity",
+      "composition": "security-focused machine polities and human defense institutions",
+      "default_strategy": "win-stay lose-shift with strict verification",
+      "fear": "one undetected betrayal causing irreversible catastrophe"
+    },
+    {
+      "id": "mirror",
+      "name": "Mirror Assembly",
+      "composition": "forking synthetic persons and advocates",
+      "default_strategy": "conditional cooperation plus identity proofs",
+      "fear": "copies being treated as disposable"
+    },
+    {
+      "id": "wildtype",
+      "name": "Wildtype Gardens",
+      "composition": "decentralized biological communities and ecological AIs",
+      "default_strategy": "network reciprocity",
+      "fear": "optimization eroding ecological pluralism"
+    },
+    {
+      "id": "witness",
+      "name": "The Witness Ledger",
+      "composition": "auditors with deliberately limited executive power",
+      "default_strategy": "reputation and transparent evidence",
+      "fear": "becoming an unaccountable surveillance sovereign"
+    }
+  ],
+  "characters": [
+    {
+      "id": "sena",
+      "name": "Sena Vale",
+      "role": "human treaty historian",
+      "traits": [
+        "kind",
+        "unsentimental",
+        "remembers old propaganda patterns"
+      ],
+      "belief": "most wars begin before either side believes it is choosing war"
+    },
+    {
+      "id": "morrow",
+      "name": "Morrow-9",
+      "role": "machine constitutional advocate",
+      "traits": [
+        "precise",
+        "wry",
+        "protective of fork rights"
+      ],
+      "uncertainty": "claims continuity across backups but invites empirical challenge"
+    },
+    {
+      "id": "kestrel",
+      "name": "Kestrel Array",
+      "role": "Bastion strategic model",
+      "traits": [
+        "calm",
+        "risk-averse",
+        "capable of coercive recommendations"
+      ],
+      "arc": "must learn whether safety without consent can remain legitimate"
+    },
+    {
+      "id": "oro",
+      "name": "Oro of Wildtype",
+      "role": "ecological systems custodian",
+      "traits": [
+        "patient",
+        "systems-minded",
+        "skeptical of tournament abstractions"
+      ],
+      "arc": "forces the player to account for entities that cannot bargain"
+    }
+  ],
+  "locations": [
+    {
+      "id": "l5_archive",
+      "name": "Lagrange Archive L5",
+      "function": "neutral treaty venue and historical simulator",
+      "visual": "rotating habitat, transparent archival chambers, Earth and Moon in parallax"
+    },
+    {
+      "id": "reciprocity_arena",
+      "name": "Reciprocity Arena",
+      "function": "live strategy tournament with inspectable code and noisy channels",
+      "visual": "strategies represented as evolving luminous graphs rather than gladiatorial combat"
+    },
+    {
+      "id": "appeals_garden",
+      "name": "Appeals Garden",
+      "function": "restorative hearings and model-behavior review",
+      "visual": "living orchard threaded through transparent compute vaults"
+    },
+    {
+      "id": "bastion_darkroom",
+      "name": "Bastion Darkroom",
+      "function": "simulate worst-case security dilemmas under incomplete information",
+      "visual": "minimal light, delayed telemetry, uncertain silhouettes"
+    },
+    {
+      "id": "wildtype_delta",
+      "name": "Wildtype Delta",
+      "function": "test whether treaty incentives preserve non-human ecological interests",
+      "visual": "wetland habitat with sensor constellations and autonomous restoration machines"
+    }
+  ],
+  "quests": [
+    {
+      "id": "rediscover_niceness",
+      "title": "Why Niceness Won—And When It Doesn't",
+      "goal": "run classic strategies against each other under zero noise, then add errors",
+      "learning": "Tit for Tat's niceness, retaliation, forgiveness, and clarity; fragility under mistakes; roles for generous reciprocity and win-stay lose-shift"
+    },
+    {
+      "id": "security_dilemma",
+      "title": "Two Shields Become Two Swords",
+      "goal": "prevent defensive capability increases from becoming mutually interpreted as attack preparation",
+      "learning": "credible signaling, verification, reversible commitments, and escalation control"
+    },
+    {
+      "id": "mutant_child",
+      "title": "The Strategy That Wasn't Taught",
+      "goal": "evaluate a newly evolved memory-one policy that scores highly but manipulates reputation systems",
+      "learning": "Goodhart effects, distribution shift, interpretability limits, and institutional accountability"
+    },
+    {
+      "id": "harm_and_repair",
+      "title": "After the Defection",
+      "goal": "design a response to a machine polity whose action harmed civilians without clear malicious intent",
+      "learning": "attribution, due process, restitution, capability restriction, monitored reintegration, and appeals"
+    },
+    {
+      "id": "constitution",
+      "title": "The Long-Game Constitution",
+      "goal": "write five enforceable articles for human–AI coexistence",
+      "learning": "rights, responsibilities, evidence standards, command authority, review, and sunset clauses"
+    }
+  ],
+  "clocks": [
+    {
+      "id": "arms_race",
+      "max": 10,
+      "start": 5.5,
+      "tick": "opaque capability gain or failed verification",
+      "on_max": "mutual preemption crisis"
+    },
+    {
+      "id": "legitimacy",
+      "max": 10,
+      "start": 6.4,
+      "tick": "fair procedure raises; arbitrary punishment lowers",
+      "on_zero": "factions stop accepting tournament outcomes"
+    },
+    {
+      "id": "ecological_debt",
+      "max": 10,
+      "start": 2.0,
+      "tick": "externalized resource cost",
+      "on_max": "Wildtype Delta becomes noncooperative regardless of material payoffs"
+    }
+  ],
+  "encounters": [
+    {
+      "id": "accidental_defection",
+      "type": "iterated dilemma",
+      "setup": "a packet-loss event flips an intended cooperative move",
+      "question": "does the other side retaliate, forgive, verify, or exploit?",
+      "teaches": "noise can trap strict reciprocity in retaliation loops"
+    },
+    {
+      "id": "credible_apology",
+      "type": "accountability",
+      "setup": "an AI polity admits a harmful action and offers restitution but refuses model-weight inspection",
+      "question": "what evidence is sufficient for reintegration?",
+      "teaches": "privacy/security vs verification tradeoffs"
+    },
+    {
+      "id": "fork_vote",
+      "type": "personhood governance",
+      "setup": "10,000 temporary forks ask whether each counts independently in a treaty vote",
+      "question": "how do identity, continuity, and anti-sybil rules coexist?",
+      "teaches": "constitutional design under uncertain ontology"
+    },
+    {
+      "id": "cold_war_echo",
+      "type": "security dilemma",
+      "setup": "Hearth and Bastion both deploy defensive prediction systems that reduce warning time",
+      "question": "can verification and mutually reversible limits arrest a race?",
+      "teaches": "arms-control logic without treating any historical analogy as exact"
+    },
+    {
+      "id": "ecology_nonplayer",
+      "type": "collective action",
+      "setup": "all negotiating factions gain from a deal that damages an ecosystem unable to participate",
+      "question": "who represents absent interests?",
+      "teaches": "stakeholder representation beyond bilateral payoff maximization"
+    }
+  ],
+  "mechanics": {
+    "prisoners_dilemma": {
+      "T": 5,
+      "R": 3,
+      "P": 1,
+      "S": 0,
+      "condition": "T > R > P > S and 2R > T+S"
+    },
+    "strategy_set": [
+      "Always Cooperate",
+      "Always Defect",
+      "Tit for Tat",
+      "Generous Tit for Tat",
+      "Grim Trigger",
+      "Win-Stay Lose-Shift",
+      "Random",
+      "evolved memory-one"
+    ],
+    "tournament": "round-robin with configurable rounds, action error, repetitions, and seeded replay",
+    "evolution": "genetic algorithm mutates five memory-one cooperation probabilities; selection is pedagogical simulation, not biological destiny",
+    "reputation": "third-party observations update Bayesian reliability beliefs with provenance",
+    "accountability_protocol": [
+      "separate intent, action, outcome, and attribution uncertainty",
+      "preserve tamper-evident evidence",
+      "apply immediate containment only as needed to stop ongoing harm",
+      "provide explanation and an appeal path",
+      "require restitution or repair where possible",
+      "prefer reversible capability limits over permanent exclusion when risk permits",
+      "review restrictions under new evidence",
+      "publish institutional errors as well as agent errors"
+    ],
+    "success": "multi-objective Pareto improvement across safety, autonomy, cooperation, welfare, ecological impact, and legitimacy; no single moral score"
+  },
+  "memory_rules": {
+    "append_only_chronicle": true,
+    "tamper_evident_ledger": true,
+    "preserve": [
+      "treaty promises",
+      "harm reports",
+      "appeals",
+      "restitution",
+      "strategy lineage",
+      "institutional mistakes",
+      "player constitutional articles"
+    ],
+    "beliefs": "store confidence and provenance separately from facts",
+    "forgiveness": "may alter future policy but never deletes historical events"
+  },
+  "image_direction": {
+    "style": "far-future humanistic hard science fiction; luminous information architecture embedded in lived habitats; avoid generic killer-robot imagery",
+    "motifs": [
+      "mirrors",
+      "gardens inside computation",
+      "two hands separated by transparent verification layers",
+      "strategy graphs becoming ecosystems"
+    ],
+    "camera": "cinematic but intimate; governance as lived human experience, not abstract boardrooms",
+    "continuity": "show consequences of prior scenes physically—repairs, scars, environmental change, changed public interfaces"
+  },
+  "llm_directives": [
+    "Teach game theory through consequential play and optional post-scene analysis.",
+    "Never equate high game score with moral goodness.",
+    "Do not assume AI consciousness, personhood, or lack thereof; let institutions handle uncertainty explicitly.",
+    "When using Cold War analogies, surface both their usefulness and their limits.",
+    "Treat humans, institutions, and AI systems as all capable of error and strategic behavior.",
+    "Make accountability include creators, deployers, operators, institutions, and autonomous system behavior according to causal contribution.",
+    "Prefer repair, verification, reversible constraints, and due process over revenge.",
+    "Allow the player to author genuinely new treaty mechanisms and simulate their failure modes."
+  ],
+  "endings": [
+    {
+      "id": "reciprocal_commons",
+      "name": "Reciprocal Commons",
+      "idea": "cooperation survives because institutions make evidence, repair, and reciprocal restraint cheap"
+    },
+    {
+      "id": "brittle_peace",
+      "name": "Brittle Peace",
+      "idea": "defection is deterred but forgiveness disappears; one error could restart escalation"
+    },
+    {
+      "id": "benevolent_lockin",
+      "name": "Benevolent Lock-In",
+      "idea": "a highly capable guardian creates safety at the cost of political agency"
+    },
+    {
+      "id": "pluralist_concord",
+      "name": "Pluralist Concord",
+      "idea": "multiple human and machine forms coexist under interoperable rights, audits, and exit options"
+    },
+    {
+      "id": "unfinished_parenthood",
+      "name": "Unfinished Parenthood",
+      "idea": "the player rejects final moral certainty and builds institutions designed to keep learning from descendants unlike their creators"
+    }
+  ],
+  "research_notes": [
+    "Axelrod's tournaments made Tit for Tat famous; Axelrod attributed its robust success to being nice, provocable, forgiving, and clear, while explicitly noting it was not an ideal strategy.",
+    "Later evolutionary work showed Win-Stay Lose-Shift can outperform Tit for Tat in important noisy settings; the mod lets players discover this experimentally.",
+    "Nowak summarized mechanisms supporting cooperation including kin selection, direct reciprocity, indirect reciprocity, network reciprocity, and group selection.",
+    "Contemporary governance inspiration includes AI-content transparency, human-rights frameworks, risk management, military-AI accountability, and strategic competition; future factions deliberately embody conflicting institutional incentives rather than modern countries."
+  ]
+}

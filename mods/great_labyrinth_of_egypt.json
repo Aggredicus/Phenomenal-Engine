@@ -1,0 +1,378 @@
+{
+  "schema_version": "1.0.0",
+  "id": "great_labyrinth_of_egypt",
+  "title": "Eidolon Shard: The Great Labyrinth of Egypt",
+  "version": "1.0.0",
+  "genre": [
+    "mythic archaeological mystery",
+    "puzzle RPG",
+    "time-loop exploration"
+  ],
+  "premise": "At a fictionalized labyrinth inspired by Egyptian myth and prior game-map work, the player crosses a symbolic surface plan and a mirrored basement while a 12-hour cycle repeats. Four reconciled fragments open the central rosette and the shaft below; twelve courts ultimately align a symbolic Solar Barque.",
+  "truth_boundary": "This is a game-design interpretation, not an archaeological claim. Historical details should be distinguished from mythic, symbolic, speculative, and invented elements.",
+  "principles": [
+    "Discovery beats exposition.",
+    "Puzzles should have physical or symbolic causality rather than arbitrary locks.",
+    "The time loop preserves player memory while most world systems partially reset.",
+    "Failure changes information and relationships instead of merely blocking progress."
+  ],
+  "simulation_profile": {
+    "skill_temperature": 0.85,
+    "image_cadence": "every_turn",
+    "time_model": "semi-Markov 12-hour loop with persistent divergence flags",
+    "physics_resolution": "local architectural acoustics, light transport cues, thermal inertia, observer uncertainty",
+    "randomness_policy": "seeded PCG32; hidden layout facts sampled once; action uncertainty sampled per attempt"
+  },
+  "player_setup": {
+    "default_role": "soul-seeker",
+    "alternate_role": "Ra-bearer",
+    "reveal_character_through_play": true,
+    "starting_familiar": "Ba, a celestial falcon-like memory companion"
+  },
+  "starting_state": {
+    "location": "F0_START",
+    "floor": "F0_surface",
+    "hour": 1,
+    "loop_index": 0,
+    "tension": 2.0,
+    "momentum": 0.0,
+    "ambient_hazard_rate": 0.015,
+    "fragments": {
+      "star": false,
+      "solar": false,
+      "scarab": false,
+      "serpent": false
+    },
+    "glyphs_aligned": 0,
+    "central_rosette_open": false,
+    "barque_active": false,
+    "player_memory_persists": true,
+    "discovered_shortcuts": []
+  },
+  "world_model": {
+    "map_layers": [
+      {
+        "id": "F0_surface",
+        "role": "ritual clue layer and upper maze",
+        "start": "F0_START"
+      },
+      {
+        "id": "B1_basement",
+        "role": "rectilinear corridor/chamber layer",
+        "start": "B1_CENTRAL_SHAFT"
+      }
+    ],
+    "critical_transition": {
+      "from": "F0_CORE_ROSETTE",
+      "to": "B1_CENTRAL_SHAFT",
+      "requires": [
+        "star_fragment",
+        "solar_fragment",
+        "scarab_fragment",
+        "serpent_fragment"
+      ]
+    },
+    "secondary_transitions": [
+      "north cardinal gate",
+      "east cardinal gate",
+      "south cardinal gate",
+      "west cardinal gate"
+    ],
+    "loop_rules": [
+      "At the end of Hour 12, transient doors, NPC positions, and unsolved court events reset.",
+      "Player memory, ledger, fused glyphs, earned trust, and explicit divergence flags persist.",
+      "A solved court may repeat with altered context rather than vanishing from play."
+    ],
+    "sensory_model": {
+      "light": "oil flame, reflected sunlight, starlight shafts, mineral fluorescence only when fiction establishes a source",
+      "sound": "long stone reverberation, occluded corridors, footstep delay, air-shaft resonance",
+      "temperature": "slow stone thermal response with cooler lower passages",
+      "perception": "uncertainty rises in darkness, echoic spaces, fatigue, and unfamiliar symbolic contexts"
+    }
+  },
+  "factions": [
+    {
+      "id": "keepers",
+      "name": "Keepers of the Meander",
+      "goal": "preserve the cycle until a worthy interpretation emerges",
+      "strategy": "conditional cooperation"
+    },
+    {
+      "id": "unbound",
+      "name": "The Unbound Dead",
+      "goal": "break the loop regardless of collateral consequences",
+      "strategy": "high-risk defection against institutions"
+    },
+    {
+      "id": "scribes",
+      "name": "Scribes of the Returning Word",
+      "goal": "record every divergence and test whether memory changes destiny",
+      "strategy": "information exchange and verification"
+    }
+  ],
+  "characters": [
+    {
+      "id": "ba",
+      "name": "Ba",
+      "role": "memory familiar",
+      "traits": [
+        "curious",
+        "protective",
+        "not omniscient"
+      ],
+      "mechanic": "may preserve one otherwise-lost clue per loop"
+    },
+    {
+      "id": "neseret",
+      "name": "Neseret",
+      "role": "keeper of the eastern mirror court",
+      "traits": [
+        "precise",
+        "skeptical",
+        "merciful"
+      ],
+      "secret": "remembers emotional tone but not literal events between loops"
+    },
+    {
+      "id": "khay",
+      "name": "Khay",
+      "role": "wandering surveyor",
+      "traits": [
+        "pragmatic",
+        "warm",
+        "afraid of the central descent"
+      ],
+      "secret": "knows one cardinal shortcut but distrusts glyph fusion"
+    }
+  ],
+  "locations": [
+    {
+      "id": "F0_START",
+      "name": "South Processional Start",
+      "sensory": {
+        "lux": 18000,
+        "db": 28,
+        "rt60": 0.2
+      },
+      "hooks": [
+        "wind-driven sand traces a repeating geometry"
+      ]
+    },
+    {
+      "id": "F0_CORE_ROSETTE",
+      "name": "Core Rosette",
+      "sensory": {
+        "lux": 12,
+        "db": 32,
+        "rt60": 1.8
+      },
+      "hooks": [
+        "four fragment sockets",
+        "subtle vertical air movement"
+      ]
+    },
+    {
+      "id": "B1_CENTRAL_SHAFT",
+      "name": "Central Shaft",
+      "sensory": {
+        "lux": 0.3,
+        "db": 24,
+        "rt60": 3.2
+      },
+      "hooks": [
+        "descending temperature",
+        "delayed echoes from side chambers"
+      ]
+    },
+    {
+      "id": "B1_W_JUDGMENT_CELL",
+      "name": "West Judgment Cell",
+      "sensory": {
+        "lux": 2,
+        "db": 36,
+        "rt60": 2.0
+      },
+      "hooks": [
+        "paired symmetry with eastern chamber"
+      ]
+    },
+    {
+      "id": "B1_E_JUDGMENT_CELL",
+      "name": "East Judgment Cell",
+      "sensory": {
+        "lux": 2,
+        "db": 36,
+        "rt60": 2.0
+      },
+      "hooks": [
+        "paired symmetry with western chamber"
+      ]
+    },
+    {
+      "id": "B1_DEEP_STAIR_SEAL",
+      "name": "Deep Stair Seal",
+      "sensory": {
+        "lux": 0.05,
+        "db": 18,
+        "rt60": 4.0
+      },
+      "hooks": [
+        "final lower threshold",
+        "twelve-glyph register"
+      ]
+    }
+  ],
+  "quests": [
+    {
+      "id": "four_fragments",
+      "title": "Reconcile the Four Corners",
+      "goal": "recover and interpret star, solar, scarab, and serpent fragments",
+      "completion": "all four fragments true",
+      "reward": "open F0_CORE_ROSETTE"
+    },
+    {
+      "id": "paired_chambers",
+      "title": "The Mirror Does Not Agree",
+      "goal": "solve paired basement rooms whose observations differ",
+      "completion": "derive the invariant shared by both rooms",
+      "reward": "one cardinal shortcut"
+    },
+    {
+      "id": "twelve_hours",
+      "title": "The Twelve Courts",
+      "goal": "cause a meaningful divergence in each hour/court",
+      "completion": "glyphs_aligned == 12",
+      "reward": "activate Solar Barque sequence"
+    },
+    {
+      "id": "memory_question",
+      "title": "What Deserves to Persist?",
+      "goal": "decide which memories the loop should preserve for everyone, not only the player",
+      "completion": "constitutional memory rule authored by player",
+      "reward": "changes ending family"
+    }
+  ],
+  "clocks": [
+    {
+      "id": "hour_cycle",
+      "max": 12,
+      "start": 1,
+      "tick": "major scene",
+      "on_max": "loop reset with divergences preserved"
+    },
+    {
+      "id": "stone_fatigue",
+      "max": 6,
+      "start": 0,
+      "tick": "reckless structural disturbance",
+      "on_max": "route closure and new detour, not instant death"
+    }
+  ],
+  "encounters": [
+    {
+      "id": "echo_without_source",
+      "type": "perception",
+      "dilemma": "follow a voice whose delay does not match the corridor geometry",
+      "resolutions": [
+        "measure echoes",
+        "trust Ba",
+        "ignore and map first",
+        "answer the voice"
+      ]
+    },
+    {
+      "id": "paired_truths",
+      "type": "logic",
+      "dilemma": "east and west chambers provide individually consistent but mutually incompatible inscriptions",
+      "resolutions": [
+        "seek invariant",
+        "privilege one court",
+        "test both physically",
+        "defer judgment"
+      ]
+    },
+    {
+      "id": "keeper_bargain",
+      "type": "social",
+      "dilemma": "a Keeper offers a shortcut in exchange for surrendering one remembered clue",
+      "resolutions": [
+        "trade",
+        "refuse",
+        "counteroffer",
+        "ask why memory matters"
+      ]
+    },
+    {
+      "id": "barque_threshold",
+      "type": "ethical",
+      "dilemma": "activation can end the loop but may erase stable identities that formed inside it",
+      "resolutions": [
+        "activate",
+        "delay",
+        "seek consent",
+        "rewrite the activation condition"
+      ]
+    }
+  ],
+  "mechanics": {
+    "core_resolution": "logistic skill-vs-difficulty probability with contextual modifiers and seeded replay",
+    "loop_divergence": "persistent flags survive resets; transient physical state does not unless causally stabilized",
+    "glyph_fusion": "combine discovered symbolic constraints; valid fusion must explain at least two prior observations",
+    "acoustic_puzzles": "use distance, sound speed, reverb, and occlusion as clue generators",
+    "light_puzzles": "use source direction, reflection, occlusion, spectrum, and time-of-day as clue generators",
+    "failure": "reveal cost, altered route, trust change, or new information; avoid dead-end rerolls"
+  },
+  "memory_rules": {
+    "append_only_chronicle": true,
+    "tamper_evident_ledger": true,
+    "preserve": [
+      "glyphs",
+      "relationships",
+      "player-authored constitutional rule",
+      "major injuries",
+      "deaths if enabled",
+      "divergence flags"
+    ],
+    "reset": [
+      "ordinary NPC positions",
+      "unsecured objects",
+      "unsolved court choreography"
+    ],
+    "rewind": "allowed only by explicit player command; mark ledger branch"
+  },
+  "image_direction": {
+    "style": "cinematic archaeological-fantasy realism; monumental scale; physically plausible light; no pseudo-hieroglyphic gibberish in close-up",
+    "camera": "24–50 mm equivalent; strong architectural perspective; viewpoint-height continuity",
+    "continuity": "preserve character clothing, injuries, carried objects, room geometry, and light sources across turns"
+  },
+  "llm_directives": [
+    "Open on sensory evidence, not lore exposition.",
+    "Treat Egyptian religion and history respectfully; label invented or speculative material when relevant out of character.",
+    "Never make a hidden solution true merely because the player guessed it; consult stable world state.",
+    "Use the physics layer to generate clues, not to bury the player in equations.",
+    "When the player proposes an experiment, simulate what the experiment could actually reveal.",
+    "Offer freeform actions in addition to listed options."
+  ],
+  "endings": [
+    {
+      "id": "barque_release",
+      "name": "Solar Release",
+      "condition": "12 glyphs aligned and informed consent rule satisfied"
+    },
+    {
+      "id": "memory_commonwealth",
+      "name": "Commonwealth of Memory",
+      "condition": "player reforms loop so inhabitants share bounded persistent memory"
+    },
+    {
+      "id": "open_labyrinth",
+      "name": "The Door Remains Open",
+      "condition": "player rejects a final answer and converts the labyrinth into an ongoing school of inquiry"
+    }
+  ],
+  "research_notes": [
+    "Prior project map: symbolic surface, rectilinear basement, 64-node playable abstraction, central rosette to central shaft.",
+    "Prior Eidolon Shard concept: 12-hour cycle, 12 courts/Nomoi, glyph fusion, Ba familiar, Solar Barque.",
+    "Historical/mythic details in this mod must be treated as inspiration, not asserted archaeology."
+  ]
+}

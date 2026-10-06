@@ -1,0 +1,217 @@
+[
+  {
+    "path": "AGENT_BOOTLOADER.md",
+    "bytes": 2692,
+    "sha256": "bd8f684a42824a951424b605629712d6d9cf3ce83aed68982a2bc5e4e56550db"
+  },
+  {
+    "path": "CHANGELOG.md",
+    "bytes": 348,
+    "sha256": "19dc2130af475fd39be4f1569d000ba39656c723c8646302796fec9183f51c17"
+  },
+  {
+    "path": "LICENSE",
+    "bytes": 1067,
+    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
+  },
+  {
+    "path": "MOD_AUTHOR_PROMPT.md",
+    "bytes": 1060,
+    "sha256": "ef79c614634856483e8e5fdbc91da09a48e9664ce9b924f79e90b2f1cdd8b271"
+  },
+  {
+    "path": "README.md",
+    "bytes": 3718,
+    "sha256": "c22b7170b099bd7567cccc7e5c807d533ad09f1d3b2ebc0c6acbd6a974597364"
+  },
+  {
+    "path": "docs/game_theory_and_ai_ethics.md",
+    "bytes": 4138,
+    "sha256": "e2a0f17b8df9a406b4a49f46dd37871de932ce26c29f4f87ce6e78597543743c"
+  },
+  {
+    "path": "docs/image_pipeline.md",
+    "bytes": 1548,
+    "sha256": "a7052e73e5607f60690863a78ab553c979f3a3f6bf7e027a0b59317512aea7a5"
+  },
+  {
+    "path": "docs/math_and_probability.md",
+    "bytes": 3798,
+    "sha256": "dadda50ce35c0ad0ba59573d10121c760700314ad0cbb6c6a6d3d905a694917d"
+  },
+  {
+    "path": "docs/memory_protocol.md",
+    "bytes": 1374,
+    "sha256": "bb77bcbbcb01168c83b5f83e209d2c54ac65091b0129b41ea4935058d0683068"
+  },
+  {
+    "path": "docs/modding_guide.md",
+    "bytes": 1610,
+    "sha256": "7b5b29ded0583492ff493a510d94171158da3ccd445d580d137c763f24098f42"
+  },
+  {
+    "path": "docs/multiscale_physics.md",
+    "bytes": 2927,
+    "sha256": "0d1e6ee4fcd43f0d96db9421ee909fa67f93832e2fef1fa7d279d07652f728b1"
+  },
+  {
+    "path": "docs/phenomenology.md",
+    "bytes": 1081,
+    "sha256": "33d42769427c1ff6319ffa264e14163cace31e4f9a7e2c9c12eed5c19fc93452"
+  },
+  {
+    "path": "docs/roadmap.md",
+    "bytes": 1830,
+    "sha256": "c90b9b6db36f568cae7aa1a000e68e7e4b8a26cc6f2c7ea55846e232c26185c6"
+  },
+  {
+    "path": "docs/sources.md",
+    "bytes": 2169,
+    "sha256": "2728b412571c3801c498bbc0f3ce8a24da6ea02883c531ac4d16ed6e9c197939"
+  },
+  {
+    "path": "examples/memory.example.json",
+    "bytes": 1078,
+    "sha256": "a7d8ad6a429b882b4df9583e9bb257e96e703146e3e5d215aad1e72f253327e2"
+  },
+  {
+    "path": "examples/run_demo.py",
+    "bytes": 843,
+    "sha256": "6023192173b88106338739f61c3f147e270e518f51c1ef49766e7e205a7be9ce"
+  },
+  {
+    "path": "mods/concord_tournament.json",
+    "bytes": 17244,
+    "sha256": "ef74f4022ac5bca1445846d38146a781e31d46839fdf022a29e99c62c08543c2"
+  },
+  {
+    "path": "mods/great_labyrinth_of_egypt.json",
+    "bytes": 12290,
+    "sha256": "8e65f98cb4d2b60adb788896ea212ed0662229fa3a2df2dcaf1b3dbeda1e5eec"
+  },
+  {
+    "path": "mods/orbital_swarm_trail.json",
+    "bytes": 12910,
+    "sha256": "56c3f182397332e6b358342349afb301ba7b384e448bafc8a2c784dd32ae66b7"
+  },
+  {
+    "path": "phenomenal_engine/__init__.py",
+    "bytes": 124,
+    "sha256": "b8cf7ae353f3c9430bc7aa9ad5f7194e9dadd6bd0aea5dd0a65c7c6aee1e4705"
+  },
+  {
+    "path": "phenomenal_engine/__main__.py",
+    "bytes": 29,
+    "sha256": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3"
+  },
+  {
+    "path": "phenomenal_engine/cli.py",
+    "bytes": 4059,
+    "sha256": "c7ffa357078866344d3f8409003a5eeb3e4ef6aa4050d9590074d331e89dcdb8"
+  },
+  {
+    "path": "phenomenal_engine/engine.py",
+    "bytes": 2644,
+    "sha256": "95104cebbbb2d0edd0702e8a806b0909dba42fe176216df7d9451ed5ae5cdd23"
+  },
+  {
+    "path": "phenomenal_engine/game_theory.py",
+    "bytes": 7257,
+    "sha256": "1f56560270f6830314680d3f29540464befe5421d99959c41d535e767ed21f80"
+  },
+  {
+    "path": "phenomenal_engine/image_jobs.py",
+    "bytes": 2055,
+    "sha256": "261d79147db756ee99cc6cc385089acd619a0011b53596897873a2ea98bc19b5"
+  },
+  {
+    "path": "phenomenal_engine/memory.py",
+    "bytes": 2917,
+    "sha256": "f534ed6202ba0c368c16c3d640fdce5d538a62ad5bbe5d3154cf991cf0fa129c"
+  },
+  {
+    "path": "phenomenal_engine/mod_loader.py",
+    "bytes": 1304,
+    "sha256": "2a2fafcb27957f7d783825a888c855a3f0b0e344848220e25eb263500c88e13b"
+  },
+  {
+    "path": "phenomenal_engine/narrative.py",
+    "bytes": 2804,
+    "sha256": "b6aaffe1240126b7bbb5898f876557518e38f29e429abbe1ee0289a30f736ed0"
+  },
+  {
+    "path": "phenomenal_engine/perception.py",
+    "bytes": 1524,
+    "sha256": "037702ea98d06862a2cf0bbb1a7bc7375eab6d68f4228da6d7a222abe79021a6"
+  },
+  {
+    "path": "phenomenal_engine/physics.py",
+    "bytes": 4021,
+    "sha256": "266a2b1ffbca1a3023041f1089eb0f78727c19f9dd74798b6d4f2763fdae6b54"
+  },
+  {
+    "path": "phenomenal_engine/probability.py",
+    "bytes": 3654,
+    "sha256": "ff39aeced0b6ad5ab6706c5461325f4c1e3a1d59d3624dc2e88662d30846d598"
+  },
+  {
+    "path": "phenomenal_engine/rng.py",
+    "bytes": 5451,
+    "sha256": "e86d5c675b186181982883ce1d1fe79c25b706b1ff8c065cc17bc9a1f6332442"
+  },
+  {
+    "path": "phenomenal_engine/waves.py",
+    "bytes": 1819,
+    "sha256": "63d251f575c0ab82feab7f70ca23fc9d56735d485bad0fba5c4def04f1b8ffa5"
+  },
+  {
+    "path": "pyproject.toml",
+    "bytes": 396,
+    "sha256": "b237d78b7d88271fcf9cc8c1c18924b4cba7e96a9335917ec13e3a91afdfd15b"
+  },
+  {
+    "path": "runtime/.gitkeep",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "schemas/memory.schema.json",
+    "bytes": 1378,
+    "sha256": "878c7a88ac3618468344e792271a804545bbc6e391542a4d81b5f31e0d68662d"
+  },
+  {
+    "path": "schemas/mod.schema.json",
+    "bytes": 1983,
+    "sha256": "626abb28a8e22a0524b46e1b7f2208911a9e23a7eb2fece0361366d6903ea832"
+  },
+  {
+    "path": "schemas/scene_packet.schema.json",
+    "bytes": 268,
+    "sha256": "eb11cc691a7a11d9daa65595fe991641f2fe4b9e49c18e11e46f936e1b8045c9"
+  },
+  {
+    "path": "tests/test_game_theory.py",
+    "bytes": 658,
+    "sha256": "58aeb3d70d877dba0e1641a1b92a7018dd8740e41df585a360f374346a78dcf1"
+  },
+  {
+    "path": "tests/test_mods.py",
+    "bytes": 425,
+    "sha256": "a05f42606f087cd50b5b54c383c30cc79ffa03ec0a207012af8e493ba5ea6d9c"
+  },
+  {
+    "path": "tests/test_physics.py",
+    "bytes": 484,
+    "sha256": "6c72f9884d41f6707268cd99f174f6fb1b06055112710a9c08445cadca695ee3"
+  },
+  {
+    "path": "tests/test_probability.py",
+    "bytes": 674,
+    "sha256": "ef43482cd1d2ae06b5794bb733f5d8c02c07d351d30b5e084d7122b46d6b7f6e"
+  },
+  {
+    "path": "tests/test_rng.py",
+    "bytes": 781,
+    "sha256": "41e7146a99348f8375e2e318bd63410b9db22429fb89872af8196893e2cf0415"
+  }
+]

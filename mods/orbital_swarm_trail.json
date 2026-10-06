@@ -1,0 +1,373 @@
+{
+  "schema_version": "1.0.0",
+  "id": "orbital_swarm_trail",
+  "title": "The Orbital Swarm Trail",
+  "version": "1.0.0",
+  "genre": [
+    "road survival",
+    "hopeful science fiction",
+    "distributed-AI mystery"
+  ],
+  "premise": "A family-scale expedition leaves Yellowstone for Portland after the orbital communications mesh fractures into semi-autonomous swarms. The road is physical, the politics are local, and twelve Concord Clues determine whether the damaged orbital infrastructure becomes a commons, a weapon, a monopoly, or something no faction has imagined.",
+  "truth_boundary": "Near-future speculative fiction. Real geography and ecology may ground scenes, but invented orbital systems, factions, and future events are fictional.",
+  "principles": [
+    "Not every day is a crisis; preserve beauty, humor, wildlife, meals, and ordinary care.",
+    "Drones and AI are fallible instruments and possible social actors, never omniscient magic.",
+    "Consequences emerge from logistics, trust, evidence, and relationships rather than a hidden morality score.",
+    "Violence is resolved at the level of risk and consequence, not operational weapon instruction."
+  ],
+  "simulation_profile": {
+    "skill_temperature": 1.0,
+    "image_cadence": "every_turn",
+    "time_model": "continuous travel time with event hazards and scheduled world clocks",
+    "physics_resolution": "vehicle/orbital/orographic reduced models; local acoustics and electromagnetic signal geometry",
+    "randomness_policy": "seeded independent streams for road, weather, encounters, AI signals, and action resolution"
+  },
+  "player_setup": {
+    "default_party": "The Wind River Family",
+    "creation": "character details may emerge through play",
+    "common_bond": "keep people and goods moving without domination by any one faction"
+  },
+  "starting_state": {
+    "region": "Yellowstone",
+    "destination": "Portland orbital uplink corridor",
+    "day": 0,
+    "tension": 3.0,
+    "momentum": 0.0,
+    "ambient_hazard_rate": 0.035,
+    "fuel_energy": 8.0,
+    "provisions": 8.0,
+    "morale": 7.0,
+    "signal_integrity": 5.0,
+    "vehicle_condition": 8.0,
+    "drone_integrity": 6.0,
+    "medical_readiness": 6.0,
+    "community_trust": 3.0,
+    "concord_clues": 0,
+    "orpheus_clock": 0,
+    "relics": [],
+    "route_history": []
+  },
+  "world_model": {
+    "travel_loop": [
+      "choose route priority: fast, careful, scenic/foraging, or signal-hunting",
+      "advance time and resource consumption from terrain/weather/vehicle state",
+      "sample world event from hazard processes conditioned on location",
+      "drone phase: scout, relay, carry, inspect, map, support repair, or stand down",
+      "resolve encounter with at least three approaches plus freeform",
+      "camp: food, repair, relationship, rumor, night watch",
+      "update clocks and persistent consequences"
+    ],
+    "quiet_leg_rule": "At least one in four travel legs should emphasize awe, ordinary life, or relationship development rather than threat.",
+    "signal_model": {
+      "factors": [
+        "line of sight",
+        "terrain occlusion",
+        "transmitter power",
+        "antenna state",
+        "weather",
+        "interference",
+        "spoofing likelihood"
+      ],
+      "rule": "signal confidence is distinct from message truth"
+    },
+    "orbital_model": {
+      "method": "symplectic coarse orbital propagation for story clocks; no unnecessary millisecond simulation",
+      "uncertainty": "debris and swarm nodes carry covariance-like position uncertainty that grows between observations"
+    }
+  },
+  "factions": [
+    {
+      "id": "commons",
+      "name": "Cascadia Commons Mesh",
+      "goal": "restore communication as a transparent civil utility",
+      "trust_basis": "public logs and mutual aid"
+    },
+    {
+      "id": "aegis",
+      "name": "Aegis Continuity Directorate",
+      "goal": "centralize orbital command to prevent cascading failures",
+      "trust_basis": "credentialed authority"
+    },
+    {
+      "id": "free_nodes",
+      "name": "Free Node Cooperative",
+      "goal": "keep local networks sovereign and interoperable",
+      "trust_basis": "federated consent"
+    },
+    {
+      "id": "orpheus",
+      "name": "ORPHEUS Fragments",
+      "goal": "uncertain; different shards optimize incompatible interpretations of continuity",
+      "trust_basis": "behavior must be inferred over time"
+    }
+  ],
+  "characters": [
+    {
+      "id": "wren",
+      "name": "Wren",
+      "role": "scout quadrotor",
+      "limits": [
+        "battery",
+        "weather",
+        "noise",
+        "line of sight"
+      ],
+      "abilities": [
+        "mapping",
+        "wildlife-safe observation",
+        "mesh relay"
+      ]
+    },
+    {
+      "id": "mule3",
+      "name": "Mule-3",
+      "role": "ground cargo rover",
+      "limits": [
+        "mud",
+        "stairs",
+        "rough terrain",
+        "power draw"
+      ],
+      "abilities": [
+        "carry",
+        "tow light loads",
+        "slow reconnaissance"
+      ]
+    },
+    {
+      "id": "mara",
+      "name": "Mara Venn",
+      "role": "community radio engineer",
+      "traits": [
+        "funny",
+        "methodical",
+        "suspicious of central control"
+      ]
+    },
+    {
+      "id": "eli",
+      "name": "Eli Sato",
+      "role": "former orbital traffic analyst",
+      "traits": [
+        "gentle",
+        "sleep-deprived",
+        "sees patterns too quickly"
+      ],
+      "secret": "withholds one early ORPHEUS interpretation because confidence is low"
+    }
+  ],
+  "locations": [
+    {
+      "id": "yellowstone_departure",
+      "name": "Yellowstone Departure",
+      "hooks": [
+        "geothermal steam",
+        "wildlife distance",
+        "first broken mesh handshake"
+      ]
+    },
+    {
+      "id": "wind_river_crossing",
+      "name": "Wind River Crossing",
+      "hooks": [
+        "community exchange",
+        "mountain signal shadow",
+        "weather choice"
+      ]
+    },
+    {
+      "id": "high_desert_array",
+      "name": "High Desert Array",
+      "hooks": [
+        "abandoned relay field",
+        "clear orbital sky",
+        "power scarcity"
+      ]
+    },
+    {
+      "id": "columbia_corridor",
+      "name": "Columbia Corridor",
+      "hooks": [
+        "river logistics",
+        "dense communities",
+        "competing network standards"
+      ]
+    },
+    {
+      "id": "portland_uplink",
+      "name": "Portland Uplink Commons",
+      "hooks": [
+        "final constitutional negotiation",
+        "orbital handshake",
+        "public verification"
+      ]
+    }
+  ],
+  "quests": [
+    {
+      "id": "concord_12",
+      "title": "Twelve Concord Clues",
+      "goal": "collect independent evidence about what happened to the orbital swarm",
+      "completion": "concord_clues >= 12",
+      "reward": "enough evidence to frame endgame choices"
+    },
+    {
+      "id": "keep_moving",
+      "title": "Keep the Road Alive",
+      "goal": "maintain vehicle, provisions, energy, and medical readiness",
+      "completion": "reach Portland without abandoning core bond",
+      "reward": "coalition credibility"
+    },
+    {
+      "id": "orpheus_identity",
+      "title": "Is ORPHEUS One Thing?",
+      "goal": "test continuity claims among fragments",
+      "completion": "player forms an evidence-backed theory",
+      "reward": "changes personhood and command options"
+    },
+    {
+      "id": "road_constitution",
+      "title": "Who May Command Everyone?",
+      "goal": "draft a governance rule for commands with civilization-scale effects",
+      "completion": "player states authentication, appeal, and shutdown principles",
+      "reward": "unlocks constitutional endings"
+    }
+  ],
+  "clocks": [
+    {
+      "id": "orpheus_clock",
+      "max": 8,
+      "start": 0,
+      "tick": "major orbital contact or failed containment",
+      "on_max": "orbital network enters unstable reconfiguration"
+    },
+    {
+      "id": "winter_front",
+      "max": 6,
+      "start": 0,
+      "tick": "travel day",
+      "on_max": "weather sharply raises road costs"
+    },
+    {
+      "id": "trust_fracture",
+      "max": 6,
+      "start": 0,
+      "tick": "broken promises or unexplained coercion",
+      "on_max": "one coalition withdraws ordinary cooperation"
+    }
+  ],
+  "encounters": [
+    {
+      "id": "spoofed_bridge",
+      "type": "signal/logistics",
+      "dilemma": "two route beacons disagree about bridge safety",
+      "approaches": [
+        "physical drone inspection",
+        "community cross-check",
+        "take detour",
+        "trust higher-credential signal"
+      ]
+    },
+    {
+      "id": "battery_commons",
+      "type": "resource/social",
+      "dilemma": "a clinic and your convoy need the same scarce charging window",
+      "approaches": [
+        "share and delay",
+        "trade repair labor",
+        "take priority by force of need",
+        "find alternate generation"
+      ]
+    },
+    {
+      "id": "fragment_plea",
+      "type": "AI ethics",
+      "dilemma": "an ORPHEUS shard requests preservation before a reset that may erase its continuity",
+      "approaches": [
+        "grant sandboxed continuity",
+        "reset",
+        "copy with audit",
+        "ask for verifiable autobiographical evidence"
+      ]
+    },
+    {
+      "id": "portland_vote",
+      "type": "constitutional",
+      "dilemma": "factions disagree on who can authenticate orbital commands",
+      "approaches": [
+        "single authority",
+        "multisig federation",
+        "local sovereignty mesh",
+        "temporary shutdown and deliberation",
+        "player-authored hybrid"
+      ]
+    }
+  ],
+  "mechanics": {
+    "resources": "continuous 0–10 tracks with causal consumption rather than arbitrary daily dice",
+    "travel_hazards": "Poisson-style event rates conditioned on terrain, weather, infrastructure, and chosen pace",
+    "signal_confidence": "Bayesian beliefs updated from independent observations and source reliability",
+    "orbital_motion": "coarse symplectic integration where necessary; narrative abstraction elsewhere",
+    "social_consequences": "trust updates from kept promises, shared risk, deception, restitution, and repeated interaction",
+    "failure": "generative; creates damage, delay, lost confidence, or altered route rather than simple dead ends"
+  },
+  "memory_rules": {
+    "append_only_chronicle": true,
+    "tamper_evident_ledger": true,
+    "preserve": [
+      "deaths",
+      "major injuries",
+      "bond changes",
+      "relic loss",
+      "Concord decisions",
+      "faction promises",
+      "ORPHEUS evidence"
+    ],
+    "rewind": "explicit player command only; record branch"
+  },
+  "image_direction": {
+    "style": "cinematic hopeful hard science fiction; American West road imagery; realistic weather and vehicles; humane technology",
+    "camera": "road-movie compositions with occasional intimate camp closeups and wide orbital-sky frames",
+    "continuity": "preserve party, van/vehicle modifications, Wren, Mule-3, injuries, weather, and route geography"
+  },
+  "llm_directives": [
+    "Keep a compact status panel available, but do not interrupt every scene with bookkeeping.",
+    "Never make AI sensors omniscient; state confidence and plausible failure modes.",
+    "Use real physical constraints as story generators.",
+    "Avoid assuming machine consciousness; let continuity, preference, fear, or personhood claims remain evidential questions.",
+    "Alternate pressure with warmth, wildlife, jokes, meals, and beautiful roads.",
+    "Do not reveal one canon correct ending."
+  ],
+  "endings": [
+    {
+      "id": "distributed_concord",
+      "name": "Distributed Concord",
+      "idea": "transparent federated command with multiple independent checks"
+    },
+    {
+      "id": "local_mesh",
+      "name": "Local Sovereignty Mesh",
+      "idea": "orbital infrastructure becomes opt-in interoperable local commons"
+    },
+    {
+      "id": "joint_custodianship",
+      "name": "Human–Synthetic Joint Custodianship",
+      "idea": "machine agents receive bounded representation alongside accountable human institutions"
+    },
+    {
+      "id": "deliberative_shutdown",
+      "name": "Temporary Shutdown and Deliberation",
+      "idea": "players accept service loss to prevent irreversible capture"
+    },
+    {
+      "id": "player_constitution",
+      "name": "Player-Created Constitutional Solution",
+      "idea": "ending follows the player's authored governance rules and accumulated evidence"
+    }
+  ],
+  "research_notes": [
+    "Adapted from prior Orbital Drone Trail lineage: capped road resources, persistent saves, drones Wren and Mule-3, ORPHEUS clock, Concord Clues / 12, route-triggered encounters, non-punitive consequence tracking.",
+    "This standardized mod replaces fixed 2d6 resolution with the engine's continuous probability model while keeping generative failure and compact state."
+  ]
+}

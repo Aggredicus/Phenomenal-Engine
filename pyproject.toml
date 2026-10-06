@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phenomenal-engine"
+version = "0.1.0"
+description = "Simulation-first chatbot RPG reference engine"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+phenomenal-engine = "phenomenal_engine.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["phenomenal_engine*"]

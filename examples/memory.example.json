@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "engine_version": "0.1.0",
+  "session_id": "example-only",
+  "mod": {
+    "id": "concord_tournament",
+    "version": "1.0.0",
+    "title": "The Concord Tournament: Children of the Long Game"
+  },
+  "turn": 0,
+  "master_seed": "example-seed",
+  "rng_streams": {},
+  "world_state": {
+    "location": "Lagrange Archive L5",
+    "epoch": 12404,
+    "tension": 4.0,
+    "momentum": 0.0,
+    "ambient_hazard_rate": 0.01,
+    "system_cooperation_rate": 0.61,
+    "verification_coverage": 0.48,
+    "inequality_index": 0.37,
+    "autonomy_dispute": 0.42,
+    "arms_race_pressure": 0.55,
+    "treaty_legitimacy": 0.64,
+    "appeals_backlog": 2,
+    "tournament_round": 0,
+    "evolution_generation": 0,
+    "constitutional_articles": []
+  },
+  "characters": {},
+  "relationships": {},
+  "quests": {},
+  "beliefs": {},
+  "facts": {
+    "revealed": [],
+    "hidden_ids": []
+  },
+  "open_threads": [],
+  "long_term_consequences": [],
+  "chronicle": [],
+  "event_ledger": [],
+  "image_jobs": [],
+  "summaries": {
+    "working": "",
+    "long_term": ""
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/phenomenal-engine/mod.schema.json",
+  "title": "Phenomenal Engine Adventure Mod",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "version",
+    "premise",
+    "simulation_profile",
+    "starting_state",
+    "world_model",
+    "quests",
+    "mechanics",
+    "llm_directives"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string"
+    },
+    "premise": {
+      "type": "string"
+    },
+    "truth_boundary": {
+      "type": "string"
+    },
+    "simulation_profile": {
+      "type": "object",
+      "properties": {
+        "skill_temperature": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "image_cadence": {
+          "type": "string"
+        },
+        "time_model": {
+          "type": "string"
+        },
+        "physics_resolution": {
+          "type": "string"
+        },
+        "randomness_policy": {
+          "type": "string"
+        }
+      }
+    },
+    "starting_state": {
+      "type": "object"
+    },
+    "world_model": {
+      "type": "object"
+    },
+    "factions": {
+      "type": "array"
+    },
+    "characters": {
+      "type": "array"
+    },
+    "locations": {
+      "type": "array"
+    },
+    "quests": {
+      "type": "array"
+    },
+    "clocks": {
+      "type": "array"
+    },
+    "encounters": {
+      "type": "array"
+    },
+    "mechanics": {
+      "type": "object"
+    },
+    "memory_rules": {
+      "type": "object"
+    },
+    "image_direction": {
+      "type": "object"
+    },
+    "llm_directives": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "endings": {
+      "type": "array"
+    },
+    "research_notes": {
+      "type": "array"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Scene Packet",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "mod_id",
+    "turn",
+    "action",
+    "simulation_outcome",
+    "phenomenology",
+    "narrative_directives"
+  ]
+}
