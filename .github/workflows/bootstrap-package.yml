@@ -1,0 +1,86 @@
+name: Bootstrap Phenomenal Engine package
+
+on:
+  push:
+    paths:
+      - BOOTSTRAP_READY
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct canonical package
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .bootstrap/part-* > /tmp/PhenomenalEngine-v0.1.0.zip.b64
+          base64 -d /tmp/PhenomenalEngine-v0.1.0.zip.b64 > /tmp/PhenomenalEngine-v0.1.0.zip
+          echo "61f7db3e022f95016dfe2e07514645951096cbbba65f58ed26c5ed0340c8a801  /tmp/PhenomenalEngine-v0.1.0.zip" | sha256sum -c -
+          rm -rf /tmp/phenomenal-extract
+          mkdir -p /tmp/phenomenal-extract
+          unzip -q /tmp/PhenomenalEngine-v0.1.0.zip -d /tmp/phenomenal-extract
+          test -d /tmp/phenomenal-extract/PhenomenalEngine-v0.1.0
+
+      - name: Install exact package tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=/tmp/phenomenal-extract/PhenomenalEngine-v0.1.0
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name .git \
+            ! -name .bootstrap \
+            ! -name .github \
+            ! -name BOOTSTRAP_READY \
+            -exec rm -rf {} +
+          cp -a "$SRC"/. .
+          rm -rf .bootstrap BOOTSTRAP_READY
+          rm -f .github/workflows/bootstrap-package.yml
+
+      - name: Verify manifest byte-for-byte
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          manifest = json.loads(Path("MANIFEST.json").read_text(encoding="utf-8"))
+          failures = []
+          for item in manifest:
+              p = Path(item["path"])
+              if not p.is_file():
+                  failures.append(f"MISSING {p}")
+                  continue
+              raw = p.read_bytes()
+              if len(raw) != item["bytes"]:
+                  failures.append(f"SIZE {p}: {len(raw)} != {item['bytes']}")
+              digest = hashlib.sha256(raw).hexdigest()
+              if digest != item["sha256"]:
+                  failures.append(f"SHA256 {p}: {digest} != {item['sha256']}")
+          if failures:
+              raise SystemExit("\n".join(failures))
+          print(f"Verified {len(manifest)} manifest entries.")
+          PY
+
+      - name: Run engine validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -v
+          python -m phenomenal_engine validate mods
+
+      - name: Commit verified project
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Phenomenal Engine Bootstrap"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Import verified Phenomenal Engine v0.1.0 package"
+          git push
