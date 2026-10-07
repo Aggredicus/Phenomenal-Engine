@@ -120,6 +120,9 @@
     },
     "travel_network": {
       "type": "object"
+    },
+    "action_rules": {
+      "type": "array"
     }
   }
 }
