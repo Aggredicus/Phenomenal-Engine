@@ -949,7 +949,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "public",
-        "description": "A broad spin-gravity concourse links the arrival halls to the rim transit loop."
+        "description": "A broad spin-gravity concourse links the arrival halls to the rim transit loop.",
+        "distance_m": 420
       },
       {
         "id": "arrival_memory",
@@ -962,7 +963,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "public",
-        "description": "A quiet customs shuttle crosses from physical arrivals to the continuity-transfer docks."
+        "description": "A quiet customs shuttle crosses from physical arrivals to the continuity-transfer docks.",
+        "distance_m": 1600
       },
       {
         "id": "lantern_market",
@@ -975,7 +977,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "public",
-        "description": "Open-sided rail cars pass apartment galleries and descend into the warm lamp-glow of the market."
+        "description": "Open-sided rail cars pass apartment galleries and descend into the warm lamp-glow of the market.",
+        "distance_m": 1200
       },
       {
         "id": "lantern_appeals",
@@ -988,7 +991,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "public",
-        "description": "The rail rises beside transparent orchards before stopping beneath the mediation terraces."
+        "description": "The rail rises beside transparent orchards before stopping beneath the mediation terraces.",
+        "distance_m": 1900
       },
       {
         "id": "lantern_mirror",
@@ -1001,7 +1005,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "public",
-        "description": "The long eastern arc passes schools, machine shrines, and neighborhoods built for branching households."
+        "description": "The long eastern arc passes schools, machine shrines, and neighborhoods built for branching households.",
+        "distance_m": 2600
       },
       {
         "id": "lantern_bastion",
@@ -1014,7 +1019,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "screened",
-        "description": "Public rail reaches Bastion through a checkpoint that can add delays when threat posture rises."
+        "description": "Public rail reaches Bastion through a checkpoint that can add delays when threat posture rises.",
+        "distance_m": 3300
       },
       {
         "id": "market_appeals",
@@ -1027,7 +1033,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "public",
-        "description": "A planted bridge threads food stalls into the outer edge of the orchard courts."
+        "description": "A planted bridge threads food stalls into the outer edge of the orchard courts.",
+        "distance_m": 850
       },
       {
         "id": "market_mirror",
@@ -1040,7 +1047,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "public",
-        "description": "A commercial gallery connects the market to studios and identity-law offices in the Cloister."
+        "description": "A commercial gallery connects the market to studios and identity-law offices in the Cloister.",
+        "distance_m": 1200
       },
       {
         "id": "memory_mirror",
@@ -1053,7 +1061,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "public",
-        "description": "A black-glass tram carries restored minds, families, and legal observers between the quays and the Cloister."
+        "description": "A black-glass tram carries restored minds, families, and legal observers between the quays and the Cloister.",
+        "distance_m": 1800
       },
       {
         "id": "appeals_wildtype",
@@ -1066,7 +1075,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "public",
-        "description": "A slow electric ferry follows the station's artificial watershed from the appeals orchards into the Delta."
+        "description": "A slow electric ferry follows the station's artificial watershed from the appeals orchards into the Delta.",
+        "distance_m": 2600
       },
       {
         "id": "mirror_bastion",
@@ -1079,7 +1089,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "screened",
-        "description": "A compact security tram joins two districts that disagree about nearly every definition of identity risk."
+        "description": "A compact security tram joins two districts that disagree about nearly every definition of identity risk.",
+        "distance_m": 1400
       },
       {
         "id": "lantern_hushworks",
@@ -1092,7 +1103,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "service",
-        "description": "An old public-service lift still reaches the Hushworks, though half its directory labels have been replaced by hand."
+        "description": "An old public-service lift still reaches the Hushworks, though half its directory labels have been replaced by hand.",
+        "distance_m": 1100
       },
       {
         "id": "bastion_oldspine",
@@ -1105,7 +1117,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "restricted",
-        "description": "A monitored industrial tram reaches the oldest axial structures through pressure doors older than the current treaty."
+        "description": "A monitored industrial tram reaches the oldest axial structures through pressure doors older than the current treaty.",
+        "distance_m": 2400
       },
       {
         "id": "wildtype_oldspine",
@@ -1118,7 +1131,8 @@
         "bidirectional": true,
         "visibility": "public",
         "access": "restricted",
-        "description": "A long maintenance transfer follows water, power, and structural trunks toward the station axis."
+        "description": "A long maintenance transfer follows water, power, and structural trunks toward the station axis.",
+        "distance_m": 4200
       },
       {
         "id": "market_hushworks_service",
@@ -1131,7 +1145,8 @@
         "bidirectional": true,
         "visibility": "hidden",
         "access": "unofficial",
-        "description": "A painted-over service stair drops from an obsolete market corridor into the upper Hushworks."
+        "description": "A painted-over service stair drops from an obsolete market corridor into the upper Hushworks.",
+        "distance_m": 550
       },
       {
         "id": "hushworks_oldspine",
@@ -1144,7 +1159,8 @@
         "bidirectional": true,
         "visibility": "hidden",
         "access": "unofficial",
-        "description": "A variable-gravity utility tunnel follows coolant trunks directly toward the Old Spine."
+        "description": "A variable-gravity utility tunnel follows coolant trunks directly toward the Old Spine.",
+        "distance_m": 1750
       },
       {
         "id": "memory_oldspine_freight",
@@ -1157,8 +1173,11 @@
         "bidirectional": true,
         "visibility": "hidden",
         "access": "freight authorization",
-        "description": "A dark freight spur bypasses passenger districts and reaches sealed axial cargo cavities."
+        "description": "A dark freight spur bypasses passenger districts and reaches sealed axial cargo cavities.",
+        "distance_m": 3100
       }
-    ]
+    ],
+    "distance_unit": "metres",
+    "distance_policy": "authored physical path length; never infer physical distance from schematic x/y coordinates"
   }
 }
