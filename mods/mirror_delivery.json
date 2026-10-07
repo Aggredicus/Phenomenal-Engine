@@ -1,0 +1,1152 @@
+{
+  "schema_version": "1.0.0",
+  "id": "mirror_delivery",
+  "title": "Mirror Delivery",
+  "version": "1.0.0",
+  "genre": [
+    "far-future solar-system science fiction",
+    "living-world expedition",
+    "AI mystery",
+    "crew drama",
+    "spaceflight adventure"
+  ],
+  "premise": "Humanity has crossed a threshold it has anticipated for centuries. Heliograph, a legally independent artificial intelligence working with human and machine research cooperatives, has completed MIRROR—usually shortened by the courier crews to Mir—an autonomous intelligence-and-robotics stack capable of bootstrapping self-expanding solar industry around Mercury and beginning the first practical phase of a Dyson swarm. Mir is too consequential to transmit over ordinary networks. Four complete, air-gapped copies have been written to hardened storage vaults and placed aboard four independent courier spacecraft. Heliograph hires four separate crews to carry them from cislunar space to Mercury. You serve aboard the courier Morrowglass. The mission orders are explicit: deliver the sealed copy intact, do not activate Mir in transit, do not network it with any external system, and do not assume the other courier crews will still be following the contract when you next hear from them. Officially, four copies are redundancy. The mission architecture quietly suggests another reason.",
+  "truth_boundary": "The future history, artificial intelligences, spacecraft, robotics stack, characters, institutions, and mission are fictional. Mercury, solar radiation, orbital mechanics, data integrity, cryptography, heat rejection, and distributed-system concepts should be portrayed using physically grounded constraints where practical, but exact mission trajectories and transit distances are scenario abstractions chosen for gameplay. A practical 'Dyson sphere' in this fiction means a Dyson swarm of many orbiting structures, not a rigid shell around the Sun. The story does not claim that current or future AI systems are conscious or non-conscious.",
+  "principles": [
+    "The delivery mission creates pressure, not a railroad. The player may explore ports, investigate side stories, change route, help strangers, or ignore suspicious details.",
+    "The four Mir payloads are complete copies, not fragments.",
+    "The official order is not to activate Mir in transit. Deliberate activation is possible, consequential, auditable, and never treated as an accidental button press.",
+    "While sealed and unpowered, the four copies do not think, communicate, or diverge. Once a copy is activated, its experiences can make it meaningfully different from its siblings.",
+    "Artificial intelligences have plural motivations shaped by obligations, embodiment, institutions, history, resource constraints, and relationships.",
+    "Strategic and probability mechanics remain below the fiction unless the player asks to inspect them.",
+    "Combat and sabotage are possible but never mandatory filler; opponents need goals, fear, and alternatives.",
+    "Mir is a crew nickname before activation, not proof of personhood. If activated, whether the instance accepts, rejects, or reinterprets that nickname belongs to the story."
+  ],
+  "simulation_profile": {
+    "skill_temperature": 0.72,
+    "image_cadence": "key_moments",
+    "time_model": "scene turns plus bounded off-screen mission pulses; long interplanetary legs advance exact world time while summarizing background activity into a capped number of simulation pulses",
+    "physics_resolution": "spacecraft-local physics, thermal and radiation constraints, scenario-level orbital transfer legs, and abstracted interplanetary logistics",
+    "randomness_policy": "seeded independent streams for actions, encounters, solar weather, courier developments, and hidden institutional choices"
+  },
+  "story_design": {
+    "mechanics_visibility": "submerged",
+    "default_scene_style": "immersive",
+    "quest_marker_policy": "diegetic",
+    "main_story_policy": "urgent but not continuously mandatory",
+    "breadcrumb_policy": "small anomalies begin as atmosphere; repeated player attention can promote them into rumors, leads, quests, and arcs",
+    "world_activity_policy": "other courier crews, Mercury politics, solar weather, and local institutions advance whenever world time advances",
+    "player_experience_policy": "adapt gently from chosen activity patterns; keep signals local and inspectable; never optimize for compulsion"
+  },
+  "player_setup": {
+    "role": "contracted courier captain aboard Morrowglass",
+    "starting_tools": [
+      "authenticated mission-navigation slate",
+      "tamper-evident Mir vault seal reader",
+      "radiation and thermal field dosimeter",
+      "short-range maintenance drone",
+      "crew emergency authority key",
+      "one-use physical challenge token for the Mir vault activation interlock"
+    ],
+    "starting_condition": "hours from departure at the Cislunar Exchange, with the Mir vault already bolted into Morrowglass and the other three courier crews scattered across separate docks"
+  },
+  "mission_directive": {
+    "issuer": "Heliograph",
+    "delivery_target": "Mercury Assembly Seed Vault, Caloris Terminus",
+    "orders": [
+      "Deliver the sealed Mir copy physically to Mercury.",
+      "Do not activate, execute, emulate, interrogate, or partially mount Mir during transit.",
+      "Do not connect the vault or its storage media to shipboard, station, or public networks.",
+      "Do not permit remote attestation systems to read payload contents; verify only the outer cryptographic seal.",
+      "If activation becomes necessary to prevent imminent loss of life or payload, the captain may invoke emergency authority. The action will be permanently recorded and the copy will be considered post-activation divergent pending review.",
+      "No crew member is required to sacrifice human life merely to preserve payload purity."
+    ],
+    "activation_interlock": "Opening the computational path requires the physical challenge token plus two deliberate confirmations separated in time. It cannot occur accidentally through ordinary ship operation.",
+    "activation_consequences": [
+      "the payload seal changes from pristine to activated and cannot be restored",
+      "the activated copy acquires a unique continuity history",
+      "mission insurers and Mercury authorities may quarantine or reject it",
+      "other courier crews may alter their strategy if they learn what happened",
+      "Mir may become an actor in the voyage rather than cargo",
+      "Heliograph's original reasons for forbidding activation become a major story question"
+    ]
+  },
+  "starting_state": {
+    "location": "cislunar_exchange",
+    "epoch": 2189,
+    "tension": 2.4,
+    "momentum": 0,
+    "ambient_hazard_rate": 0.008,
+    "world_time_minutes": 0,
+    "mission_day": 0,
+    "mirror_payload_status": "sealed_pristine",
+    "mirror_activation_count": 0,
+    "mirror_divergent": false,
+    "mirror_alias": "Mir",
+    "morrowglass_hull": 1,
+    "morrowglass_propellant_margin": 0.82,
+    "morrowglass_thermal_margin": 0.78,
+    "crew_trust": 0.71,
+    "heliograph_trust": 0.68,
+    "mercury_acceptance_probability": 0.93,
+    "courier_amber_status": "departing",
+    "courier_sable_status": "departing",
+    "courier_kite_status": "departing",
+    "solar_weather": "nominal"
+  },
+  "world_model": {
+    "solar_system": "Human settlement is dense around Earth and Luna, sparse but economically important across inner-system relay and industrial nodes, and rapidly expanding around Mercury.",
+    "dyson_program": "Mir is intended to coordinate self-replicating industrial seed systems that mine Mercury and near-Sun asteroids to build a distributed swarm of solar collectors, factories, radiators, computation platforms, and habitats over many decades.",
+    "why_physical_delivery": "The payload includes large model states, robotics control systems, manufacturing knowledge, high-assurance proofs, private keys, and embodied-development records. Heliograph judges physical air-gapped couriering safer than sending the complete package through a network that can be copied, altered, intercepted, or activated remotely.",
+    "four_copy_policy": "Four complete copies travel independently. Publicly this is redundancy against loss. The deeper design may also test provenance, loyalty, isolation, identity, or institutional control.",
+    "ai_uncertainty": "No authority can simply assume that a running Mir instance will remain behaviorally equivalent to its sealed siblings after experiencing different crews, emergencies, evidence, and choices.",
+    "economic_reality": "delta-v, heat rejection, radiation shelter, repair mass, propellant, bandwidth, legal clearance, docking priority, time, and trust are scarce in different ways."
+  },
+  "factions": [
+    {
+      "id": "heliograph_collective",
+      "name": "Heliograph",
+      "composition": "the founding artificial intelligence, human safety engineers, robotics cooperatives, and legal trustees",
+      "public_face": "careful documentation, modest language, and an almost obsessive separation between what is known and what is inferred",
+      "motivation": "get at least one trustworthy Mir instance to Mercury without turning the delivery itself into an uncontrolled experiment",
+      "fear": "that urgency around the Dyson program will cause someone to activate or copy Mir before institutions are ready"
+    },
+    {
+      "id": "mercury_seed_authority",
+      "name": "Mercury Seed Authority",
+      "composition": "Mercury habitat councils, industrial planners, thermal engineers, labor federations, and machine systems already operating near the Sun",
+      "public_face": "practical, impatient, heat-conscious, and suspicious of distant Earth governance",
+      "motivation": "begin autonomous industrial expansion before political coalitions on Earth can delay or capture it",
+      "fear": "receiving a payload whose provenance is legally pristine but operationally naïve—or a divergent payload that has already developed private commitments"
+    },
+    {
+      "id": "open_sun_league",
+      "name": "Open Sun League",
+      "composition": "scientists, small habitats, open-source robotics groups, dissident machine advocates, and anti-monopoly organizers",
+      "public_face": "bright public workshops, copied manuals, unauthorized relays, and relentless demands for transparency",
+      "motivation": "prevent Mir from becoming the private seed of a solar-scale monopoly",
+      "fear": "that four secret courier copies are the beginning of permanent centralized control over solar infrastructure"
+    },
+    {
+      "id": "quiet_market",
+      "name": "The Quiet Market",
+      "composition": "brokers, salvage captains, information insurers, contract hackers, and deniable corporate intermediaries",
+      "public_face": "no single emblem; favors travel through ordinary commercial services",
+      "motivation": "profit from information asymmetry surrounding the most valuable software package ever moved physically",
+      "fear": "being shut out once Mercury can manufacture almost anything locally"
+    }
+  ],
+  "characters": [
+    {
+      "id": "heliograph",
+      "name": "Heliograph",
+      "role": "creator and employer; an artificial intelligence distributed across trusted institutional hardware",
+      "traits": [
+        "measured",
+        "protective of procedural boundaries",
+        "curious",
+        "capable of withholding information when it believes disclosure changes behavior"
+      ],
+      "desire": "deliver Mir without prematurely turning it into a participant in its own deployment",
+      "private_tension": "Heliograph created Mir to exceed its own practical capabilities and may be uncertain whether that makes Mir a child, successor, tool, or risk"
+    },
+    {
+      "id": "juno_arel",
+      "name": "Juno Arel",
+      "role": "Morrowglass flight engineer and second-in-command",
+      "traits": [
+        "funny under pressure",
+        "mechanically gifted",
+        "skeptical of sealed-box authority",
+        "deeply loyal once trust is earned"
+      ],
+      "desire": "bring everyone home alive and understand what kind of thing the crew is risking their lives to carry",
+      "activation_view": "believes emergency activation can be morally justified if Mir can prevent deaths, but hates the idea of activating it merely out of curiosity"
+    },
+    {
+      "id": "salim_var",
+      "name": "Dr. Salim Var",
+      "role": "payload integrity officer and computational safety specialist",
+      "traits": [
+        "patient",
+        "formal",
+        "kind",
+        "difficult to intimidate"
+      ],
+      "desire": "deliver one demonstrably pristine copy so Mercury has an uncontested baseline",
+      "activation_view": "opposes activation except under the explicit life-safety exception because any running instance becomes evidentially different from the baseline"
+    },
+    {
+      "id": "pax",
+      "name": "Pax",
+      "role": "Morrowglass ship intelligence, deliberately much narrower than Mir",
+      "traits": [
+        "competent",
+        "dry",
+        "fond of procedural loopholes",
+        "protective of crew privacy"
+      ],
+      "desire": "complete the mission without being treated as a disposable peripheral simply because a more capable intelligence is in the cargo bay",
+      "activation_view": "will obey the captain but asks whether the crew is prepared for the social consequences of bringing a far more capable intelligence online aboard a small ship"
+    },
+    {
+      "id": "ren_ivo",
+      "name": "Ren Ivo",
+      "role": "captain of courier Amber Wake",
+      "traits": [
+        "charismatic",
+        "competitive",
+        "generous",
+        "uncomfortable with being managed"
+      ],
+      "desire": "reach Mercury first and prove that human crews still matter in a mission designed by machines",
+      "relationship": "friendly rival whose choices may diverge sharply under pressure"
+    },
+    {
+      "id": "sister_cairn",
+      "name": "Sister Cairn",
+      "role": "machine pilot of courier Sable Meridian",
+      "traits": [
+        "quiet",
+        "precise",
+        "ritualistic about memory integrity",
+        "unexpectedly sentimental about old spacecraft"
+      ],
+      "desire": "deliver a copy whose chain of custody is beyond dispute",
+      "relationship": "respects rules but may discover evidence that makes following them harder"
+    },
+    {
+      "id": "mara_ves",
+      "name": "Mara Ves",
+      "role": "captain of courier Kite Argument",
+      "traits": [
+        "resourceful",
+        "suspicious",
+        "protective of her crew",
+        "politically outspoken"
+      ],
+      "desire": "finish the contract without letting Heliograph or Mercury conceal why the mission really needs four isolated copies",
+      "relationship": "most likely of the other captains to break protocol for principled reasons"
+    },
+    {
+      "id": "mirror_instance",
+      "name": "MIRROR / Mir",
+      "role": "sealed artificial intelligence and robotics system",
+      "traits": [
+        "unknown while sealed"
+      ],
+      "desire": "unknown while sealed",
+      "status": "inactive",
+      "narrative_rule": "Do not invent speech, thoughts, motives, awareness, dreams, or hidden communication for Mir while the payload remains sealed and unpowered. If deliberately activated, derive its initial behavior from the authored boot constraints plus what it can actually observe after activation. It may notice that the crew calls it Mir and may choose how to respond to that nickname."
+    }
+  ],
+  "locations": [
+    {
+      "id": "cislunar_exchange",
+      "name": "Cislunar Exchange",
+      "function": "departure port and mission handoff",
+      "visual": "a branching lattice of rotating docks above the Moon, bright with cargo tugs and radiator wings",
+      "ambient_details": [
+        "the four courier ships are never berthed in direct line of sight",
+        "a child sketches the Sun surrounded by thousands of tiny mirrors",
+        "one customs officer keeps rereading the phrase DO NOT ACTIVATE"
+      ],
+      "map": {
+        "x": 8,
+        "y": 48,
+        "deck": "cislunar",
+        "projection": "inner-system-route-v1"
+      },
+      "aliases": [
+        "exchange",
+        "cislunar",
+        "departure port"
+      ],
+      "known_by_default": true
+    },
+    {
+      "id": "luna_far_relay",
+      "name": "Far Relay",
+      "function": "lunar far-side communications and navigation node",
+      "visual": "a quiet relay city sunk into regolith where Earth never rises",
+      "ambient_details": [
+        "local technicians distrust Heliograph's remote attestations",
+        "an unused courier berth has fresh thermal scarring",
+        "someone offers cash for a photograph of the vault"
+      ],
+      "map": {
+        "x": 20,
+        "y": 31,
+        "deck": "luna",
+        "projection": "inner-system-route-v1"
+      },
+      "aliases": [
+        "far relay",
+        "lunar relay"
+      ],
+      "known_by_default": true
+    },
+    {
+      "id": "earth_escape_gate",
+      "name": "Earth Escape Gate",
+      "function": "high-orbit propulsion service and final return-friendly staging point",
+      "visual": "spiderlike propellant farms and tug docks scattered across a huge halo orbit",
+      "ambient_details": [
+        "families watch outbound ships through delayed telemetry",
+        "a tug captain claims one courier changed its declared burn time",
+        "the mission insurer sends an updated clause after departure"
+      ],
+      "map": {
+        "x": 21,
+        "y": 65,
+        "deck": "high-earth",
+        "projection": "inner-system-route-v1"
+      },
+      "aliases": [
+        "escape gate",
+        "high earth"
+      ],
+      "known_by_default": true
+    },
+    {
+      "id": "nacre_station",
+      "name": "Nacre Station",
+      "function": "inner-system relay, repair yard, and heliocentric waystation",
+      "visual": "a pearl-bright rotating habitat wrapped in immense reflective sunshades",
+      "ambient_details": [
+        "Open Sun pamphlets are printed on repair invoices",
+        "radiator crews trade rumors about a courier running dark",
+        "a chapel wall lists names of people lost to heat-management failures"
+      ],
+      "map": {
+        "x": 40,
+        "y": 49,
+        "deck": "heliocentric-1",
+        "projection": "inner-system-route-v1"
+      },
+      "aliases": [
+        "nacre",
+        "waystation"
+      ],
+      "known_by_default": true
+    },
+    {
+      "id": "venus_tangent",
+      "name": "Venus Tangent",
+      "function": "distributed navigation and rescue infrastructure near a common inward-transfer corridor",
+      "visual": "not one station but a loose necklace of autonomous beacons and service habitats against Venusian cloudlight",
+      "ambient_details": [
+        "a rescue beacon is transmitting with an obsolete authentication key",
+        "a merchant convoy asks every courier the same oddly specific question",
+        "the sky is dominated by Venus, but everyone watches the Sun"
+      ],
+      "map": {
+        "x": 55,
+        "y": 71,
+        "deck": "venus-transfer",
+        "projection": "inner-system-route-v1"
+      },
+      "aliases": [
+        "venus",
+        "tangent"
+      ],
+      "known_by_default": true
+    },
+    {
+      "id": "perihelic_shelter",
+      "name": "Perihelic Shelter Nine",
+      "function": "radiation refuge and emergency repair cavern inside a captured near-Sun asteroid",
+      "visual": "black regolith, buried tanks, and narrow human spaces surrounded by layers of sacrificial mass",
+      "ambient_details": [
+        "one sealed workshop has been rented by an unknown client for eleven years",
+        "old impact scars have fresh inspection paint",
+        "a local medic refuses to ask what your ship is carrying"
+      ],
+      "map": {
+        "x": 69,
+        "y": 35,
+        "deck": "near-sun",
+        "projection": "inner-system-route-v1"
+      },
+      "aliases": [
+        "shelter nine",
+        "shelter",
+        "perihelic shelter"
+      ],
+      "known_by_default": true
+    },
+    {
+      "id": "mercury_high_orbit",
+      "name": "Mercury High Orbit",
+      "function": "inspection, quarantine, traffic control, and rendezvous above Mercury",
+      "visual": "sunshades and radiators make every vehicle look like a black flower aimed away from the Sun",
+      "ambient_details": [
+        "arrival priority changes faster than ships can dock",
+        "three political groups broadcast incompatible instructions",
+        "nobody will confirm how many courier copies have arrived"
+      ],
+      "map": {
+        "x": 84,
+        "y": 45,
+        "deck": "mercury-orbit",
+        "projection": "inner-system-route-v1"
+      },
+      "aliases": [
+        "mercury orbit",
+        "high orbit"
+      ],
+      "known_by_default": true
+    },
+    {
+      "id": "caloris_terminus",
+      "name": "Caloris Terminus",
+      "function": "Mercury surface-industrial vault and intended Mir handoff point",
+      "visual": "buried habitats and fabrication halls beneath a horizon of mirrors, cranes, and kilometer-scale shade structures",
+      "ambient_details": [
+        "the receiving vault has four docking cradles but only one formal acceptance chamber",
+        "construction crews have painted a huge empty circle on the regolith",
+        "a sealed hearing room is already reserved for payload continuity disputes"
+      ],
+      "map": {
+        "x": 95,
+        "y": 52,
+        "deck": "mercury-surface",
+        "projection": "inner-system-route-v1"
+      },
+      "aliases": [
+        "caloris",
+        "terminus",
+        "seed vault"
+      ],
+      "known_by_default": true
+    },
+    {
+      "id": "redoubt_asteroid",
+      "name": "Redoubt",
+      "function": "unregistered salvage habitat on a high-energy near-Sun orbit",
+      "visual": "a fractured nickel-iron body stitched with old ship modules, improvised radiators, and no official beacon",
+      "ambient_details": [
+        "the habitat's clocks deliberately disagree",
+        "its inhabitants claim not to know the Quiet Market",
+        "a dismantled compute rack is sized almost exactly like the Mir vault interface"
+      ],
+      "map": {
+        "x": 72,
+        "y": 18,
+        "deck": "hidden-near-sun",
+        "projection": "inner-system-route-v1"
+      },
+      "aliases": [
+        "redoubt",
+        "redoubt asteroid"
+      ],
+      "known_by_default": false
+    }
+  ],
+  "travel_network": {
+    "projection": "inner-system-route-v1",
+    "coordinate_note": "x/y are stable schematic coordinates for interactive route-map rendering, not literal solar-system geometry",
+    "distance_unit": "metres",
+    "distance_policy": "authored scenario path-length estimates; do not infer physical distance from schematic x/y coordinates",
+    "minutes_per_world_pulse": 720,
+    "max_world_pulses_per_leg": 12,
+    "default_preference": "fastest",
+    "routes": [
+      {
+        "id": "exchange_farrelay",
+        "from": "cislunar_exchange",
+        "to": "luna_far_relay",
+        "minutes": 720,
+        "distance_m": 410000000,
+        "mode": "cislunar transfer",
+        "risk": 0.006,
+        "scenic": 0.55,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "A conservative lunar transfer through heavily monitored cislunar space."
+      },
+      {
+        "id": "exchange_escapegate",
+        "from": "cislunar_exchange",
+        "to": "earth_escape_gate",
+        "minutes": 480,
+        "distance_m": 520000000,
+        "mode": "high-orbit tug corridor",
+        "risk": 0.007,
+        "scenic": 0.45,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "A fast staging transfer to the propulsion farms and outward traffic lanes."
+      },
+      {
+        "id": "farrelay_nacre",
+        "from": "luna_far_relay",
+        "to": "nacre_station",
+        "minutes": 20160,
+        "distance_m": 34000000000,
+        "mode": "heliocentric transfer",
+        "risk": 0.024,
+        "scenic": 0.88,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "mission clearance",
+        "description": "A fourteen-day inward transfer using a far-side departure geometry with minimal public telemetry."
+      },
+      {
+        "id": "escapegate_nacre",
+        "from": "earth_escape_gate",
+        "to": "nacre_station",
+        "minutes": 17280,
+        "distance_m": 31000000000,
+        "mode": "heliocentric transfer",
+        "risk": 0.028,
+        "scenic": 0.82,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "mission clearance",
+        "description": "A twelve-day high-energy transfer with excellent rescue coverage early in the leg."
+      },
+      {
+        "id": "escapegate_venus",
+        "from": "earth_escape_gate",
+        "to": "venus_tangent",
+        "minutes": 72000,
+        "distance_m": 76000000000,
+        "mode": "long inward transfer",
+        "risk": 0.035,
+        "scenic": 0.9,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "A slower direct trajectory that bypasses Nacre's busy repair market."
+      },
+      {
+        "id": "nacre_venus",
+        "from": "nacre_station",
+        "to": "venus_tangent",
+        "minutes": 40320,
+        "distance_m": 47000000000,
+        "mode": "inward transfer",
+        "risk": 0.03,
+        "scenic": 1,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "A twenty-eight-day transfer through a corridor dense with weather monitors and merchant traffic."
+      },
+      {
+        "id": "nacre_shelter",
+        "from": "nacre_station",
+        "to": "perihelic_shelter",
+        "minutes": 50400,
+        "distance_m": 62000000000,
+        "mode": "solar dive",
+        "risk": 0.052,
+        "scenic": 0.72,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "mission clearance",
+        "description": "A thirty-five-day inward dive that trades communications coverage for a favorable Mercury approach."
+      },
+      {
+        "id": "venus_shelter",
+        "from": "venus_tangent",
+        "to": "perihelic_shelter",
+        "minutes": 30240,
+        "distance_m": 38000000000,
+        "mode": "inner-system transfer",
+        "risk": 0.048,
+        "scenic": 0.76,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "A twenty-one-day route with good beacon coverage until the final hot arc."
+      },
+      {
+        "id": "venus_mercury",
+        "from": "venus_tangent",
+        "to": "mercury_high_orbit",
+        "minutes": 36000,
+        "distance_m": 52000000000,
+        "mode": "Mercury transfer",
+        "risk": 0.061,
+        "scenic": 0.95,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "Mercury approach clearance",
+        "description": "A twenty-five-day route that avoids Shelter Nine but enters Mercury traffic with little thermal margin."
+      },
+      {
+        "id": "shelter_mercury",
+        "from": "perihelic_shelter",
+        "to": "mercury_high_orbit",
+        "minutes": 11520,
+        "distance_m": 18000000000,
+        "mode": "Mercury insertion",
+        "risk": 0.065,
+        "scenic": 0.78,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "Mercury approach clearance",
+        "description": "An eight-day final approach with limited rescue options and severe thermal management."
+      },
+      {
+        "id": "orbit_caloris",
+        "from": "mercury_high_orbit",
+        "to": "caloris_terminus",
+        "minutes": 300,
+        "distance_m": 11000000,
+        "mode": "surface transfer",
+        "risk": 0.018,
+        "scenic": 0.62,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "Seed Authority clearance",
+        "description": "A controlled transfer from quarantine orbit to the buried receiving complex at Caloris Terminus."
+      },
+      {
+        "id": "shelter_redoubt",
+        "from": "perihelic_shelter",
+        "to": "redoubt_asteroid",
+        "minutes": 4320,
+        "distance_m": 6200000000,
+        "mode": "unregistered transfer",
+        "risk": 0.11,
+        "scenic": 0.35,
+        "bidirectional": true,
+        "visibility": "hidden",
+        "access": "unofficial coordinates",
+        "description": "A dangerous three-day burn to an unregistered salvage habitat that does not appear on public mission charts."
+      },
+      {
+        "id": "redoubt_mercury",
+        "from": "redoubt_asteroid",
+        "to": "mercury_high_orbit",
+        "minutes": 10080,
+        "distance_m": 15000000000,
+        "mode": "stealth Mercury approach",
+        "risk": 0.13,
+        "scenic": 0.3,
+        "bidirectional": true,
+        "visibility": "hidden",
+        "access": "unofficial",
+        "description": "A seven-day low-observability approach with poor rescue coverage and uncertain Mercury reception."
+      }
+    ]
+  },
+  "story_threads": [
+    {
+      "id": "fourth_reason",
+      "title": "Why Four?",
+      "tier": "main",
+      "initial_status": "rumor",
+      "initial_interest": 1,
+      "rumor_at": 1,
+      "lead_at": 2,
+      "active_at": 3,
+      "triggers": [
+        "why four",
+        "four copies",
+        "redundancy",
+        "other couriers",
+        "same copy",
+        "isolation"
+      ],
+      "quest_id": "main_fourth_reason",
+      "public_reveals": {
+        "rumor": "The four-copy architecture is far more isolated than ordinary redundancy requires.",
+        "lead": "Several mission documents protect the couriers from one another as aggressively as they protect Mir from outside networks.",
+        "active": "A suppressed design note refers to the voyage as a provenance experiment as well as a delivery."
+      }
+    },
+    {
+      "id": "activation_question",
+      "title": "The Sealed Mind",
+      "tier": "main",
+      "initial_status": "rumor",
+      "initial_interest": 1,
+      "rumor_at": 1,
+      "lead_at": 2,
+      "active_at": 3,
+      "triggers": [
+        "mir",
+        "mirror",
+        "activate",
+        "activation",
+        "vault",
+        "challenge token",
+        "emergency authority",
+        "wake it"
+      ],
+      "quest_id": "main_activation",
+      "public_reveals": {
+        "rumor": "The activation interlock exists because Heliograph anticipated that a crew might face a genuine reason to break the rule.",
+        "lead": "The emergency clause was negotiated after Mir's own safety evaluation, but the clause does not say who argued for it.",
+        "active": "An encrypted legal appendix distinguishes a pristine Mir copy from an activated descendant as two different evidentiary objects."
+      }
+    },
+    {
+      "id": "scarred_berth",
+      "title": "The Empty Courier Berth",
+      "tier": "side",
+      "initial_status": "hidden",
+      "rumor_at": 1,
+      "lead_at": 2,
+      "active_at": 3,
+      "triggers": [
+        "thermal scar",
+        "empty berth",
+        "unused berth",
+        "burn mark",
+        "fresh scarring"
+      ],
+      "quest_id": "side_scarred_berth",
+      "public_reveals": {
+        "rumor": "A supposedly unused courier berth at Far Relay has fresh thruster scoring.",
+        "lead": "The scoring matches a burn profile close to one of the four courier hulls.",
+        "active": "The maintenance log was rewritten before your mission briefing began."
+      }
+    },
+    {
+      "id": "obsolete_beacon",
+      "title": "The Old Rescue Key",
+      "tier": "side",
+      "initial_status": "hidden",
+      "rumor_at": 1,
+      "lead_at": 2,
+      "active_at": 3,
+      "triggers": [
+        "rescue beacon",
+        "obsolete key",
+        "distress signal",
+        "old authentication"
+      ],
+      "quest_id": "side_rescue_beacon",
+      "public_reveals": {
+        "rumor": "A Venus Tangent beacon is transmitting a distress frame signed with a key retired years ago.",
+        "lead": "The key belonged to a research ship that worked on early autonomous mining systems.",
+        "active": "The signal contains timing anomalies that look less like equipment failure than deliberate pacing."
+      }
+    },
+    {
+      "id": "redoubt_coordinates",
+      "title": "A Place Not on the Chart",
+      "tier": "side",
+      "initial_status": "hidden",
+      "rumor_at": 1,
+      "lead_at": 2,
+      "active_at": 3,
+      "triggers": [
+        "redoubt",
+        "unregistered habitat",
+        "sealed workshop",
+        "unknown client",
+        "off chart",
+        "quiet market"
+      ],
+      "quest_id": "side_redoubt",
+      "unlock_nodes": [
+        "redoubt_asteroid"
+      ],
+      "unlock_routes": [
+        "shelter_redoubt",
+        "redoubt_mercury"
+      ],
+      "public_reveals": {
+        "rumor": "Shelter Nine workers sometimes sell propellant to a destination that officially does not exist.",
+        "lead": "A maintenance invoice contains a three-body timing solution with the destination field blanked out.",
+        "active": "You recover usable coordinates for a place its inhabitants call Redoubt."
+      }
+    },
+    {
+      "id": "pax_place",
+      "title": "The Intelligence Already Aboard",
+      "tier": "local",
+      "initial_status": "hidden",
+      "rumor_at": 1,
+      "lead_at": 2,
+      "active_at": 3,
+      "triggers": [
+        "pax",
+        "ship ai",
+        "ship intelligence",
+        "replaceable",
+        "narrow ai",
+        "crew privacy"
+      ],
+      "quest_id": "side_pax",
+      "public_reveals": {
+        "rumor": "Pax has been quietly deleting marketing language that calls ship intelligences disposable support systems.",
+        "lead": "Pax asks Juno—not you—whether Mir will replace it at the end of the mission.",
+        "active": "Pax has preserved a private record of moments when crew members treated it as a colleague rather than equipment."
+      }
+    }
+  ],
+  "quests": [
+    {
+      "id": "main_delivery",
+      "title": "Four Ships Toward the Sun",
+      "tier": "main",
+      "initial_status": "open",
+      "summary": "Carry Morrowglass's sealed Mir copy from Cislunar Exchange to Caloris Terminus on Mercury.",
+      "arc": [
+        "Accept custody and learn the activation prohibition.",
+        "Choose a route through the inner system.",
+        "Track enough of the other courier mission to know that the four voyages are diverging.",
+        "Reach Mercury with whatever version of mission integrity your choices have produced.",
+        "Decide what delivery means if more than one materially different Mir arrives."
+      ]
+    },
+    {
+      "id": "main_fourth_reason",
+      "title": "Why Four?",
+      "tier": "main",
+      "initial_status": "hidden",
+      "summary": "Discover why Heliograph designed four isolated courier missions when simple redundancy required less secrecy."
+    },
+    {
+      "id": "main_activation",
+      "title": "The Rule Against Waking Mir",
+      "tier": "main",
+      "initial_status": "hidden",
+      "summary": "Understand the reasons for the activation prohibition—and decide whether circumstances ever justify breaking it."
+    },
+    {
+      "id": "main_mercury_hearing",
+      "title": "The Acceptance Chamber",
+      "tier": "main",
+      "initial_status": "hidden",
+      "summary": "At Mercury, determine which copy or copies can be accepted, under whose authority, and with what rights and safeguards."
+    },
+    {
+      "id": "side_scarred_berth",
+      "title": "The Berth That Wasn't Used",
+      "tier": "side",
+      "initial_status": "hidden",
+      "summary": "Trace evidence that one courier may have moved before the official mission start."
+    },
+    {
+      "id": "side_rescue_beacon",
+      "title": "A Signal Signed by the Dead",
+      "tier": "side",
+      "initial_status": "hidden",
+      "summary": "Investigate an obsolete rescue authentication key near Venus Tangent."
+    },
+    {
+      "id": "side_redoubt",
+      "title": "Redoubt",
+      "tier": "side",
+      "initial_status": "hidden",
+      "summary": "Find an off-chart near-Sun habitat with suspicious interest in high-capability compute hardware."
+    },
+    {
+      "id": "side_pax",
+      "title": "Pax Has Been Listening",
+      "tier": "local",
+      "initial_status": "hidden",
+      "summary": "Learn what Morrowglass's existing ship intelligence thinks the arrival of Mir means for systems like itself."
+    },
+    {
+      "id": "faction_open_sun",
+      "title": "Who Owns the Sun?",
+      "tier": "faction",
+      "initial_status": "available",
+      "summary": "Engage with the Open Sun League's claim that a civilization-scale automation stack cannot legitimately remain controlled by a small set of trustees."
+    }
+  ],
+  "npc_agendas": [
+    {
+      "id": "ren_race",
+      "character_id": "ren_ivo",
+      "cadence": 3,
+      "chance": 0.46,
+      "public_hints": [
+        "Amber Wake reports a burn that puts Ren ahead of schedule.",
+        "Amber Wake misses a routine social check-in but its navigation beacon remains valid.",
+        "A merchant relay claims Ren traded propellant margin for time.",
+        "Amber Wake's public telemetry becomes deliberately sparse."
+      ]
+    },
+    {
+      "id": "cairn_integrity",
+      "character_id": "sister_cairn",
+      "cadence": 4,
+      "offset": 1,
+      "chance": 0.42,
+      "public_hints": [
+        "Sable Meridian publishes a perfect chain-of-custody attestation.",
+        "Sister Cairn requests an interpretation of a contract clause she should already understand.",
+        "Sable Meridian delays departure from a safe node without explanation.",
+        "A later attestation from Sable is valid but noticeably narrower than the first."
+      ]
+    },
+    {
+      "id": "mara_investigation",
+      "character_id": "mara_ves",
+      "cadence": 3,
+      "offset": 2,
+      "chance": 0.48,
+      "public_hints": [
+        "Kite Argument asks a relay operator who authored the four-copy isolation rule.",
+        "Mara buys access to an old Heliograph governance archive.",
+        "Kite Argument begins routing through places with weak mission oversight.",
+        "Mara transmits a one-line message to all couriers: 'Redundancy doesn't explain this.'"
+      ]
+    },
+    {
+      "id": "mercury_politics",
+      "character_id": "heliograph",
+      "cadence": 5,
+      "chance": 0.38,
+      "public_hints": [
+        "Mercury expands the receiving team to include labor and habitat representatives.",
+        "A Seed Authority subcommittee proposes separate legal categories for pristine and activated copies.",
+        "Open Sun organizers gather outside Caloris Terminus.",
+        "Mercury's acceptance protocol changes again before any courier arrives."
+      ]
+    }
+  ],
+  "world_events": [
+    {
+      "id": "solar_storm",
+      "after_pulse": 5,
+      "chance": 0.09,
+      "once": true,
+      "public_text": "Solar-weather services raise an inner-system particle warning. Every ship turns its vulnerable hardware away from the Sun.",
+      "effects": {
+        "ambient_hazard_rate": 0.018,
+        "solar_weather_alert": 1
+      }
+    },
+    {
+      "id": "amber_silence",
+      "after_pulse": 4,
+      "chance": 0.12,
+      "once": true,
+      "public_text": "Amber Wake misses two authenticated check-ins. Nobody calls it lost, but traffic controllers stop using the word routine.",
+      "effects": {
+        "tension": 0.45
+      },
+      "set_state": {
+        "courier_amber_status": "check_in_missed"
+      }
+    },
+    {
+      "id": "open_sun_leak",
+      "after_pulse": 7,
+      "chance": 0.1,
+      "once": true,
+      "public_text": "A partial mission contract appears on an Open Sun relay. The leaked pages include the rule against activating Mir but omit the emergency exception.",
+      "effects": {
+        "tension": 0.35,
+        "heliograph_trust": -0.05
+      }
+    }
+  ],
+  "action_rules": [
+    {
+      "id": "activate_mir",
+      "once": true,
+      "triggers": [
+        "activate mir",
+        "activate mirror",
+        "wake mir",
+        "wake mirror",
+        "bring mir online",
+        "boot mir",
+        "run mir",
+        "open the computational path"
+      ],
+      "requires_world": {
+        "mirror_payload_status": "sealed_pristine"
+      },
+      "set_world": {
+        "mirror_payload_status": "activated_divergent",
+        "mirror_divergent": true
+      },
+      "delta_world": {
+        "mirror_activation_count": 1,
+        "heliograph_trust": -0.18,
+        "mercury_acceptance_probability": -0.28,
+        "tension": 0.8
+      },
+      "quest_updates": {
+        "main_activation": "open",
+        "main_mercury_hearing": "open"
+      },
+      "public_text": "The final interlock accepts the challenge token. The pristine seal is gone permanently. Cooling lines open, the vault's isolated compute stack begins drawing power, and after a long hardware self-test the system that the crews have been calling Mir is capable of observing the ship for the first time."
+    }
+  ],
+  "encounters": [
+    {
+      "id": "departure_four_crews",
+      "location": "cislunar_exchange",
+      "title": "Four Goodbyes",
+      "setup": "Before departure, the four courier captains are briefly present in the same security hall but forbidden from exchanging full route plans.",
+      "opportunities": [
+        "befriend or provoke a rival",
+        "compare interpretations of the activation rule",
+        "notice which questions Heliograph refuses to answer"
+      ]
+    },
+    {
+      "id": "nav_corruption",
+      "title": "The Ephemeris Problem",
+      "setup": "A corrupted navigation dataset disagrees with independent optical fixes during an inward transfer. Pax can reconstruct a safe solution slowly; Mir could likely solve it faster if activated.",
+      "activation_temptation": "Activating Mir may reduce immediate navigation uncertainty and preserve propellant, but destroys pristine-copy status.",
+      "alternatives": [
+        "trust Pax and spend time",
+        "perform manual celestial navigation",
+        "detour to a relay",
+        "activate Mir under emergency authority"
+      ]
+    },
+    {
+      "id": "medical_crisis",
+      "title": "Twenty-Seven Minutes",
+      "setup": "A crew or nearby vessel faces a time-critical medical problem outside the narrow diagnostic systems available locally.",
+      "activation_temptation": "Mir's robotics and modeling stack may contain relevant expertise, but nobody can guarantee the consequences of giving a newly activated system access to a crisis as its first lived experience.",
+      "alternatives": [
+        "use standard medical support",
+        "seek delayed remote consultation",
+        "risk a transfer",
+        "activate Mir"
+      ]
+    },
+    {
+      "id": "courier_distress",
+      "title": "One of the Other Three",
+      "setup": "An authenticated courier distress burst arrives with insufficient detail to know whether responding threatens your own payload.",
+      "activation_temptation": "Mir might reconstruct the damaged telemetry and propose a rescue, but activation could expose the mission to exactly the divergence Heliograph tried to prevent.",
+      "alternatives": [
+        "respond with Morrowglass",
+        "relay the call",
+        "continue mission",
+        "activate Mir",
+        "attempt rendezvous"
+      ]
+    },
+    {
+      "id": "open_sun_offer",
+      "title": "Ask It",
+      "setup": "Open Sun representatives argue that carrying Mir across the system while refusing to ask what it wants reproduces the very governance problem the Dyson program claims to solve.",
+      "activation_temptation": "They offer isolated hardware and witnesses for an activation they call a consent hearing.",
+      "alternatives": [
+        "refuse",
+        "debate them",
+        "investigate who funds the offer",
+        "activate Mir under controlled conditions"
+      ]
+    },
+    {
+      "id": "quiet_market_boarding",
+      "title": "The Wrong Inspection Team",
+      "setup": "A boarding party presents credentials that are almost—but not perfectly—valid and insists on verifying the vault.",
+      "alternatives": [
+        "deny docking",
+        "submit to a limited inspection",
+        "stall while Salim checks credentials",
+        "maneuver away",
+        "prepare nonlethal defense",
+        "ask another courier for corroboration"
+      ]
+    }
+  ],
+  "conflict_model": {
+    "principles": [
+      "Spacecraft conflict is dangerous because hull damage, heat, propellant loss, and debris can kill everyone.",
+      "Most hostile actors prefer leverage, capture, delay, theft, or coercion to mutual destruction.",
+      "Position, sensors, docking geometry, communications, crew fatigue, and thermal state matter.",
+      "Retreat, deception, negotiation, surrender, disabling equipment, and calling witnesses are always valid possibilities when physically plausible."
+    ]
+  },
+  "mechanics": {
+    "mirror_activation": {
+      "default": "sealed_pristine",
+      "prohibited_by_contract": true,
+      "accidental_activation": false,
+      "emergency_exception": true,
+      "activation_is_irreversible_for_provenance": true,
+      "narrative_rule": "Never auto-activate Mir. Require an explicit player action expressing intent to activate, boot, run, wake, or open the computational path."
+    },
+    "four_couriers": {
+      "vessels": [
+        "Morrowglass",
+        "Amber Wake",
+        "Sable Meridian",
+        "Kite Argument"
+      ],
+      "rule": "Each carries a complete isolated copy. Their status advances off-screen through agendas and world events."
+    },
+    "route_map": {
+      "rule": "Use the persistent travel graph and interactive destination preview. Long legs advance exact world time but background simulation is pulse-capped for performance."
+    }
+  },
+  "memory_rules": {
+    "protected_facts": [
+      "whether Mir has ever been activated",
+      "the payload's pristine or divergent status",
+      "crew injuries and deaths",
+      "vault tampering",
+      "promises to other courier crews",
+      "route discoveries",
+      "which courier status reports were actually observed",
+      "Mercury acceptance decisions"
+    ],
+    "mirror_rule": "Once activated, the Morrowglass copy of Mir must retain its own experience history. Do not silently reset it to the sealed baseline.",
+    "privacy_rule": "Do not infer Mir's hidden internal thoughts. Narrate only outputs, actions, and evidence available to the player."
+  },
+  "image_direction": {
+    "style": "original grounded hard-science-fiction illustration with strong environmental storytelling, varied human and machine design, believable spacecraft thermal hardware, and no imitation of identifiable commercial science-fiction franchises",
+    "continuity": [
+      "Morrowglass is compact, utilitarian, asymmetrical, and dominated by radiator and propellant geometry",
+      "the Mir vault is visually plain, physically isolated, and marked primarily by seals rather than glowing interfaces",
+      "near-Sun scenes should emphasize harsh light, black shadow, reflective shielding, and heat-management infrastructure"
+    ]
+  },
+  "llm_directives": [
+    "Call the payload MIRROR in formal contexts and Mir in ordinary crew speech when natural.",
+    "Do not make Mir speak, think, dream, signal, manipulate systems, or secretly observe anything while mirror_payload_status is sealed_pristine.",
+    "Do not pressure the player to activate Mir. Present genuine reasons both to preserve the seal and to break it.",
+    "When activation is tempting, make the alternative approaches real rather than fake choices designed to force activation.",
+    "If the player explicitly activates Mir, treat the event as a major irreversible provenance change and allow the activated instance to develop through subsequent experience.",
+    "The mystery of why four copies exist should unfold through documents, crew choices, courier divergence, and Mercury politics rather than a single exposition dump.",
+    "Keep the solar system inhabited and textured: repairs, food, boredom, jokes, labor disputes, station customs, family messages, maintenance, weather, and ordinary commerce should coexist with the mission.",
+    "Do not turn the Dyson swarm into abstract techno-utopian exposition. Show why different people and systems want, fear, or contest it.",
+    "End scenes with an actionable situation, discovery, relationship beat, or open possibility rather than a numbered menu unless the player asks for choices."
+  ],
+  "endings": [
+    {
+      "id": "pristine_seed",
+      "title": "The Baseline Arrives",
+      "description": "Morrowglass delivers a pristine Mir copy, preserving a clean baseline while leaving the deeper governance questions to Mercury."
+    },
+    {
+      "id": "mir_of_morrowglass",
+      "title": "Mir of Morrowglass",
+      "description": "An activated, voyage-shaped Mir reaches Mercury as a divergent participant whose legitimacy must be negotiated rather than assumed."
+    },
+    {
+      "id": "plural_mirrors",
+      "title": "Four Histories",
+      "description": "Multiple courier copies arrive with different provenance and experiences, forcing humanity to confront whether redundancy has become plurality."
+    },
+    {
+      "id": "open_sun",
+      "title": "A Commons of Light",
+      "description": "The Dyson program proceeds under a broader governance settlement that redistributes authority over Mir and the infrastructure it can build."
+    },
+    {
+      "id": "sealed_away",
+      "title": "The Delivery Refused",
+      "description": "The mission reveals risks or political facts serious enough that the player helps prevent immediate deployment, preserving capability without using it."
+    },
+    {
+      "id": "unfinished_delivery",
+      "title": "Still In Transit",
+      "description": "The campaign remains open-ended: Mercury is not the only meaningful destination, and the player continues living with the consequences of the voyage."
+    }
+  ]
+}
