@@ -21,6 +21,7 @@ OPTIONAL_TYPES = {
     "story_threads": list,
     "npc_agendas": list,
     "world_events": list,
+    "action_rules": list,
     "conflict_model": dict,
     "travel_network": dict,
     "factions": list,
