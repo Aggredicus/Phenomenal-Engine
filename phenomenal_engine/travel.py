@@ -625,7 +625,12 @@ def travel_pulses_for_minutes(mod: dict, minutes: float) -> int:
         1.0,
         float(mod.get("travel_network", {}).get("minutes_per_world_pulse", 10.0)),
     )
-    return max(1, int(math.ceil(float(minutes) / minutes_per_pulse)))
+    pulses = max(1, int(math.ceil(float(minutes) / minutes_per_pulse)))
+    max_pulses = max(
+        1,
+        int(mod.get("travel_network", {}).get("max_world_pulses_per_leg", 24)),
+    )
+    return min(pulses, max_pulses)
 
 
 def apply_route(mod: dict, memory: dict, route_plan: dict) -> dict:
