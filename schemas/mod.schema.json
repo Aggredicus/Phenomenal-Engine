@@ -123,6 +123,15 @@
     },
     "action_rules": {
       "type": "array"
+    },
+    "mission_directive": {
+      "type": "object"
+    },
+    "hidden_truths": {
+      "type": "object"
+    },
+    "main_arc": {
+      "type": "array"
     }
   }
 }
