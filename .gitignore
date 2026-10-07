@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Test/tool caches
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Local editor / OS noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Phenomenal Engine local campaign data.
+# Keep runtime/.gitkeep tracked, but do not accidentally publish saves.
+runtime/*
+!runtime/.gitkeep
+
+# Common campaign/save exports outside runtime/
+*.save.json
+*.save.jsonl
+campaign-*.json
+campaign-*.jsonl
+
+# Provider/local secrets
+.env
+.env.*
+!.env.example

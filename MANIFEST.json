@@ -1,8 +1,13 @@
 [
   {
+    "path": ".gitignore",
+    "bytes": 501,
+    "sha256": "a3d0a41fe7ae1c02d575e98734885423ebaefe187108a74b4ec3729a3a40892f"
+  },
+  {
     "path": "AGENT_BOOTLOADER.md",
-    "bytes": 2692,
-    "sha256": "bd8f684a42824a951424b605629712d6d9cf3ce83aed68982a2bc5e4e56550db"
+    "bytes": 5172,
+    "sha256": "aa9286bfb6569479b35377d5b010ef6db470b40130b6de7305796b3e346bb093"
   },
   {
     "path": "CHANGELOG.md",
@@ -10,19 +15,14 @@
     "sha256": "19dc2130af475fd39be4f1569d000ba39656c723c8646302796fec9183f51c17"
   },
   {
-    "path": "LICENSE",
-    "bytes": 1067,
-    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
+    "path": "docs/chatbot_quickstart.md",
+    "bytes": 4334,
+    "sha256": "43d43dff321f22108f21f66a5587495baad847a74b5656d1fb3fc165b46ac845"
   },
   {
-    "path": "MOD_AUTHOR_PROMPT.md",
-    "bytes": 1060,
-    "sha256": "ef79c614634856483e8e5fdbc91da09a48e9664ce9b924f79e90b2f1cdd8b271"
-  },
-  {
-    "path": "README.md",
-    "bytes": 3718,
-    "sha256": "c22b7170b099bd7567cccc7e5c807d533ad09f1d3b2ebc0c6acbd6a974597364"
+    "path": "docs/codespaces_and_saves.md",
+    "bytes": 4083,
+    "sha256": "d23bc3823a62585bdc7bc4fe47e34fe63b60954eef662065873516ecb523179a"
   },
   {
     "path": "docs/game_theory_and_ai_ethics.md",
@@ -33,6 +33,11 @@
     "path": "docs/image_pipeline.md",
     "bytes": 1548,
     "sha256": "a7052e73e5607f60690863a78ab553c979f3a3f6bf7e027a0b59317512aea7a5"
+  },
+  {
+    "path": "docs/integration_contract.md",
+    "bytes": 7185,
+    "sha256": "3fac4e4a0851d23c031884bb1355011d11315830e97d19e48bb74010438d0acc"
   },
   {
     "path": "docs/math_and_probability.md",
@@ -78,6 +83,16 @@
     "path": "examples/run_demo.py",
     "bytes": 843,
     "sha256": "6023192173b88106338739f61c3f147e270e518f51c1ef49766e7e205a7be9ce"
+  },
+  {
+    "path": "LICENSE",
+    "bytes": 1067,
+    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
+  },
+  {
+    "path": "MOD_AUTHOR_PROMPT.md",
+    "bytes": 1060,
+    "sha256": "ef79c614634856483e8e5fdbc91da09a48e9664ce9b924f79e90b2f1cdd8b271"
   },
   {
     "path": "mods/concord_tournament.json",
@@ -170,6 +185,11 @@
     "sha256": "b237d78b7d88271fcf9cc8c1c18924b4cba7e96a9335917ec13e3a91afdfd15b"
   },
   {
+    "path": "README.md",
+    "bytes": 6746,
+    "sha256": "91f3e8f26ee6e8b740a119485446af7a97d0a6de48e6e9ca9cc9ddfff2c91fa4"
+  },
+  {
     "path": "runtime/.gitkeep",
     "bytes": 0,
     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -188,6 +208,21 @@
     "path": "schemas/scene_packet.schema.json",
     "bytes": 268,
     "sha256": "eb11cc691a7a11d9daa65595fe991641f2fe4b9e49c18e11e46f936e1b8045c9"
+  },
+  {
+    "path": "SECURITY.md",
+    "bytes": 8048,
+    "sha256": "d509e3a784c51a10bea1f752a827bed92d4de479d208d9c6a0ea72b0d8ba86e4"
+  },
+  {
+    "path": "START_HERE.md",
+    "bytes": 4401,
+    "sha256": "55500e082d4ab7d4dd13c184d01b0ddc5919d2c91bd07c02cb6abb9c8515101c"
+  },
+  {
+    "path": "SUPPORT.md",
+    "bytes": 4376,
+    "sha256": "82d7b529fe333897fb0b8eeb82b6db84d3f14c66f98e1fe52871ac9820395cdd"
   },
   {
     "path": "tests/test_game_theory.py",
