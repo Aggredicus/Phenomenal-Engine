@@ -187,6 +187,8 @@ python -m unittest discover -s tests -v
 python -m phenomenal_engine tournament --rounds 100 --error-rate 0.02
 python -m phenomenal_engine evolve --generations 30
 python -m phenomenal_engine planck-budget
+python -m phenomenal_engine map mods/concord_tournament.json
+python -m phenomenal_engine route mods/concord_tournament.json "Wildtype Delta" --preference scenic
 ~~~
 
 Create a save without taking a turn:
@@ -228,6 +230,8 @@ For integration developers:
 - `docs/integration_contract.md`
 - `SECURITY.md`
 - `docs/memory_protocol.md`
+- `docs/living_world_storytelling.md`
+- `docs/travel_graph.md`
 - `schemas/memory.schema.json`
 - `schemas/mod.schema.json`
 
@@ -242,6 +246,8 @@ For integration developers:
 - Idempotent agent turn execution.
 - Observer-limited scene packets.
 - Provider-neutral image jobs.
+- Persistent node-map travel with authored and runtime-discovered locations, routes, delays, closures, and multi-hop pathfinding.
+- Living-world story threads, NPC agendas, environmental breadcrumbs, and campaign-local player-experience adaptation.
 - Declarative JSON mods.
 
 The language model is the dramatist. **The simulation is the adjudicator.**
