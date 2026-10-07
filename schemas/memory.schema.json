@@ -3,24 +3,14 @@
   "$id": "https://example.local/phenomenal-engine/memory.schema.json",
   "title": "Phenomenal Engine Persistent Memory",
   "type": "object",
-  "required": [
-    "schema_version",
-    "engine_version",
-    "session_id",
-    "mod",
-    "turn",
-    "master_seed",
-    "rng_streams",
-    "world_state",
-    "event_ledger"
-  ],
+  "required": ["schema_version","engine_version","session_id","mod","turn","master_seed","rng_streams","world_state","event_ledger"],
   "properties": {
     "schema_version": {"const": "1.0.0"},
     "engine_version": {"type": "string"},
     "session_id": {"type": "string"},
-    "state_version": {"type": "integer", "minimum": 0},
+    "state_version": {"type": "integer","minimum": 0},
     "mod": {"type": "object"},
-    "turn": {"type": "integer", "minimum": 0},
+    "turn": {"type": "integer","minimum": 0},
     "master_seed": {"type": "string"},
     "rng_streams": {"type": "object"},
     "world_state": {"type": "object"},
@@ -34,7 +24,9 @@
     "chronicle": {"type": "array"},
     "event_ledger": {"type": "array"},
     "image_jobs": {"type": "array"},
-    "last_scene_packet": {"type": ["object", "null"]},
-    "summaries": {"type": "object"}
+    "last_scene_packet": {"type": ["object","null"]},
+    "summaries": {"type": "object"},
+    "story_state": {"type": "object"},
+    "player_experience": {"type": "object"}
   }
 }
