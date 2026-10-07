@@ -3,7 +3,7 @@ from __future__ import annotations
 from copy import deepcopy
 import re
 
-from .travel import apply_route, infer_destination, plan_route, set_route_override, travel_pulses
+from .travel import apply_route, discover_node, discover_route, infer_destination, plan_route, set_route_override, travel_pulses
 
 ACTION_MODES = {
     "combat": {
@@ -155,6 +155,10 @@ def _promote_thread(memory: dict, mod: dict, state: dict, definition: dict) -> d
         quest = memory.setdefault("quests", {}).get(linked_quest)
         if quest is not None and quest.get("status") in {"hidden", "rumor", "available"}:
             quest["status"] = "open"
+        for node_id in definition.get("unlock_nodes", []):
+            discover_node(mod, memory, node_id)
+        for route_id in definition.get("unlock_routes", []):
+            discover_route(mod, memory, route_id)
 
     public = definition.get("public_reveals", {})
     return {
