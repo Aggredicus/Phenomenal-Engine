@@ -404,11 +404,11 @@ button:disabled {{ opacity:.45; cursor:not-allowed; }}
     const n = Number(minutes);
     if (!Number.isFinite(n)) return "—";
     if (n < 60) return Math.round(n) + " min";
-    if (n < 1440) {
+    if (n < 1440) {{
       const h = Math.floor(n / 60);
       const m = Math.round(n % 60);
       return h + " h" + (m ? " " + m + " min" : "");
-    }
+    }}
     const d = Math.floor(n / 1440);
     const h = Math.round((n % 1440) / 60);
     return d + " d" + (h ? " " + h + " h" : "");
