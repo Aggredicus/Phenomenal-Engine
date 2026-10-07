@@ -18,7 +18,7 @@ The language model may describe the trip, but it does not decide topology. Route
 A player can issue natural commands such as:
 
 - “Go to the Market of Small Suns.”
-- “Take the safest route to Wildtype Delta.”
+- “Take the safest route to Mercury High Orbit.”
 - “Head back to the Arrival Spindle.”
 - “Find a scenic way to the Mirror Cloister.”
 
@@ -60,8 +60,8 @@ Run:
 
 ```bash
 python -m phenomenal_engine map-ui \
-  mods/concord_tournament.json \
-  runtime/concord.json
+  mods/mirror_delivery.json \
+  runtime/mirror.json
 ```
 
 Then open the loopback URL printed by the command. The server binds only to `127.0.0.1`.
@@ -125,27 +125,27 @@ Every scene packet may include `world_map`:
 - visited/current markers;
 - persistent closures and delays.
 
-Coordinates are a rendering aid. A mod may use literal coordinates when appropriate, but Concord uses a stable schematic projection rather than pretending its 2D map is literal station geometry.
+Coordinates are a rendering aid. A mod may use literal coordinates when appropriate, but Mirror Delivery uses a stable schematic inner-system projection rather than pretending its 2D map is literal orbital geometry.
 
 ## CLI inspection
 
 Preview the known map without creating a save:
 
 ```bash
-python -m phenomenal_engine map mods/concord_tournament.json
+python -m phenomenal_engine map mods/mirror_delivery.json
 ```
 
 Inspect a campaign's actual discovered map:
 
 ```bash
-python -m phenomenal_engine map mods/concord_tournament.json --save runtime/concord.json
+python -m phenomenal_engine map mods/mirror_delivery.json --save runtime/mirror.json
 ```
 
 Plan a route:
 
 ```bash
-python -m phenomenal_engine route mods/concord_tournament.json "Wildtype Delta" \
-  --save runtime/concord.json \
+python -m phenomenal_engine route mods/mirror_delivery.json "Mercury High Orbit" \
+  --save runtime/mirror.json \
   --preference safest
 ```
 
