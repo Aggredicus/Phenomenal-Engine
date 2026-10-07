@@ -3,7 +3,7 @@ from __future__ import annotations
 from copy import deepcopy
 import re
 
-from .travel import apply_route, discover_node, discover_route, infer_destination, plan_route, set_route_override, travel_pulses
+from .travel import advance_journey, begin_journey, cancel_journey, discover_node, discover_route, infer_destination, reroute_journey, set_route_override, travel_pulses_for_minutes
 
 ACTION_MODES = {
     "combat": {
@@ -49,6 +49,24 @@ def classify_action(action: str) -> str:
         scored.append((len(words & keywords), mode))
     score, mode = max(scored, default=(0, "general"))
     return mode if score > 0 else "general"
+
+
+def _travel_control(action: str) -> str | None:
+    text = action.lower()
+    if any(phrase in text for phrase in (
+        "cancel journey", "cancel travel", "stop journey", "stop traveling", "stop travelling",
+    )):
+        return "cancel"
+    if any(phrase in text for phrase in (
+        "reroute", "re-route", "change route", "replan route", "re-plan route",
+    )):
+        return "reroute"
+    if any(phrase in text for phrase in (
+        "continue journey", "continue travel", "continue traveling", "continue travelling",
+        "next leg", "keep going", "proceed to the next",
+    )):
+        return "continue"
+    return None
 
 
 def initial_story_state(mod: dict) -> dict:
@@ -328,34 +346,79 @@ def advance_story(mod: dict, memory: dict, action: str, outcome: dict, rng) -> d
     memory.setdefault("story_state", initial_story_state(mod))
     memory.setdefault("player_experience", initial_player_experience())
 
-    mode = classify_action(action)
+    control = _travel_control(action)
+    mode = "travel" if control else classify_action(action)
     _update_experience(memory, action, mode)
 
     travel_update = None
     elapsed_pulses = 1
     if mode == "travel":
-        destination = infer_destination(mod, memory, action)
-        if destination:
-            words = _words(action)
-            preference = (
-                "safest" if words & {"safe", "safer", "safest", "careful", "carefully"}
-                else "scenic" if words & {"scenic", "beautiful", "interesting", "long", "wander"}
-                else "fastest"
-            )
-            travel_update = plan_route(
-                mod,
-                memory,
-                destination,
-                preference=preference,
-            )
-            if travel_update.get("status") in {"ok", "already_there"}:
-                elapsed_pulses = travel_pulses(mod, travel_update)
-                apply_route(mod, memory, travel_update)
-        else:
+        words = _words(action)
+        preference = (
+            "safest" if words & {"safe", "safer", "safest", "careful", "carefully"}
+            else "scenic" if words & {"scenic", "beautiful", "interesting", "long", "wander"}
+            else "fastest"
+        )
+
+        if control == "cancel":
             travel_update = {
-                "status": "no_destination",
-                "origin": memory.get("world_state", {}).get("location"),
+                "intent": "cancel",
+                **cancel_journey(mod, memory),
             }
+        elif control == "reroute":
+            rerouted = reroute_journey(mod, memory, preference=preference)
+            travel_update = {
+                "intent": "reroute",
+                **rerouted,
+            }
+        elif control == "continue":
+            leg = advance_journey(mod, memory, legs=1)
+            travel_update = {
+                "intent": "continue",
+                **leg,
+            }
+            elapsed_pulses = travel_pulses_for_minutes(
+                mod, float(leg.get("leg_minutes", 0.0))
+            )
+        else:
+            destination = infer_destination(mod, memory, action)
+            if destination:
+                started = begin_journey(
+                    mod,
+                    memory,
+                    destination,
+                    preference=preference,
+                )
+                if started.get("status") == "active":
+                    leg = advance_journey(mod, memory, legs=1)
+                    travel_update = {
+                        "intent": "start",
+                        "journey_started": started,
+                        **leg,
+                    }
+                    elapsed_pulses = travel_pulses_for_minutes(
+                        mod, float(leg.get("leg_minutes", 0.0))
+                    )
+                else:
+                    travel_update = {
+                        "intent": "start",
+                        **started,
+                    }
+            elif memory.get("travel_state", {}).get("active_journey"):
+                leg = advance_journey(mod, memory, legs=1)
+                travel_update = {
+                    "intent": "continue",
+                    **leg,
+                }
+                elapsed_pulses = travel_pulses_for_minutes(
+                    mod, float(leg.get("leg_minutes", 0.0))
+                )
+            else:
+                travel_update = {
+                    "status": "no_destination",
+                    "intent": "none",
+                    "origin": memory.get("world_state", {}).get("location"),
+                }
 
     story = memory["story_state"]
 
