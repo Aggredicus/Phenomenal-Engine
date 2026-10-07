@@ -3,17 +3,22 @@ name: Phenomenal Engine CI
 on:
   push:
     branches:
-      - "**"
+      - main
   pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: phenomenal-engine-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
+    name: Fast full validation
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -25,16 +30,16 @@ jobs:
         run: python -m phenomenal_engine validate mods
 
       - name: Run unit tests
-        run: python -m unittest discover -s tests -v
+        run: python -m unittest discover -s tests -q
 
       - name: Smoke-test persistent campaign
         shell: bash
         run: |
           set -euo pipefail
           tmp="$(mktemp -d)"
-          python -m phenomenal_engine play mods/concord_tournament.json "$tmp/concord.json" "Begin." --seed ci --idempotency-key ci-1
-          python -m phenomenal_engine play mods/concord_tournament.json "$tmp/concord.json" "Inspect the ledger." --idempotency-key ci-2
-          python -m phenomenal_engine status "$tmp/concord.json"
+          python -m phenomenal_engine play mods/concord_tournament.json "$tmp/concord.json" "Begin." --seed ci --idempotency-key ci-1 >/dev/null
+          python -m phenomenal_engine play mods/concord_tournament.json "$tmp/concord.json" "Inspect the ledger." --idempotency-key ci-2 >/dev/null
+          python -m phenomenal_engine status "$tmp/concord.json" >/dev/null
 
       - name: Check optional Codespaces startup remains opt-in
         run: |
@@ -46,7 +51,6 @@ jobs:
           assert data["codespaces"]["default_enabled"] is False
           assert data["codespaces"]["created"] is False
           assert len(data["mods"]) == 3
-          print("Codespaces is off by default.")
           PY
 
       - name: Verify canonical manifest
