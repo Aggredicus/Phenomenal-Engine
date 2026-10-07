@@ -22,6 +22,7 @@ OPTIONAL_TYPES = {
     "npc_agendas": list,
     "world_events": list,
     "conflict_model": dict,
+    "travel_network": dict,
     "factions": list,
     "characters": list,
     "locations": list,
