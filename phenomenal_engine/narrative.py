@@ -1,6 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from .story import experience_directives, visible_story_state
+from .travel import visible_map
 
 def _light_word(lux: float) -> str:
     if lux < 0.01: return "near-total darkness"
@@ -67,6 +68,7 @@ def build_scene_packet(
         "known_world_state": memory.get("world_state", {}),
         "open_threads": memory.get("open_threads", []),
         "story_state": visible_story_state(memory),
+        "world_map": visible_map(mod, memory),
         "story_update": story_update,
         "presentation": {
             "mechanics_visibility": story_design.get("mechanics_visibility", "submerged"),
@@ -85,6 +87,7 @@ def build_scene_packet(
             "Plant optional details that can remain mere atmosphere. Promote them into story threads only when the player shows interest.",
             "Support simultaneous main, faction, side, local, and emergent threads. Never imply the player is playing incorrectly for ignoring the main story.",
             "Do not announce every breadcrumb as a quest. Use diegetic clues, overheard conversation, objects, changes in place, and character behavior.",
+            "Honor the persistent travel graph. Distances, route order, travel modes, closures, shortcuts, and the player current location must remain consistent with world_map and story_update.travel.",
             "Conflict should have positioning, environment, morale, alternatives, and persistent consequences; opponents should have motives rather than existing only as targets.",
             "Failure should transform the situation, reveal cost or information, or open a different route more often than it simply blocks progress.",
             "End with a concrete affordance, dilemma, discovery, interruption, or natural opening for free-form action.",
