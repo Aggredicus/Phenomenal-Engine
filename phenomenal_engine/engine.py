@@ -4,6 +4,7 @@ from .probability import sample_skill_check, consequence_severity, hazard_probab
 from .memory import append_event
 from .narrative import build_scene_packet, PhenomenologyFrame
 from .image_jobs import should_generate, enqueue
+from .story import advance_story
 
 class Engine:
     def __init__(self, mod: dict, memory: dict, queue_path: str | None = None):
@@ -11,7 +12,7 @@ class Engine:
         self.memory = memory
         self.queue_path = queue_path
         self.streams: dict[str, PCG32] = {}
-        for label in ["actions", "world", "encounters", "game_theory", "images"]:
+        for label in ["actions", "world", "encounters", "game_theory", "images", "story"]:
             saved = memory.get("rng_streams", {}).get(label)
             self.streams[label] = PCG32.from_state_dict(saved) if saved else derive_stream(memory["master_seed"], label)
 
@@ -64,8 +65,27 @@ class Engine:
             ),
         )
 
-        packet = build_scene_packet(self.mod, self.memory, action, outcome, frame)
-        event_payload = {"action": action, "resolution": outcome, "scene_packet": packet}
+        story_update = advance_story(
+            self.mod,
+            self.memory,
+            action,
+            outcome,
+            self.streams["story"],
+        )
+        packet = build_scene_packet(
+            self.mod,
+            self.memory,
+            action,
+            outcome,
+            frame,
+            story_update=story_update,
+        )
+        event_payload = {
+            "action": action,
+            "resolution": outcome,
+            "story_update": story_update,
+            "scene_packet": packet,
+        }
         if idempotency_key:
             event_payload["idempotency_key"] = idempotency_key
         append_event(self.memory, "player_action", event_payload)
