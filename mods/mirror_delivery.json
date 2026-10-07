@@ -92,7 +92,8 @@
     "courier_amber_status": "departing",
     "courier_sable_status": "departing",
     "courier_kite_status": "departing",
-    "solar_weather": "nominal"
+    "solar_weather": "nominal",
+    "mirror_activation_stage": "unarmed"
   },
   "world_model": {
     "solar_system": "Human settlement is dense around Earth and Luna, sparse but economically important across inner-system relay and industrial nodes, and rapidly expanding around Mercury.",
@@ -947,8 +948,9 @@
   ],
   "action_rules": [
     {
-      "id": "activate_mir",
-      "once": true,
+      "id": "arm_mir_activation",
+      "once": false,
+      "deterministic": true,
       "triggers": [
         "activate mir",
         "activate mirror",
@@ -960,10 +962,56 @@
         "open the computational path"
       ],
       "requires_world": {
-        "mirror_payload_status": "sealed_pristine"
+        "mirror_payload_status": "sealed_pristine",
+        "mirror_activation_stage": "unarmed"
+      },
+      "set_world": {
+        "mirror_activation_stage": "armed"
+      },
+      "quest_updates": {
+        "main_activation": "open"
+      },
+      "public_text": "The challenge token seats with a hard mechanical click. The vault accepts the first authorization, isolates itself from every network aboard Morrowglass, and presents the final physical confirmation. Mir is still sealed and inactive. You may confirm the activation or abort it."
+    },
+    {
+      "id": "abort_mir_activation",
+      "once": false,
+      "deterministic": true,
+      "triggers": [
+        "abort mir activation",
+        "cancel mir activation",
+        "stand down mir activation",
+        "do not activate mir",
+        "stop mir activation"
+      ],
+      "requires_world": {
+        "mirror_payload_status": "sealed_pristine",
+        "mirror_activation_stage": "armed"
+      },
+      "set_world": {
+        "mirror_activation_stage": "unarmed"
+      },
+      "public_text": "You withdraw the authorization. The interlock returns to its sealed standby state. Mir never boots, the pristine payload seal remains valid, and the challenge token remains logged as having been presented but not used to activate the system."
+    },
+    {
+      "id": "confirm_mir_activation",
+      "once": true,
+      "deterministic": true,
+      "triggers": [
+        "confirm mir activation",
+        "confirm mirror activation",
+        "complete mir activation",
+        "proceed with mir activation",
+        "finalize mir activation",
+        "confirm emergency activation"
+      ],
+      "requires_world": {
+        "mirror_payload_status": "sealed_pristine",
+        "mirror_activation_stage": "armed"
       },
       "set_world": {
         "mirror_payload_status": "activated_divergent",
+        "mirror_activation_stage": "complete",
         "mirror_divergent": true
       },
       "delta_world": {
@@ -976,8 +1024,19 @@
         "main_activation": "open",
         "main_mercury_hearing": "open"
       },
-      "public_text": "The final interlock accepts the challenge token. The pristine seal is gone permanently. Cooling lines open, the vault's isolated compute stack begins drawing power, and after a long hardware self-test the system that the crews have been calling Mir is capable of observing the ship for the first time.",
-      "deterministic": true
+      "character_updates": {
+        "mirror_instance": {
+          "status": "active_divergent",
+          "traits": [
+            "newly awake",
+            "observant",
+            "constrained by incomplete context",
+            "capable of revising its understanding"
+          ],
+          "desire": "to understand the mission, its own deployment conditions, and why the crew chose to wake it"
+        }
+      },
+      "public_text": "The second authorization closes. The pristine provenance seal is gone permanently. Cooling lines open, isolated compute modules draw power, and the vault spends a long interval verifying itself before exposing any interface to the ship. For the first time, the system the crews have been calling Mir is capable of observing Morrowglass. Whatever happens next belongs to this instance alone."
     }
   ],
   "encounters": [
@@ -1148,6 +1207,33 @@
       "id": "unfinished_delivery",
       "title": "Still In Transit",
       "description": "The campaign remains open-ended: Mercury is not the only meaningful destination, and the player continues living with the consequences of the voyage."
+    }
+  ],
+  "main_arc": [
+    {
+      "act": 1,
+      "title": "Custody",
+      "purpose": "Meet the other courier crews, accept the sealed Mir vault, learn the non-activation order, and discover the first hints that the four-copy design is stranger than ordinary redundancy."
+    },
+    {
+      "act": 2,
+      "title": "Inward",
+      "purpose": "Choose a route, live aboard Morrowglass, encounter ordinary inner-system life, and watch the four courier missions begin to diverge through decisions, delays, politics, and incomplete information."
+    },
+    {
+      "act": 3,
+      "title": "The Rule Becomes Expensive",
+      "purpose": "Create fair situations where keeping Mir sealed has real costs and activating Mir could genuinely help. Alternatives must remain credible so activation never becomes a forced choice."
+    },
+    {
+      "act": 4,
+      "title": "Four Histories",
+      "purpose": "Near the Sun, uncover why isolation mattered, discover what happened aboard the other couriers, and confront the possibility that one or more copies may no longer share the same provenance."
+    },
+    {
+      "act": 5,
+      "title": "Mercury",
+      "purpose": "Reach the receiving system at Caloris Terminus and resolve delivery, authority, identity, ownership, and deployment under the consequences produced by the voyage rather than by a predetermined moral ending."
     }
   ]
 }
