@@ -34,6 +34,11 @@ This is **off-screen simulation**, not a claim that the application continues ru
 
 NPC agendas should include ordinary life as well as plot activity: work, friendships, debts, hobbies, care obligations, status, grief, curiosity, ritual, and boredom. Important characters should not exist only to wait for the player.
 
+
+## Spatial continuity
+
+Locations and travel use the persistent node-map graph described in `docs/travel_graph.md`. The narrator must respect current location, known routes, travel duration, route discoveries, and persistent closures. Exploration can reveal new edges, and long journeys advance more living-world time than short ones.
+
 ## Submerged mechanics
 
 Probability, cooperation models, security dilemmas, reputation, and other formal systems remain available to the adjudicator.
