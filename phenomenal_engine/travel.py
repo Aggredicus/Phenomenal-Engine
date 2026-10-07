@@ -61,6 +61,9 @@ def initial_travel_state(mod: dict) -> dict:
         "dynamic_nodes": {},
         "dynamic_routes": {},
         "last_route": None,
+        "active_journey": None,
+        "last_journey": None,
+        "journey_history": [],
     }
 
 
@@ -73,6 +76,9 @@ def ensure_travel_state(mod: dict, memory: dict) -> dict:
     state.setdefault("dynamic_nodes", {})
     state.setdefault("dynamic_routes", {})
     state.setdefault("last_route", None)
+    state.setdefault("active_journey", None)
+    state.setdefault("last_journey", None)
+    state.setdefault("journey_history", [])
     current = memory.get("world_state", {}).get("location")
     if current and current not in state["known_nodes"]:
         state["known_nodes"].append(current)
@@ -351,6 +357,240 @@ def travel_pulses(mod: dict, route_plan: dict) -> int:
     return max(1, int(math.ceil(float(route_plan.get("total_minutes", 0.0)) / minutes_per_pulse)))
 
 
+def _journey_snapshot(journey: dict | None) -> dict | None:
+    if not journey:
+        return None
+    segments = journey.get("segments", [])
+    index = int(journey.get("next_segment_index", 0))
+    current_node = journey.get("current_node", journey.get("origin"))
+    next_segment = segments[index] if 0 <= index < len(segments) else None
+    return {
+        "status": journey.get("status", "active"),
+        "origin": journey.get("origin"),
+        "destination": journey.get("destination"),
+        "preference": journey.get("preference", "fastest"),
+        "nodes": list(journey.get("nodes", [])),
+        "segments": list(segments),
+        "current_node": current_node,
+        "next_node": next_segment.get("to") if next_segment else None,
+        "next_segment_index": index,
+        "completed_segments": index,
+        "total_segments": len(segments),
+        "total_minutes": float(journey.get("total_minutes", 0.0)),
+        "elapsed_minutes": float(journey.get("elapsed_minutes", 0.0)),
+        "remaining_minutes": max(
+            0.0,
+            float(journey.get("total_minutes", 0.0))
+            - float(journey.get("elapsed_minutes", 0.0)),
+        ),
+        "started_turn": journey.get("started_turn"),
+        "blocked_reason": journey.get("blocked_reason"),
+    }
+
+
+def active_journey(memory: dict) -> dict | None:
+    return _journey_snapshot(memory.get("travel_state", {}).get("active_journey"))
+
+
+def begin_journey(
+    mod: dict,
+    memory: dict,
+    destination: str,
+    *,
+    preference: str = "fastest",
+) -> dict:
+    state = ensure_travel_state(mod, memory)
+    plan = plan_route(mod, memory, destination, preference=preference)
+    if plan.get("status") == "already_there":
+        completed = {
+            **plan,
+            "status": "completed",
+            "current_node": plan.get("destination"),
+            "next_segment_index": 0,
+            "elapsed_minutes": 0.0,
+            "started_turn": memory.get("turn"),
+        }
+        state["last_journey"] = completed
+        state["active_journey"] = None
+        return _journey_snapshot(completed) or completed
+    if plan.get("status") != "ok":
+        return plan
+
+    previous = state.get("active_journey")
+    if previous:
+        previous = dict(previous)
+        previous["status"] = "rerouted"
+        state["journey_history"].append(_journey_snapshot(previous))
+
+    journey = {
+        **plan,
+        "status": "active",
+        "current_node": plan["origin"],
+        "next_segment_index": 0,
+        "elapsed_minutes": 0.0,
+        "started_turn": memory.get("turn"),
+        "blocked_reason": None,
+    }
+    state["active_journey"] = journey
+    return _journey_snapshot(journey) or journey
+
+
+def _effective_segment(mod: dict, memory: dict, segment: dict) -> dict | None:
+    state = ensure_travel_state(mod, memory)
+    route_id = segment.get("route_id")
+    for raw in _route_defs(mod, memory):
+        if raw.get("id") != route_id:
+            continue
+        if not _route_is_available(raw, state):
+            return None
+        route = _effective_route(raw, state)
+        forward = route.get("from") == segment.get("from") and route.get("to") == segment.get("to")
+        reverse = (
+            bool(route.get("bidirectional", True))
+            and route.get("to") == segment.get("from")
+            and route.get("from") == segment.get("to")
+        )
+        if not (forward or reverse):
+            return None
+        return {
+            "route_id": route["id"],
+            "from": segment["from"],
+            "to": segment["to"],
+            "mode": route.get("mode", "walk"),
+            "minutes": float(route.get("minutes", 1.0)),
+            "risk": float(route.get("risk", 0.0)),
+            "scenic": float(route.get("scenic", 0.0)),
+            "access": route.get("access", "public"),
+            "description": route.get("description"),
+            "reverse": reverse,
+        }
+    return None
+
+
+def advance_journey(mod: dict, memory: dict, *, legs: int = 1) -> dict:
+    state = ensure_travel_state(mod, memory)
+    journey = state.get("active_journey")
+    if not journey:
+        return {"status": "no_active_journey"}
+
+    if journey.get("status") == "blocked":
+        return _journey_snapshot(journey) or {"status": "blocked"}
+
+    legs = max(1, int(legs))
+    traversed = []
+    leg_minutes = 0.0
+
+    for _ in range(legs):
+        index = int(journey.get("next_segment_index", 0))
+        segments = journey.get("segments", [])
+        if index >= len(segments):
+            break
+
+        planned = segments[index]
+        current = memory.get("world_state", {}).get("location")
+        if current != planned.get("from"):
+            journey["status"] = "blocked"
+            journey["blocked_reason"] = "location_changed"
+            break
+
+        effective = _effective_segment(mod, memory, planned)
+        if effective is None:
+            journey["status"] = "blocked"
+            journey["blocked_reason"] = "route_unavailable"
+            break
+
+        ws = memory.setdefault("world_state", {})
+        ws["location"] = effective["to"]
+        ws["world_time_minutes"] = (
+            float(ws.get("world_time_minutes", 0.0)) + effective["minutes"]
+        )
+        journey["current_node"] = effective["to"]
+        journey["next_segment_index"] = index + 1
+        journey["elapsed_minutes"] = (
+            float(journey.get("elapsed_minutes", 0.0)) + effective["minutes"]
+        )
+        leg_minutes += effective["minutes"]
+        traversed.append(effective)
+
+        if effective["to"] not in state["visited_nodes"]:
+            state["visited_nodes"].append(effective["to"])
+        if effective["to"] not in state["known_nodes"]:
+            state["known_nodes"].append(effective["to"])
+
+    state["visited_nodes"].sort()
+    state["known_nodes"].sort()
+
+    if (
+        journey.get("status") != "blocked"
+        and int(journey.get("next_segment_index", 0)) >= len(journey.get("segments", []))
+    ):
+        journey["status"] = "completed"
+        journey["current_node"] = journey.get("destination")
+        snapshot = _journey_snapshot(journey) or dict(journey)
+        snapshot["traversed_segments"] = traversed
+        snapshot["leg_minutes"] = leg_minutes
+        state["last_journey"] = dict(journey)
+        state["journey_history"].append(_journey_snapshot(journey))
+        del state["journey_history"][:-20]
+        state["last_route"] = {
+            "status": "ok",
+            "origin": journey.get("origin"),
+            "destination": journey.get("destination"),
+            "nodes": journey.get("nodes", []),
+            "segments": journey.get("segments", []),
+            "total_minutes": journey.get("total_minutes", 0.0),
+            "total_risk": journey.get("total_risk", 0.0),
+            "preference": journey.get("preference", "fastest"),
+        }
+        state["active_journey"] = None
+        return snapshot
+
+    snapshot = _journey_snapshot(journey) or dict(journey)
+    snapshot["traversed_segments"] = traversed
+    snapshot["leg_minutes"] = leg_minutes
+    return snapshot
+
+
+def reroute_journey(
+    mod: dict,
+    memory: dict,
+    *,
+    preference: str | None = None,
+) -> dict:
+    state = ensure_travel_state(mod, memory)
+    journey = state.get("active_journey")
+    if not journey:
+        return {"status": "no_active_journey"}
+    destination = journey.get("destination")
+    chosen = preference or journey.get("preference", "fastest")
+    return begin_journey(mod, memory, destination, preference=chosen)
+
+
+def cancel_journey(mod: dict, memory: dict) -> dict:
+    state = ensure_travel_state(mod, memory)
+    journey = state.get("active_journey")
+    if not journey:
+        return {"status": "no_active_journey"}
+    journey = dict(journey)
+    journey["status"] = "cancelled"
+    snapshot = _journey_snapshot(journey) or journey
+    state["last_journey"] = journey
+    state["journey_history"].append(snapshot)
+    del state["journey_history"][:-20]
+    state["active_journey"] = None
+    return snapshot
+
+
+def travel_pulses_for_minutes(mod: dict, minutes: float) -> int:
+    if minutes <= 0:
+        return 1
+    minutes_per_pulse = max(
+        1.0,
+        float(mod.get("travel_network", {}).get("minutes_per_world_pulse", 10.0)),
+    )
+    return max(1, int(math.ceil(float(minutes) / minutes_per_pulse)))
+
+
 def apply_route(mod: dict, memory: dict, route_plan: dict) -> dict:
     if route_plan.get("status") not in {"ok", "already_there"}:
         return route_plan
@@ -409,9 +649,49 @@ def visible_map(mod: dict, memory: dict) -> dict:
             "bidirectional": bool(effective.get("bidirectional", True)),
         })
 
+    journey = active_journey(memory)
+    active_nodes = set(journey.get("nodes", [])) if journey else set()
+    active_route_ids = {
+        item.get("route_id") for item in journey.get("segments", [])
+    } if journey else set()
+    destination = journey.get("destination") if journey else None
+    next_stop = journey.get("next_node") if journey else None
+
+    for node in nodes:
+        node["on_active_journey"] = node["id"] in active_nodes
+        node["destination"] = node["id"] == destination
+        node["next_stop"] = node["id"] == next_stop
+        node["selectable_destination"] = not node["current"]
+    for edge in edges:
+        edge["on_active_journey"] = edge["id"] in active_route_ids
+
     return {
         "current_location": memory.get("world_state", {}).get("location"),
         "world_time_minutes": float(memory.get("world_state", {}).get("world_time_minutes", 0.0)),
         "nodes": nodes,
         "edges": edges,
+        "active_journey": journey,
+        "interaction": {
+            "destination_selection": True,
+            "route_preferences": ["fastest", "safest", "scenic"],
+            "start": {
+                "kind": "travel_start",
+                "required": ["destination_id"],
+                "optional": ["preference"],
+            },
+            "continue": {
+                "kind": "travel_continue",
+                "enabled": bool(journey and journey.get("status") == "active"),
+            },
+            "reroute": {
+                "kind": "travel_reroute",
+                "enabled": bool(journey),
+                "optional": ["preference"],
+            },
+            "cancel": {
+                "kind": "travel_cancel",
+                "enabled": bool(journey),
+            },
+            "default_advance": "one_edge_per_authoritative_turn",
+        },
     }
