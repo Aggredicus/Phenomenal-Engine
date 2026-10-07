@@ -188,6 +188,7 @@ python -m phenomenal_engine evolve --generations 30
 python -m phenomenal_engine planck-budget
 python -m phenomenal_engine map mods/concord_tournament.json
 python -m phenomenal_engine route mods/concord_tournament.json "Wildtype Delta" --preference scenic
+python -m phenomenal_engine map-ui mods/concord_tournament.json runtime/concord.json
 ~~~
 
 Create a save without taking a turn:
@@ -254,6 +255,7 @@ For integration developers:
 - Observer-limited scene packets.
 - Provider-neutral image jobs.
 - Persistent node-map travel with authored and runtime-discovered locations, routes, delays, closures, and multi-hop pathfinding.
+- Interactive map destination focus/preview with authored distance + time estimates, explicit Confirm Travel, and persistent one-edge-at-a-time journeys.
 - Living-world story threads, NPC agendas, environmental breadcrumbs, and campaign-local player-experience adaptation.
 - Declarative JSON mods.
 
