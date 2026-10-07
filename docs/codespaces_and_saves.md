@@ -37,9 +37,9 @@ This keeps interactive startup fast while preserving the full correctness gate w
 
 ~~~bash
 python -m phenomenal_engine play \
-  mods/concord_tournament.json \
-  runtime/concord.json \
-  "Begin the Concord Tournament." \
+  mods/mirror_delivery.json \
+  runtime/mirror.json \
+  "Inspect the sealed Mir vault." \
   --seed "my-campaign" \
   --idempotency-key opening-1
 ~~~
@@ -48,16 +48,16 @@ Continue:
 
 ~~~bash
 python -m phenomenal_engine play \
-  mods/concord_tournament.json \
-  runtime/concord.json \
-  "I inspect the treaty audit." \
+  mods/mirror_delivery.json \
+  runtime/mirror.json \
+  "I ask Juno about the other couriers." \
   --idempotency-key turn-2
 ~~~
 
 Inspect:
 
 ~~~bash
-python -m phenomenal_engine status runtime/concord.json
+python -m phenomenal_engine status runtime/mirror.json
 ~~~
 
 ## Persistence warning
