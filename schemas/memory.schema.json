@@ -88,6 +88,9 @@
     },
     "player_experience": {
       "type": "object"
+    },
+    "travel_state": {
+      "type": "object"
     }
   }
 }
