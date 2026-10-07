@@ -25,36 +25,6 @@
     "sha256": "b42bbdbead65e49f8cd03c68e3caaeaa544a99dd2488d3551069eecdb7f5e6ad"
   },
   {
-    "path": "LICENSE",
-    "bytes": 1067,
-    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
-  },
-  {
-    "path": "MOD_AUTHOR_PROMPT.md",
-    "bytes": 1060,
-    "sha256": "ef79c614634856483e8e5fdbc91da09a48e9664ce9b924f79e90b2f1cdd8b271"
-  },
-  {
-    "path": "README.md",
-    "bytes": 8671,
-    "sha256": "611f01011dfca4c7a46d6e0eb5986f91d75423d812b28ce2b6acdb7c78c56fdb"
-  },
-  {
-    "path": "SECURITY.md",
-    "bytes": 5495,
-    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
-  },
-  {
-    "path": "START_HERE.md",
-    "bytes": 5413,
-    "sha256": "6c0b15334af445475d94fe0c6c76e14fc18e10e675d90b61d488961a2efca312"
-  },
-  {
-    "path": "SUPPORT.md",
-    "bytes": 3824,
-    "sha256": "d86f89c6415c84f63b3a8efcc4c30cb621d08efbf36adff7ef1aeef96933aae5"
-  },
-  {
     "path": "docs/chatbot_quickstart.md",
     "bytes": 3482,
     "sha256": "2e1b636115c65bd0db6893de9f3a09767208476d3ff3cb6863550c908039c774"
@@ -78,6 +48,11 @@
     "path": "docs/integration_contract.md",
     "bytes": 6653,
     "sha256": "de218bff8c3446768fe6aeeb7f3defb58cacaa0812a8e589bffd4e8986ecdb3e"
+  },
+  {
+    "path": "docs/living_world_storytelling.md",
+    "bytes": 4979,
+    "sha256": "049b4ea651d3d84731cb7f73c55d1f123ad50fa83a104cab99e920f51c6dccfe"
   },
   {
     "path": "docs/math_and_probability.md",
@@ -130,9 +105,19 @@
     "sha256": "6023192173b88106338739f61c3f147e270e518f51c1ef49766e7e205a7be9ce"
   },
   {
+    "path": "LICENSE",
+    "bytes": 1067,
+    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
+  },
+  {
+    "path": "MOD_AUTHOR_PROMPT.md",
+    "bytes": 2204,
+    "sha256": "d255e2740821521a7d30e709857d3e1ab346c432de9afce2cba52bb0c1884b81"
+  },
+  {
     "path": "mods/concord_tournament.json",
-    "bytes": 17244,
-    "sha256": "ef74f4022ac5bca1445846d38146a781e31d46839fdf022a29e99c62c08543c2"
+    "bytes": 36681,
+    "sha256": "b9f2d1f041cef98e448ee6a5df8105faf9f0c18b7f0abc4d71e65b832073ede4"
   },
   {
     "path": "mods/great_labyrinth_of_egypt.json",
@@ -161,8 +146,8 @@
   },
   {
     "path": "phenomenal_engine/engine.py",
-    "bytes": 3338,
-    "sha256": "6efe057637e9e886857aa6ab63e85cc2da1f70f57b6092f22ac66486fb289ea0"
+    "bytes": 3750,
+    "sha256": "dc6f0e9d3cea84bec27e988494d879959718b68323d4768ab6925bab69926e60"
   },
   {
     "path": "phenomenal_engine/game_theory.py",
@@ -176,18 +161,18 @@
   },
   {
     "path": "phenomenal_engine/memory.py",
-    "bytes": 4780,
-    "sha256": "b2b507e1e15f2fc9c58807b148865b82155c33bf365e3854db074fe2dc026c74"
+    "bytes": 5184,
+    "sha256": "cfee09142b4e4cf5c8cf3bae2509a89033ea832d8e3b723c0ea5ed243045fe77"
   },
   {
     "path": "phenomenal_engine/mod_loader.py",
-    "bytes": 1304,
-    "sha256": "2a2fafcb27957f7d783825a888c855a3f0b0e344848220e25eb263500c88e13b"
+    "bytes": 2186,
+    "sha256": "3e243e7944194225024e7e7cf7814edf77ce0c79bc554dc6772daacc798e1b09"
   },
   {
     "path": "phenomenal_engine/narrative.py",
-    "bytes": 2804,
-    "sha256": "b6aaffe1240126b7bbb5898f876557518e38f29e429abbe1ee0289a30f736ed0"
+    "bytes": 4875,
+    "sha256": "a89a4dbc0b657ca512727eaf1d21630f216a8ae6edf9f1f8ab5127db6312e29b"
   },
   {
     "path": "phenomenal_engine/perception.py",
@@ -210,6 +195,11 @@
     "sha256": "e86d5c675b186181982883ce1d1fe79c25b706b1ff8c065cc17bc9a1f6332442"
   },
   {
+    "path": "phenomenal_engine/story.py",
+    "bytes": 13228,
+    "sha256": "e51b219fbfd6f2ddd74e308ea015662138848e914c6ab82bae59b6c37c937e80"
+  },
+  {
     "path": "phenomenal_engine/waves.py",
     "bytes": 1819,
     "sha256": "63d251f575c0ab82feab7f70ca23fc9d56735d485bad0fba5c4def04f1b8ffa5"
@@ -220,19 +210,24 @@
     "sha256": "f32debe33cb83a05387135a0e75522581723e51cebdf4dd682e410304cabf842"
   },
   {
+    "path": "README.md",
+    "bytes": 8671,
+    "sha256": "611f01011dfca4c7a46d6e0eb5986f91d75423d812b28ce2b6acdb7c78c56fdb"
+  },
+  {
     "path": "runtime/.gitkeep",
     "bytes": 0,
     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   {
     "path": "schemas/memory.schema.json",
-    "bytes": 1255,
-    "sha256": "b866183029286febb7984aab738a51ef7d7fe33da8b796b4e63eb3d598177ee5"
+    "bytes": 1651,
+    "sha256": "7a59c99dddde58747b9d362f1e55b02721c31f9f31d8215d5c3d170261a89e36"
   },
   {
     "path": "schemas/mod.schema.json",
-    "bytes": 1983,
-    "sha256": "626abb28a8e22a0524b46e1b7f2208911a9e23a7eb2fece0361366d6903ea832"
+    "bytes": 2242,
+    "sha256": "8019138f12a5d892de2d1bf4daa90c441f44235958b47ebc47cd7fa7b5df37f8"
   },
   {
     "path": "schemas/scene_packet.schema.json",
@@ -243,6 +238,21 @@
     "path": "scripts/manifest.py",
     "bytes": 2346,
     "sha256": "0e622e592ef68c133ef3cfc0dca6216a567440bc2a5ca58ff42895d2c86a2f8d"
+  },
+  {
+    "path": "SECURITY.md",
+    "bytes": 5495,
+    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
+  },
+  {
+    "path": "START_HERE.md",
+    "bytes": 5413,
+    "sha256": "6c0b15334af445475d94fe0c6c76e14fc18e10e675d90b61d488961a2efca312"
+  },
+  {
+    "path": "SUPPORT.md",
+    "bytes": 3824,
+    "sha256": "d86f89c6415c84f63b3a8efcc4c30cb621d08efbf36adff7ef1aeef96933aae5"
   },
   {
     "path": "tests/test_game_theory.py",
@@ -278,5 +288,10 @@
     "path": "tests/test_startup_choices.py",
     "bytes": 2204,
     "sha256": "3be07b1835bc1f4699b605d6faaf1fe9028a214bb13f74c78ccc93b4bcd9cffb"
+  },
+  {
+    "path": "tests/test_story.py",
+    "bytes": 3409,
+    "sha256": "ab123a11ef369656bcc3b9ec7b36b6cb23b3f1443c0df08b0c289ba12386cd26"
   }
 ]
