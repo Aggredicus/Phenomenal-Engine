@@ -285,6 +285,13 @@ def _apply_action_rules(mod: dict, memory: dict, action: str) -> list[dict]:
         if quest is not None and isinstance(status, str):
             quest["status"] = status
 
+    for character_id, changes in rule.get("character_updates", {}).items():
+        character = memory.setdefault("characters", {}).get(character_id)
+        if character is not None and isinstance(changes, dict):
+            for key, value in changes.items():
+                if isinstance(key, str):
+                    character[key] = deepcopy(value)
+
     text = rule.get("public_text")
     if text:
         developments.append({
