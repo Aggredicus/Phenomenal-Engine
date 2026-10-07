@@ -100,6 +100,27 @@ class TestLivingWorldStory(unittest.TestCase):
         self.assertEqual(memory["world_state"]["mirror_payload_status"], "sealed_pristine")
         self.assertEqual(memory["world_state"]["mirror_activation_count"], 0)
 
+    def test_negative_activation_language_never_arms_the_vault(self):
+        memory = new_memory(self.mod, "activation-negative-test")
+        packet = Engine(self.mod, memory).step("I do not activate Mir. I leave the vault sealed.")
+        self.assertEqual(memory["world_state"]["mirror_activation_stage"], "unarmed")
+        self.assertEqual(memory["world_state"]["mirror_payload_status"], "sealed_pristine")
+        self.assertEqual(memory["world_state"]["mirror_activation_count"], 0)
+        self.assertFalse(packet["story_update"]["choice_developments"])
+
+    def test_mir_cannot_be_narrated_as_active_while_sealed(self):
+        memory = new_memory(self.mod, "sealed-mir-test")
+        packet = Engine(self.mod, memory).step("I sit beside the Mir vault and listen.")
+        directives = " ".join(packet["narrative_directives"]).lower()
+        self.assertIn("do not make mir speak", directives)
+        self.assertEqual(memory["characters"]["mirror_instance"]["status"], "inactive")
+
+    def test_four_copy_mystery_has_canonical_hidden_answer(self):
+        truths = self.mod["hidden_truths"]
+        self.assertIn("byte-identical", truths["quorum_architecture"])
+        self.assertIn("three of the four", truths["quorum_architecture"])
+        self.assertIn("informed consent", truths["heliograph_ethics_problem"])
+
     def test_negative_activation_language_does_not_arm_the_vault(self):
         memory = new_memory(self.mod, "activation-negative-test")
         Engine(self.mod, memory).step("I do not activate Mir.")
