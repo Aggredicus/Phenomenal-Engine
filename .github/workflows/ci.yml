@@ -37,9 +37,9 @@ jobs:
         run: |
           set -euo pipefail
           tmp="$(mktemp -d)"
-          python -m phenomenal_engine play mods/concord_tournament.json "$tmp/concord.json" "Begin." --seed ci --idempotency-key ci-1 >/dev/null
-          python -m phenomenal_engine play mods/concord_tournament.json "$tmp/concord.json" "Inspect the ledger." --idempotency-key ci-2 >/dev/null
-          python -m phenomenal_engine status "$tmp/concord.json" >/dev/null
+          python -m phenomenal_engine play mods/mirror_delivery.json "$tmp/mirror.json" "Begin." --seed ci --idempotency-key ci-1 >/dev/null
+          python -m phenomenal_engine play mods/mirror_delivery.json "$tmp/mirror.json" "Inspect the Mir vault seal." --idempotency-key ci-2 >/dev/null
+          python -m phenomenal_engine status "$tmp/mirror.json" >/dev/null
 
       - name: Check optional Codespaces startup remains opt-in
         run: |
