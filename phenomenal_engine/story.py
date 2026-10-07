@@ -111,6 +111,7 @@ def initial_story_state(mod: dict) -> dict:
         "threads": threads,
         "npc_agendas": npc_agendas,
         "world_events": world_events,
+        "action_rules": {},
         "ambient_history": [],
     }
 
@@ -229,6 +230,71 @@ def _apply_effects(world_state: dict, effects: dict) -> None:
                 world_state[key] = current + delta
 
 
+def _apply_set(world_state: dict, values: dict) -> None:
+    for key, value in values.items():
+        if isinstance(key, str):
+            world_state[key] = deepcopy(value)
+
+
+def _requirements_match(world_state: dict, requirements: dict) -> bool:
+    for key, expected in requirements.items():
+        if world_state.get(key) != expected:
+            return False
+    return True
+
+
+def matching_action_rule(mod: dict, memory: dict, action: str) -> dict | None:
+    text = action.lower()
+    world_state = memory.get("world_state", {})
+    fired = memory.get("story_state", {}).get("action_rules", {})
+    for rule in mod.get("action_rules", []):
+        if not isinstance(rule, dict) or not rule.get("id"):
+            continue
+        if rule.get("once", True) and fired.get(rule["id"], {}).get("triggered"):
+            continue
+        if not _requirements_match(world_state, rule.get("requires_world", {})):
+            continue
+        triggers = [str(item).lower() for item in rule.get("triggers", []) if str(item).strip()]
+        if triggers and any(trigger in text for trigger in triggers):
+            return rule
+    return None
+
+
+def _apply_action_rules(mod: dict, memory: dict, action: str) -> list[dict]:
+    story = memory.setdefault("story_state", initial_story_state(mod))
+    story.setdefault("action_rules", {})
+    world_state = memory.setdefault("world_state", {})
+    developments = []
+
+    rule = matching_action_rule(mod, memory, action)
+    if rule is None:
+        return developments
+
+    state = story["action_rules"].setdefault(
+        rule["id"],
+        {"id": rule["id"], "triggered": False, "last_triggered_turn": None},
+    )
+    state["triggered"] = True
+    state["last_triggered_turn"] = memory.get("turn")
+
+    _apply_set(world_state, rule.get("set_world", {}))
+    _apply_effects(world_state, rule.get("delta_world", {}))
+
+    for quest_id, status in rule.get("quest_updates", {}).items():
+        quest = memory.setdefault("quests", {}).get(quest_id)
+        if quest is not None and isinstance(status, str):
+            quest["status"] = status
+
+    text = rule.get("public_text")
+    if text:
+        developments.append({
+            "kind": "action_rule",
+            "text": text,
+            "source_id": rule["id"],
+        })
+    return developments
+
+
 def _advance_world_events(memory: dict, mod: dict, rng) -> list[dict]:
     developments = []
     story = memory["story_state"]
@@ -252,6 +318,7 @@ def _advance_world_events(memory: dict, mod: dict, rng) -> list[dict]:
 
         state["triggered"] = True
         _apply_effects(ws, definition.get("effects", {}))
+        _apply_set(ws, definition.get("set_state", {}))
         for route_id, changes in definition.get("route_changes", {}).items():
             if isinstance(changes, dict):
                 try:
@@ -422,6 +489,8 @@ def advance_story(mod: dict, memory: dict, action: str, outcome: dict, rng) -> d
 
     story = memory["story_state"]
 
+    choice_developments = _apply_action_rules(mod, memory, action)
+
     breadcrumbs = []
     for definition in mod.get("story_threads", []):
         if not isinstance(definition, dict) or not definition.get("id"):
@@ -461,6 +530,7 @@ def advance_story(mod: dict, memory: dict, action: str, outcome: dict, rng) -> d
         "travel": travel_update,
         "elapsed_world_pulses": elapsed_pulses,
         "breadcrumbs": breadcrumbs,
+        "choice_developments": choice_developments,
         "ambient_developments": ambient,
         "experience_directives": experience_directives(memory),
     }
