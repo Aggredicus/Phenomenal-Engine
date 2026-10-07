@@ -1,28 +1,38 @@
 [
   {
+    "path": ".devcontainer/devcontainer.json",
+    "bytes": 262,
+    "sha256": "ee070fd86f8e264a469605257490a876b55bae636f0a4bda154d84ca8aaa8542"
+  },
+  {
+    "path": ".github/workflows/ci.yml",
+    "bytes": 1132,
+    "sha256": "2535b14a6ffc7f64cd5aca429b4b66f8612aa28dd25d65343d970ee7285209c1"
+  },
+  {
     "path": ".gitignore",
     "bytes": 501,
     "sha256": "a3d0a41fe7ae1c02d575e98734885423ebaefe187108a74b4ec3729a3a40892f"
   },
   {
     "path": "AGENT_BOOTLOADER.md",
-    "bytes": 5172,
-    "sha256": "aa9286bfb6569479b35377d5b010ef6db470b40130b6de7305796b3e346bb093"
+    "bytes": 4598,
+    "sha256": "1ce5bc33d4f5639cd53df24b118f460bd2b3b023a635f3e5fea4317bbd27c41d"
   },
   {
     "path": "CHANGELOG.md",
-    "bytes": 348,
-    "sha256": "19dc2130af475fd39be4f1569d000ba39656c723c8646302796fec9183f51c17"
+    "bytes": 961,
+    "sha256": "c588cc3649bb46db35ff1339fd4cb5270df5c273a099440a9c6b8f3ccf183e42"
   },
   {
     "path": "docs/chatbot_quickstart.md",
-    "bytes": 4334,
-    "sha256": "43d43dff321f22108f21f66a5587495baad847a74b5656d1fb3fc165b46ac845"
+    "bytes": 2475,
+    "sha256": "ffbf60fe4356755977770fd2146b83c9db2c418b22bf57987f2576713aa2a44d"
   },
   {
     "path": "docs/codespaces_and_saves.md",
-    "bytes": 4083,
-    "sha256": "d23bc3823a62585bdc7bc4fe47e34fe63b60954eef662065873516ecb523179a"
+    "bytes": 2138,
+    "sha256": "e3f7c0d263461833091b2fc4dfa78f0172ffb33d3b6ce2171829fe464ae60555"
   },
   {
     "path": "docs/game_theory_and_ai_ethics.md",
@@ -36,8 +46,8 @@
   },
   {
     "path": "docs/integration_contract.md",
-    "bytes": 7185,
-    "sha256": "3fac4e4a0851d23c031884bb1355011d11315830e97d19e48bb74010438d0acc"
+    "bytes": 5676,
+    "sha256": "a2353f03647e77db90d4551ef73623be8877a2da36e7d714ff7d7249c5197c39"
   },
   {
     "path": "docs/math_and_probability.md",
@@ -73,6 +83,11 @@
     "path": "docs/sources.md",
     "bytes": 2169,
     "sha256": "2728b412571c3801c498bbc0f3ce8a24da6ea02883c531ac4d16ed6e9c197939"
+  },
+  {
+    "path": "docs/write_access_setup.md",
+    "bytes": 3851,
+    "sha256": "5a23b797b74cbaa04a9dd6e2e38f417fe50da9bf639204dee3a0c687b6d34fb4"
   },
   {
     "path": "examples/memory.example.json",
@@ -112,7 +127,7 @@
   {
     "path": "phenomenal_engine/__init__.py",
     "bytes": 124,
-    "sha256": "b8cf7ae353f3c9430bc7aa9ad5f7194e9dadd6bd0aea5dd0a65c7c6aee1e4705"
+    "sha256": "a65ed216d6ce2bd819ae7e260f4a4c05ff48cfa3d1d010a03cd2a00940224a06"
   },
   {
     "path": "phenomenal_engine/__main__.py",
@@ -121,13 +136,13 @@
   },
   {
     "path": "phenomenal_engine/cli.py",
-    "bytes": 4059,
-    "sha256": "c7ffa357078866344d3f8409003a5eeb3e4ef6aa4050d9590074d331e89dcdb8"
+    "bytes": 7827,
+    "sha256": "01f3e7dc5952cd67c92e862c6186cdf1056c36dd42dcd072275bb1b69d8c7f6a"
   },
   {
     "path": "phenomenal_engine/engine.py",
-    "bytes": 2644,
-    "sha256": "95104cebbbb2d0edd0702e8a806b0909dba42fe176216df7d9451ed5ae5cdd23"
+    "bytes": 3338,
+    "sha256": "6efe057637e9e886857aa6ab63e85cc2da1f70f57b6092f22ac66486fb289ea0"
   },
   {
     "path": "phenomenal_engine/game_theory.py",
@@ -141,8 +156,8 @@
   },
   {
     "path": "phenomenal_engine/memory.py",
-    "bytes": 2917,
-    "sha256": "f534ed6202ba0c368c16c3d640fdce5d538a62ad5bbe5d3154cf991cf0fa129c"
+    "bytes": 4780,
+    "sha256": "a442987130c0199267f1f75d36db1fe99a3fa618ed9ae9b410185fc649bfcdf5"
   },
   {
     "path": "phenomenal_engine/mod_loader.py",
@@ -182,12 +197,12 @@
   {
     "path": "pyproject.toml",
     "bytes": 396,
-    "sha256": "b237d78b7d88271fcf9cc8c1c18924b4cba7e96a9335917ec13e3a91afdfd15b"
+    "sha256": "535de3da64bbd0f3fd31266c99e3d4012bd4ec035e5c67bc872f5343d82e9ca5"
   },
   {
     "path": "README.md",
-    "bytes": 6746,
-    "sha256": "91f3e8f26ee6e8b740a119485446af7a97d0a6de48e6e9ca9cc9ddfff2c91fa4"
+    "bytes": 7042,
+    "sha256": "cd86903b0844b36ddd31c46f6e63695952df2785c6f37ccae6e684c583280061"
   },
   {
     "path": "runtime/.gitkeep",
@@ -196,8 +211,8 @@
   },
   {
     "path": "schemas/memory.schema.json",
-    "bytes": 1378,
-    "sha256": "878c7a88ac3618468344e792271a804545bbc6e391542a4d81b5f31e0d68662d"
+    "bytes": 1255,
+    "sha256": "b866183029286febb7984aab738a51ef7d7fe33da8b796b4e63eb3d598177ee5"
   },
   {
     "path": "schemas/mod.schema.json",
@@ -210,19 +225,24 @@
     "sha256": "eb11cc691a7a11d9daa65595fe991641f2fe4b9e49c18e11e46f936e1b8045c9"
   },
   {
+    "path": "scripts/manifest.py",
+    "bytes": 2346,
+    "sha256": "0e622e592ef68c133ef3cfc0dca6216a567440bc2a5ca58ff42895d2c86a2f8d"
+  },
+  {
     "path": "SECURITY.md",
-    "bytes": 8048,
-    "sha256": "d509e3a784c51a10bea1f752a827bed92d4de479d208d9c6a0ea72b0d8ba86e4"
+    "bytes": 5495,
+    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
   },
   {
     "path": "START_HERE.md",
-    "bytes": 4401,
-    "sha256": "55500e082d4ab7d4dd13c184d01b0ddc5919d2c91bd07c02cb6abb9c8515101c"
+    "bytes": 4015,
+    "sha256": "ead538e19f00cc290530ae8ccbfd410de937692fbc022b9b552ba5300013c4d3"
   },
   {
     "path": "SUPPORT.md",
-    "bytes": 4376,
-    "sha256": "82d7b529fe333897fb0b8eeb82b6db84d3f14c66f98e1fe52871ac9820395cdd"
+    "bytes": 3127,
+    "sha256": "567cd973afcd78b8f04aef9b4f73b9be5fa9946f9f829b0d1cba2efedbaaff7e"
   },
   {
     "path": "tests/test_game_theory.py",
@@ -233,6 +253,11 @@
     "path": "tests/test_mods.py",
     "bytes": 425,
     "sha256": "a05f42606f087cd50b5b54c383c30cc79ffa03ec0a207012af8e493ba5ea6d9c"
+  },
+  {
+    "path": "tests/test_persistent_play.py",
+    "bytes": 4127,
+    "sha256": "ff531b5881dd4f4d236c7bc3fd19e84293d75ba06bf8bd1000da85b610f9c35e"
   },
   {
     "path": "tests/test_physics.py",
