@@ -11,6 +11,8 @@ Requirements:
 - Define what is sampled once versus repeatedly and give every major mechanic a causal explanation.
 - Include at least 3 factions, 4 substantial characters, 6 locations, 5 quests across multiple tiers, 3 clocks, and 4 encounters.
 - Include optional conflict opportunities where position, environment, equipment, morale, retreat, and lasting consequences matter.
+- Define a persistent travel network when the adventure has multiple locations: stable node IDs, map coordinates or a declared schematic projection, route times/modes/access/risk, and at least one viable path between ordinary known destinations.
+- Allow hidden shortcuts or dynamically discovered places when they improve exploration, but never let narration contradict the authoritative travel graph.
 - Put abstract mathematics and strategic models beneath concrete dramatic situations unless the player explicitly asks to inspect them.
 - Define a truth boundary separating factual material from speculation or invention.
 - Include physics/perception hooks that can produce concrete light, sound, motion, temperature, signal, or timing observations.
