@@ -21,38 +21,8 @@
   },
   {
     "path": "CHANGELOG.md",
-    "bytes": 1456,
-    "sha256": "b42bbdbead65e49f8cd03c68e3caaeaa544a99dd2488d3551069eecdb7f5e6ad"
-  },
-  {
-    "path": "LICENSE",
-    "bytes": 1067,
-    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
-  },
-  {
-    "path": "MOD_AUTHOR_PROMPT.md",
-    "bytes": 2204,
-    "sha256": "d255e2740821521a7d30e709857d3e1ab346c432de9afce2cba52bb0c1884b81"
-  },
-  {
-    "path": "README.md",
-    "bytes": 8671,
-    "sha256": "611f01011dfca4c7a46d6e0eb5986f91d75423d812b28ce2b6acdb7c78c56fdb"
-  },
-  {
-    "path": "SECURITY.md",
-    "bytes": 5495,
-    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
-  },
-  {
-    "path": "START_HERE.md",
-    "bytes": 5413,
-    "sha256": "6c0b15334af445475d94fe0c6c76e14fc18e10e675d90b61d488961a2efca312"
-  },
-  {
-    "path": "SUPPORT.md",
-    "bytes": 3824,
-    "sha256": "d86f89c6415c84f63b3a8efcc4c30cb621d08efbf36adff7ef1aeef96933aae5"
+    "bytes": 2356,
+    "sha256": "8f34ed9e943171f699edb0523f3879ddeaf69b7b49b138d27f52586b181d73e1"
   },
   {
     "path": "docs/chatbot_quickstart.md",
@@ -81,8 +51,8 @@
   },
   {
     "path": "docs/living_world_storytelling.md",
-    "bytes": 4979,
-    "sha256": "049b4ea651d3d84731cb7f73c55d1f123ad50fa83a104cab99e920f51c6dccfe"
+    "bytes": 5315,
+    "sha256": "9913026e90d43af733c18303e69804973569bf550c8f1890c2ce6dae6636669a"
   },
   {
     "path": "docs/math_and_probability.md",
@@ -120,6 +90,11 @@
     "sha256": "2728b412571c3801c498bbc0f3ce8a24da6ea02883c531ac4d16ed6e9c197939"
   },
   {
+    "path": "docs/travel_graph.md",
+    "bytes": 4761,
+    "sha256": "3c5a1f11bbfe371180081f75ddcd8c2f944404b81d0ccca525e3ef5f08bd1f61"
+  },
+  {
     "path": "docs/write_access_setup.md",
     "bytes": 3851,
     "sha256": "5a23b797b74cbaa04a9dd6e2e38f417fe50da9bf639204dee3a0c687b6d34fb4"
@@ -135,9 +110,19 @@
     "sha256": "6023192173b88106338739f61c3f147e270e518f51c1ef49766e7e205a7be9ce"
   },
   {
+    "path": "LICENSE",
+    "bytes": 1067,
+    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
+  },
+  {
+    "path": "MOD_AUTHOR_PROMPT.md",
+    "bytes": 2606,
+    "sha256": "cbadd2a1e0926c52436ffa906c09be11542e5ae115204855a78cc4783087f99b"
+  },
+  {
     "path": "mods/concord_tournament.json",
-    "bytes": 36681,
-    "sha256": "b9f2d1f041cef98e448ee6a5df8105faf9f0c18b7f0abc4d71e65b832073ede4"
+    "bytes": 47061,
+    "sha256": "2ec2ab3099fd6557aaa787e98f6e4450016cff28d1d550da3e36fe8cda34ed13"
   },
   {
     "path": "mods/great_labyrinth_of_egypt.json",
@@ -161,8 +146,8 @@
   },
   {
     "path": "phenomenal_engine/cli.py",
-    "bytes": 10443,
-    "sha256": "4c50fe7bbec1c8fc05870fea17c73c294eb29e57e752594c9b1556a19dc6a524"
+    "bytes": 12049,
+    "sha256": "2232533fa2bc251f36ac721de31d66148c13689f86cf86d75a7c427d49c54f51"
   },
   {
     "path": "phenomenal_engine/engine.py",
@@ -181,18 +166,18 @@
   },
   {
     "path": "phenomenal_engine/memory.py",
-    "bytes": 5184,
-    "sha256": "cfee09142b4e4cf5c8cf3bae2509a89033ea832d8e3b723c0ea5ed243045fe77"
+    "bytes": 5460,
+    "sha256": "28698791b326c81b8507f348103932e094a0ef973c54209db2d26f7f6b0b3aed"
   },
   {
     "path": "phenomenal_engine/mod_loader.py",
-    "bytes": 2186,
-    "sha256": "3e243e7944194225024e7e7cf7814edf77ce0c79bc554dc6772daacc798e1b09"
+    "bytes": 2214,
+    "sha256": "111437e907a0a693eaa5e5f09d4a40b2136431d14190c7acb865dc43d374f0a1"
   },
   {
     "path": "phenomenal_engine/narrative.py",
-    "bytes": 4875,
-    "sha256": "a89a4dbc0b657ca512727eaf1d21630f216a8ae6edf9f1f8ab5127db6312e29b"
+    "bytes": 5158,
+    "sha256": "451de3cfbd4ac48d896e6d9e56984d56f5ae4ccd1492559911c9f56e997484db"
   },
   {
     "path": "phenomenal_engine/perception.py",
@@ -216,8 +201,13 @@
   },
   {
     "path": "phenomenal_engine/story.py",
-    "bytes": 13228,
-    "sha256": "e51b219fbfd6f2ddd74e308ea015662138848e914c6ab82bae59b6c37c937e80"
+    "bytes": 14922,
+    "sha256": "03e8fb7dd72d4c9dbd3a35810aac8709e1e6c87d4e36173d53488dd65860dcfe"
+  },
+  {
+    "path": "phenomenal_engine/travel.py",
+    "bytes": 14256,
+    "sha256": "98756dbbce8fec9739c42c27c4e82f9927d9bef13218f6d1d2254a415c327100"
   },
   {
     "path": "phenomenal_engine/waves.py",
@@ -230,19 +220,24 @@
     "sha256": "f32debe33cb83a05387135a0e75522581723e51cebdf4dd682e410304cabf842"
   },
   {
+    "path": "README.md",
+    "bytes": 9144,
+    "sha256": "0e1dbe622cc12de6b8df2fa7bd3cf41c2ff99c6e54775be7f3d0fbac8c6ea4b0"
+  },
+  {
     "path": "runtime/.gitkeep",
     "bytes": 0,
     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   {
     "path": "schemas/memory.schema.json",
-    "bytes": 1651,
-    "sha256": "7a59c99dddde58747b9d362f1e55b02721c31f9f31d8215d5c3d170261a89e36"
+    "bytes": 1703,
+    "sha256": "30fa95b1be1a730c0e156c06d13654a81305240a6cd1c5cd370e82d7f485476f"
   },
   {
     "path": "schemas/mod.schema.json",
-    "bytes": 2242,
-    "sha256": "8019138f12a5d892de2d1bf4daa90c441f44235958b47ebc47cd7fa7b5df37f8"
+    "bytes": 2296,
+    "sha256": "abd041e3c2f8a79cb63328896384d280dfaa6590d03f07d3d20c9ec8c0dafa90"
   },
   {
     "path": "schemas/scene_packet.schema.json",
@@ -253,6 +248,21 @@
     "path": "scripts/manifest.py",
     "bytes": 2346,
     "sha256": "0e622e592ef68c133ef3cfc0dca6216a567440bc2a5ca58ff42895d2c86a2f8d"
+  },
+  {
+    "path": "SECURITY.md",
+    "bytes": 5495,
+    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
+  },
+  {
+    "path": "START_HERE.md",
+    "bytes": 5413,
+    "sha256": "6c0b15334af445475d94fe0c6c76e14fc18e10e675d90b61d488961a2efca312"
+  },
+  {
+    "path": "SUPPORT.md",
+    "bytes": 3824,
+    "sha256": "d86f89c6415c84f63b3a8efcc4c30cb621d08efbf36adff7ef1aeef96933aae5"
   },
   {
     "path": "tests/test_game_theory.py",
@@ -293,5 +303,10 @@
     "path": "tests/test_story.py",
     "bytes": 3409,
     "sha256": "ab123a11ef369656bcc3b9ec7b36b6cb23b3f1443c0df08b0c289ba12386cd26"
+  },
+  {
+    "path": "tests/test_travel.py",
+    "bytes": 4877,
+    "sha256": "2cd6eb9b86fd5eb4043c4498bd03bf1f0c1df859d60d711c5f6f13c7b6304351"
   }
 ]
