@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import hashlib, json, os, tempfile, uuid
 
 from .story import initial_player_experience, initial_story_state
+from .travel import initial_travel_state
 
 SCHEMA_VERSION = "1.0.0"
 ENGINE_VERSION = "0.2.1"
@@ -57,6 +58,7 @@ def new_memory(mod: dict, seed: int | str) -> dict:
         "summaries": {"working": "", "long_term": ""},
         "story_state": initial_story_state(mod),
         "player_experience": initial_player_experience(),
+        "travel_state": initial_travel_state(mod),
     }
     append_event(
         memory,
@@ -136,4 +138,5 @@ def load_memory(path: str | Path) -> dict:
     data.setdefault("last_scene_packet", None)
     data.setdefault("story_state", {"world_pulse": 0, "threads": {}, "npc_agendas": {}, "world_events": {}, "ambient_history": []})
     data.setdefault("player_experience", initial_player_experience())
+    data.setdefault("travel_state", {"known_nodes": [], "known_routes": [], "visited_nodes": [], "route_overrides": {}, "dynamic_nodes": {}, "dynamic_routes": {}, "last_route": None})
     return data
