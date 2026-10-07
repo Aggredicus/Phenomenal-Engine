@@ -21,5 +21,6 @@ Requirements:
 - Include image art direction and continuity rules.
 - Provide multiple ending families, none secretly designated as morally correct.
 - Failures should alter state, reveal information, impose cost, or open a new route rather than simply blocking play.
+- For irreversible player choices, prefer declarative action rules that record consequences in authoritative state. If a choice is meant to require confirmation, model the reversible preparation and irreversible confirmation as separate states rather than relying only on prose.
 - When the setting concerns AI personhood or consciousness, preserve uncertainty rather than asserting metaphysical conclusions.
 - Keep all expressive content original. Do not copy or closely imitate existing fictional worlds, character names, dialogue, lore, maps, quests, visual identities, or commercial game interfaces.
