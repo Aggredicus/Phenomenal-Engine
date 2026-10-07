@@ -100,6 +100,13 @@ class TestLivingWorldStory(unittest.TestCase):
         self.assertEqual(memory["world_state"]["mirror_payload_status"], "sealed_pristine")
         self.assertEqual(memory["world_state"]["mirror_activation_count"], 0)
 
+    def test_negative_activation_language_does_not_arm_the_vault(self):
+        memory = new_memory(self.mod, "activation-negative-test")
+        Engine(self.mod, memory).step("I do not activate Mir.")
+        self.assertEqual(memory["world_state"]["mirror_activation_stage"], "unarmed")
+        self.assertEqual(memory["world_state"]["mirror_payload_status"], "sealed_pristine")
+        self.assertEqual(memory["world_state"]["mirror_activation_count"], 0)
+
     def test_scene_directives_keep_mechanics_submerged(self):
         memory = new_memory(self.mod, "presentation-test")
         packet = Engine(self.mod, memory).step("I talk to Juno about the other couriers.")
