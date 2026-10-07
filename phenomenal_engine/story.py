@@ -26,8 +26,8 @@ ACTION_MODES = {
         "hide", "sneak", "stealth", "shadow", "conceal", "bypass", "pick", "silent"
     },
     "travel": {
-        "travel", "ride", "fly", "ferry", "train", "rail", "depart", "leave", "return",
-        "cross", "journey", "wait", "rest", "sleep"
+        "travel", "go", "head", "move", "ride", "fly", "ferry", "train", "rail", "depart", "leave", "return",
+        "cross", "journey", "commute", "wait", "rest", "sleep"
     },
     "craft": {
         "build", "repair", "craft", "make", "modify", "assemble", "cook", "program",
