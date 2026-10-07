@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — living-world branch
+- Added persistent node-map travel with stable locations, route edges, travel time, risk, access metadata, and fastest/safest/scenic multi-hop pathfinding.
+- Added discovered shortcuts, dynamic runtime locations/routes, persistent route overrides, and scene-packet map state.
+- Travel time now advances living-world pulses so NPC agendas and world events can progress during longer journeys.
+- Added `map` and `route` inspection commands plus Concord station transit topology.
+- Added living-world story hierarchy, breadcrumb-to-quest promotion, NPC agendas, and campaign-local ethical player-experience adaptation.
+- Reworked Concord toward immersive character-driven situations with game-theory mechanics kept beneath the prose layer.
+- Added explicit copyright-safe authorship guidance for original settings, quests, characters, maps, and visual expression.
+
 ## 0.2.1
 - Made GitHub Codespaces opt-in and disabled by default, with a once-per-setup optional suggestion and explicit cost disclosure.
 - Added a non-billable `start` CLI command that lists adventures and returns runtime/Codespaces choices.
