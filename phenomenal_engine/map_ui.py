@@ -397,6 +397,7 @@ button:disabled {{ opacity:.45; cursor:not-allowed; }}
     if (m === null || m === undefined) return "Not surveyed";
     const n = Number(m);
     if (!Number.isFinite(n)) return "Not surveyed";
+    if (n >= 1000000000) return (n / 1000000000).toFixed(1) + " million km";
     return n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 1 : 2) + " km" : Math.round(n) + " m";
   }}
 
