@@ -371,7 +371,15 @@ def travel_pulses(mod: dict, route_plan: dict) -> int:
         1.0,
         float(mod.get("travel_network", {}).get("minutes_per_world_pulse", 10.0)),
     )
-    return max(1, int(math.ceil(float(route_plan.get("total_minutes", 0.0)) / minutes_per_pulse)))
+    pulses = max(
+        1,
+        int(math.ceil(float(route_plan.get("total_minutes", 0.0)) / minutes_per_pulse)),
+    )
+    max_pulses = max(
+        1,
+        int(mod.get("travel_network", {}).get("max_world_pulses_per_leg", 24)),
+    )
+    return min(pulses, max_pulses)
 
 
 def _journey_snapshot(journey: dict | None) -> dict | None:
