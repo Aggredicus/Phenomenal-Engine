@@ -26,6 +26,55 @@ The engine resolves the destination from stable IDs, names, and aliases, then co
 
 The default route preference is fastest. `safest` weights route risk more strongly; `scenic` gives modest preference to authored scenic edges while still accounting for time and risk.
 
+## Interactive destination selection
+
+The reference map UI uses a deliberate two-step interaction:
+
+1. **Tap or focus a node** — highlight the destination and calculate a read-only route preview.
+2. **Confirm Travel** — commit the journey and traverse the first edge.
+
+Focusing a location never moves the player, advances world time, changes RNG state, or writes the campaign save.
+
+The preview shows, when route data is available:
+
+- total authored physical distance;
+- estimated travel time;
+- number of graph legs;
+- each intermediate stop;
+- travel mode for each edge;
+- route risk and non-public access notes.
+
+Changing Fastest / Safest / Scenic recalculates the preview without committing movement.
+
+After confirmation, travel becomes a persistent `active_journey`. Each ordinary Continue action advances **one edge**. This creates natural interruption points for encounters, delays, dialogue, discoveries, or player decisions at intermediate nodes.
+
+A player may cancel at the current node or reroute from the current node. Neither action teleports the player.
+
+### Distance rule
+
+Schematic map coordinates are for rendering only and must not be presented as physical distance. Routes may define `distance_m`, which is summed for distance previews. If one or more legs lack authored physical distance, the UI reports distance as unsurveyed rather than inventing it from the diagram.
+
+### Reference browser UI
+
+Run:
+
+```bash
+python -m phenomenal_engine map-ui \
+  mods/concord_tournament.json \
+  runtime/concord.json
+```
+
+Then open the loopback URL printed by the command. The server binds only to `127.0.0.1`.
+
+The browser page and other future clients use the same interaction contract exposed in `world_map.interaction`:
+
+- `travel_start` — destination selection already previewed; explicit confirmation required;
+- `travel_continue` — traverse the next graph edge;
+- `travel_reroute` — recompute the remaining journey from the current node;
+- `travel_cancel` — stop at the current node.
+
+Mutating UI requests carry idempotency keys so retries or accidental double submissions do not advance two legs.
+
 ## Consistency
 
 The graph prevents narrative teleportation.
