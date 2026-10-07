@@ -1,17 +1,19 @@
 # Changelog
 
 ## Unreleased — living-world branch
+- Mirror Delivery now treats deliberate activation of Mir as an irreversible declarative choice: pristine status, trust, Mercury acceptance, and later story access change in authoritative state.
+- Long interplanetary legs advance exact travel time but cap background simulation pulses to keep play responsive.
 - Added an interactive loopback map UI: tap/focus previews destination, distance, time, legs, risk, and route modes; explicit Confirm Travel is required before movement.
 - Travel now persists as an edge-by-edge journey so intermediate nodes can host encounters and interruptions; Continue, Reroute, and Cancel operate from the current node.
-- Added authored physical route distances to Concord; schematic screen coordinates are never treated as literal distance.
+- Added authored physical route distances to Mirror Delivery; schematic screen coordinates are never treated as literal orbital distance.
 - CI now runs once per pull request (plus direct `main` pushes), cancels superseded runs, uses a five-minute hard timeout, and keeps the full normal gate because it completes quickly.
 - Codespace creation no longer blocks on the full unit suite; startup runs only lightweight mod validation while full tests remain in CI or explicit developer commands.
 - Added persistent node-map travel with stable locations, route edges, travel time, risk, access metadata, and fastest/safest/scenic multi-hop pathfinding.
 - Added discovered shortcuts, dynamic runtime locations/routes, persistent route overrides, and scene-packet map state.
 - Travel time now advances living-world pulses so NPC agendas and world events can progress during longer journeys.
-- Added `map` and `route` inspection commands plus Concord station transit topology.
+- Added `map` and `route` inspection commands plus persistent arbitrary-location travel topology.
 - Added living-world story hierarchy, breadcrumb-to-quest promotion, NPC agendas, and campaign-local ethical player-experience adaptation.
-- Reworked Concord toward immersive character-driven situations with game-theory mechanics kept beneath the prose layer.
+- Replaced the Concord narrative with Mirror Delivery, a four-courier inner-system expedition built around a sealed high-capability AI payload, living-world choices, and hidden strategic mechanics.
 - Added explicit copyright-safe authorship guidance for original settings, quests, characters, maps, and visual expression.
 
 ## 0.2.1
