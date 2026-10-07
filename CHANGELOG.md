@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased — living-world branch
+- Added an interactive loopback map UI: tap/focus previews destination, distance, time, legs, risk, and route modes; explicit Confirm Travel is required before movement.
+- Travel now persists as an edge-by-edge journey so intermediate nodes can host encounters and interruptions; Continue, Reroute, and Cancel operate from the current node.
+- Added authored physical route distances to Concord; schematic screen coordinates are never treated as literal distance.
 - CI now runs once per pull request (plus direct `main` pushes), cancels superseded runs, uses a five-minute hard timeout, and keeps the full normal gate because it completes quickly.
 - Codespace creation no longer blocks on the full unit suite; startup runs only lightweight mod validation while full tests remain in CI or explicit developer commands.
 - Added persistent node-map travel with stable locations, route edges, travel time, risk, access metadata, and fastest/safest/scenic multi-hop pathfinding.
