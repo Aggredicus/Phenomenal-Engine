@@ -40,7 +40,7 @@ Included adventures:
 
 1. **Eidolon Shard: The Great Labyrinth of Egypt**
 2. **The Orbital Swarm Trail**
-3. **The Concord Tournament: Children of the Long Game**
+3. **Mirror Delivery**
 
 ## Starting the game: Codespaces is optional
 
@@ -70,8 +70,8 @@ Version 0.2.0 adds a stateful turn command:
 
 ~~~bash
 python -m phenomenal_engine play \
-  mods/concord_tournament.json \
-  runtime/concord.json \
+  mods/mirror_delivery.json \
+  runtime/mirror.json \
   "I ask Morrow-9 to audit the evidence." \
   --idempotency-key turn-001
 ~~~
@@ -92,7 +92,7 @@ On the first call, `play` creates the campaign. On later calls it:
 Inspect a save:
 
 ~~~bash
-python -m phenomenal_engine status runtime/concord.json
+python -m phenomenal_engine status runtime/mirror.json
 ~~~
 
 The older `step` command remains available as a **stateless diagnostic** and should not be used for a continuing campaign.
@@ -186,17 +186,17 @@ python -m unittest discover -s tests -v
 python -m phenomenal_engine tournament --rounds 100 --error-rate 0.02
 python -m phenomenal_engine evolve --generations 30
 python -m phenomenal_engine planck-budget
-python -m phenomenal_engine map mods/concord_tournament.json
-python -m phenomenal_engine route mods/concord_tournament.json "Wildtype Delta" --preference scenic
-python -m phenomenal_engine map-ui mods/concord_tournament.json runtime/concord.json
+python -m phenomenal_engine map mods/mirror_delivery.json
+python -m phenomenal_engine route mods/mirror_delivery.json "Mercury High Orbit" --preference scenic
+python -m phenomenal_engine map-ui mods/mirror_delivery.json runtime/mirror.json
 ~~~
 
 Create a save without taking a turn:
 
 ~~~bash
 python -m phenomenal_engine new-save \
-  mods/concord_tournament.json \
-  runtime/concord.json \
+  mods/mirror_delivery.json \
+  runtime/mirror.json \
   --seed "my-campaign"
 ~~~
 
