@@ -62,23 +62,43 @@ class TestLivingWorldStory(unittest.TestCase):
         principles = " ".join(xp["principles"]).lower()
         self.assertIn("compulsive", principles)
 
-    def test_explicit_activation_is_deterministic_and_irreversible_in_state(self):
+    def test_mir_activation_requires_two_deliberate_steps(self):
         memory = new_memory(self.mod, "activation-test")
-        packet = Engine(self.mod, memory).step(
-            "I use the challenge token and explicitly activate Mir."
+
+        armed = Engine(self.mod, memory).step(
+            "I use the challenge token and activate Mir."
         )
-        self.assertTrue(packet["simulation_outcome"]["success"])
-        self.assertTrue(packet["simulation_outcome"]["deterministic"])
+        self.assertTrue(armed["simulation_outcome"]["success"])
+        self.assertTrue(armed["simulation_outcome"]["deterministic"])
+        self.assertEqual(memory["world_state"]["mirror_activation_stage"], "armed")
+        self.assertEqual(memory["world_state"]["mirror_payload_status"], "sealed_pristine")
+        self.assertFalse(memory["world_state"]["mirror_divergent"])
+        self.assertEqual(memory["world_state"]["mirror_activation_count"], 0)
+
+        confirmed = Engine(self.mod, memory).step("I confirm Mir activation.")
+        self.assertTrue(confirmed["simulation_outcome"]["deterministic"])
+        self.assertEqual(memory["world_state"]["mirror_activation_stage"], "complete")
         self.assertEqual(memory["world_state"]["mirror_payload_status"], "activated_divergent")
         self.assertTrue(memory["world_state"]["mirror_divergent"])
         self.assertEqual(memory["world_state"]["mirror_activation_count"], 1)
+        self.assertEqual(memory["characters"]["mirror_instance"]["status"], "active_divergent")
         self.assertEqual(memory["quests"]["main_activation"]["status"], "open")
         self.assertEqual(memory["quests"]["main_mercury_hearing"]["status"], "open")
-        developments = packet["story_update"]["choice_developments"]
-        self.assertTrue(any(item["source_id"] == "activate_mir" for item in developments))
+        developments = confirmed["story_update"]["choice_developments"]
+        self.assertTrue(any(item["source_id"] == "confirm_mir_activation" for item in developments))
 
-        Engine(self.mod, memory).step("I activate Mir again.")
+        Engine(self.mod, memory).step("I confirm Mir activation again.")
         self.assertEqual(memory["world_state"]["mirror_activation_count"], 1)
+
+    def test_activation_can_be_aborted_before_final_confirmation(self):
+        memory = new_memory(self.mod, "activation-abort-test")
+        engine = Engine(self.mod, memory)
+        engine.step("I activate Mir.")
+        self.assertEqual(memory["world_state"]["mirror_activation_stage"], "armed")
+        engine.step("I abort Mir activation.")
+        self.assertEqual(memory["world_state"]["mirror_activation_stage"], "unarmed")
+        self.assertEqual(memory["world_state"]["mirror_payload_status"], "sealed_pristine")
+        self.assertEqual(memory["world_state"]["mirror_activation_count"], 0)
 
     def test_scene_directives_keep_mechanics_submerged(self):
         memory = new_memory(self.mod, "presentation-test")
