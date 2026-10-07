@@ -189,6 +189,8 @@ python -m phenomenal_engine planck-budget
 python -m phenomenal_engine map mods/mirror_delivery.json
 python -m phenomenal_engine route mods/mirror_delivery.json "Mercury High Orbit" --preference scenic
 python -m phenomenal_engine map-ui mods/mirror_delivery.json runtime/mirror.json
+python -m phenomenal_engine director-state mods/mirror_delivery.json runtime/mirror.json
+python -m phenomenal_engine director-validate-command mods/mirror_delivery.json runtime/mirror.json examples/mirror_delivery_activate_command.json
 ~~~
 
 Create a save without taking a turn:
@@ -240,6 +242,7 @@ For integration developers:
 - `docs/memory_protocol.md`
 - `docs/living_world_storytelling.md`
 - `docs/mirror_delivery_design.md`
+- `docs/director_json.md`
 - `docs/travel_graph.md`
 - `schemas/memory.schema.json`
 - `schemas/mod.schema.json`
@@ -259,5 +262,6 @@ For integration developers:
 - Interactive map destination focus/preview with authored distance + time estimates, explicit Confirm Travel, and persistent one-edge-at-a-time journeys.
 - Living-world story threads, NPC agendas, environmental breadcrumbs, and campaign-local player-experience adaptation.
 - Declarative JSON mods.
+- Stable JSON director-state projections and machine command validation for human/AI co-directing.
 
 The language model is the dramatist. **The simulation is the adjudicator.**
