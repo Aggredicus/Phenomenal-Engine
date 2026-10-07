@@ -4,7 +4,7 @@ from .probability import sample_skill_check, consequence_severity, hazard_probab
 from .memory import append_event
 from .narrative import build_scene_packet, PhenomenologyFrame
 from .image_jobs import should_generate, enqueue
-from .story import advance_story
+from .story import advance_story, matching_action_rule
 
 class Engine:
     def __init__(self, mod: dict, memory: dict, queue_path: str | None = None):
@@ -31,17 +31,30 @@ class Engine:
     ) -> dict:
         self.memory["turn"] += 1
         action_rng = self.streams["actions"]
-        outcome = sample_skill_check(
-            action_rng,
-            skill,
-            difficulty,
-            context,
-            self.mod["simulation_profile"].get("skill_temperature", 1.0),
-        )
-        outcome["consequence_severity"] = consequence_severity(
-            action_rng,
-            base=max(0.1, abs(outcome["margin"]) + 0.5),
-        )
+        action_rule = matching_action_rule(self.mod, self.memory, action)
+        if action_rule is not None and action_rule.get("deterministic", False):
+            outcome = {
+                "success_probability": 1.0,
+                "uniform_draw": None,
+                "success": True,
+                "margin": 1.0,
+                "confidence": 1.0,
+                "deterministic": True,
+                "rule_id": action_rule["id"],
+            }
+            outcome["consequence_severity"] = 0.0
+        else:
+            outcome = sample_skill_check(
+                action_rng,
+                skill,
+                difficulty,
+                context,
+                self.mod["simulation_profile"].get("skill_temperature", 1.0),
+            )
+            outcome["consequence_severity"] = consequence_severity(
+                action_rng,
+                base=max(0.1, abs(outcome["margin"]) + 0.5),
+            )
         hazard_rate = float(self.memory.get("world_state", {}).get("ambient_hazard_rate", 0.0))
         outcome["ambient_hazard_triggered"] = (
             action_rng.random() < hazard_probability(hazard_rate, 1.0)
