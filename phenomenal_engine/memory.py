@@ -3,6 +3,8 @@ from pathlib import Path
 from datetime import datetime, timezone
 import hashlib, json, os, tempfile, uuid
 
+from .story import initial_player_experience, initial_story_state
+
 SCHEMA_VERSION = "1.0.0"
 ENGINE_VERSION = "0.2.1"
 
@@ -26,7 +28,7 @@ def new_memory(mod: dict, seed: int | str) -> dict:
         if not isinstance(item, dict) or not item.get("id"):
             continue
         quest = _copy_json(item)
-        quest.setdefault("status", "open")
+        quest.setdefault("status", item.get("initial_status", "open"))
         quests[item["id"]] = quest
 
     memory = {
@@ -53,6 +55,8 @@ def new_memory(mod: dict, seed: int | str) -> dict:
         "image_jobs": [],
         "last_scene_packet": None,
         "summaries": {"working": "", "long_term": ""},
+        "story_state": initial_story_state(mod),
+        "player_experience": initial_player_experience(),
     }
     append_event(
         memory,
@@ -130,4 +134,6 @@ def load_memory(path: str | Path) -> dict:
         raise ValueError("memory ledger hash chain failed verification")
     data.setdefault("state_version", int(data.get("turn", 0)))
     data.setdefault("last_scene_packet", None)
+    data.setdefault("story_state", {"world_pulse": 0, "threads": {}, "npc_agendas": {}, "world_events": {}, "ambient_history": []})
+    data.setdefault("player_experience", initial_player_experience())
     return data
