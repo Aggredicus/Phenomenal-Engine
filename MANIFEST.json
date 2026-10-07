@@ -1,13 +1,13 @@
 [
   {
     "path": ".devcontainer/devcontainer.json",
-    "bytes": 262,
-    "sha256": "ee070fd86f8e264a469605257490a876b55bae636f0a4bda154d84ca8aaa8542"
+    "bytes": 219,
+    "sha256": "e13c312a401bc09bd803fecb8538828e4b88d69b07eeb5531b0febe5cbec44d5"
   },
   {
     "path": ".github/workflows/ci.yml",
-    "bytes": 1645,
-    "sha256": "2be334b9f54da34767312a90bc1fb0e607c233ccf73c41613718967f943939a7"
+    "bytes": 1784,
+    "sha256": "07b811d8144e4144e939c5cdc07a2176b7adbafb4295b3110b54abd63b1627b3"
   },
   {
     "path": ".gitignore",
@@ -21,8 +21,8 @@
   },
   {
     "path": "CHANGELOG.md",
-    "bytes": 2356,
-    "sha256": "8f34ed9e943171f699edb0523f3879ddeaf69b7b49b138d27f52586b181d73e1"
+    "bytes": 2709,
+    "sha256": "d581b50ad78647d04f9211ad7fc88318a4cb6491ad35619a8f249065dedca5ab"
   },
   {
     "path": "LICENSE",
@@ -36,8 +36,8 @@
   },
   {
     "path": "README.md",
-    "bytes": 9144,
-    "sha256": "0e1dbe622cc12de6b8df2fa7bd3cf41c2ff99c6e54775be7f3d0fbac8c6ea4b0"
+    "bytes": 10042,
+    "sha256": "80fa8f96c561ab4d9d03b12e4655fb1453eef4b998b250987d00f211903d958d"
   },
   {
     "path": "SECURITY.md",
@@ -61,8 +61,8 @@
   },
   {
     "path": "docs/codespaces_and_saves.md",
-    "bytes": 3403,
-    "sha256": "e9b3f081a3b5fd8a0a7b31cebfb4352e5689f18dbd40b17317716343d08a33c8"
+    "bytes": 4268,
+    "sha256": "bc0e963509bed2d4f408c3355e92beeffc5386a44389fd0b439b241828cce33e"
   },
   {
     "path": "docs/game_theory_and_ai_ethics.md",
