@@ -110,6 +110,20 @@ def initial_player_experience() -> dict:
     }
 
 
+def _thread_definition(mod: dict, thread_id: str) -> dict | None:
+    for item in mod.get("story_threads", []):
+        if isinstance(item, dict) and item.get("id") == thread_id:
+            return item
+    return None
+
+
+def _quest_definition(mod: dict, quest_id: str) -> dict | None:
+    for item in mod.get("quests", []):
+        if isinstance(item, dict) and item.get("id") == quest_id:
+            return item
+    return None
+
+
 def _touches_thread(action: str, thread: dict) -> bool:
     haystack = action.lower()
     for trigger in thread.get("triggers", []):
@@ -118,7 +132,7 @@ def _touches_thread(action: str, thread: dict) -> bool:
     return False
 
 
-def _promote_thread(memory: dict, state: dict, definition: dict) -> dict | None:
+def _promote_thread(memory: dict, mod: dict, state: dict, definition: dict) -> dict | None:
     previous = state["status"]
     interest = state["interest"]
     rumor_at = int(definition.get("rumor_at", 1))
@@ -328,7 +342,7 @@ def advance_story(mod: dict, memory: dict, action: str, outcome: dict, rng) -> d
         if _touches_thread(action, definition):
             state["interest"] = int(state.get("interest", 0)) + 1
             state["last_touched_turn"] = memory.get("turn")
-            promoted = _promote_thread(memory, state, definition)
+            promoted = _promote_thread(memory, mod, state, definition)
             if promoted:
                 breadcrumbs.append(promoted)
 
