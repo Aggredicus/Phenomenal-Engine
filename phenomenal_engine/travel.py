@@ -185,6 +185,7 @@ def register_dynamic_route(
     minutes: float,
     mode: str = "walk",
     risk: float = 0.0,
+    distance_m: float | None = None,
     bidirectional: bool = True,
     known: bool = True,
 ) -> dict:
@@ -201,6 +202,7 @@ def register_dynamic_route(
         "minutes": float(minutes),
         "mode": mode,
         "risk": float(risk),
+        "distance_m": None if distance_m is None else max(0.0, float(distance_m)),
         "bidirectional": bool(bidirectional),
         "visibility": "public" if known else "hidden",
         "dynamic": True,
@@ -279,6 +281,7 @@ def plan_route(
             "nodes": [origin_id],
             "segments": [],
             "total_minutes": 0.0,
+            "total_distance_m": 0.0,
             "total_risk": 0.0,
             "preference": preference,
         }
@@ -320,6 +323,10 @@ def plan_route(
             "mode": route.get("mode", "walk"),
             "minutes": float(route.get("minutes", 1.0)),
             "risk": float(route.get("risk", 0.0)),
+            "distance_m": (
+                None if route.get("distance_m") is None
+                else max(0.0, float(route.get("distance_m", 0.0)))
+            ),
             "scenic": float(route.get("scenic", 0.0)),
             "access": route.get("access", "public"),
             "description": route.get("description"),
@@ -330,6 +337,13 @@ def plan_route(
 
     nodes = [origin_id] + [segment["to"] for segment in segments]
     total_minutes = sum(segment["minutes"] for segment in segments)
+    measured_distances = [
+        segment["distance_m"] for segment in segments
+        if segment.get("distance_m") is not None
+    ]
+    total_distance_m = (
+        sum(measured_distances) if len(measured_distances) == len(segments) else None
+    )
     survival = 1.0
     for segment in segments:
         survival *= 1.0 - max(0.0, min(1.0, segment["risk"]))
@@ -342,6 +356,9 @@ def plan_route(
         "nodes": nodes,
         "segments": segments,
         "total_minutes": round(total_minutes, 3),
+        "total_distance_m": (
+            None if total_distance_m is None else round(total_distance_m, 3)
+        ),
         "total_risk": round(total_risk, 6),
         "preference": preference,
     }
@@ -377,11 +394,21 @@ def _journey_snapshot(journey: dict | None) -> dict | None:
         "completed_segments": index,
         "total_segments": len(segments),
         "total_minutes": float(journey.get("total_minutes", 0.0)),
+        "total_distance_m": journey.get("total_distance_m"),
         "elapsed_minutes": float(journey.get("elapsed_minutes", 0.0)),
+        "elapsed_distance_m": float(journey.get("elapsed_distance_m", 0.0)),
         "remaining_minutes": max(
             0.0,
             float(journey.get("total_minutes", 0.0))
             - float(journey.get("elapsed_minutes", 0.0)),
+        ),
+        "remaining_distance_m": (
+            None if journey.get("total_distance_m") is None
+            else max(
+                0.0,
+                float(journey.get("total_distance_m", 0.0))
+                - float(journey.get("elapsed_distance_m", 0.0)),
+            )
         ),
         "started_turn": journey.get("started_turn"),
         "blocked_reason": journey.get("blocked_reason"),
@@ -428,6 +455,7 @@ def begin_journey(
         "current_node": plan["origin"],
         "next_segment_index": 0,
         "elapsed_minutes": 0.0,
+        "elapsed_distance_m": 0.0,
         "started_turn": memory.get("turn"),
         "blocked_reason": None,
     }
@@ -459,6 +487,10 @@ def _effective_segment(mod: dict, memory: dict, segment: dict) -> dict | None:
             "mode": route.get("mode", "walk"),
             "minutes": float(route.get("minutes", 1.0)),
             "risk": float(route.get("risk", 0.0)),
+            "distance_m": (
+                None if route.get("distance_m") is None
+                else max(0.0, float(route.get("distance_m", 0.0)))
+            ),
             "scenic": float(route.get("scenic", 0.0)),
             "access": route.get("access", "public"),
             "description": route.get("description"),
@@ -509,6 +541,11 @@ def advance_journey(mod: dict, memory: dict, *, legs: int = 1) -> dict:
         journey["elapsed_minutes"] = (
             float(journey.get("elapsed_minutes", 0.0)) + effective["minutes"]
         )
+        if effective.get("distance_m") is not None:
+            journey["elapsed_distance_m"] = (
+                float(journey.get("elapsed_distance_m", 0.0))
+                + float(effective["distance_m"])
+            )
         leg_minutes += effective["minutes"]
         traversed.append(effective)
 
@@ -644,6 +681,10 @@ def visible_map(mod: dict, memory: dict) -> dict:
             "minutes": float(effective.get("minutes", 1.0)),
             "mode": effective.get("mode", "walk"),
             "risk": float(effective.get("risk", 0.0)),
+            "distance_m": (
+                None if effective.get("distance_m") is None
+                else max(0.0, float(effective.get("distance_m", 0.0)))
+            ),
             "access": effective.get("access", "public"),
             "closed": bool(effective.get("closed", False)),
             "bidirectional": bool(effective.get("bidirectional", True)),
@@ -673,9 +714,20 @@ def visible_map(mod: dict, memory: dict) -> dict:
         "active_journey": journey,
         "interaction": {
             "destination_selection": True,
+            "selection_behavior": "focus_and_preview_only",
+            "movement_requires_confirmation": True,
+            "preview_fields": [
+                "destination",
+                "total_distance_m",
+                "total_minutes",
+                "segments",
+                "risk",
+                "access",
+            ],
             "route_preferences": ["fastest", "safest", "scenic"],
             "start": {
                 "kind": "travel_start",
+                "label": "Confirm Travel",
                 "required": ["destination_id"],
                 "optional": ["preference"],
             },
