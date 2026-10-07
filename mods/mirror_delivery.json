@@ -976,7 +976,8 @@
         "main_activation": "open",
         "main_mercury_hearing": "open"
       },
-      "public_text": "The final interlock accepts the challenge token. The pristine seal is gone permanently. Cooling lines open, the vault's isolated compute stack begins drawing power, and after a long hardware self-test the system that the crews have been calling Mir is capable of observing the ship for the first time."
+      "public_text": "The final interlock accepts the challenge token. The pristine seal is gone permanently. Cooling lines open, the vault's isolated compute stack begins drawing power, and after a long hardware self-test the system that the crews have been calling Mir is capable of observing the ship for the first time.",
+      "deterministic": true
     }
   ],
   "encounters": [
