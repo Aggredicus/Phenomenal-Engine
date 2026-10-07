@@ -116,14 +116,13 @@ without advancing the campaign a second time.
 
 Codespaces is **not required** and **never auto-enabled by the engine**. This repository includes `.devcontainer/devcontainer.json`.
 
-Only if you opt in after reviewing GitHub's usage allowance, open the fork in GitHub Codespaces. The container automatically runs:
+Only if you opt in after reviewing GitHub's usage allowance, open the fork in GitHub Codespaces. Startup deliberately performs only the inexpensive mod validation:
 
 ~~~bash
 python -m phenomenal_engine validate mods
-python -m unittest discover -s tests -v
 ~~~
 
-No ports are forwarded by default.
+The full unit suite is left to GitHub CI or an explicit developer command, so opening a Codespace does not block on tests that have already run remotely. No ports are forwarded by default.
 
 Then try:
 
@@ -204,13 +203,21 @@ python -m phenomenal_engine new-save \
 
 ## Continuous integration
 
-`.github/workflows/ci.yml` runs on pushes to `main`, the integration branch, pull requests, and manual dispatch. It:
+CI is designed to be a **short correctness gate, not a loading screen**.
+
+`.github/workflows/ci.yml` runs once for pull requests, on direct pushes to `main`, and on manual dispatch. Feature-branch pushes with an open PR do not also run a duplicate push workflow. Superseded runs for the same PR/ref are cancelled automatically.
+
+The normal gate:
 
 - validates all bundled mods;
 - runs the complete unit-test suite;
-- smoke-tests two persistent turns;
-- verifies save status;
+- smoke-tests persistent campaign saving and reload;
+- verifies Codespaces remains opt-in;
 - verifies every canonical file against `MANIFEST.json`.
+
+The current full gate is intentionally small enough to remain the default rather than weakening routine coverage with a partial test tier. Expensive future soak tests, large simulation sweeps, benchmarks, or release qualification should be explicit developer/release operations and must never block ordinary gameplay startup.
+
+Gameplay does **not** wait for GitHub CI. Codespace creation also runs only the lightweight mod validation; developers can run the full suite locally when needed.
 
 The workflow token is read-only.
 
