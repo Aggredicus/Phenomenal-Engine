@@ -3,6 +3,8 @@ from __future__ import annotations
 from copy import deepcopy
 import re
 
+from .travel import apply_route, infer_destination, plan_route, set_route_override, travel_pulses
+
 ACTION_MODES = {
     "combat": {
         "attack", "fight", "strike", "shoot", "fire", "stab", "punch", "kick",
@@ -228,6 +230,12 @@ def _advance_world_events(memory: dict, mod: dict, rng) -> list[dict]:
 
         state["triggered"] = True
         _apply_effects(ws, definition.get("effects", {}))
+        for route_id, changes in definition.get("route_changes", {}).items():
+            if isinstance(changes, dict):
+                try:
+                    set_route_override(mod, memory, route_id, **changes)
+                except ValueError:
+                    pass
         text = definition.get("public_text")
         if text:
             developments.append({
@@ -319,9 +327,33 @@ def advance_story(mod: dict, memory: dict, action: str, outcome: dict, rng) -> d
     mode = classify_action(action)
     _update_experience(memory, action, mode)
 
+    travel_update = None
+    elapsed_pulses = 1
+    if mode == "travel":
+        destination = infer_destination(mod, memory, action)
+        if destination:
+            words = _words(action)
+            preference = (
+                "safest" if words & {"safe", "safer", "safest", "careful", "carefully"}
+                else "scenic" if words & {"scenic", "beautiful", "interesting", "long", "wander"}
+                else "fastest"
+            )
+            travel_update = plan_route(
+                mod,
+                memory,
+                destination,
+                preference=preference,
+            )
+            if travel_update.get("status") in {"ok", "already_there"}:
+                elapsed_pulses = travel_pulses(mod, travel_update)
+                apply_route(mod, memory, travel_update)
+        else:
+            travel_update = {
+                "status": "no_destination",
+                "origin": memory.get("world_state", {}).get("location"),
+            }
+
     story = memory["story_state"]
-    story["world_pulse"] = int(story.get("world_pulse", 0)) + 1
-    pulses = 2 if mode == "travel" else 1
 
     breadcrumbs = []
     for definition in mod.get("story_threads", []):
@@ -347,7 +379,8 @@ def advance_story(mod: dict, memory: dict, action: str, outcome: dict, rng) -> d
                 breadcrumbs.append(promoted)
 
     ambient = []
-    for _ in range(pulses):
+    for _ in range(elapsed_pulses):
+        story["world_pulse"] = int(story.get("world_pulse", 0)) + 1
         ambient.extend(_advance_npc_agendas(memory, mod, rng, 1))
         ambient.extend(_advance_world_events(memory, mod, rng))
 
@@ -358,6 +391,8 @@ def advance_story(mod: dict, memory: dict, action: str, outcome: dict, rng) -> d
 
     return {
         "action_mode": mode,
+        "travel": travel_update,
+        "elapsed_world_pulses": elapsed_pulses,
         "breadcrumbs": breadcrumbs,
         "ambient_developments": ambient,
         "experience_directives": experience_directives(memory),
