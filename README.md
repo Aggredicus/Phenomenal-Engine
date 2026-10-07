@@ -239,6 +239,7 @@ For integration developers:
 - `SECURITY.md`
 - `docs/memory_protocol.md`
 - `docs/living_world_storytelling.md`
+- `docs/mirror_delivery_design.md`
 - `docs/travel_graph.md`
 - `schemas/memory.schema.json`
 - `schemas/mod.schema.json`
