@@ -147,6 +147,53 @@ def cmd_status(args):
         "last_scene_packet": memory.get("last_scene_packet"),
     }, indent=2, ensure_ascii=False))
 
+def cmd_start(args):
+    """Offer safe first-run choices without creating billable infrastructure."""
+    mods_dir = Path(args.mods)
+    available_mods = []
+    if mods_dir.is_dir():
+        for path in sorted(mods_dir.glob("*.json")):
+            mod = load_mod(path)
+            available_mods.append({
+                "id": mod["id"],
+                "title": mod["title"],
+                "version": mod["version"],
+                "path": str(path),
+            })
+    choice = "off" if args.no_codespaces else "requested" if args.codespaces else "offer"
+    codespaces = {
+        "optional": True,
+        "default_enabled": False,
+        "choice": choice,
+        "requested": choice == "requested",
+        "created": False,
+        "may_incur_charges": True,
+        "prompt": (
+            "Optional: Would you like to use GitHub Codespaces as a separate "
+            "development or advanced-simulation workspace? GitHub's included "
+            "usage is limited, and charges may apply. It is not needed if an "
+            "existing trusted Python runtime is available."
+        ) if choice == "offer" else None,
+        "setup_steps": [
+            "Review current Codespaces pricing and remaining free allowance on GitHub.",
+            "Open your fork on GitHub, then Code > Codespaces > Create codespace.",
+            "Keep ports private; do not paste tokens into game chat.",
+        ] if choice == "requested" else [],
+        "pricing_reference": "https://github.com/pricing",
+    }
+    print(json.dumps({
+        "status": "setup_choices",
+        "runtime_policy": "prefer_existing_trusted_runtime",
+        "codespaces": codespaces,
+        "mods": available_mods,
+        "next_step": (
+            "Choose an adventure. Use an already available trusted runtime; "
+            "only enter Codespaces setup after explicit player opt-in."
+        ),
+        "note": "This command never creates a Codespace or runs a game turn.",
+    }, indent=2, ensure_ascii=False))
+
+
 def add_resolution_args(p):
     p.add_argument("--skill", type=float, default=0.0)
     p.add_argument("--difficulty", type=float, default=0.0)
@@ -209,6 +256,19 @@ def main(argv=None):
     p.add_argument("--idempotency-key", default=None)
     p.add_argument("--allow-mod-version-mismatch", action="store_true")
     p.set_defaults(func=cmd_play)
+
+    p = sub.add_parser("start", help="offer adventures and optional Codespaces setup without provisioning compute")
+    p.add_argument("--mods", default="mods", help="directory containing adventure mods")
+    codespace_choice = p.add_mutually_exclusive_group()
+    codespace_choice.add_argument(
+        "--codespaces", action="store_true",
+        help="request manual Codespaces setup instructions; does not create a Codespace",
+    )
+    codespace_choice.add_argument(
+        "--no-codespaces", action="store_true",
+        help="skip the Codespaces offer for this startup",
+    )
+    p.set_defaults(func=cmd_start)
 
     p = sub.add_parser("status", help="verify and inspect a persistent campaign save")
     p.add_argument("save")

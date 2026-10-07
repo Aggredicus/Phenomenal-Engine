@@ -1,4 +1,4 @@
-# Phenomenal Engine v0.2.0
+# Phenomenal Engine v0.2.1
 
 **Fork it. Connect a write-capable chatbot AI. Say: `Play Phenomenal Engine.`**
 
@@ -41,6 +41,28 @@ Included adventures:
 1. **Eidolon Shard: The Great Labyrinth of Egypt**
 2. **The Orbital Swarm Trail**
 3. **The Concord Tournament: Children of the Long Game**
+
+## Starting the game: Codespaces is optional
+
+**The normal/default path uses whatever trusted Python execution environment is already available.** Starting the game never creates, starts, or bills a GitHub Codespace automatically.
+
+On a new campaign, the connected AI should offer the adventures and mention this **optional, dismissible** choice once:
+
+> Optional: Would you like to use GitHub Codespaces as a development or advanced-simulation workspace? GitHub provides limited included usage and may charge for additional compute/storage. You can skip this and use an existing runtime instead.
+
+Declining does not block play when a suitable runtime and save destination already exist. If no trusted runtime is available, explain that limitation and offer **existing local Python** or **manual Codespaces** as separate alternatives—never pretend write access alone can execute Python.
+
+The CLI also exposes the non-billable startup plan:
+
+~~~bash
+python -m phenomenal_engine start                 # offer Codespaces, default off
+python -m phenomenal_engine start --no-codespaces # skip the offer
+python -m phenomenal_engine start --codespaces    # manual setup instructions only
+~~~
+
+These commands only print JSON choices. Even `--codespaces` **does not provision or enable a Codespace remotely**; the user must choose to create one in GitHub after reviewing costs.
+
+See `docs/codespaces_and_saves.md` and [GitHub's current Codespaces pricing](https://github.com/pricing).
 
 ## Persistent play is now implemented
 
@@ -90,11 +112,11 @@ If the same key is submitted twice, the second call returns:
 
 without advancing the campaign a second time.
 
-## Codespaces
+## Optional GitHub Codespaces
 
-This repository includes `.devcontainer/devcontainer.json`.
+Codespaces is **not required** and **never auto-enabled by the engine**. This repository includes `.devcontainer/devcontainer.json`.
 
-Open the fork in GitHub Codespaces. The container automatically runs:
+Only if you opt in after reviewing GitHub's usage allowance, open the fork in GitHub Codespaces. The container automatically runs:
 
 ~~~bash
 python -m phenomenal_engine validate mods

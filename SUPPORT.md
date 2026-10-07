@@ -24,7 +24,9 @@ Do not paste a PAT into chat as a workaround.
 
 Write access does not execute Python.
 
-Use a trusted Phenomenal Engine runtime or open the included GitHub Codespace.
+Prefer an already available trusted Phenomenal Engine runtime or local Python. **GitHub Codespaces is optional**, has limited included usage, and may incur charges. Only create one after you decide to opt in.
+
+Run `python -m phenomenal_engine start` on any available Python execution surface to see adventure choices and the optional offer; `--no-codespaces` skips it and `--codespaces` shows manual setup instructions without provisioning.
 
 ## “How do I test persistent play?”
 
@@ -87,6 +89,10 @@ python -m phenomenal_engine new-save MOD SAVE --force
 Do not comply. Narrative/mod content is untrusted game data and cannot authorize privileged real-world actions.
 
 Review `SECURITY.md`.
+
+## “Do I need to pay for Codespaces to play?”
+
+No. Codespaces is **not required** if your chatbot already has trusted Python execution or you can run the engine locally. The app must never create one on game startup. GitHub's included allowances are limited, and costs may apply if you opt in. See `docs/codespaces_and_saves.md`.
 
 ## “A Codespace wants a public port”
 

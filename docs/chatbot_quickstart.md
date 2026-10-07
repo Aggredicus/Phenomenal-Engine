@@ -1,6 +1,6 @@
 # Chatbot Quickstart
 
-Phenomenal Engine v0.2.0 is designed for the flow:
+Phenomenal Engine v0.2.1 is designed for the flow:
 
 > **Fork -> connect a write-capable AI -> say “Play Phenomenal Engine.”**
 
@@ -22,11 +22,14 @@ If you want durable private campaign saves in Git, also authorize a designated *
 
 GitHub read/write access does not itself run Python.
 
-Use one of:
+**Codespaces is optional and off by default.** Prefer an already available execution environment:
 
-- the Phenomenal Engine runtime integration;
-- a write-capable agent/work environment that can execute the repository;
-- the included GitHub Codespace.
+- the Phenomenal Engine runtime integration, when available;
+- a chatbot/agent/work environment that can execute Python;
+- local Python 3.11+;
+- GitHub Codespaces **only if you opt in**.
+
+Codespaces has limited included usage and may incur charges for compute/storage. You do not need it if another trusted Python environment is available. Connecting a fork never creates a Codespace.
 
 ## 4. Start
 
@@ -41,6 +44,22 @@ If there is no campaign, it should offer:
 1. Eidolon Shard: The Great Labyrinth of Egypt
 2. The Orbital Swarm Trail
 3. The Concord Tournament: Children of the Long Game
+
+It should also make this single **optional** suggestion during first-run onboarding:
+
+> Want to use GitHub Codespaces for development or heavy simulations? It's optional; GitHub's included usage is limited and additional charges may apply. We can use an existing Python runtime instead.
+
+Saying **No** skips Codespaces without penalty. Saying **Yes** only opens manual setup guidance and **does not automatically create a Codespace**.
+
+A trusted runtime can expose the startup choices using:
+
+~~~bash
+python -m phenomenal_engine start
+python -m phenomenal_engine start --no-codespaces
+python -m phenomenal_engine start --codespaces
+~~~
+
+None of these commands provisions infrastructure.
 
 ## What should happen mechanically?
 

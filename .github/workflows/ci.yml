@@ -37,5 +37,18 @@ jobs:
           python -m phenomenal_engine play mods/concord_tournament.json "$tmp/concord.json" "Inspect the ledger." --idempotency-key ci-2
           python -m phenomenal_engine status "$tmp/concord.json"
 
+      - name: Check optional Codespaces startup remains opt-in
+        run: |
+          python -m phenomenal_engine start > /tmp/startup.json
+          python - <<'PY'
+          import json
+          data=json.load(open("/tmp/startup.json", encoding="utf-8"))
+          assert data["codespaces"]["choice"] == "offer"
+          assert data["codespaces"]["default_enabled"] is False
+          assert data["codespaces"]["created"] is False
+          assert len(data["mods"]) == 3
+          print("Codespaces is off by default.")
+          PY
+
       - name: Verify canonical manifest
         run: python scripts/manifest.py --check

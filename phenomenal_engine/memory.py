@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import hashlib, json, os, tempfile, uuid
 
 SCHEMA_VERSION = "1.0.0"
-ENGINE_VERSION = "0.2.0"
+ENGINE_VERSION = "0.2.1"
 
 def canonical_json(obj) -> str:
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)

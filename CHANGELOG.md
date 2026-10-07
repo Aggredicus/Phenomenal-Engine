@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+- Made GitHub Codespaces opt-in and disabled by default, with a once-per-setup optional suggestion and explicit cost disclosure.
+- Added a non-billable `start` CLI command that lists adventures and returns runtime/Codespaces choices.
+- Added `--codespaces` (manual instructions only) and `--no-codespaces` (skip offer), with tests guaranteeing no provisioning.
+- Updated startup, chatbot, Codespaces, integration, and support documentation to prefer existing trusted Python execution.
+
 ## 0.2.0
 - Added persistent `play` / `continue` CLI flow that creates or reloads a campaign, restores RNG streams, runs one turn, and atomically saves state.
 - Added idempotency keys so retried agent/tool calls do not duplicate turns.

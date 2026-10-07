@@ -1,10 +1,21 @@
-# Codespaces and Saves
+# Optional Codespaces and Saves
 
-Phenomenal Engine includes a ready-to-use GitHub Codespaces configuration at `.devcontainer/devcontainer.json`.
+**Codespaces is opt-in.** Phenomenal Engine does not automatically create or start a Codespace when a player says "Play Phenomenal Engine." The normal route uses an existing trusted Python runtime.
+
+GitHub offers limited included Codespaces usage. Exceeding the allowance can incur compute and storage charges. Review your plan, remaining usage, and spending limits before starting one:
+https://github.com/pricing
+
+Phenomenal Engine includes a ready-to-use GitHub Codespaces configuration at `.devcontainer/devcontainer.json`, but this file is used **only when the user deliberately creates a Codespace**.
 
 Codespaces is a convenient **user-controlled Python execution surface**. It is not, by itself, the long-term private save database.
 
-## Start a Codespace
+## When the option should be suggested
+
+At the first game startup the AI should mention Codespaces once as an optional advanced workspace and offer to skip it. Choosing "no" must not change the ability to play using a separate trusted runtime.
+
+If the user chooses Codespaces, the CLI `python -m phenomenal_engine start --codespaces` returns manual instructions; it does not provision infrastructure. The player must deliberately create the Codespace through GitHub, or later approve a supported provisioning integration after reviewing costs.
+
+## Start a Codespace (only after opt-in)
 
 From your fork, choose **Code -> Codespaces -> Create codespace**.
 
@@ -65,7 +76,9 @@ A production integration can combine them, but should expose narrow game operati
 - Do not put PATs or production service secrets in the fork.
 - Use Codespaces secrets only when genuinely needed for development.
 - Do not execute unreviewed user-modified engine code with privileged service credentials.
-- Do not auto-create billable Codespaces merely because a repo was connected.
+- Do not auto-create or auto-start Codespaces merely because a repo was connected or the player started a campaign.
+- Do not assume included monthly usage is unlimited.
+- Respect a player's "skip" choice for the current setup; do not repeat the suggestion during every turn.
 
 GitHub security guidance:
 https://docs.github.com/en/codespaces/reference/security-in-github-codespaces

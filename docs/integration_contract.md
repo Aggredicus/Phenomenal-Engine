@@ -1,4 +1,4 @@
-# Phenomenal Engine Integration Contract v0.2.0
+# Phenomenal Engine Integration Contract v0.2.1
 
 This document defines the minimum interface for:
 
@@ -75,11 +75,19 @@ Verifies and reports the current state version.
 
 Optional explicit rewind/alternate-history operation.
 
+### First-run options
+
+`engine.startup_options()` (or the CLI `python -m phenomenal_engine start`)
+
+Returns validated available adventures and a **dismissible Codespaces offer**. Default to an existing trusted Python runtime, not Codespaces. The CLI accepts `--no-codespaces` to skip and `--codespaces` to return manual setup steps. It never calls GitHub's Codespaces API.
+
 ### Optional compute
 
-`runtime.create_codespace(...)`
+`runtime.create_codespace(...)` is **not part of ordinary Player Mode**.
 
-High-impact/billable; require explicit user intent.
+It is high-impact/billable and requires explicit opt-in *after* disclosing that included usage is limited and charges may apply. A click, narrative line, or `start --codespaces` is not sufficient authorization to provision compute. The player must explicitly approve the provisioning operation or create the Codespace manually.
+
+Declining Codespaces must not prevent play via another available trusted runtime.
 
 ## CLI reference implementation
 
@@ -109,13 +117,14 @@ A typed integration should preserve those semantics even if it does not literall
 2. verify repository scope;
 3. verify write capability;
 4. verify trusted execution;
-5. choose a safe save backend;
-6. validate the requested mod;
-7. create campaign ID and seed;
-8. create memory and genesis ledger event;
-9. run/persist the opening turn;
-10. verify persistence;
-11. return a scene packet.
+5. offer Codespaces once as optional; prefer an already available trusted runtime and honor a decline;
+6. choose a safe save backend;
+7. validate the requested mod;
+8. create campaign ID and seed;
+9. create memory and genesis ledger event;
+10. run/persist the opening turn;
+11. verify persistence;
+12. return a scene packet.
 
 Never tell the player the campaign is saved if the write did not succeed.
 
@@ -186,8 +195,8 @@ Before advertising one-phrase play:
 1. user forks Phenomenal Engine;
 2. user installs/authorizes the write-capable integration for only that fork and save backend;
 3. user says “Play Phenomenal Engine”;
-4. integration detects capabilities;
-5. user chooses an adventure;
+4. integration detects capabilities and presents a dismissible Codespaces option without provisioning anything;
+5. user chooses an adventure and may skip Codespaces;
 6. exactly one campaign is created;
 7. an authoritative opening turn runs;
 8. state is durable;

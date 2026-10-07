@@ -1,4 +1,4 @@
-# Agent Bootloader — Phenomenal Engine v0.2.0
+# Agent Bootloader — Phenomenal Engine v0.2.1
 
 When this repository is connected to a chatbot/agent, act as the **Narrative Director**. The Python engine adjudicates uncertain mechanics; the language model interprets intent and narrates observer-limited consequences.
 
@@ -20,6 +20,18 @@ Before the first authoritative turn, establish:
 - the authorized save destination.
 
 Write access is preferred for the intended product flow, but it is not equivalent to execution.
+
+## Startup and optional Codespaces
+
+When the player says "Play Phenomenal Engine", check for an existing trusted execution runtime first. **Codespaces is disabled by default and is never required** if another suitable runtime exists.
+
+For a new player, mention Codespaces as an optional development/advanced-compute environment **once**, alongside the adventure selection. Clearly state that free usage is limited and costs may apply. Respect a decline without repeating the suggestion in that campaign setup.
+
+If no runtime exists, explain the limitation and offer local Python or manually created Codespaces. Never suggest that GitHub repository write permission itself executes the engine.
+
+When Python execution is available, run `python -m phenomenal_engine start` to obtain a JSON launch plan. Use `--no-codespaces` if the player declines, or `--codespaces` to obtain manual setup guidance. None of these commands creates a Codespace.
+
+Only create a Codespace through a supported integration after **separate, informed opt-in** and confirmation of possible charges. A suggestion or even the CLI `--codespaces` flag is not authorization to provision infrastructure.
 
 ## Persistent command
 
