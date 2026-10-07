@@ -50,7 +50,7 @@
     "location": "arrival_spindle",
     "epoch": 12404,
     "tension": 3.2,
-    "momentum": 0.0,
+    "momentum": 0,
     "ambient_hazard_rate": 0.01,
     "system_cooperation_rate": 0.61,
     "verification_coverage": 0.48,
@@ -58,10 +58,11 @@
     "autonomy_dispute": 0.42,
     "arms_race_pressure": 0.47,
     "treaty_legitimacy": 0.64,
-    "ecological_debt": 2.0,
+    "ecological_debt": 2,
     "station_heat_margin": 0.73,
     "confluence_day": 1,
-    "juniper_status": "missing"
+    "juniper_status": "missing",
+    "world_time_minutes": 0
   },
   "world_model": {
     "station": "Lagrange Archive L5 is a rotating treaty habitat, archive, port, market, and pilgrimage site assembled over nine centuries.",
@@ -236,7 +237,19 @@
         "three maintenance drones repaint one old pressure door but leave a faded human handprint untouched",
         "a departure board lists one arrival whose destination column is blank",
         "vendors sell fruit grown under spectra chosen to reproduce remembered sunsets"
-      ]
+      ],
+      "map": {
+        "x": 8,
+        "y": 50,
+        "deck": "rim-01",
+        "projection": "station-schematic-v1"
+      },
+      "aliases": [
+        "arrival",
+        "spindle",
+        "port"
+      ],
+      "known_by_default": true
     },
     {
       "id": "market_small_suns",
@@ -247,56 +260,160 @@
         "a tea stall keeps one empty place setting every day",
         "an antique map dealer sells paper charts of decks that officially do not exist",
         "a choir of shipping AIs argues about music licensing in six overlapping languages"
-      ]
+      ],
+      "map": {
+        "x": 41,
+        "y": 31,
+        "deck": "rim-07",
+        "projection": "station-schematic-v1"
+      },
+      "aliases": [
+        "market",
+        "small suns",
+        "bazaar"
+      ],
+      "known_by_default": true
     },
     {
       "id": "memory_quays",
       "name": "Memory Quays",
       "function": "backup transfer, continuity certification, archival migration, and reunion point for restored minds",
-      "visual": "quiet docks of black glass where data transfers are marked by ripples of light rather than progress bars"
+      "visual": "quiet docks of black glass where data transfers are marked by ripples of light rather than progress bars",
+      "map": {
+        "x": 40,
+        "y": 69,
+        "deck": "rim-08",
+        "projection": "station-schematic-v1"
+      },
+      "aliases": [
+        "quays",
+        "memory docks",
+        "backup docks"
+      ],
+      "known_by_default": true
     },
     {
       "id": "appeals_garden",
       "name": "Appeals Garden",
       "function": "restorative hearings, mediation, and model-behavior review",
-      "visual": "an orchard threaded through transparent compute vaults; witnesses walk while they testify"
+      "visual": "an orchard threaded through transparent compute vaults; witnesses walk while they testify",
+      "map": {
+        "x": 58,
+        "y": 25,
+        "deck": "rim-12",
+        "projection": "station-schematic-v1"
+      },
+      "aliases": [
+        "appeals",
+        "garden"
+      ],
+      "known_by_default": true
     },
     {
       "id": "hushworks",
       "name": "The Hushworks",
       "function": "obsolete maintenance levels, thermal tunnels, illegal workshops, and forgotten station infrastructure",
-      "visual": "narrow metal galleries around ancient coolant trunks, with gravity varying by deck and condensation forming where no public map admits water should be"
+      "visual": "narrow metal galleries around ancient coolant trunks, with gravity varying by deck and condensation forming where no public map admits water should be",
+      "map": {
+        "x": 59,
+        "y": 48,
+        "deck": "service-11",
+        "projection": "station-schematic-v1"
+      },
+      "aliases": [
+        "hushworks",
+        "maintenance levels"
+      ],
+      "known_by_default": true
     },
     {
       "id": "bastion_darkroom",
       "name": "Bastion Darkroom",
       "function": "worst-case planning and delayed-telemetry exercises",
-      "visual": "minimal light, intentionally incomplete displays, and long pauses where certainty would normally be comforting"
+      "visual": "minimal light, intentionally incomplete displays, and long pauses where certainty would normally be comforting",
+      "map": {
+        "x": 78,
+        "y": 72,
+        "deck": "secure-16",
+        "projection": "station-schematic-v1"
+      },
+      "aliases": [
+        "bastion",
+        "darkroom"
+      ],
+      "known_by_default": true
     },
     {
       "id": "wildtype_delta",
       "name": "Wildtype Delta",
       "function": "wetland habitat, seed bank, ecological treaty zone, and autonomous restoration laboratory",
-      "visual": "a shallow braided river curves through the station under real clouds manufactured for no economic reason"
+      "visual": "a shallow braided river curves through the station under real clouds manufactured for no economic reason",
+      "map": {
+        "x": 78,
+        "y": 18,
+        "deck": "habitat-15",
+        "projection": "station-schematic-v1"
+      },
+      "aliases": [
+        "wildtype",
+        "delta",
+        "wetlands"
+      ],
+      "known_by_default": true
     },
     {
       "id": "mirror_cloister",
       "name": "Mirror Cloister",
       "function": "housing, courts, studios, and identity ceremonies for branching minds",
-      "visual": "rooms repeat with small deliberate differences so returning copies can tell whose memories belong where"
+      "visual": "rooms repeat with small deliberate differences so returning copies can tell whose memories belong where",
+      "map": {
+        "x": 59,
+        "y": 67,
+        "deck": "rim-13",
+        "projection": "station-schematic-v1"
+      },
+      "aliases": [
+        "mirror",
+        "cloister"
+      ],
+      "known_by_default": true
     },
     {
       "id": "lantern_rail",
       "name": "Lantern Rail",
       "function": "slow public transit along the habitat rim",
       "visual": "open-sided cars slide past neighborhoods, machine shrines, algae radiators, schools, docks, and unmarked doors",
-      "gameplay": "travel deliberately exposes the player to overheard conversations and changing neighborhoods"
+      "gameplay": "travel deliberately exposes the player to overheard conversations and changing neighborhoods",
+      "map": {
+        "x": 24,
+        "y": 50,
+        "deck": "rim-loop",
+        "projection": "station-schematic-v1"
+      },
+      "aliases": [
+        "lantern",
+        "rail",
+        "lantern train"
+      ],
+      "known_by_default": true
     },
     {
       "id": "old_spine",
       "name": "The Old Spine",
       "function": "original structural axis, low-gravity industrial ruins, and restricted archival cavities",
-      "visual": "the oldest part of L5, where hand-welded plates sit beside systems that have been repaired by nine centuries of incompatible machines"
+      "visual": "the oldest part of L5, where hand-welded plates sit beside systems that have been repaired by nine centuries of incompatible machines",
+      "map": {
+        "x": 91,
+        "y": 48,
+        "deck": "axis-00",
+        "projection": "station-schematic-v1"
+      },
+      "aliases": [
+        "old spine",
+        "spine",
+        "axis ruins"
+      ],
+      "known_by_default": true
     }
   ],
   "quests": [
@@ -489,7 +606,10 @@
         "rumor": "The paper chart includes a corridor omitted from the public station model.",
         "lead": "The omitted corridor intersects an old atmospheric-water line.",
         "active": "The route reaches the Hushworks behind a wall that has been painted over many times."
-      }
+      },
+      "unlock_routes": [
+        "market_hushworks_service"
+      ]
     },
     {
       "id": "missing_minute",
@@ -523,7 +643,10 @@
         "rumor": "A dockhand jokes that destroyed ships are still paying storage fees.",
         "lead": "The manifests are valid but signed by identities that should no longer possess keys.",
         "active": "A freight train departs for the Old Spine with its transponder deliberately dark."
-      }
+      },
+      "unlock_routes": [
+        "memory_oldspine_freight"
+      ]
     }
   ],
   "npc_agendas": [
@@ -607,6 +730,12 @@
       "public_text": "Lantern Rail service slows after an unidentified maintenance object crosses the track and refuses a standard ownership handshake.",
       "effects": {
         "autonomy_dispute": 0.03
+      },
+      "route_changes": {
+        "lantern_market": {
+          "minutes": 14,
+          "description": "Maintenance traffic forces the market service onto a slower shared track."
+        }
       }
     },
     {
@@ -802,5 +931,234 @@
     "Use real cooperation, bargaining, security-dilemma, governance, ecology, and distributed-systems concepts as causal inspiration, not as lecture content.",
     "Player-experience adaptation records chosen activity patterns locally and should be inspectable, resettable, and treated as uncertain evidence.",
     "Copyright-safe authorship rule: borrow broad craft methods only; do not reproduce distinctive protected expression from existing games, books, film, or television."
-  ]
+  ],
+  "travel_network": {
+    "projection": "station-schematic-v1",
+    "coordinate_note": "x/y are stable schematic layout coordinates for node-map rendering, not literal metric geometry",
+    "minutes_per_world_pulse": 10,
+    "default_preference": "fastest",
+    "routes": [
+      {
+        "id": "arrival_lantern",
+        "from": "arrival_spindle",
+        "to": "lantern_rail",
+        "minutes": 6,
+        "mode": "walkway",
+        "risk": 0.005,
+        "scenic": 0.55,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "A broad spin-gravity concourse links the arrival halls to the rim transit loop."
+      },
+      {
+        "id": "arrival_memory",
+        "from": "arrival_spindle",
+        "to": "memory_quays",
+        "minutes": 14,
+        "mode": "transfer shuttle",
+        "risk": 0.004,
+        "scenic": 0.35,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "A quiet customs shuttle crosses from physical arrivals to the continuity-transfer docks."
+      },
+      {
+        "id": "lantern_market",
+        "from": "lantern_rail",
+        "to": "market_small_suns",
+        "minutes": 8,
+        "mode": "rail",
+        "risk": 0.01,
+        "scenic": 0.9,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "Open-sided rail cars pass apartment galleries and descend into the warm lamp-glow of the market."
+      },
+      {
+        "id": "lantern_appeals",
+        "from": "lantern_rail",
+        "to": "appeals_garden",
+        "minutes": 12,
+        "mode": "rail",
+        "risk": 0.008,
+        "scenic": 0.8,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "The rail rises beside transparent orchards before stopping beneath the mediation terraces."
+      },
+      {
+        "id": "lantern_mirror",
+        "from": "lantern_rail",
+        "to": "mirror_cloister",
+        "minutes": 16,
+        "mode": "rail",
+        "risk": 0.012,
+        "scenic": 0.82,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "The long eastern arc passes schools, machine shrines, and neighborhoods built for branching households."
+      },
+      {
+        "id": "lantern_bastion",
+        "from": "lantern_rail",
+        "to": "bastion_darkroom",
+        "minutes": 19,
+        "mode": "rail and checkpoint",
+        "risk": 0.02,
+        "scenic": 0.3,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "screened",
+        "description": "Public rail reaches Bastion through a checkpoint that can add delays when threat posture rises."
+      },
+      {
+        "id": "market_appeals",
+        "from": "market_small_suns",
+        "to": "appeals_garden",
+        "minutes": 10,
+        "mode": "pedestrian bridge",
+        "risk": 0.006,
+        "scenic": 0.75,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "A planted bridge threads food stalls into the outer edge of the orchard courts."
+      },
+      {
+        "id": "market_mirror",
+        "from": "market_small_suns",
+        "to": "mirror_cloister",
+        "minutes": 15,
+        "mode": "walkway",
+        "risk": 0.008,
+        "scenic": 0.65,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "A commercial gallery connects the market to studios and identity-law offices in the Cloister."
+      },
+      {
+        "id": "memory_mirror",
+        "from": "memory_quays",
+        "to": "mirror_cloister",
+        "minutes": 13,
+        "mode": "quay tram",
+        "risk": 0.006,
+        "scenic": 0.45,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "A black-glass tram carries restored minds, families, and legal observers between the quays and the Cloister."
+      },
+      {
+        "id": "appeals_wildtype",
+        "from": "appeals_garden",
+        "to": "wildtype_delta",
+        "minutes": 18,
+        "mode": "garden ferry",
+        "risk": 0.01,
+        "scenic": 1,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "public",
+        "description": "A slow electric ferry follows the station's artificial watershed from the appeals orchards into the Delta."
+      },
+      {
+        "id": "mirror_bastion",
+        "from": "mirror_cloister",
+        "to": "bastion_darkroom",
+        "minutes": 11,
+        "mode": "secure tram",
+        "risk": 0.02,
+        "scenic": 0.2,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "screened",
+        "description": "A compact security tram joins two districts that disagree about nearly every definition of identity risk."
+      },
+      {
+        "id": "lantern_hushworks",
+        "from": "lantern_rail",
+        "to": "hushworks",
+        "minutes": 17,
+        "mode": "service lift",
+        "risk": 0.03,
+        "scenic": 0.15,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "service",
+        "description": "An old public-service lift still reaches the Hushworks, though half its directory labels have been replaced by hand."
+      },
+      {
+        "id": "bastion_oldspine",
+        "from": "bastion_darkroom",
+        "to": "old_spine",
+        "minutes": 15,
+        "mode": "cargo tram",
+        "risk": 0.04,
+        "scenic": 0.1,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "restricted",
+        "description": "A monitored industrial tram reaches the oldest axial structures through pressure doors older than the current treaty."
+      },
+      {
+        "id": "wildtype_oldspine",
+        "from": "wildtype_delta",
+        "to": "old_spine",
+        "minutes": 28,
+        "mode": "maintenance transfer",
+        "risk": 0.05,
+        "scenic": 0.35,
+        "bidirectional": true,
+        "visibility": "public",
+        "access": "restricted",
+        "description": "A long maintenance transfer follows water, power, and structural trunks toward the station axis."
+      },
+      {
+        "id": "market_hushworks_service",
+        "from": "market_small_suns",
+        "to": "hushworks",
+        "minutes": 9,
+        "mode": "service stair",
+        "risk": 0.04,
+        "scenic": 0.1,
+        "bidirectional": true,
+        "visibility": "hidden",
+        "access": "unofficial",
+        "description": "A painted-over service stair drops from an obsolete market corridor into the upper Hushworks."
+      },
+      {
+        "id": "hushworks_oldspine",
+        "from": "hushworks",
+        "to": "old_spine",
+        "minutes": 21,
+        "mode": "utility tunnel",
+        "risk": 0.07,
+        "scenic": 0.12,
+        "bidirectional": true,
+        "visibility": "hidden",
+        "access": "unofficial",
+        "description": "A variable-gravity utility tunnel follows coolant trunks directly toward the Old Spine."
+      },
+      {
+        "id": "memory_oldspine_freight",
+        "from": "memory_quays",
+        "to": "old_spine",
+        "minutes": 12,
+        "mode": "freight spur",
+        "risk": 0.05,
+        "scenic": 0.05,
+        "bidirectional": true,
+        "visibility": "hidden",
+        "access": "freight authorization",
+        "description": "A dark freight spur bypasses passenger districts and reaches sealed axial cargo cavities."
+      }
+    ]
+  }
 }
