@@ -6,8 +6,8 @@
   },
   {
     "path": ".github/workflows/ci.yml",
-    "bytes": 1132,
-    "sha256": "2535b14a6ffc7f64cd5aca429b4b66f8612aa28dd25d65343d970ee7285209c1"
+    "bytes": 1645,
+    "sha256": "2be334b9f54da34767312a90bc1fb0e607c233ccf73c41613718967f943939a7"
   },
   {
     "path": ".gitignore",
@@ -16,13 +16,13 @@
   },
   {
     "path": "AGENT_BOOTLOADER.md",
-    "bytes": 4598,
-    "sha256": "1ce5bc33d4f5639cd53df24b118f460bd2b3b023a635f3e5fea4317bbd27c41d"
+    "bytes": 5770,
+    "sha256": "656e92a7278d66e6ca9229518326697b6061e8b0993493dc5637e689224f41b7"
   },
   {
     "path": "CHANGELOG.md",
-    "bytes": 961,
-    "sha256": "c588cc3649bb46db35ff1339fd4cb5270df5c273a099440a9c6b8f3ccf183e42"
+    "bytes": 1456,
+    "sha256": "b42bbdbead65e49f8cd03c68e3caaeaa544a99dd2488d3551069eecdb7f5e6ad"
   },
   {
     "path": "LICENSE",
@@ -36,8 +36,8 @@
   },
   {
     "path": "README.md",
-    "bytes": 7042,
-    "sha256": "cd86903b0844b36ddd31c46f6e63695952df2785c6f37ccae6e684c583280061"
+    "bytes": 8671,
+    "sha256": "611f01011dfca4c7a46d6e0eb5986f91d75423d812b28ce2b6acdb7c78c56fdb"
   },
   {
     "path": "SECURITY.md",
@@ -46,23 +46,23 @@
   },
   {
     "path": "START_HERE.md",
-    "bytes": 4015,
-    "sha256": "ead538e19f00cc290530ae8ccbfd410de937692fbc022b9b552ba5300013c4d3"
+    "bytes": 5413,
+    "sha256": "6c0b15334af445475d94fe0c6c76e14fc18e10e675d90b61d488961a2efca312"
   },
   {
     "path": "SUPPORT.md",
-    "bytes": 3127,
-    "sha256": "567cd973afcd78b8f04aef9b4f73b9be5fa9946f9f829b0d1cba2efedbaaff7e"
+    "bytes": 3824,
+    "sha256": "d86f89c6415c84f63b3a8efcc4c30cb621d08efbf36adff7ef1aeef96933aae5"
   },
   {
     "path": "docs/chatbot_quickstart.md",
-    "bytes": 2475,
-    "sha256": "ffbf60fe4356755977770fd2146b83c9db2c418b22bf57987f2576713aa2a44d"
+    "bytes": 3482,
+    "sha256": "2e1b636115c65bd0db6893de9f3a09767208476d3ff3cb6863550c908039c774"
   },
   {
     "path": "docs/codespaces_and_saves.md",
-    "bytes": 2138,
-    "sha256": "e3f7c0d263461833091b2fc4dfa78f0172ffb33d3b6ce2171829fe464ae60555"
+    "bytes": 3403,
+    "sha256": "e9b3f081a3b5fd8a0a7b31cebfb4352e5689f18dbd40b17317716343d08a33c8"
   },
   {
     "path": "docs/game_theory_and_ai_ethics.md",
@@ -76,8 +76,8 @@
   },
   {
     "path": "docs/integration_contract.md",
-    "bytes": 5676,
-    "sha256": "a2353f03647e77db90d4551ef73623be8877a2da36e7d714ff7d7249c5197c39"
+    "bytes": 6653,
+    "sha256": "de218bff8c3446768fe6aeeb7f3defb58cacaa0812a8e589bffd4e8986ecdb3e"
   },
   {
     "path": "docs/math_and_probability.md",
@@ -147,7 +147,7 @@
   {
     "path": "phenomenal_engine/__init__.py",
     "bytes": 124,
-    "sha256": "a65ed216d6ce2bd819ae7e260f4a4c05ff48cfa3d1d010a03cd2a00940224a06"
+    "sha256": "33a6596f62d8f80376ebfdff9ea66ee47f286e9c9eb180faab65dfdc5f7c22d6"
   },
   {
     "path": "phenomenal_engine/__main__.py",
@@ -156,8 +156,8 @@
   },
   {
     "path": "phenomenal_engine/cli.py",
-    "bytes": 7827,
-    "sha256": "01f3e7dc5952cd67c92e862c6186cdf1056c36dd42dcd072275bb1b69d8c7f6a"
+    "bytes": 10443,
+    "sha256": "4c50fe7bbec1c8fc05870fea17c73c294eb29e57e752594c9b1556a19dc6a524"
   },
   {
     "path": "phenomenal_engine/engine.py",
@@ -177,7 +177,7 @@
   {
     "path": "phenomenal_engine/memory.py",
     "bytes": 4780,
-    "sha256": "a442987130c0199267f1f75d36db1fe99a3fa618ed9ae9b410185fc649bfcdf5"
+    "sha256": "b2b507e1e15f2fc9c58807b148865b82155c33bf365e3854db074fe2dc026c74"
   },
   {
     "path": "phenomenal_engine/mod_loader.py",
@@ -217,7 +217,7 @@
   {
     "path": "pyproject.toml",
     "bytes": 396,
-    "sha256": "535de3da64bbd0f3fd31266c99e3d4012bd4ec035e5c67bc872f5343d82e9ca5"
+    "sha256": "f32debe33cb83a05387135a0e75522581723e51cebdf4dd682e410304cabf842"
   },
   {
     "path": "runtime/.gitkeep",
@@ -273,5 +273,10 @@
     "path": "tests/test_rng.py",
     "bytes": 781,
     "sha256": "41e7146a99348f8375e2e318bd63410b9db22429fb89872af8196893e2cf0415"
+  },
+  {
+    "path": "tests/test_startup_choices.py",
+    "bytes": 2204,
+    "sha256": "3be07b1835bc1f4699b605d6faaf1fe9028a214bb13f74c78ccc93b4bcd9cffb"
   }
 ]
