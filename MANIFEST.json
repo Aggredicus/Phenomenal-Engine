@@ -25,6 +25,36 @@
     "sha256": "b42bbdbead65e49f8cd03c68e3caaeaa544a99dd2488d3551069eecdb7f5e6ad"
   },
   {
+    "path": "LICENSE",
+    "bytes": 1067,
+    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
+  },
+  {
+    "path": "MOD_AUTHOR_PROMPT.md",
+    "bytes": 2204,
+    "sha256": "d255e2740821521a7d30e709857d3e1ab346c432de9afce2cba52bb0c1884b81"
+  },
+  {
+    "path": "README.md",
+    "bytes": 8671,
+    "sha256": "611f01011dfca4c7a46d6e0eb5986f91d75423d812b28ce2b6acdb7c78c56fdb"
+  },
+  {
+    "path": "SECURITY.md",
+    "bytes": 5495,
+    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
+  },
+  {
+    "path": "START_HERE.md",
+    "bytes": 5413,
+    "sha256": "6c0b15334af445475d94fe0c6c76e14fc18e10e675d90b61d488961a2efca312"
+  },
+  {
+    "path": "SUPPORT.md",
+    "bytes": 3824,
+    "sha256": "d86f89c6415c84f63b3a8efcc4c30cb621d08efbf36adff7ef1aeef96933aae5"
+  },
+  {
     "path": "docs/chatbot_quickstart.md",
     "bytes": 3482,
     "sha256": "2e1b636115c65bd0db6893de9f3a09767208476d3ff3cb6863550c908039c774"
@@ -103,16 +133,6 @@
     "path": "examples/run_demo.py",
     "bytes": 843,
     "sha256": "6023192173b88106338739f61c3f147e270e518f51c1ef49766e7e205a7be9ce"
-  },
-  {
-    "path": "LICENSE",
-    "bytes": 1067,
-    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
-  },
-  {
-    "path": "MOD_AUTHOR_PROMPT.md",
-    "bytes": 2204,
-    "sha256": "d255e2740821521a7d30e709857d3e1ab346c432de9afce2cba52bb0c1884b81"
   },
   {
     "path": "mods/concord_tournament.json",
@@ -210,11 +230,6 @@
     "sha256": "f32debe33cb83a05387135a0e75522581723e51cebdf4dd682e410304cabf842"
   },
   {
-    "path": "README.md",
-    "bytes": 8671,
-    "sha256": "611f01011dfca4c7a46d6e0eb5986f91d75423d812b28ce2b6acdb7c78c56fdb"
-  },
-  {
     "path": "runtime/.gitkeep",
     "bytes": 0,
     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -238,21 +253,6 @@
     "path": "scripts/manifest.py",
     "bytes": 2346,
     "sha256": "0e622e592ef68c133ef3cfc0dca6216a567440bc2a5ca58ff42895d2c86a2f8d"
-  },
-  {
-    "path": "SECURITY.md",
-    "bytes": 5495,
-    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
-  },
-  {
-    "path": "START_HERE.md",
-    "bytes": 5413,
-    "sha256": "6c0b15334af445475d94fe0c6c76e14fc18e10e675d90b61d488961a2efca312"
-  },
-  {
-    "path": "SUPPORT.md",
-    "bytes": 3824,
-    "sha256": "d86f89c6415c84f63b3a8efcc4c30cb621d08efbf36adff7ef1aeef96933aae5"
   },
   {
     "path": "tests/test_game_theory.py",
