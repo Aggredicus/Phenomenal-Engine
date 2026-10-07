@@ -98,7 +98,7 @@ Bundled mods:
 
 - `mods/great_labyrinth_of_egypt.json`
 - `mods/orbital_swarm_trail.json`
-- `mods/concord_tournament.json`
+- `mods/mirror_delivery.json`
 
 ## 5. Authoritative turn command
 

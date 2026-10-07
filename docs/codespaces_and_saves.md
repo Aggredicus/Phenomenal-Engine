@@ -19,22 +19,27 @@ If the user chooses Codespaces, the CLI `python -m phenomenal_engine start --cod
 
 From your fork, choose **Code -> Codespaces -> Create codespace**.
 
-The container uses Python 3.12 and automatically runs:
+The container uses Python 3.12 and automatically runs only the lightweight startup validation:
 
 ~~~bash
 python -m phenomenal_engine validate mods
-python -m unittest discover -s tests -v
 ~~~
 
-No ports are forwarded by default.
+The full unit suite is intentionally **not** a blocking Codespace creation step. GitHub CI runs it on pull requests and `main`; developers can still run it explicitly with:
+
+~~~bash
+python -m unittest discover -s tests -q
+~~~
+
+This keeps interactive startup fast while preserving the full correctness gate where it belongs. No ports are forwarded by default.
 
 ## Start a persistent campaign
 
 ~~~bash
 python -m phenomenal_engine play \
-  mods/concord_tournament.json \
-  runtime/concord.json \
-  "Begin the Concord Tournament." \
+  mods/mirror_delivery.json \
+  runtime/mirror.json \
+  "Inspect the sealed Mir vault." \
   --seed "my-campaign" \
   --idempotency-key opening-1
 ~~~
@@ -43,16 +48,16 @@ Continue:
 
 ~~~bash
 python -m phenomenal_engine play \
-  mods/concord_tournament.json \
-  runtime/concord.json \
-  "I inspect the treaty audit." \
+  mods/mirror_delivery.json \
+  runtime/mirror.json \
+  "I ask Juno about the other couriers." \
   --idempotency-key turn-2
 ~~~
 
 Inspect:
 
 ~~~bash
-python -m phenomenal_engine status runtime/concord.json
+python -m phenomenal_engine status runtime/mirror.json
 ~~~
 
 ## Persistence warning
@@ -69,6 +74,18 @@ A write-capable GitHub connection and a Codespace solve different problems:
 - Codespace: Python execution.
 
 A production integration can combine them, but should expose narrow game operations rather than a generic credentialed shell.
+
+## Performance policy
+
+Interactive play must not wait for repository CI, benchmark sweeps, or heavyweight simulation validation.
+
+Use three levels:
+
+1. **Player startup** — no CI wait; load validated game state and play.
+2. **Codespace startup** — cheap structural/mod validation only.
+3. **PR/main CI** — complete normal test suite and persistence/integrity checks.
+
+Long-running soak tests, broad seed sweeps, profiling, or release qualification should be invoked only when a specific engineering question justifies the extra wait.
 
 ## Security
 

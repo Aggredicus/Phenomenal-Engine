@@ -1,7 +1,7 @@
 {
   "name": "Phenomenal Engine",
   "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
-  "postCreateCommand": "python -m phenomenal_engine validate mods && python -m unittest discover -s tests -v",
+  "postCreateCommand": "python -m phenomenal_engine validate mods",
   "forwardPorts": [],
   "remoteUser": "vscode"
 }

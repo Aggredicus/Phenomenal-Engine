@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "command_id": "CMD-0042",
+  "type": "activate_mir",
+  "requested_by": "ai_director",
+  "target_id": "mir_morrowglass",
+  "payload": {
+    "mode": "diagnostics"
+  },
+  "approval": {
+    "required": true,
+    "status": "pending_human",
+    "approved_by": null,
+    "approved_at": null
+  },
+  "expected_state_version": 12,
+  "idempotency_key": "director-cmd-0042"
+}
