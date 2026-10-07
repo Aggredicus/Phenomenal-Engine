@@ -17,6 +17,7 @@ from .game_theory import (
 )
 from .physics import planck_budget
 from .travel import plan_route, visible_map
+from .map_ui import serve_map_ui
 
 def cmd_validate(args):
     p = Path(args.path)
@@ -220,6 +221,14 @@ def cmd_route(args):
     )
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
+def cmd_map_ui(args):
+    serve_map_ui(
+        args.mod,
+        args.save,
+        port=args.port,
+        seed=args.seed,
+    )
+
 def add_resolution_args(p):
     p.add_argument("--skill", type=float, default=0.0)
     p.add_argument("--difficulty", type=float, default=0.0)
@@ -310,6 +319,13 @@ def main(argv=None):
     p.add_argument("--preference", choices=["fastest", "safest", "scenic"], default="fastest")
     p.add_argument("--seed", default="map-preview")
     p.set_defaults(func=cmd_route)
+
+    p = sub.add_parser("map-ui", help="serve the interactive node map on loopback")
+    p.add_argument("mod")
+    p.add_argument("save")
+    p.add_argument("--port", type=int, default=8765)
+    p.add_argument("--seed", default="map-ui", help="used only when the save does not exist")
+    p.set_defaults(func=cmd_map_ui)
 
     p = sub.add_parser("status", help="verify and inspect a persistent campaign save")
     p.add_argument("save")
