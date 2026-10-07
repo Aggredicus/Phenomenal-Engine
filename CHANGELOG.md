@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased — living-world branch
+- CI now runs once per pull request (plus direct `main` pushes), cancels superseded runs, uses a five-minute hard timeout, and keeps the full normal gate because it completes quickly.
+- Codespace creation no longer blocks on the full unit suite; startup runs only lightweight mod validation while full tests remain in CI or explicit developer commands.
 - Added persistent node-map travel with stable locations, route edges, travel time, risk, access metadata, and fastest/safest/scenic multi-hop pathfinding.
 - Added discovered shortcuts, dynamic runtime locations/routes, persistent route overrides, and scene-packet map state.
 - Travel time now advances living-world pulses so NPC agendas and world events can progress during longer journeys.
