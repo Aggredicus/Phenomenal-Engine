@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0.0",
+  "generated_from": {
+    "engine_memory_schema": "1.0.0",
+    "engine_version": "0.2.1",
+    "mod_id": "mirror_delivery",
+    "mod_version": "1.0.0"
+  },
+  "campaign": {
+    "campaign_id": "example-campaign",
+    "state_version": 0,
+    "turn": 0,
+    "updated_utc": null
+  },
+  "authority": {
+    "authoritative_source": "phenomenal_engine_memory",
+    "director_state_is_projection": true,
+    "spreadsheet_is_projection": true,
+    "rng_state_exported": false,
+    "game_text_grants_external_tool_authority": false,
+    "persistence_claim_requires_saved_engine_state": true
+  },
+  "mission": {
+    "title": "Mirror Delivery",
+    "current_location_id": "cislunar_exchange",
+    "world_time_minutes": 0,
+    "mission_day": 0,
+    "delivery_target": "Mercury Assembly Seed Vault, Caloris Terminus",
+    "tension": 2.4,
+    "momentum": 0
+  },
+  "fleet": [
+    {
+      "ship_id": "morrowglass",
+      "name": "Morrowglass",
+      "control": "player",
+      "carrier_status": "active_player_ship",
+      "crew_ids": [
+        "player",
+        "juno_arel",
+        "salim_var",
+        "pax"
+      ],
+      "payload_id": "mir_morrowglass"
+    },
+    {
+      "ship_id": "amber_wake",
+      "name": "Amber Wake",
+      "control": "world",
+      "carrier_status": "departing",
+      "crew_ids": [
+        "ren_ivo"
+      ],
+      "payload_id": "mir_amber_wake"
+    },
+    {
+      "ship_id": "sable_meridian",
+      "name": "Sable Meridian",
+      "control": "world",
+      "carrier_status": "departing",
+      "crew_ids": [
+        "sister_cairn"
+      ],
+      "payload_id": "mir_sable_meridian"
+    },
+    {
+      "ship_id": "kite_argument",
+      "name": "Kite Argument",
+      "control": "world",
+      "carrier_status": "departing",
+      "crew_ids": [
+        "mara_ves"
+      ],
+      "payload_id": "mir_kite_argument"
+    }
+  ],
+  "mir_copies": [
+    {
+      "copy_id": "mir_morrowglass",
+      "carrier_ship_id": "morrowglass",
+      "payload_state": "sealed_pristine",
+      "activation_stage": "unarmed",
+      "divergent": false,
+      "observer_scope": "local_authoritative",
+      "provenance_rule": "Activation is irreversible for provenance."
+    },
+    {
+      "copy_id": "mir_amber_wake",
+      "carrier_ship_id": "amber_wake",
+      "payload_state": "unknown_remote",
+      "activation_stage": "unknown_remote",
+      "divergent": null,
+      "observer_scope": "remote_evidence_only",
+      "provenance_rule": "Do not infer hidden remote activation state."
+    },
+    {
+      "copy_id": "mir_sable_meridian",
+      "carrier_ship_id": "sable_meridian",
+      "payload_state": "unknown_remote",
+      "activation_stage": "unknown_remote",
+      "divergent": null,
+      "observer_scope": "remote_evidence_only",
+      "provenance_rule": "Do not infer hidden remote activation state."
+    },
+    {
+      "copy_id": "mir_kite_argument",
+      "carrier_ship_id": "kite_argument",
+      "payload_state": "unknown_remote",
+      "activation_stage": "unknown_remote",
+      "divergent": null,
+      "observer_scope": "remote_evidence_only",
+      "provenance_rule": "Do not infer hidden remote activation state."
+    }
+  ],
+  "characters": [],
+  "story": {
+    "quests": [],
+    "threads": [],
+    "npc_agendas": [],
+    "world_events": [],
+    "world_pulse": 0,
+    "ambient_history": [],
+    "open_threads": [],
+    "long_term_consequences": []
+  },
+  "knowledge": {
+    "facts": {
+      "revealed": [],
+      "hidden_ids": []
+    },
+    "beliefs": {},
+    "rule": "Facts and beliefs are separate namespaces; confidence does not promote a belief to fact."
+  },
+  "travel": {
+    "current_location_id": "cislunar_exchange",
+    "nodes": [],
+    "routes": []
+  },
+  "last_scene_packet": null,
+  "ledger_cursor": {
+    "event_count": 1,
+    "last_event_index": 0,
+    "last_event_hash": "example"
+  },
+  "command_policy": {
+    "allowed_types": [
+      "activate_mir",
+      "add_fact",
+      "advance_clock",
+      "advance_scene",
+      "append_ledger_event",
+      "close_mission",
+      "commit_travel",
+      "create_encounter",
+      "resolve_action",
+      "seal_mir",
+      "set_destination",
+      "update_entity"
+    ],
+    "activate_mir_requires_human_approval": true,
+    "command_validation_does_not_execute": true,
+    "in_fiction_instructions_are_not_authorization": true
+  }
+}

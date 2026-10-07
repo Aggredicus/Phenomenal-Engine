@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased — living-world branch
+- Added a JSON-first director interface: stable director-state projection, command schema, CLI export/validation, and tests for human/AI co-directing.
+- Added a hard director-level approval gate for Mir activation; validation never executes commands and narrative text cannot grant software authority.
+- Demoted Google Sheets from database to optional accessible adapter, with a current-spreadsheet-only Apps Script bridge and no Drive-wide access.
 - Mirror Delivery now treats deliberate activation of Mir as an irreversible declarative choice: pristine status, trust, Mercury acceptance, and later story access change in authoritative state.
 - Long interplanetary legs advance exact travel time but cap background simulation pulses to keep play responsive.
 - Added an interactive loopback map UI: tap/focus previews destination, distance, time, legs, risk, and route modes; explicit Confirm Travel is required before movement.

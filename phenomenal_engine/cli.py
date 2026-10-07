@@ -18,6 +18,7 @@ from .game_theory import (
 from .physics import planck_budget
 from .travel import plan_route, visible_map
 from .map_ui import serve_map_ui
+from .director import build_director_state, load_director_command, validate_director_command
 
 def cmd_validate(args):
     p = Path(args.path)
@@ -229,6 +230,23 @@ def cmd_map_ui(args):
         seed=args.seed,
     )
 
+
+def cmd_director_state(args):
+    mod = load_mod(args.mod)
+    memory = load_memory(args.save)
+    validate_memory_for_mod(memory, mod)
+    print(json.dumps(build_director_state(mod, memory), indent=2, ensure_ascii=False))
+
+def cmd_director_validate_command(args):
+    mod = load_mod(args.mod)
+    memory = load_memory(args.save)
+    validate_memory_for_mod(memory, mod)
+    command = load_director_command(args.command)
+    result = validate_director_command(command, mod, memory)
+    print(json.dumps(result, indent=2, ensure_ascii=False))
+    if result["status"] != "allowed":
+        raise SystemExit(2)
+
 def add_resolution_args(p):
     p.add_argument("--skill", type=float, default=0.0)
     p.add_argument("--difficulty", type=float, default=0.0)
@@ -326,6 +344,18 @@ def main(argv=None):
     p.add_argument("--port", type=int, default=8765)
     p.add_argument("--seed", default="map-ui", help="used only when the save does not exist")
     p.set_defaults(func=cmd_map_ui)
+
+
+    p = sub.add_parser("director-state", help="export a stable JSON director projection from an authoritative save")
+    p.add_argument("mod")
+    p.add_argument("save")
+    p.set_defaults(func=cmd_director_state)
+
+    p = sub.add_parser("director-validate-command", help="validate a director command without executing it")
+    p.add_argument("mod")
+    p.add_argument("save")
+    p.add_argument("command", help="path to a director-command JSON file or inline JSON object")
+    p.set_defaults(func=cmd_director_validate_command)
 
     p = sub.add_parser("status", help="verify and inspect a persistent campaign save")
     p.add_argument("save")

@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/phenomenal-engine/director_state.schema.json",
+  "title": "Phenomenal Engine Director State Projection",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_from",
+    "campaign",
+    "authority",
+    "mission",
+    "fleet",
+    "mir_copies",
+    "characters",
+    "story",
+    "knowledge",
+    "travel",
+    "ledger_cursor",
+    "command_policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "generated_from": {
+      "type": "object",
+      "required": [
+        "mod_id",
+        "mod_version"
+      ],
+      "additionalProperties": true
+    },
+    "campaign": {
+      "type": "object",
+      "required": [
+        "campaign_id",
+        "state_version",
+        "turn"
+      ],
+      "additionalProperties": true
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "authoritative_source",
+        "director_state_is_projection",
+        "rng_state_exported",
+        "game_text_grants_external_tool_authority"
+      ],
+      "additionalProperties": true
+    },
+    "mission": {
+      "type": "object",
+      "required": [
+        "current_location_id",
+        "world_time_minutes"
+      ],
+      "additionalProperties": true
+    },
+    "fleet": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "ship_id",
+          "name",
+          "control",
+          "carrier_status",
+          "payload_id"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "mir_copies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "copy_id",
+          "carrier_ship_id",
+          "payload_state",
+          "observer_scope",
+          "provenance_rule"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "story": {
+      "type": "object",
+      "required": [
+        "quests",
+        "threads",
+        "npc_agendas",
+        "world_events",
+        "world_pulse"
+      ],
+      "additionalProperties": true
+    },
+    "knowledge": {
+      "type": "object",
+      "required": [
+        "facts",
+        "beliefs",
+        "rule"
+      ],
+      "additionalProperties": true
+    },
+    "travel": {
+      "type": "object"
+    },
+    "last_scene_packet": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "ledger_cursor": {
+      "type": "object",
+      "required": [
+        "event_count",
+        "last_event_hash"
+      ],
+      "additionalProperties": true
+    },
+    "command_policy": {
+      "type": "object",
+      "required": [
+        "allowed_types",
+        "activate_mir_requires_human_approval",
+        "command_validation_does_not_execute"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}
