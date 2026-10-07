@@ -117,6 +117,9 @@
     },
     "research_notes": {
       "type": "array"
+    },
+    "travel_network": {
+      "type": "object"
     }
   }
 }
