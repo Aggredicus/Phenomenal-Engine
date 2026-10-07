@@ -18,6 +18,9 @@ REQUIRED = {
 
 OPTIONAL_TYPES = {
     "story_design": dict,
+    "mission_directive": dict,
+    "hidden_truths": dict,
+    "main_arc": list,
     "story_threads": list,
     "npc_agendas": list,
     "world_events": list,
