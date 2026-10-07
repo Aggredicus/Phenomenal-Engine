@@ -1,5 +1,4 @@
 from __future__ import annotations
-from copy import deepcopy
 from .rng import derive_stream, PCG32
 from .probability import sample_skill_check, consequence_severity, hazard_probability
 from .memory import append_event
@@ -19,26 +18,67 @@ class Engine:
     def _persist_rng(self):
         self.memory["rng_streams"] = {k: v.state_dict() for k, v in self.streams.items()}
 
-    def step(self, action: str, skill: float = 0.0, difficulty: float = 0.0, context: float = 0.0, frame: PhenomenologyFrame | None = None, significance: float = 0.5) -> dict:
+    def step(
+        self,
+        action: str,
+        skill: float = 0.0,
+        difficulty: float = 0.0,
+        context: float = 0.0,
+        frame: PhenomenologyFrame | None = None,
+        significance: float = 0.5,
+        idempotency_key: str | None = None,
+    ) -> dict:
         self.memory["turn"] += 1
         action_rng = self.streams["actions"]
-        outcome = sample_skill_check(action_rng, skill, difficulty, context, self.mod["simulation_profile"].get("skill_temperature", 1.0))
-        outcome["consequence_severity"] = consequence_severity(action_rng, base=max(0.1, abs(outcome["margin"]) + 0.5))
+        outcome = sample_skill_check(
+            action_rng,
+            skill,
+            difficulty,
+            context,
+            self.mod["simulation_profile"].get("skill_temperature", 1.0),
+        )
+        outcome["consequence_severity"] = consequence_severity(
+            action_rng,
+            base=max(0.1, abs(outcome["margin"]) + 0.5),
+        )
         hazard_rate = float(self.memory.get("world_state", {}).get("ambient_hazard_rate", 0.0))
-        outcome["ambient_hazard_triggered"] = action_rng.random() < hazard_probability(hazard_rate, 1.0)
+        outcome["ambient_hazard_triggered"] = (
+            action_rng.random() < hazard_probability(hazard_rate, 1.0)
+        )
 
-        # Generic state dynamics: specific mods can interpret these variables in the LLM layer.
         ws = self.memory.setdefault("world_state", {})
-        ws["tension"] = max(0.0, min(10.0, float(ws.get("tension", 3.0)) + (0.35 if not outcome["success"] else -0.15)))
-        ws["momentum"] = max(-10.0, min(10.0, float(ws.get("momentum", 0.0)) + (0.3 if outcome["success"] else -0.2)))
+        ws["tension"] = max(
+            0.0,
+            min(
+                10.0,
+                float(ws.get("tension", 3.0))
+                + (0.35 if not outcome["success"] else -0.15),
+            ),
+        )
+        ws["momentum"] = max(
+            -10.0,
+            min(
+                10.0,
+                float(ws.get("momentum", 0.0))
+                + (0.3 if outcome["success"] else -0.2),
+            ),
+        )
 
-        append_event(self.memory, "player_action", {"action": action, "resolution": outcome})
         packet = build_scene_packet(self.mod, self.memory, action, outcome, frame)
+        event_payload = {"action": action, "resolution": outcome, "scene_packet": packet}
+        if idempotency_key:
+            event_payload["idempotency_key"] = idempotency_key
+        append_event(self.memory, "player_action", event_payload)
 
         cadence = self.mod["simulation_profile"].get("image_cadence", "key_moments")
         if self.queue_path and should_generate(cadence, self.memory["turn"], significance):
             job = enqueue(self.queue_path, packet, significance)
-            self.memory.setdefault("image_jobs", []).append({"id": job["id"], "turn": job["turn"], "status": job["status"]})
+            self.memory.setdefault("image_jobs", []).append(
+                {"id": job["id"], "turn": job["turn"], "status": job["status"]}
+            )
 
         self._persist_rng()
+        previous_version = int(self.memory.get("state_version", self.memory["turn"] - 1))
+        self.memory["state_version"] = previous_version + 1
+        self.memory["last_scene_packet"] = packet
         return packet

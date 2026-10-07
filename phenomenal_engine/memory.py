@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import hashlib, json, os, tempfile, uuid
 
 SCHEMA_VERSION = "1.0.0"
+ENGINE_VERSION = "0.2.0"
 
 def canonical_json(obj) -> str:
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
@@ -11,21 +12,38 @@ def canonical_json(obj) -> str:
 def event_hash(event_without_hash: dict) -> str:
     return hashlib.sha256(canonical_json(event_without_hash).encode("utf-8")).hexdigest()
 
+def _copy_json(value):
+    return json.loads(json.dumps(value))
+
 def new_memory(mod: dict, seed: int | str) -> dict:
-    return {
+    characters = {
+        item["id"]: _copy_json(item)
+        for item in mod.get("characters", [])
+        if isinstance(item, dict) and item.get("id")
+    }
+    quests = {}
+    for item in mod.get("quests", []):
+        if not isinstance(item, dict) or not item.get("id"):
+            continue
+        quest = _copy_json(item)
+        quest.setdefault("status", "open")
+        quests[item["id"]] = quest
+
+    memory = {
         "schema_version": SCHEMA_VERSION,
-        "engine_version": "0.1.0",
+        "engine_version": ENGINE_VERSION,
         "session_id": str(uuid.uuid4()),
+        "state_version": 0,
         "mod": {"id": mod["id"], "version": mod["version"], "title": mod["title"]},
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "updated_utc": datetime.now(timezone.utc).isoformat(),
         "turn": 0,
         "master_seed": str(seed),
         "rng_streams": {},
-        "world_state": json.loads(json.dumps(mod.get("starting_state", {}))),
-        "characters": {},
+        "world_state": _copy_json(mod.get("starting_state", {})),
+        "characters": characters,
         "relationships": {},
-        "quests": {},
+        "quests": quests,
         "beliefs": {},
         "facts": {"revealed": [], "hidden_ids": []},
         "open_threads": [],
@@ -33,8 +51,15 @@ def new_memory(mod: dict, seed: int | str) -> dict:
         "chronicle": [],
         "event_ledger": [],
         "image_jobs": [],
+        "last_scene_packet": None,
         "summaries": {"working": "", "long_term": ""},
     }
+    append_event(
+        memory,
+        "campaign_created",
+        {"mod_id": mod["id"], "mod_version": mod["version"]},
+    )
+    return memory
 
 def append_event(memory: dict, kind: str, payload: dict) -> dict:
     prev = memory["event_ledger"][-1]["hash"] if memory["event_ledger"] else "GENESIS"
@@ -60,6 +85,28 @@ def verify_ledger(memory: dict) -> bool:
         prev = saved
     return True
 
+def validate_memory_for_mod(memory: dict, mod: dict, allow_version_mismatch: bool = False) -> None:
+    saved_mod = memory.get("mod", {})
+    if saved_mod.get("id") != mod.get("id"):
+        raise ValueError(
+            f"save belongs to mod {saved_mod.get('id')!r}, not {mod.get('id')!r}"
+        )
+    if not allow_version_mismatch and saved_mod.get("version") != mod.get("version"):
+        raise ValueError(
+            "save/mod version mismatch: "
+            f"{saved_mod.get('version')!r} != {mod.get('version')!r}; "
+            "migrate the save or pass --allow-mod-version-mismatch intentionally"
+        )
+
+def find_event_by_idempotency_key(memory: dict, key: str | None) -> dict | None:
+    if not key:
+        return None
+    for event in reversed(memory.get("event_ledger", [])):
+        payload = event.get("payload", {})
+        if payload.get("idempotency_key") == key:
+            return event
+    return None
+
 def save_memory(path: str | Path, memory: dict) -> None:
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
@@ -77,6 +124,10 @@ def save_memory(path: str | Path, memory: dict) -> None:
 
 def load_memory(path: str | Path) -> dict:
     data = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError("memory file must contain a JSON object")
     if not verify_ledger(data):
         raise ValueError("memory ledger hash chain failed verification")
+    data.setdefault("state_version", int(data.get("turn", 0)))
+    data.setdefault("last_scene_packet", None)
     return data

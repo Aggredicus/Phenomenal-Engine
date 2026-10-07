@@ -15,63 +15,26 @@
     "event_ledger"
   ],
   "properties": {
-    "schema_version": {
-      "const": "1.0.0"
-    },
-    "engine_version": {
-      "type": "string"
-    },
-    "session_id": {
-      "type": "string"
-    },
-    "mod": {
-      "type": "object"
-    },
-    "turn": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "master_seed": {
-      "type": "string"
-    },
-    "rng_streams": {
-      "type": "object"
-    },
-    "world_state": {
-      "type": "object"
-    },
-    "characters": {
-      "type": "object"
-    },
-    "relationships": {
-      "type": "object"
-    },
-    "quests": {
-      "type": "object"
-    },
-    "beliefs": {
-      "type": "object"
-    },
-    "facts": {
-      "type": "object"
-    },
-    "open_threads": {
-      "type": "array"
-    },
-    "long_term_consequences": {
-      "type": "array"
-    },
-    "chronicle": {
-      "type": "array"
-    },
-    "event_ledger": {
-      "type": "array"
-    },
-    "image_jobs": {
-      "type": "array"
-    },
-    "summaries": {
-      "type": "object"
-    }
+    "schema_version": {"const": "1.0.0"},
+    "engine_version": {"type": "string"},
+    "session_id": {"type": "string"},
+    "state_version": {"type": "integer", "minimum": 0},
+    "mod": {"type": "object"},
+    "turn": {"type": "integer", "minimum": 0},
+    "master_seed": {"type": "string"},
+    "rng_streams": {"type": "object"},
+    "world_state": {"type": "object"},
+    "characters": {"type": "object"},
+    "relationships": {"type": "object"},
+    "quests": {"type": "object"},
+    "beliefs": {"type": "object"},
+    "facts": {"type": "object"},
+    "open_threads": {"type": "array"},
+    "long_term_consequences": {"type": "array"},
+    "chronicle": {"type": "array"},
+    "event_ledger": {"type": "array"},
+    "image_jobs": {"type": "array"},
+    "last_scene_packet": {"type": ["object", "null"]},
+    "summaries": {"type": "object"}
   }
 }

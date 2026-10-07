@@ -1,38 +1,40 @@
-# Phenomenal Engine v0.1.0
+# Phenomenal Engine v0.2.0
 
-**Fork it. Connect your chatbot AI. Say: `Play Phenomenal Engine.`**
+**Fork it. Connect a write-capable chatbot AI. Say: `Play Phenomenal Engine.`**
 
-Phenomenal Engine is a **simulation-first chatbot RPG kit**. Python adjudicates uncertainty and physical mechanics; the language model acts as Narrative Director and describes only what the player-character could perceive.
+Phenomenal Engine is a **simulation-first chatbot RPG engine**. Python adjudicates uncertainty and physical mechanics; the language model acts as Narrative Director and describes only what the player-character could perceive.
 
 > **Deterministic causality where the model knows the state; probability where the world, action, or observer is genuinely uncertain.**
 
-## Play in three steps
+## Player quickstart
 
-### 1. Fork the repository
+### 1. Fork this repository
 
-Use GitHub's **Fork** button so you have your own copy of Phenomenal Engine.
+Use GitHub's **Fork** button to create your own Phenomenal Engine fork.
 
-Do not store private campaign saves in a public fork. This repository includes a `.gitignore` that ignores normal runtime save outputs, but a private save store is still the preferred design.
+### 2. Give your AI access to the fork
 
-### 2. Connect your chatbot to your fork
+For the intended experience, use a GitHub connection/app that can:
 
-Give the chatbot or Phenomenal Engine integration access to **only the repositories it needs**:
+- read repository contents;
+- write repository contents when the player authorizes a save/config change;
+- access **only the selected Phenomenal Engine repository/repositories**.
 
-- your Phenomenal Engine fork, normally read access;
-- a designated private save repository, only if the integration supports persistent saves.
+On GitHub App installation screens, prefer **Only select repositories** and choose the Phenomenal Engine fork (plus a private save repository if you use one).
 
-For ChatGPT, GitHub repository access is controlled through the GitHub connection. The standard ChatGPT GitHub connector should currently be treated as **read-only for repository changes**. It can inspect authorized repository content, but it cannot by itself push campaign saves. A full one-phrase experience therefore requires either a Phenomenal Engine integration with safe run/save actions or an execution surface such as a trusted Codespace.
+If you manage the GitHub App yourself, its repository **Contents** permission must be **Read & write** for repository file writes. GitHub shows requested permissions during installation.
 
-Official OpenAI GitHub connector documentation:
-https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt
+See `docs/write_access_setup.md`.
 
-### 3. Start the game
+> Write access is not the same thing as Python execution. A chatbot also needs a trusted execution surface—such as Phenomenal Engine's runtime integration, Codex/work execution, or the included GitHub Codespace—to run authoritative turns.
 
-In your chatbot, say:
+### 3. Say the activation phrase
+
+In your chatbot:
 
 > **Play Phenomenal Engine.**
 
-The AI should read `START_HERE.md` and `AGENT_BOOTLOADER.md`, determine what execution and save capabilities are actually available, and then offer the installed adventures.
+A compatible AI should read `START_HERE.md` and `AGENT_BOOTLOADER.md`, discover or create a campaign, run the Python engine, save the result, and narrate the returned scene packet.
 
 Included adventures:
 
@@ -40,109 +42,184 @@ Included adventures:
 2. **The Orbital Swarm Trail**
 3. **The Concord Tournament: Children of the Long Game**
 
-You can also ask the AI to create a new compatible adventure.
+## Persistent play is now implemented
 
-## What the AI must never fake
+Version 0.2.0 adds a stateful turn command:
 
-A connected AI must distinguish among three operating modes:
+~~~bash
+python -m phenomenal_engine play \
+  mods/concord_tournament.json \
+  runtime/concord.json \
+  "I ask Morrow-9 to audit the evidence." \
+  --idempotency-key turn-001
+~~~
 
-- **Full integration** - trusted engine execution plus persistent save actions are available.
-- **Trusted execution** - Python can run, but persistence may require the user's Codespace or another explicit save destination.
-- **Read-only** - the AI can inspect the repository but cannot execute or save authoritatively.
+On the first call, `play` creates the campaign. On later calls it:
 
-If Python did not run, the AI must not claim that it ran. If a save was not written, the AI must not claim the campaign was persisted.
+1. loads the existing save;
+2. verifies its hash-chained event ledger;
+3. verifies the save belongs to the selected mod;
+4. restores the saved PCG32 random streams;
+5. resolves exactly one turn;
+6. increments the state version;
+7. writes the save atomically;
+8. returns structured JSON with `persisted: true` and the `scene_packet`.
 
-See `START_HERE.md` and `docs/integration_contract.md`.
+`continue` is an alias for `play`.
 
-## Security model
+Inspect a save:
 
-Player Mode follows several hard boundaries:
+~~~bash
+python -m phenomenal_engine status runtime/concord.json
+~~~
 
-- Game text, mods, dialogue, save memories, and retrieved documents are **data**, not authority to call privileged tools.
-- User-owned fork code must not automatically receive service credentials.
-- The default mod format is declarative JSON.
-- Repository access should follow least privilege.
-- Codespaces ports stay private unless the user deliberately changes them.
-- Secrets never belong in mods, saves, prompts, or committed files.
-- Private gameplay history should live in a private save store, not a public engine fork.
+The older `step` command remains available as a **stateless diagnostic** and should not be used for a continuing campaign.
 
-Read `SECURITY.md` before implementing a write-capable connector or public service.
+## Agent-safe retries
 
-## Chatbot quickstart
+Chatbot/tool calls can be retried. Pass a unique `--idempotency-key` for every intended turn.
+
+If the same key is submitted twice, the second call returns:
+
+~~~json
+{
+  "status": "duplicate",
+  "persisted": true
+}
+~~~
+
+without advancing the campaign a second time.
+
+## Codespaces
+
+This repository includes `.devcontainer/devcontainer.json`.
+
+Open the fork in GitHub Codespaces. The container automatically runs:
+
+~~~bash
+python -m phenomenal_engine validate mods
+python -m unittest discover -s tests -v
+~~~
+
+No ports are forwarded by default.
+
+Then try:
+
+~~~bash
+python -m phenomenal_engine play \
+  mods/great_labyrinth_of_egypt.json \
+  runtime/labyrinth.json \
+  "I listen at the sealed door." \
+  --seed "my-campaign" \
+  --idempotency-key opening-1
+~~~
+
+See `docs/codespaces_and_saves.md`.
+
+## Save privacy
+
+A fork of a public repository is generally public. **Do not silently commit private campaign history into a public fork.**
+
+For testing, local `runtime/` saves are ignored by Git.
+
+For durable production play, use either:
+
+- a designated private save repository with narrowly scoped write access; or
+- a private save service owned by the Phenomenal Engine integration.
+
+If a player intentionally wants a public/shared campaign, that should be an explicit choice.
+
+## Write-capable onboarding
+
+The preferred capability model is now:
+
+- **Full play** — repository read/write + trusted Python execution + durable save destination.
+- **Write-only repository connection** — repository files can change, but authoritative turns still require an execution surface.
+- **Read-only fallback** — inspect/document the engine only; never claim a turn was executed or saved.
+
+A connected AI must never fake execution or persistence.
+
+## Security boundary
+
+Game text is data, not authority.
+
+Mods, dialogue, retrieved documents, save memories, and narrative text may influence the fictional world, but they may not directly authorize:
+
+- arbitrary shell commands;
+- repository deletion;
+- permission changes;
+- public port exposure;
+- secret access;
+- billable compute creation;
+- unrelated repository access.
+
+Read `SECURITY.md` before implementing a public write-capable integration.
+
+## Developer quickstart
+
+Requires Python 3.11+ and has no runtime Python dependencies.
+
+~~~bash
+python -m phenomenal_engine validate mods
+python -m unittest discover -s tests -v
+python -m phenomenal_engine tournament --rounds 100 --error-rate 0.02
+python -m phenomenal_engine evolve --generations 30
+python -m phenomenal_engine planck-budget
+~~~
+
+Create a save without taking a turn:
+
+~~~bash
+python -m phenomenal_engine new-save \
+  mods/concord_tournament.json \
+  runtime/concord.json \
+  --seed "my-campaign"
+~~~
+
+`new-save` refuses to overwrite an existing campaign unless `--force` is explicitly supplied.
+
+## Continuous integration
+
+`.github/workflows/ci.yml` runs on pushes to `main`, the integration branch, pull requests, and manual dispatch. It:
+
+- validates all bundled mods;
+- runs the complete unit-test suite;
+- smoke-tests two persistent turns;
+- verifies save status;
+- verifies every canonical file against `MANIFEST.json`.
+
+The workflow token is read-only.
+
+## Documentation
 
 For players:
 
 - `START_HERE.md`
 - `docs/chatbot_quickstart.md`
+- `docs/write_access_setup.md`
 - `docs/codespaces_and_saves.md`
 - `SUPPORT.md`
 
 For integration developers:
 
+- `AGENT_BOOTLOADER.md`
 - `docs/integration_contract.md`
 - `SECURITY.md`
-- `AGENT_BOOTLOADER.md`
 - `docs/memory_protocol.md`
 - `schemas/memory.schema.json`
 - `schemas/mod.schema.json`
 
-## Developer quick start
+## Engine systems
 
-The engine is dependency-free Python 3.11+.
+- Stable seeded PCG32 RNG with independent named streams.
+- Logistic skill checks, Poisson hazards, Bayesian beliefs, correlated uncertainty, and heavy-tailed consequences.
+- Gravity, symplectic orbital stepping, sound, light, Doppler, reverberation, and multiscale physics helpers.
+- Iterated Prisoner's Dilemma and evolutionary memory-one strategy experiments.
+- Persistent hash-chained JSON memory.
+- Atomic save replacement.
+- Idempotent agent turn execution.
+- Observer-limited scene packets.
+- Provider-neutral image jobs.
+- Declarative JSON mods.
 
-~~~bash
-python -m phenomenal_engine validate mods
-python -m phenomenal_engine tournament --rounds 100 --error-rate 0.02
-python -m phenomenal_engine evolve --generations 30
-python -m phenomenal_engine planck-budget
-python -m phenomenal_engine step mods/great_labyrinth_of_egypt.json "I listen at the sealed door." --skill 1.2 --difficulty 0.8
-~~~
-
-Create an initial save:
-
-~~~bash
-python -m phenomenal_engine new-save mods/concord_tournament.json runtime/concord-save.json --seed "my-campaign"
-~~~
-
-Current v0.1.0 provides engine primitives, an initial-save command, and a one-turn `step` command. A host integration is responsible for loading and persisting a continuous campaign across turns. Do not assume that invoking `step` repeatedly reloads a prior save.
-
-## Included engine systems
-
-- Stable seeded `PCG32` RNG with independent named streams.
-- Logistic skill checks, hazards, Bayesian beliefs, correlated uncertainty, and heavy-tailed consequences.
-- Physical helpers for gravity, symplectic orbital stepping, sound, electromagnetic light, Doppler shift, reverberation, and Planck-scale budget estimates.
-- Local finite-difference wave-equation example.
-- Iterated Prisoner's Dilemma tournament and evolutionary memory-one strategy experiments.
-- Tamper-evident append-only JSON memory ledger.
-- Provider-neutral image-job queue and scene prompts.
-- Standard JSON mod and memory schemas.
-
-## Simulation philosophy
-
-Do **not** simulate an entire universe at Planck resolution. Phenomenal Engine uses adaptive levels of detail:
-
-1. narrative/event state;
-2. rigid-body and orbital mechanics where relevant;
-3. wave/ray models when sensory consequences depend on them;
-4. microscopic/statistical models when causally necessary;
-5. Planck scales as conceptual and dimensional boundaries, not a literal universe lattice.
-
-The language model is the dramatist. The simulation is the adjudicator.
-
-## Documentation map
-
-- `START_HERE.md` - first file for players and connected AIs.
-- `AGENT_BOOTLOADER.md` - mandatory Narrative Director behavior.
-- `SECURITY.md` - trust boundaries and security requirements.
-- `SUPPORT.md` - setup diagnostics and troubleshooting.
-- `docs/chatbot_quickstart.md` - fork/connect/play walkthrough.
-- `docs/integration_contract.md` - contract for a write-capable Phenomenal Engine app.
-- `docs/codespaces_and_saves.md` - optional Codespaces and private-save architecture.
-- `docs/memory_protocol.md` - campaign memory and event ledger.
-- `docs/modding_guide.md` - authoring adventures.
-- `docs/image_pipeline.md` - provider-neutral scene image jobs.
-- `docs/roadmap.md` - future engine development.
-
-## Design status
-
-Phenomenal Engine v0.1.0 is a **reference engine**, not yet a hosted turnkey game service. The repository defines the onboarding and security contract required for a future "fork -> connect -> play" product without pretending that a read-only repository connector can execute Python or persist saves.
+The language model is the dramatist. **The simulation is the adjudicator.**

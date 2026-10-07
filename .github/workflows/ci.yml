@@ -1,0 +1,72 @@
+name: Phenomenal Engine CI
+
+on:
+  push:
+    branches:
+      - main
+      - write-capable-play
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Python version
+        run: python --version
+
+      - name: Validate bundled mods
+        run: python -m phenomenal_engine validate mods
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Smoke-test persistent campaign
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          python -m phenomenal_engine play mods/concord_tournament.json "$tmp/concord.json" "Begin." --seed ci --idempotency-key ci-1
+          python -m phenomenal_engine play mods/concord_tournament.json "$tmp/concord.json" "Inspect the ledger." --idempotency-key ci-2
+          python -m phenomenal_engine status "$tmp/concord.json"
+
+      - name: Verify canonical manifest
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          root = Path(".")
+          manifest = json.loads((root / "MANIFEST.json").read_text(encoding="utf-8"))
+          expected_paths = {entry["path"] for entry in manifest}
+          actual_paths = {
+              str(p.relative_to(root)).replace("\\", "/")
+              for p in root.rglob("*")
+              if p.is_file()
+              and ".git" not in p.parts
+              and "__pycache__" not in p.parts
+              and not p.name.endswith((".pyc", ".pyo"))
+              and str(p.relative_to(root)).replace("\\", "/") != "MANIFEST.json"
+          }
+          if expected_paths != actual_paths:
+              missing = sorted(actual_paths - expected_paths)
+              stale = sorted(expected_paths - actual_paths)
+              raise SystemExit(f"manifest path mismatch; missing={missing}, stale={stale}")
+
+          for entry in manifest:
+              p = root / entry["path"]
+              data = p.read_bytes()
+              if len(data) != entry["bytes"]:
+                  raise SystemExit(f"byte count mismatch: {entry['path']}")
+              digest = hashlib.sha256(data).hexdigest()
+              if digest != entry["sha256"]:
+                  raise SystemExit(f"sha256 mismatch: {entry['path']}")
+          print(f"Verified {len(manifest)} manifest entries.")
+          PY

@@ -1,129 +1,71 @@
-# Codespaces and Private Saves
+# Codespaces and Saves
 
-GitHub Codespaces can be useful for Phenomenal Engine, but it should be treated as an **optional user-owned execution environment**, not as the canonical database for campaign history.
+Phenomenal Engine includes a ready-to-use GitHub Codespaces configuration at `.devcontainer/devcontainer.json`.
 
-## Recommended architecture
+Codespaces is a convenient **user-controlled Python execution surface**. It is not, by itself, the long-term private save database.
 
-~~~text
-public Phenomenal Engine fork
-          |
-          | code + declarative mods
-          v
-trusted runtime or user Codespace
-          |
-          | validated campaign operations
-          v
-private save store
-~~~
+## Start a Codespace
 
-The engine fork and campaign history have different privacy needs.
+From your fork, choose **Code -> Codespaces -> Create codespace**.
 
-## Why saves should be separate
-
-A typical public fork is appropriate for:
-
-- source code;
-- schemas;
-- documentation;
-- shareable mods.
-
-A campaign save may contain:
-
-- choices;
-- relationships;
-- quest history;
-- beliefs and discoveries;
-- chronicle text;
-- image references;
-- long-term state.
-
-Treat that as private user data unless the player deliberately publishes it.
-
-The repository `.gitignore` blocks common runtime save artifacts from accidental commits, but a private save store remains the stronger design.
-
-## Using a Codespace manually
-
-From the user's fork, create a GitHub Codespace through GitHub's UI.
-
-Then:
+The container uses Python 3.12 and automatically runs:
 
 ~~~bash
-python --version
 python -m phenomenal_engine validate mods
-python -m unittest discover -s tests
+python -m unittest discover -s tests -v
 ~~~
 
-Optional editable install:
+No ports are forwarded by default.
+
+## Start a persistent campaign
 
 ~~~bash
-python -m pip install -e .
-phenomenal-engine validate mods
+python -m phenomenal_engine play \
+  mods/concord_tournament.json \
+  runtime/concord.json \
+  "Begin the Concord Tournament." \
+  --seed "my-campaign" \
+  --idempotency-key opening-1
 ~~~
 
-Create an initial save:
+Continue:
 
 ~~~bash
-python -m phenomenal_engine new-save \
-  mods/great_labyrinth_of_egypt.json \
-  runtime/labyrinth-save.json \
-  --seed "my-campaign"
+python -m phenomenal_engine play \
+  mods/concord_tournament.json \
+  runtime/concord.json \
+  "I inspect the treaty audit." \
+  --idempotency-key turn-2
 ~~~
 
-Current v0.1.0 note: `new-save` creates an initial state and `step` performs a one-turn simulation, but the CLI does not yet provide a complete persistent `play/continue` command that reloads a prior save every turn. A host integration must manage that lifecycle correctly.
+Inspect:
 
-## Codespaces security rules
+~~~bash
+python -m phenomenal_engine status runtime/concord.json
+~~~
 
-GitHub Codespaces are isolated environments, but repository code still executes with the permissions available to that Codespace.
+## Persistence warning
 
-Safe defaults:
+`runtime/` is ignored by Git to prevent accidental publication. The file survives ordinary Codespace stops, but deleting the Codespace can remove uncommitted local state.
 
-- open only repositories you trust;
-- do not put application/service credentials in the fork;
-- use Codespaces secrets when a development secret is actually necessary;
-- do not expose ports publicly for ordinary gameplay;
-- do not automatically run unreviewed fork code with privileged credentials;
-- keep Player Mode and Developer Mode separate.
+For durable campaign persistence, copy/synchronize saves to a designated private repository or private save service.
 
-GitHub states that forwarded ports are private by default; public ports can be reached without authentication. Leave game-development ports private unless you have a deliberate reason to change them.
+## Write-capable chatbot + Codespace
 
-Security reference:
+A write-capable GitHub connection and a Codespace solve different problems:
+
+- GitHub write access: authorized repository mutations/persistence;
+- Codespace: Python execution.
+
+A production integration can combine them, but should expose narrow game operations rather than a generic credentialed shell.
+
+## Security
+
+- Keep forwarded ports private.
+- Do not put PATs or production service secrets in the fork.
+- Use Codespaces secrets only when genuinely needed for development.
+- Do not execute unreviewed user-modified engine code with privileged service credentials.
+- Do not auto-create billable Codespaces merely because a repo was connected.
+
+GitHub security guidance:
 https://docs.github.com/en/codespaces/reference/security-in-github-codespaces
-
-## Codespaces and secrets
-
-Do not solve chatbot-to-Codespace communication by pasting tokens into chat.
-
-If a future integration needs Codespaces access, use narrowly scoped GitHub App authorization and server-side token handling. Never commit generated tokens.
-
-GitHub documents Codespaces secrets here:
-https://docs.github.com/en/code-security/reference/secret-security/secret-types
-
-## First-run product flow
-
-A future full integration may use Codespaces like this:
-
-1. user says **Play Phenomenal Engine**;
-2. integration detects no campaign;
-3. user chooses an adventure;
-4. integration asks for explicit approval before creating a Codespace if one is actually needed;
-5. Codespace starts from a trusted engine configuration;
-6. initial campaign state is generated;
-7. save is persisted to the designated private store;
-8. Codespace may stop when no longer needed.
-
-Do not create a Codespace merely because a repository was connected. Compute creation may have cost and security implications.
-
-## Preferred future direction
-
-For ordinary players, a small trusted Phenomenal Engine service or typed chatbot tool is cleaner than booting a Codespace every turn.
-
-Codespaces are best suited to:
-
-- mod development;
-- engine development;
-- debugging;
-- large simulations;
-- migrations;
-- user-controlled experimentation.
-
-The ordinary play loop should be able to use narrow `campaign.run_turn`-style operations without exposing a shell.

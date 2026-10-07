@@ -1,138 +1,91 @@
 # Chatbot Quickstart
 
-This guide is for players who want to fork Phenomenal Engine, connect it to an AI assistant, and start with the phrase **Play Phenomenal Engine**.
+Phenomenal Engine v0.2.0 is designed for the flow:
 
-## Before you begin
+> **Fork -> connect a write-capable AI -> say “Play Phenomenal Engine.”**
 
-You need:
+## 1. Fork
 
-- a GitHub account;
-- a fork of this repository;
-- a chatbot/agent that can read the fork;
-- for authoritative simulation, access to either a trusted Phenomenal Engine integration or a Python execution environment.
+Fork the public Phenomenal Engine repository into your GitHub account.
 
-A repository connection alone does not necessarily provide code execution or save writes.
+## 2. Connect
 
-## Step 1 - Fork Phenomenal Engine
+Authorize your AI integration to the selected fork.
 
-On the upstream GitHub repository, choose **Fork** and create the fork under your account.
+For the intended experience, repository writes require **Contents: Read & write** on the selected repository. Prefer **Only select repositories** during GitHub App installation.
 
-The engine fork is expected to be shareable source code. Do not deliberately add private campaign saves or secrets to it.
+See `docs/write_access_setup.md`.
 
-## Step 2 - Connect your AI
+If you want durable private campaign saves in Git, also authorize a designated **private** save repository with Contents read/write.
 
-Authorize your chatbot or GitHub App to access only the repository/repositories it needs.
+## 3. Ensure there is an execution surface
 
-Preferred minimum access:
+GitHub read/write access does not itself run Python.
 
-| Resource | Normal player access |
-| --- | --- |
-| Phenomenal Engine fork | Read |
-| Private save repository | Read/write only when persistent saves are supported |
-| Other repositories | None |
-| Repository administration | None |
+Use one of:
 
-GitHub Apps allow installers to choose specific repositories. Prefer **Only select repositories** rather than granting broad account-wide access.
+- the Phenomenal Engine runtime integration;
+- a write-capable agent/work environment that can execute the repository;
+- the included GitHub Codespace.
 
-## Step 3 - Say the activation phrase
+## 4. Start
 
-Tell your AI:
+Say:
 
 > **Play Phenomenal Engine.**
 
-A compatible AI should read:
+The AI should read `START_HERE.md` and `AGENT_BOOTLOADER.md`.
 
-1. `START_HERE.md`
-2. `AGENT_BOOTLOADER.md`
-3. the selected mod
-4. the campaign memory, when available
+If there is no campaign, it should offer:
 
-It should then tell you which operating mode it has if that affects mechanics or saves.
+1. Eidolon Shard: The Great Labyrinth of Egypt
+2. The Orbital Swarm Trail
+3. The Concord Tournament: Children of the Long Game
 
-## Expected first-run experience
+## What should happen mechanically?
 
-With a full Phenomenal Engine integration, the AI should:
+A full integration should call the equivalent of:
 
-1. discover that no campaign exists;
-2. offer the installed adventures;
-3. create a private campaign save after you choose;
-4. generate a campaign ID and deterministic seed;
-5. initialize the event ledger;
-6. run the opening simulation;
-7. narrate the opening scene;
-8. persist the resulting state.
+~~~bash
+python -m phenomenal_engine play MOD SAVE "PLAYER ACTION" \
+  --idempotency-key UNIQUE_TURN_ID
+~~~
 
-With read-only repository access, it must **not** claim those persistence steps occurred.
+The engine creates the save on the first turn and reloads it on later turns.
 
-## Included adventures
+The AI should narrate only after the command/tool returns a successful `scene_packet` and confirms persistence.
 
-### Eidolon Shard: The Great Labyrinth of Egypt
+## Resume later
 
-Archaeological mystery, symbolic architecture, acoustics, light, memory, and an Egyptian/Jungian underworld structure.
+Say:
 
-File: `mods/great_labyrinth_of_egypt.json`
+> **Resume my Phenomenal Engine campaign.**
 
-### The Orbital Swarm Trail
+A compatible integration should locate the authorized campaign, verify its ledger, and continue from the same state.
 
-A nonviolent near-future journey from Yellowstone toward Portland and an orbital communications problem involving autonomous systems and contested governance.
+## Capability check
 
-File: `mods/orbital_swarm_trail.json`
+If unsure, say:
 
-### The Concord Tournament: Children of the Long Game
+> Before we play, verify whether you can read and write my Phenomenal Engine repository and whether you can actually execute Python.
 
-A far-future game-theory story about cooperation, evolutionary strategies, accountability, security dilemmas, and durable institutions.
+The AI should report those as separate capabilities.
 
-File: `mods/concord_tournament.json`
+## Privacy
 
-## ChatGPT-specific note
+Public forks are not private campaign stores. For private play, keep durable save state in a private repository/service.
 
-As of this documentation update, the standard ChatGPT GitHub connector can retrieve authorized repository content but does not push repository changes. Treat it as read-only unless OpenAI's current product documentation says otherwise.
+Local Codespace tests may use `runtime/`; it is ignored by Git.
 
-Official documentation:
-https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt
+## Safety expectations
 
-For continuous authoritative play, pair repository access with a safe execution/persistence integration or use a trusted user-controlled runtime.
+Normal play should never require:
 
-## Codespaces option
+- a PAT pasted into chat;
+- repository Administration permission;
+- access to unrelated repositories;
+- public Codespaces ports;
+- arbitrary scripts requested by a mod;
+- secrets committed to Git.
 
-A GitHub Codespace can provide a user-owned Python environment for development or manual execution.
-
-See `docs/codespaces_and_saves.md`.
-
-## What you should never be asked to do
-
-Normal play should not require you to:
-
-- paste a GitHub personal access token into chat;
-- commit API keys;
-- expose a Codespace port publicly;
-- grant repository administration access;
-- grant access to every repository on your account;
-- run an unexplained script downloaded from a mod;
-- store private saves in a public fork.
-
-If instructions ask for these things, stop and review `SECURITY.md`.
-
-## Useful prompts
-
-Start:
-
-> Play Phenomenal Engine.
-
-Choose a campaign:
-
-> Start The Orbital Swarm Trail with a new seed.
-
-Resume:
-
-> Resume my Phenomenal Engine campaign.
-
-Inspect capability:
-
-> Before we play, tell me whether you can actually run Python and persist my save.
-
-Developer mode:
-
-> Enter Phenomenal Engine Developer Mode for this fork. Do not use any application secrets.
-
-Developer Mode is intentionally separate from normal play.
+See `SECURITY.md`.

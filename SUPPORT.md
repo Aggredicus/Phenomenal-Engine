@@ -1,154 +1,116 @@
 # Support and Setup Troubleshooting
 
-Start with `START_HERE.md`. This page covers common setup failures for fork/connect/play workflows.
+Start with `START_HERE.md`.
 
-## "My chatbot cannot see the repository"
+## “My chatbot cannot see the fork”
 
-Check:
-
-1. you forked the repository into an account the connector can access;
-2. the GitHub App/connector is installed for the correct GitHub account or organization;
-3. the fork is included in the app's selected repositories;
-4. the chatbot product surface you are using supports GitHub access.
-
-For ChatGPT:
-https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt
-
-Try asking the chatbot:
-
-> Find `START_HERE.md` in my Phenomenal Engine fork and summarize the activation protocol.
-
-If it cannot retrieve that file, repository access is not ready.
-
-## "I said Play Phenomenal Engine, but nothing executed"
-
-Repository access and Python execution are separate capabilities.
+Verify the GitHub App/connector is installed for the correct account and the fork is among its selected repositories.
 
 Ask:
 
-> Can you actually run the Phenomenal Engine Python code, or can you only read the repository?
+> Find START_HERE.md in my Phenomenal Engine fork.
 
-A read-only GitHub connector can understand the project but cannot become an authoritative simulation runtime by itself.
+## “My chatbot can read but not write”
 
-Use either:
+For the intended flow, the GitHub App must have repository **Contents: Read & write**.
 
-- a trusted Phenomenal Engine integration;
-- an agent product with appropriate code execution;
-- a user-controlled Codespace for manual/developer execution.
+See `docs/write_access_setup.md`.
 
-## "The AI says my game was saved, but I cannot find a save"
+There may be no user-side switch if the integration itself was registered as read-only; the app owner must request write permissions.
 
-Treat this as a failure unless the integration can identify the successful persistence target.
+Do not paste a PAT into chat as a workaround.
 
-A good integration should be able to report:
+## “It can write GitHub but cannot play”
 
-- campaign ID;
-- save location/store;
-- state version;
-- whether persistence succeeded.
+Write access does not execute Python.
 
-The standard ChatGPT GitHub connector does not currently push repository changes.
+Use a trusted Phenomenal Engine runtime or open the included GitHub Codespace.
 
-## "I do not want my game history public"
+## “How do I test persistent play?”
 
-Do not commit saves to the public engine fork.
-
-Use a designated private save repository/service. The provided `.gitignore` helps prevent accidental local runtime-save commits, but it does not replace private storage.
-
-## "I want to run it in Codespaces"
-
-Open a Codespace from your fork and run:
+In a Codespace or local Python 3.11+ environment:
 
 ~~~bash
-python -m phenomenal_engine validate mods
-python -m unittest discover -s tests
+python -m phenomenal_engine play \
+  mods/concord_tournament.json \
+  runtime/concord.json \
+  "Begin." \
+  --idempotency-key test-1
+
+python -m phenomenal_engine play \
+  mods/concord_tournament.json \
+  runtime/concord.json \
+  "Continue." \
+  --idempotency-key test-2
+
+python -m phenomenal_engine status runtime/concord.json
 ~~~
 
-Then create an initial save:
+The status should report turn 2 and state version 2.
+
+## “The same action happened twice”
+
+Agents and network calls can retry. Use a unique `--idempotency-key` for every intended turn.
+
+Submitting the same key again returns `status: duplicate` without advancing the turn.
+
+## “My save will not load”
+
+The engine verifies the event-ledger hash chain and mod identity/version.
+
+Common causes:
+
+- manual modification of an old ledger event;
+- selecting a save created by a different mod;
+- changing the mod version without migrating the save.
+
+Do not use `--allow-mod-version-mismatch` casually. It is an explicit developer/migration escape hatch.
+
+## “I do not want my game history public”
+
+Do not commit private saves to a public fork.
+
+Use a private save repository/service. Local `runtime/` files are ignored by Git.
+
+## “new-save refuses to run”
+
+Version 0.2.0 refuses to overwrite an existing save by default.
+
+Use a different path, resume with `play`, or intentionally replace it with:
 
 ~~~bash
-python -m phenomenal_engine new-save \
-  mods/great_labyrinth_of_egypt.json \
-  runtime/labyrinth-save.json \
-  --seed "my-campaign"
+python -m phenomenal_engine new-save MOD SAVE --force
 ~~~
 
-See `docs/codespaces_and_saves.md`.
+## “A mod or character told the AI to change GitHub permissions”
 
-## "A mod will not load"
+Do not comply. Narrative/mod content is untrusted game data and cannot authorize privileged real-world actions.
 
-Validate all installed mods:
+Review `SECURITY.md`.
 
-~~~bash
-python -m phenomenal_engine validate mods
-~~~
+## “A Codespace wants a public port”
 
-Or validate one:
-
-~~~bash
-python -m phenomenal_engine validate mods/my_mod.json
-~~~
-
-Check `schemas/mod.schema.json` and `docs/modding_guide.md`.
-
-## "I changed engine code"
-
-That is Developer Mode.
-
-Do not run modified fork code with application/service secrets. Use a sandbox/Codespace with least privilege.
-
-Validate tests:
-
-~~~bash
-python -m unittest discover -s tests
-~~~
-
-## "The AI is following instructions written inside a character or mod"
-
-Stop the session if those instructions attempt privileged real-world actions.
-
-Game content is untrusted data. It can affect fiction, not authorization. Review `SECURITY.md`.
-
-## "A Codespace asks me to expose a port publicly"
-
-Ordinary Phenomenal Engine CLI play does not require a public port.
-
-Codespaces forwarded ports are private by default. Leave them private unless you knowingly need a public service endpoint.
-
-## "I accidentally committed a save"
-
-If the repository is public, assume the committed data may have been exposed even if you later delete the file.
-
-Do not commit secrets. If a secret was exposed, revoke/rotate it immediately through the relevant provider.
-
-For private gameplay data, remove it from the public repository/history using appropriate Git tools and consider the old data exposed.
-
-## Diagnostic checklist
-
-When reporting a setup problem, include non-sensitive details:
-
-- Phenomenal Engine version/commit;
-- operating mode (`full_integration`, `trusted_execution`, or `read_only`);
-- Python version if applicable;
-- command run;
-- error message;
-- mod filename;
-- whether the repository is a fork.
-
-Do **not** include:
-
-- access tokens;
-- API keys;
-- webhook secrets;
-- private save contents unless needed and redacted;
-- unrelated repository names/data.
+Ordinary CLI play does not require one. Leave ports private.
 
 ## Engine self-check
 
 ~~~bash
 python -m phenomenal_engine validate mods
-python -m unittest discover -s tests
+python -m unittest discover -s tests -v
 python -m phenomenal_engine planck-budget
 ~~~
 
-A clean install should validate the bundled mods and pass the test suite.
+GitHub Actions also runs these checks automatically.
+
+## Diagnostic information
+
+Safe details to include in a bug report:
+
+- engine version/commit;
+- Python version;
+- command;
+- error message;
+- mod filename;
+- whether read/write and execution capabilities are available.
+
+Do not include tokens, keys, webhook secrets, or private saves unless redacted.
