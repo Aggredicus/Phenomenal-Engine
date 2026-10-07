@@ -3,8 +3,7 @@ name: Phenomenal Engine CI
 on:
   push:
     branches:
-      - main
-      - write-capable-play
+      - "**"
   pull_request:
   workflow_dispatch:
 
