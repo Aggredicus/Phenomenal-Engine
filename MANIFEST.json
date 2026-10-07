@@ -21,8 +21,8 @@
   },
   {
     "path": "CHANGELOG.md",
-    "bytes": 2709,
-    "sha256": "d581b50ad78647d04f9211ad7fc88318a4cb6491ad35619a8f249065dedca5ab"
+    "bytes": 3172,
+    "sha256": "3f2ca1501179c0bf653970b5a99bf7b341477706e734e9b583cceef1526d44c5"
   },
   {
     "path": "LICENSE",
@@ -31,13 +31,13 @@
   },
   {
     "path": "MOD_AUTHOR_PROMPT.md",
-    "bytes": 2606,
-    "sha256": "cbadd2a1e0926c52436ffa906c09be11542e5ae115204855a78cc4783087f99b"
+    "bytes": 2730,
+    "sha256": "e31b9196e5a0943756e7ed3e38e8d643fbebf0c5e2144ed4a767dbce2e211634"
   },
   {
     "path": "README.md",
-    "bytes": 10042,
-    "sha256": "80fa8f96c561ab4d9d03b12e4655fb1453eef4b998b250987d00f211903d958d"
+    "bytes": 10281,
+    "sha256": "009c6106b5da12945ebe4bef89b0895a6d818934e4fcbe936f111d98ec0c37cc"
   },
   {
     "path": "SECURITY.md",
@@ -121,8 +121,8 @@
   },
   {
     "path": "docs/travel_graph.md",
-    "bytes": 4761,
-    "sha256": "3c5a1f11bbfe371180081f75ddcd8c2f944404b81d0ccca525e3ef5f08bd1f61"
+    "bytes": 6886,
+    "sha256": "bd7a8964ba8561b28fb11c81089eed6d2f1df83a5cedd8fd93e27c9f95aa2fd4"
   },
   {
     "path": "docs/write_access_setup.md",
@@ -141,8 +141,8 @@
   },
   {
     "path": "mods/concord_tournament.json",
-    "bytes": 47061,
-    "sha256": "2ec2ab3099fd6557aaa787e98f6e4450016cff28d1d550da3e36fe8cda34ed13"
+    "bytes": 47683,
+    "sha256": "eb56b6adb0d762e70a6a0d892d96e56d24b18885e6de11141fa64ac5a0148cc8"
   },
   {
     "path": "mods/great_labyrinth_of_egypt.json",
@@ -166,8 +166,8 @@
   },
   {
     "path": "phenomenal_engine/cli.py",
-    "bytes": 12049,
-    "sha256": "2232533fa2bc251f36ac721de31d66148c13689f86cf86d75a7c427d49c54f51"
+    "bytes": 12535,
+    "sha256": "dcd7266a270b5bcef3d1b7e30d6ecb7746094fe93d90592ea0af64cfdc241286"
   },
   {
     "path": "phenomenal_engine/engine.py",
@@ -183,6 +183,11 @@
     "path": "phenomenal_engine/image_jobs.py",
     "bytes": 2055,
     "sha256": "261d79147db756ee99cc6cc385089acd619a0011b53596897873a2ea98bc19b5"
+  },
+  {
+    "path": "phenomenal_engine/map_ui.py",
+    "bytes": 25919,
+    "sha256": "2b382a4fdb5ca3f63ff56214e720a156ec90ce2d4fb932ca0ca1789909973d77"
   },
   {
     "path": "phenomenal_engine/memory.py",
@@ -221,13 +226,13 @@
   },
   {
     "path": "phenomenal_engine/story.py",
-    "bytes": 14922,
-    "sha256": "03e8fb7dd72d4c9dbd3a35810aac8709e1e6c87d4e36173d53488dd65860dcfe"
+    "bytes": 17265,
+    "sha256": "6f8eced92776dedd62c6f92a076eb55ef4d58a212745a6b745b125301395ce78"
   },
   {
     "path": "phenomenal_engine/travel.py",
-    "bytes": 14256,
-    "sha256": "98756dbbce8fec9739c42c27c4e82f9927d9bef13218f6d1d2254a415c327100"
+    "bytes": 26491,
+    "sha256": "d5bc45177d1b210da7ff8357b98bfcc004a39d0651359530c8a9d52eed2ddeac"
   },
   {
     "path": "phenomenal_engine/waves.py",
@@ -306,7 +311,7 @@
   },
   {
     "path": "tests/test_travel.py",
-    "bytes": 4877,
-    "sha256": "2cd6eb9b86fd5eb4043c4498bd03bf1f0c1df859d60d711c5f6f13c7b6304351"
+    "bytes": 8385,
+    "sha256": "43312ad7f906e12f194064ed1c0bef56e019d5b9eee0123e0100f31c80814c7e"
   }
 ]
