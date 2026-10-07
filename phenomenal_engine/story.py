@@ -254,6 +254,13 @@ def matching_action_rule(mod: dict, memory: dict, action: str) -> dict | None:
             continue
         if not _requirements_match(world_state, rule.get("requires_world", {})):
             continue
+        excluded = [
+            str(item).lower()
+            for item in rule.get("exclude_triggers", [])
+            if str(item).strip()
+        ]
+        if excluded and any(trigger in text for trigger in excluded):
+            continue
         triggers = [str(item).lower() for item in rule.get("triggers", []) if str(item).strip()]
         if triggers and any(trigger in text for trigger in triggers):
             return rule
