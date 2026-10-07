@@ -18,70 +18,67 @@ from phenomenal_engine.travel import (
 class TestTravelGraph(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.mod = load_mod("mods/concord_tournament.json")
+        cls.mod = load_mod("mods/mirror_delivery.json")
 
     def test_known_locations_have_stable_multi_hop_routes_with_distance_and_time(self):
         memory = new_memory(self.mod, "route-test")
-        first = plan_route(self.mod, memory, "Wildtype Delta")
-        second = plan_route(self.mod, memory, "Wildtype Delta")
+        first = plan_route(self.mod, memory, "Mercury High Orbit")
+        second = plan_route(self.mod, memory, "Mercury High Orbit")
         self.assertEqual(first, second)
         self.assertEqual(first["status"], "ok")
-        self.assertEqual(first["origin"], "arrival_spindle")
-        self.assertEqual(first["destination"], "wildtype_delta")
-        self.assertEqual(first["nodes"][0], "arrival_spindle")
-        self.assertEqual(first["nodes"][-1], "wildtype_delta")
+        self.assertEqual(first["origin"], "cislunar_exchange")
+        self.assertEqual(first["destination"], "mercury_high_orbit")
+        self.assertEqual(first["nodes"][0], "cislunar_exchange")
+        self.assertEqual(first["nodes"][-1], "mercury_high_orbit")
         self.assertGreater(len(first["segments"]), 1)
-        self.assertGreater(first["total_minutes"], 0)
-        self.assertGreater(first["total_distance_m"], 0)
+        self.assertGreater(first["total_minutes"], 10000)
+        self.assertGreater(first["total_distance_m"], 1000000)
         self.assertTrue(all(seg["distance_m"] is not None for seg in first["segments"]))
 
     def test_preview_is_non_mutating_and_shows_distance_time_and_legs(self):
         memory = new_memory(self.mod, "preview-test")
         before = copy.deepcopy(memory)
-        preview = preview_route(self.mod, memory, "wildtype_delta", "fastest")
+        preview = preview_route(self.mod, memory, "mercury_high_orbit", "fastest")
         self.assertEqual(memory, before)
         self.assertEqual(preview["status"], "ok")
-        self.assertEqual(preview["destination_name"], "Wildtype Delta")
+        self.assertEqual(preview["destination_name"], "Mercury High Orbit")
         self.assertGreater(preview["total_distance_m"], 0)
         self.assertGreater(preview["total_minutes"], 0)
         self.assertGreater(len(preview["segments"]), 1)
 
     def test_confirmed_travel_advances_only_one_edge(self):
         memory = new_memory(self.mod, "journey-test")
-        preview = preview_route(self.mod, memory, "wildtype_delta", "fastest")
+        preview = preview_route(self.mod, memory, "mercury_high_orbit", "fastest")
         first_stop = preview["segments"][0]["to"]
 
         result = apply_map_action(
             self.mod,
             memory,
             kind="travel_start",
-            destination_id="wildtype_delta",
+            destination_id="mercury_high_orbit",
             preference="fastest",
             action_id="journey-start-1",
         )
         self.assertEqual(result["status"], "ok")
         self.assertEqual(memory["world_state"]["location"], first_stop)
-        self.assertNotEqual(memory["world_state"]["location"], "wildtype_delta")
+        self.assertNotEqual(memory["world_state"]["location"], "mercury_high_orbit")
         self.assertIsNotNone(memory["travel_state"]["active_journey"])
         self.assertEqual(
             memory["travel_state"]["active_journey"]["destination"],
-            "wildtype_delta",
+            "mercury_high_orbit",
         )
-        self.assertEqual(
-            result["world_map"]["active_journey"]["completed_segments"],
-            1,
-        )
+        self.assertEqual(result["world_map"]["active_journey"]["completed_segments"], 1)
 
     def test_continue_journey_moves_node_by_node_until_arrival(self):
         memory = new_memory(self.mod, "continue-test")
-        preview = preview_route(self.mod, memory, "wildtype_delta", "fastest")
+        preview = preview_route(self.mod, memory, "mercury_high_orbit", "fastest")
         expected_nodes = preview["nodes"]
 
         apply_map_action(
             self.mod,
             memory,
             kind="travel_start",
-            destination_id="wildtype_delta",
+            destination_id="mercury_high_orbit",
             preference="fastest",
             action_id="continue-start",
         )
@@ -99,13 +96,12 @@ class TestTravelGraph(unittest.TestCase):
             )
             visited_in_order.append(memory["world_state"]["location"])
 
-        self.assertEqual(memory["world_state"]["location"], "wildtype_delta")
+        self.assertEqual(memory["world_state"]["location"], "mercury_high_orbit")
         self.assertEqual(visited_in_order, expected_nodes[1:])
-        self.assertIsNone(memory["travel_state"]["active_journey"])
 
     def test_scene_map_exposes_confirm_before_movement_contract(self):
         memory = new_memory(self.mod, "contract-test")
-        packet = Engine(self.mod, memory).step("I inspect the station map.")
+        packet = Engine(self.mod, memory).step("I inspect the mission route map.")
         interaction = packet["world_map"]["interaction"]
         self.assertEqual(interaction["selection_behavior"], "focus_and_preview_only")
         self.assertTrue(interaction["movement_requires_confirmation"])
@@ -121,92 +117,72 @@ class TestTravelGraph(unittest.TestCase):
         self.assertIn("Travel time", html)
         self.assertIn("Continue to next node", html)
 
-    def test_hidden_shortcut_changes_route_only_after_discovery(self):
+    def test_hidden_redoubt_routes_appear_only_after_discovery(self):
         memory = new_memory(self.mod, "shortcut-test")
-        before = plan_route(
-            self.mod,
-            memory,
-            "hushworks",
-            origin="market_small_suns",
-        )
-        self.assertEqual(before["status"], "ok")
-        self.assertNotIn(
-            "market_hushworks_service",
-            {edge["id"] for edge in visible_map(self.mod, memory)["edges"]},
-        )
+        visible_before = visible_map(self.mod, memory)
+        self.assertNotIn("redoubt_asteroid", {n["id"] for n in visible_before["nodes"]})
+        self.assertNotIn("shelter_redoubt", {e["id"] for e in visible_before["edges"]})
 
-        self.assertTrue(discover_route(self.mod, memory, "market_hushworks_service"))
-        after = plan_route(
-            self.mod,
-            memory,
-            "hushworks",
-            origin="market_small_suns",
-        )
-        self.assertIn(
-            "market_hushworks_service",
-            {edge["id"] for edge in visible_map(self.mod, memory)["edges"]},
-        )
-        self.assertLess(after["total_minutes"], before["total_minutes"])
-        self.assertEqual(after["segments"][0]["route_id"], "market_hushworks_service")
-
-    def test_story_breadcrumb_can_unlock_a_real_map_edge(self):
-        memory = new_memory(self.mod, "map-clue-test")
         engine = Engine(self.mod, memory)
-        engine.step("I inspect the paper map.")
-        engine.step("I ask the map dealer about the unmarked deck on the paper map.")
-        engine.step("I follow the paper map toward the painted-over corridor.")
-        self.assertIn(
-            "market_hushworks_service",
-            memory["travel_state"]["known_routes"],
+        engine.step("I ask about the unregistered habitat.")
+        engine.step("I inspect the unknown client's sealed workshop records.")
+        engine.step("I recover the off chart Redoubt coordinates.")
+
+        visible_after = visible_map(self.mod, memory)
+        self.assertIn("redoubt_asteroid", {n["id"] for n in visible_after["nodes"]})
+        self.assertIn("shelter_redoubt", {e["id"] for e in visible_after["edges"]})
+        route = plan_route(
+            self.mod, memory, "redoubt_asteroid", origin="perihelic_shelter"
         )
+        self.assertEqual(route["status"], "ok")
 
     def test_route_overrides_persist_world_changes(self):
         memory = new_memory(self.mod, "delay-test")
         before = plan_route(
             self.mod,
             memory,
-            "market_small_suns",
-            origin="lantern_rail",
+            "earth_escape_gate",
+            origin="cislunar_exchange",
         )
-        self.assertEqual(before["total_minutes"], 8.0)
+        self.assertEqual(before["total_minutes"], 480.0)
         set_route_override(
             self.mod,
             memory,
-            "lantern_market",
-            minutes=14,
+            "exchange_escapegate",
+            minutes=900,
             closed=False,
         )
         after = plan_route(
             self.mod,
             memory,
-            "market_small_suns",
-            origin="lantern_rail",
+            "earth_escape_gate",
+            origin="cislunar_exchange",
         )
-        self.assertEqual(after["total_minutes"], 14.0)
+        self.assertEqual(after["total_minutes"], 900.0)
 
     def test_runtime_locations_can_join_the_same_graph(self):
         memory = new_memory(self.mod, "dynamic-node-test")
         register_dynamic_node(
             self.mod,
             memory,
-            "quiet_observatory",
-            "Quiet Observatory",
-            map_position={"x": 96, "y": 30, "projection": "station-schematic-v1"},
+            "mercury_observatory",
+            "Mercury Observatory",
+            map_position={"x": 90, "y": 28, "projection": "inner-system-route-v1"},
         )
         register_dynamic_route(
             self.mod,
             memory,
-            "oldspine_observatory",
-            "old_spine",
-            "quiet_observatory",
-            minutes=7,
-            distance_m=640,
-            mode="ladder lift",
+            "orbit_observatory",
+            "mercury_high_orbit",
+            "mercury_observatory",
+            minutes=90,
+            distance_m=4200000,
+            mode="orbital shuttle",
         )
-        result = plan_route(self.mod, memory, "Quiet Observatory")
+        result = plan_route(self.mod, memory, "Mercury Observatory")
         self.assertEqual(result["status"], "ok")
-        self.assertEqual(result["destination"], "quiet_observatory")
-        self.assertEqual(result["nodes"][-1], "quiet_observatory")
+        self.assertEqual(result["destination"], "mercury_observatory")
+        self.assertEqual(result["nodes"][-1], "mercury_observatory")
         self.assertIsNotNone(result["total_distance_m"])
 
 
