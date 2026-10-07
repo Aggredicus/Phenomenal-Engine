@@ -1,6 +1,8 @@
+import copy
 import unittest
 
 from phenomenal_engine.engine import Engine
+from phenomenal_engine.map_ui import apply_map_action, preview_route, render_interactive_map_html
 from phenomenal_engine.memory import new_memory
 from phenomenal_engine.mod_loader import load_mod
 from phenomenal_engine.travel import (
@@ -18,7 +20,7 @@ class TestTravelGraph(unittest.TestCase):
     def setUpClass(cls):
         cls.mod = load_mod("mods/concord_tournament.json")
 
-    def test_known_locations_have_stable_multi_hop_routes(self):
+    def test_known_locations_have_stable_multi_hop_routes_with_distance_and_time(self):
         memory = new_memory(self.mod, "route-test")
         first = plan_route(self.mod, memory, "Wildtype Delta")
         second = plan_route(self.mod, memory, "Wildtype Delta")
@@ -30,16 +32,94 @@ class TestTravelGraph(unittest.TestCase):
         self.assertEqual(first["nodes"][-1], "wildtype_delta")
         self.assertGreater(len(first["segments"]), 1)
         self.assertGreater(first["total_minutes"], 0)
+        self.assertGreater(first["total_distance_m"], 0)
+        self.assertTrue(all(seg["distance_m"] is not None for seg in first["segments"]))
 
-    def test_travel_action_updates_location_clock_and_scene_map(self):
+    def test_preview_is_non_mutating_and_shows_distance_time_and_legs(self):
+        memory = new_memory(self.mod, "preview-test")
+        before = copy.deepcopy(memory)
+        preview = preview_route(self.mod, memory, "wildtype_delta", "fastest")
+        self.assertEqual(memory, before)
+        self.assertEqual(preview["status"], "ok")
+        self.assertEqual(preview["destination_name"], "Wildtype Delta")
+        self.assertGreater(preview["total_distance_m"], 0)
+        self.assertGreater(preview["total_minutes"], 0)
+        self.assertGreater(len(preview["segments"]), 1)
+
+    def test_confirmed_travel_advances_only_one_edge(self):
         memory = new_memory(self.mod, "journey-test")
-        packet = Engine(self.mod, memory).step("I travel to Wildtype Delta.")
-        travel = packet["story_update"]["travel"]
-        self.assertEqual(travel["status"], "ok")
+        preview = preview_route(self.mod, memory, "wildtype_delta", "fastest")
+        first_stop = preview["segments"][0]["to"]
+
+        result = apply_map_action(
+            self.mod,
+            memory,
+            kind="travel_start",
+            destination_id="wildtype_delta",
+            preference="fastest",
+            action_id="journey-start-1",
+        )
+        self.assertEqual(result["status"], "ok")
+        self.assertEqual(memory["world_state"]["location"], first_stop)
+        self.assertNotEqual(memory["world_state"]["location"], "wildtype_delta")
+        self.assertIsNotNone(memory["travel_state"]["active_journey"])
+        self.assertEqual(
+            memory["travel_state"]["active_journey"]["destination"],
+            "wildtype_delta",
+        )
+        self.assertEqual(
+            result["world_map"]["active_journey"]["completed_segments"],
+            1,
+        )
+
+    def test_continue_journey_moves_node_by_node_until_arrival(self):
+        memory = new_memory(self.mod, "continue-test")
+        preview = preview_route(self.mod, memory, "wildtype_delta", "fastest")
+        expected_nodes = preview["nodes"]
+
+        apply_map_action(
+            self.mod,
+            memory,
+            kind="travel_start",
+            destination_id="wildtype_delta",
+            preference="fastest",
+            action_id="continue-start",
+        )
+        visited_in_order = [memory["world_state"]["location"]]
+
+        i = 0
+        while memory["travel_state"]["active_journey"] is not None:
+            i += 1
+            self.assertLess(i, 20)
+            apply_map_action(
+                self.mod,
+                memory,
+                kind="travel_continue",
+                action_id=f"continue-{i}",
+            )
+            visited_in_order.append(memory["world_state"]["location"])
+
         self.assertEqual(memory["world_state"]["location"], "wildtype_delta")
-        self.assertEqual(packet["world_map"]["current_location"], "wildtype_delta")
-        self.assertGreater(memory["world_state"]["world_time_minutes"], 0)
-        self.assertGreaterEqual(packet["story_update"]["elapsed_world_pulses"], 2)
+        self.assertEqual(visited_in_order, expected_nodes[1:])
+        self.assertIsNone(memory["travel_state"]["active_journey"])
+
+    def test_scene_map_exposes_confirm_before_movement_contract(self):
+        memory = new_memory(self.mod, "contract-test")
+        packet = Engine(self.mod, memory).step("I inspect the station map.")
+        interaction = packet["world_map"]["interaction"]
+        self.assertEqual(interaction["selection_behavior"], "focus_and_preview_only")
+        self.assertTrue(interaction["movement_requires_confirmation"])
+        self.assertEqual(interaction["start"]["label"], "Confirm Travel")
+        self.assertEqual(interaction["default_advance"], "one_edge_per_authoritative_turn")
+
+    def test_reference_ui_contains_focus_preview_and_confirm_controls(self):
+        memory = new_memory(self.mod, "ui-test")
+        html = render_interactive_map_html(visible_map(self.mod, memory))
+        self.assertIn("Tap a node to focus and preview", html)
+        self.assertIn("Confirm Travel", html)
+        self.assertIn("Distance", html)
+        self.assertIn("Travel time", html)
+        self.assertIn("Continue to next node", html)
 
     def test_hidden_shortcut_changes_route_only_after_discovery(self):
         memory = new_memory(self.mod, "shortcut-test")
@@ -120,12 +200,14 @@ class TestTravelGraph(unittest.TestCase):
             "old_spine",
             "quiet_observatory",
             minutes=7,
+            distance_m=640,
             mode="ladder lift",
         )
         result = plan_route(self.mod, memory, "Quiet Observatory")
         self.assertEqual(result["status"], "ok")
         self.assertEqual(result["destination"], "quiet_observatory")
         self.assertEqual(result["nodes"][-1], "quiet_observatory")
+        self.assertIsNotNone(result["total_distance_m"])
 
 
 if __name__ == "__main__":
