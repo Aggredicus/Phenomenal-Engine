@@ -16,6 +16,7 @@ from .game_theory import (
     WinStayLoseShift, GrimTrigger, RandomStrategy, round_robin, evolve_memory_one
 )
 from .physics import planck_budget
+from .travel import plan_route, visible_map
 
 def cmd_validate(args):
     p = Path(args.path)
@@ -194,6 +195,31 @@ def cmd_start(args):
     }, indent=2, ensure_ascii=False))
 
 
+
+def _load_map_memory(mod: dict, save: str | None, seed: str):
+    if save:
+        memory = load_memory(save)
+        validate_memory_for_mod(memory, mod)
+        return memory
+    return new_memory(mod, seed)
+
+def cmd_map(args):
+    mod = load_mod(args.mod)
+    memory = _load_map_memory(mod, args.save, args.seed)
+    print(json.dumps(visible_map(mod, memory), indent=2, ensure_ascii=False))
+
+def cmd_route(args):
+    mod = load_mod(args.mod)
+    memory = _load_map_memory(mod, args.save, args.seed)
+    result = plan_route(
+        mod,
+        memory,
+        args.destination,
+        origin=args.origin,
+        preference=args.preference,
+    )
+    print(json.dumps(result, indent=2, ensure_ascii=False))
+
 def add_resolution_args(p):
     p.add_argument("--skill", type=float, default=0.0)
     p.add_argument("--difficulty", type=float, default=0.0)
@@ -269,6 +295,21 @@ def main(argv=None):
         help="skip the Codespaces offer for this startup",
     )
     p.set_defaults(func=cmd_start)
+
+    p = sub.add_parser("map", help="show the persistent known-location node map")
+    p.add_argument("mod")
+    p.add_argument("--save", default=None, help="optional campaign save; otherwise uses fresh map state")
+    p.add_argument("--seed", default="map-preview")
+    p.set_defaults(func=cmd_map)
+
+    p = sub.add_parser("route", help="plan a consistent graph route between known locations")
+    p.add_argument("mod")
+    p.add_argument("destination")
+    p.add_argument("--save", default=None, help="optional campaign save providing current location and discoveries")
+    p.add_argument("--from", dest="origin", default=None, help="override origin location id")
+    p.add_argument("--preference", choices=["fastest", "safest", "scenic"], default="fastest")
+    p.add_argument("--seed", default="map-preview")
+    p.set_defaults(func=cmd_route)
 
     p = sub.add_parser("status", help="verify and inspect a persistent campaign save")
     p.add_argument("save")
