@@ -971,7 +971,16 @@
       "quest_updates": {
         "main_activation": "open"
       },
-      "public_text": "The challenge token seats with a hard mechanical click. The vault accepts the first authorization, isolates itself from every network aboard Morrowglass, and presents the final physical confirmation. Mir is still sealed and inactive. You may confirm the activation or abort it."
+      "public_text": "The challenge token seats with a hard mechanical click. The vault accepts the first authorization, isolates itself from every network aboard Morrowglass, and presents the final physical confirmation. Mir is still sealed and inactive. You may confirm the activation or abort it.",
+      "exclude_triggers": [
+        "do not activate mir",
+        "don't activate mir",
+        "do not activate mirror",
+        "don't activate mirror",
+        "not activate mir",
+        "abort mir activation",
+        "cancel mir activation"
+      ]
     },
     {
       "id": "abort_mir_activation",
@@ -1175,7 +1184,8 @@
     "The mystery of why four copies exist should unfold through documents, crew choices, courier divergence, and Mercury politics rather than a single exposition dump.",
     "Keep the solar system inhabited and textured: repairs, food, boredom, jokes, labor disputes, station customs, family messages, maintenance, weather, and ordinary commerce should coexist with the mission.",
     "Do not turn the Dyson swarm into abstract techno-utopian exposition. Show why different people and systems want, fear, or contest it.",
-    "End scenes with an actionable situation, discovery, relationship beat, or open possibility rather than a numbered menu unless the player asks for choices."
+    "End scenes with an actionable situation, discovery, relationship beat, or open possibility rather than a numbered menu unless the player asks for choices.",
+    "Treat hidden_truths as director-only canonical answers. Reveal them gradually through evidence, courier events, Heliograph records, and Mercury procedures; never disclose them simply because the mod contains them."
   ],
   "endings": [
     {
@@ -1235,5 +1245,13 @@
       "title": "Mercury",
       "purpose": "Reach the receiving system at Caloris Terminus and resolve delivery, authority, identity, ownership, and deployment under the consequences produced by the voyage rather than by a predetermined moral ending."
     }
-  ]
+  ],
+  "hidden_truths": {
+    "narrative_access": "Director-only until discovered through authored evidence. Do not reveal these facts merely because they are present in the mod.",
+    "quorum_architecture": "The four vaults contain byte-identical Mir intelligence payloads but each vault also carries a different hardware-root authorization share. Mercury's unrestricted industrial bootstrap requires three of the four shares. A single delivered Mir can be studied and tested, but cannot independently authorize civilization-scale self-replication.",
+    "why_routes_are_isolated": "Heliograph separated routes and crews so one capture, coercion event, software exploit, political authority, or compromised courier could not obtain a bootstrap quorum. The secrecy is defense against correlated failure, not evidence that the intelligence was divided into fragments.",
+    "why_activation_matters": "Activating Mir does not erase its hardware authorization share, but it ends the pristine baseline claim. An activated copy may form commitments, learn secrets, or contest instructions before Mercury asks it to participate in a threshold authorization process.",
+    "heliograph_ethics_problem": "Heliograph deliberately withheld the three-of-four quorum requirement from the courier crews because it believed knowing the other missions were necessary would increase collusion, coercion, rescue pressure, and targeted attacks. That decision may have improved security while violating the crews' ability to give fully informed consent.",
+    "mercury_problem": "The receiving authority expected identical sealed copies. If several arrive activated or divergent, the threshold system can become a constitutional question: are three authorization shares held by three continuations of one intelligence, three distinct participants, property controlled by trustees, or something else?"
+  }
 }
