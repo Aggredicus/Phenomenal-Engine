@@ -15,44 +15,29 @@
     "sha256": "a3d0a41fe7ae1c02d575e98734885423ebaefe187108a74b4ec3729a3a40892f"
   },
   {
+    "path": "adapters/google_sheets/appsscript.json",
+    "bytes": 267,
+    "sha256": "74fd68e670d1bd1c727920740f6783d80f6c2497fd3522877e52a3eb5b6a46cc"
+  },
+  {
+    "path": "adapters/google_sheets/director_bridge.gs",
+    "bytes": 3299,
+    "sha256": "6d3aa50a5a02f0d1627263cb06b26b3021ae2255d993918e264f3d488d169bd1"
+  },
+  {
+    "path": "adapters/google_sheets/README.md",
+    "bytes": 709,
+    "sha256": "5224e44a0cd63ea23b35a1b9a89d707457c19a33c0cdfcb9aaffd0cc3563872a"
+  },
+  {
     "path": "AGENT_BOOTLOADER.md",
-    "bytes": 5770,
-    "sha256": "656e92a7278d66e6ca9229518326697b6061e8b0993493dc5637e689224f41b7"
+    "bytes": 6418,
+    "sha256": "68c73bb3eb6b0a0e4df5a0810d69d5a45142b4a54f8e85db68a11414e8d906d6"
   },
   {
     "path": "CHANGELOG.md",
-    "bytes": 3588,
-    "sha256": "7c3fd98749cd127e022d1b51d1cf60954a8a934524999d8fbd10d358b90ab1cb"
-  },
-  {
-    "path": "LICENSE",
-    "bytes": 1067,
-    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
-  },
-  {
-    "path": "MOD_AUTHOR_PROMPT.md",
-    "bytes": 3009,
-    "sha256": "ca059dd71e886c55f997341db2bae65a56e33e0c5d81ee15084f05f937c111ba"
-  },
-  {
-    "path": "README.md",
-    "bytes": 10267,
-    "sha256": "1c33adbba251d7e337a5938d6a986fdd39691b1f9f853eba49394366b1e1c1ff"
-  },
-  {
-    "path": "SECURITY.md",
-    "bytes": 5495,
-    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
-  },
-  {
-    "path": "START_HERE.md",
-    "bytes": 5410,
-    "sha256": "ba37b8f5afe727b507c4212bc990bb096e3e6a3138a3405202aec78a3219ebb7"
-  },
-  {
-    "path": "SUPPORT.md",
-    "bytes": 3815,
-    "sha256": "d9656e1362405071199acc6199edcc92ada2c37a641fce470916f58725213d9c"
+    "bytes": 4037,
+    "sha256": "667d15a9642de04737332580ed9a80f987f1b65c0e45ae1adca8dbadc095e455"
   },
   {
     "path": "docs/chatbot_quickstart.md",
@@ -63,6 +48,11 @@
     "path": "docs/codespaces_and_saves.md",
     "bytes": 4268,
     "sha256": "3f8fdd755ff44bbc5586c2d6bf7b5454b7f18b5b7db63281d2a4c4e36e5547fd"
+  },
+  {
+    "path": "docs/director_json.md",
+    "bytes": 2445,
+    "sha256": "9b4895870b91a4b7bf8605629040b087c7848d4d41424ecc1c52096a0d4bbc82"
   },
   {
     "path": "docs/game_theory_and_ai_ethics.md",
@@ -140,9 +130,29 @@
     "sha256": "151032a99aaea6d44c96996b13cfef31f1ab365cd7cc896dfaf40f3b60ef8250"
   },
   {
+    "path": "examples/mirror_delivery_activate_command.json",
+    "bytes": 396,
+    "sha256": "80f19a83ac1c102ddd429d733451351c4da192886be91b301af99e0f68822f7e"
+  },
+  {
+    "path": "examples/mirror_delivery_director_state.json",
+    "bytes": 4330,
+    "sha256": "22aa0784ba55332cfed65def212c5204358f2ac3c5f3871b0a98412072fc588d"
+  },
+  {
     "path": "examples/run_demo.py",
     "bytes": 843,
     "sha256": "6023192173b88106338739f61c3f147e270e518f51c1ef49766e7e205a7be9ce"
+  },
+  {
+    "path": "LICENSE",
+    "bytes": 1067,
+    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
+  },
+  {
+    "path": "MOD_AUTHOR_PROMPT.md",
+    "bytes": 3009,
+    "sha256": "ca059dd71e886c55f997341db2bae65a56e33e0c5d81ee15084f05f937c111ba"
   },
   {
     "path": "mods/great_labyrinth_of_egypt.json",
@@ -171,8 +181,13 @@
   },
   {
     "path": "phenomenal_engine/cli.py",
-    "bytes": 12535,
-    "sha256": "dcd7266a270b5bcef3d1b7e30d6ecb7746094fe93d90592ea0af64cfdc241286"
+    "bytes": 13769,
+    "sha256": "1f909b96763cba87e10f9c6d70342007a44477dd30db447257d9f1c94989ba78"
+  },
+  {
+    "path": "phenomenal_engine/director.py",
+    "bytes": 9052,
+    "sha256": "06e458a8a73e6f84b6bd94d59974096310d9ca813c1db7a6800a2a1f2137d1dc"
   },
   {
     "path": "phenomenal_engine/engine.py",
@@ -250,9 +265,24 @@
     "sha256": "f32debe33cb83a05387135a0e75522581723e51cebdf4dd682e410304cabf842"
   },
   {
+    "path": "README.md",
+    "bytes": 10628,
+    "sha256": "15071538389324b60a598a8ff9f4b55dda1c716124b9eda4aacdfe03ba42cba3"
+  },
+  {
     "path": "runtime/.gitkeep",
     "bytes": 0,
     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "schemas/director_command.schema.json",
+    "bytes": 1935,
+    "sha256": "14725d473d92e36549db82bbb058da134fdd0d2cffc12cb367fc63529ceb1723"
+  },
+  {
+    "path": "schemas/director_state.schema.json",
+    "bytes": 2956,
+    "sha256": "1bc4c0d63c4394bb1d177a9a9e3fc31cb8985e0998e933012c105a870664849d"
   },
   {
     "path": "schemas/memory.schema.json",
@@ -273,6 +303,26 @@
     "path": "scripts/manifest.py",
     "bytes": 2346,
     "sha256": "0e622e592ef68c133ef3cfc0dca6216a567440bc2a5ca58ff42895d2c86a2f8d"
+  },
+  {
+    "path": "SECURITY.md",
+    "bytes": 5495,
+    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
+  },
+  {
+    "path": "START_HERE.md",
+    "bytes": 5410,
+    "sha256": "ba37b8f5afe727b507c4212bc990bb096e3e6a3138a3405202aec78a3219ebb7"
+  },
+  {
+    "path": "SUPPORT.md",
+    "bytes": 3815,
+    "sha256": "d9656e1362405071199acc6199edcc92ada2c37a641fce470916f58725213d9c"
+  },
+  {
+    "path": "tests/test_director.py",
+    "bytes": 3181,
+    "sha256": "f1c6f8bea0cc65569b5dbc7f04fba09292a35386f4e0fb5134efaa49ac770c51"
   },
   {
     "path": "tests/test_game_theory.py",
