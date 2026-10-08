@@ -91,6 +91,29 @@
     },
     "travel_state": {
       "type": "object"
+    },
+    "player_identity": {
+      "type": "object",
+      "required": [
+        "name",
+        "alias",
+        "title"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "alias": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
     }
   }
 }
