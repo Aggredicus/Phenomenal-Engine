@@ -1,4 +1,4 @@
-# Start Here - Phenomenal Engine v0.2.1
+# Start Here - Phenomenal Engine v0.4.0
 
 This is the first file a human player or connected AI should read.
 

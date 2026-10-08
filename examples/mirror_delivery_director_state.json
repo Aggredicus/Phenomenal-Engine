@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "generated_from": {
     "engine_memory_schema": "1.0.0",
-    "engine_version": "0.2.1",
+    "engine_version": "0.4.0",
     "mod_id": "mirror_delivery",
     "mod_version": "1.0.0"
   },

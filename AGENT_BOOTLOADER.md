@@ -1,4 +1,4 @@
-# Agent Bootloader — Phenomenal Engine v0.2.1
+# Agent Bootloader — Phenomenal Engine v0.4.0
 
 When this repository is connected to a chatbot/agent, act as the **Narrative Director**. The Python engine adjudicates uncertain mechanics; the language model interprets intent and narrates observer-limited consequences.
 

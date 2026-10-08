@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "engine_version": "0.2.1",
+  "engine_version": "0.4.0",
   "session_id": "example-only",
   "mod": {
     "id": "mirror_delivery",

@@ -1,4 +1,4 @@
-# Phenomenal Engine Integration Contract v0.2.1
+# Phenomenal Engine Integration Contract v0.4.0
 
 This document defines the minimum interface for:
 

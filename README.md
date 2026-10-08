@@ -1,4 +1,4 @@
-# Phenomenal Engine v0.2.1
+# Phenomenal Engine v0.4.0
 
 **Fork it. Connect a write-capable chatbot AI. Say: `Play Phenomenal Engine.`**
 

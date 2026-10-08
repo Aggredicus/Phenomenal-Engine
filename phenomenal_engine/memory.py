@@ -7,7 +7,7 @@ from .story import initial_player_experience, initial_story_state
 from .travel import initial_travel_state
 
 SCHEMA_VERSION = "1.0.0"
-ENGINE_VERSION = "0.2.1"
+ENGINE_VERSION = "0.4.0"
 
 def canonical_json(obj) -> str:
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)

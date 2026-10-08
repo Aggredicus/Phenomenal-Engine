@@ -1,6 +1,6 @@
 # Chatbot Quickstart
 
-Phenomenal Engine v0.2.1 is designed for the flow:
+Phenomenal Engine v0.4.0 is designed for the flow:
 
 > **Fork -> connect a write-capable AI -> say “Play Phenomenal Engine.”**
 

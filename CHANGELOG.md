@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — living-world branch
+## 0.4.0 — 2026-10-07
 - Added a JSON-first director interface: stable director-state projection, command schema, CLI export/validation, and tests for human/AI co-directing.
 - Added a hard director-level approval gate for Mir activation; validation never executes commands and narrative text cannot grant software authority.
 - Demoted Google Sheets from database to optional accessible adapter, with a current-spreadsheet-only Apps Script bridge and no Drive-wide access.
