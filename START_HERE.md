@@ -1,4 +1,4 @@
-# Start Here - Phenomenal Engine v0.2.1
+# Start Here - Phenomenal Engine v0.4.0
 
 This is the first file a human player or connected AI should read.
 
@@ -98,7 +98,7 @@ Bundled mods:
 
 - `mods/great_labyrinth_of_egypt.json`
 - `mods/orbital_swarm_trail.json`
-- `mods/concord_tournament.json`
+- `mods/mirror_delivery.json`
 
 ## 5. Authoritative turn command
 

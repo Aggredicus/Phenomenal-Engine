@@ -64,6 +64,21 @@
     "world_model": {
       "type": "object"
     },
+    "story_design": {
+      "type": "object"
+    },
+    "story_threads": {
+      "type": "array"
+    },
+    "npc_agendas": {
+      "type": "array"
+    },
+    "world_events": {
+      "type": "array"
+    },
+    "conflict_model": {
+      "type": "object"
+    },
     "factions": {
       "type": "array"
     },
@@ -101,6 +116,21 @@
       "type": "array"
     },
     "research_notes": {
+      "type": "array"
+    },
+    "travel_network": {
+      "type": "object"
+    },
+    "action_rules": {
+      "type": "array"
+    },
+    "mission_directive": {
+      "type": "object"
+    },
+    "hidden_truths": {
+      "type": "object"
+    },
+    "main_arc": {
       "type": "array"
     }
   }

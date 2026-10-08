@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.4.0 — 2026-10-07
+- Added a JSON-first director interface: stable director-state projection, command schema, CLI export/validation, and tests for human/AI co-directing.
+- Added a hard director-level approval gate for Mir activation; validation never executes commands and narrative text cannot grant software authority.
+- Demoted Google Sheets from database to optional accessible adapter, with a current-spreadsheet-only Apps Script bridge and no Drive-wide access.
+- Mirror Delivery now treats deliberate activation of Mir as an irreversible declarative choice: pristine status, trust, Mercury acceptance, and later story access change in authoritative state.
+- Long interplanetary legs advance exact travel time but cap background simulation pulses to keep play responsive.
+- Added an interactive loopback map UI: tap/focus previews destination, distance, time, legs, risk, and route modes; explicit Confirm Travel is required before movement.
+- Travel now persists as an edge-by-edge journey so intermediate nodes can host encounters and interruptions; Continue, Reroute, and Cancel operate from the current node.
+- Added authored physical route distances to Mirror Delivery; schematic screen coordinates are never treated as literal orbital distance.
+- CI now runs once per pull request (plus direct `main` pushes), cancels superseded runs, uses a five-minute hard timeout, and keeps the full normal gate because it completes quickly.
+- Codespace creation no longer blocks on the full unit suite; startup runs only lightweight mod validation while full tests remain in CI or explicit developer commands.
+- Added persistent node-map travel with stable locations, route edges, travel time, risk, access metadata, and fastest/safest/scenic multi-hop pathfinding.
+- Added discovered shortcuts, dynamic runtime locations/routes, persistent route overrides, and scene-packet map state.
+- Travel time now advances living-world pulses so NPC agendas and world events can progress during longer journeys.
+- Added `map` and `route` inspection commands plus persistent arbitrary-location travel topology.
+- Added living-world story hierarchy, breadcrumb-to-quest promotion, NPC agendas, and campaign-local ethical player-experience adaptation.
+- Replaced the Concord narrative with Mirror Delivery, a four-courier inner-system expedition built around a sealed high-capability AI payload, living-world choices, and hidden strategic mechanics.
+- Added explicit copyright-safe authorship guidance for original settings, quests, characters, maps, and visual expression.
+
 ## 0.2.1
 - Made GitHub Codespaces opt-in and disabled by default, with a once-per-setup optional suggestion and explicit cost disclosure.
 - Added a non-billable `start` CLI command that lists adventures and returns runtime/Codespaces choices.

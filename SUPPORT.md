@@ -34,18 +34,18 @@ In a Codespace or local Python 3.11+ environment:
 
 ~~~bash
 python -m phenomenal_engine play \
-  mods/concord_tournament.json \
-  runtime/concord.json \
+  mods/mirror_delivery.json \
+  runtime/mirror.json \
   "Begin." \
   --idempotency-key test-1
 
 python -m phenomenal_engine play \
-  mods/concord_tournament.json \
-  runtime/concord.json \
+  mods/mirror_delivery.json \
+  runtime/mirror.json \
   "Continue." \
   --idempotency-key test-2
 
-python -m phenomenal_engine status runtime/concord.json
+python -m phenomenal_engine status runtime/mirror.json
 ~~~
 
 The status should report turn 2 and state version 2.

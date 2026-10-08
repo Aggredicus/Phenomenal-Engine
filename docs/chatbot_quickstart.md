@@ -1,6 +1,6 @@
 # Chatbot Quickstart
 
-Phenomenal Engine v0.2.1 is designed for the flow:
+Phenomenal Engine v0.4.0 is designed for the flow:
 
 > **Fork -> connect a write-capable AI -> say “Play Phenomenal Engine.”**
 
@@ -43,7 +43,7 @@ If there is no campaign, it should offer:
 
 1. Eidolon Shard: The Great Labyrinth of Egypt
 2. The Orbital Swarm Trail
-3. The Concord Tournament: Children of the Long Game
+3. Mirror Delivery
 
 It should also make this single **optional** suggestion during first-run onboarding:
 

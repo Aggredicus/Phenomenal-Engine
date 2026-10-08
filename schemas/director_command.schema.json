@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/phenomenal-engine/director_command.schema.json",
+  "title": "Phenomenal Engine Director Command",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "command_id",
+    "type",
+    "requested_by",
+    "payload",
+    "approval"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "command_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "enum": [
+        "set_destination",
+        "commit_travel",
+        "advance_scene",
+        "advance_clock",
+        "resolve_action",
+        "update_entity",
+        "append_ledger_event",
+        "activate_mir",
+        "seal_mir",
+        "create_encounter",
+        "close_mission",
+        "add_fact"
+      ]
+    },
+    "requested_by": {
+      "enum": [
+        "player",
+        "human_gm",
+        "ai_director",
+        "system"
+      ]
+    },
+    "target_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "approval": {
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "not_required",
+            "pending_human",
+            "approved",
+            "denied"
+          ]
+        },
+        "approved_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approved_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "expected_state_version": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "idempotency_key": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
