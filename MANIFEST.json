@@ -10,6 +10,11 @@
     "sha256": "9111d4c06aa902e4a5b642ab4e48da82bf3793b3d074379a8c2663316f634482"
   },
   {
+    "path": ".github/workflows/publish-v0.4.0.yml",
+    "bytes": 2742,
+    "sha256": "bec2d66ebdd272bef38c10eaa36875a3c04e0e332f916c090d7fee5be4d4e180"
+  },
+  {
     "path": ".gitignore",
     "bytes": 501,
     "sha256": "a3d0a41fe7ae1c02d575e98734885423ebaefe187108a74b4ec3729a3a40892f"
