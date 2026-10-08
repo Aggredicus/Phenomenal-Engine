@@ -17,12 +17,12 @@
   {
     "path": "AGENT_BOOTLOADER.md",
     "bytes": 6418,
-    "sha256": "13ed584fc3b705d314bde6089ea95b247a77b8cca9a078738314303d963266c9"
+    "sha256": "008233c9b18a78aedb9949095b6f7373b17156333bdebc0c7e66369e99e70d85"
   },
   {
     "path": "CHANGELOG.md",
     "bytes": 4023,
-    "sha256": "fae2abe42df6de4c2a4e4e99eb7df656ed92040359740b49eb87943b0ce2331a"
+    "sha256": "3aaf1c6992eaa238d2045d4db863d5346cb8d368cb1ec80ee68291ad58e9145f"
   },
   {
     "path": "LICENSE",
@@ -37,12 +37,12 @@
   {
     "path": "README.md",
     "bytes": 10628,
-    "sha256": "8d3fd91230f1d353ff48de70acc2224f602ab6ecfe75efc0d82fc1d2cdbccee2"
+    "sha256": "8da666a81b182394b0a995298ba09cfc207fe294862858ad0e7df387bef75e2d"
   },
   {
     "path": "RELEASE_NOTES_v0.4.0.md",
     "bytes": 3576,
-    "sha256": "b3efb185ab2bac9ba79ef2bd78357786f4fd2692d522d7ea9f43cc055d775a0b"
+    "sha256": "c68a5c96c69d59add727f6d638845aa27ee7af9a2e68ca3a8adf5e14e2ecb9bc"
   },
   {
     "path": "SECURITY.md",
@@ -52,7 +52,7 @@
   {
     "path": "START_HERE.md",
     "bytes": 5410,
-    "sha256": "0266a0198b6fff6309278e428c7e9ea6bd55a74c757b47c8be35fb1da8a26ff4"
+    "sha256": "1d9ba2314eb2c21a017a3edc828aa2fb33b59155f466e52675ad144f1becbb92"
   },
   {
     "path": "SUPPORT.md",
@@ -77,7 +77,7 @@
   {
     "path": "docs/chatbot_quickstart.md",
     "bytes": 3448,
-    "sha256": "f9eff7ad89e97ff8fef95e9056f1ffd3c8985f3e150368336730afd1684f68f8"
+    "sha256": "2408ee2e036fc9b9b1c70b4263fe82ea9c1965649cfedda2860e080caf94ee09"
   },
   {
     "path": "docs/codespaces_and_saves.md",
@@ -102,7 +102,7 @@
   {
     "path": "docs/integration_contract.md",
     "bytes": 6653,
-    "sha256": "77acbc2cedd67f37defdffe4e569c3b0f220864e193304aa6f3fe3035356055c"
+    "sha256": "4b35bc909595bfd7e4444601d7dc22e50db28576c7a568965b68de8785753aa7"
   },
   {
     "path": "docs/living_world_storytelling.md",
@@ -162,7 +162,7 @@
   {
     "path": "examples/memory.example.json",
     "bytes": 892,
-    "sha256": "3d77b7689145928be480d3673be821f3c5aa32352e5922c7ea031358d59aeba6"
+    "sha256": "9df836fe7ffaf0b6d12f76ac83d0172a1d65f5fc5631db0b2cb5139f09d4b15c"
   },
   {
     "path": "examples/mirror_delivery_activate_command.json",
@@ -172,7 +172,7 @@
   {
     "path": "examples/mirror_delivery_director_state.json",
     "bytes": 4330,
-    "sha256": "d609af5e6eee403e0b9e8c80dd19693c354f6ceb482c9b600251893450e08cdf"
+    "sha256": "a626c83f720422ca0ba9ff743f1ae609f747b4031bf4eae1d4ae65bd93fd041a"
   },
   {
     "path": "examples/run_demo.py",
@@ -197,7 +197,7 @@
   {
     "path": "phenomenal_engine/__init__.py",
     "bytes": 124,
-    "sha256": "3a642970abf9b867d8a93d1eff63e3951772f59b7fd4841d0994eb65ef90a629"
+    "sha256": "f83c0d0bed339236c5a9e17eb0e68d42c1b0dc7bb5c048cdc2871a8cdb1dcd93"
   },
   {
     "path": "phenomenal_engine/__main__.py",
@@ -237,7 +237,7 @@
   {
     "path": "phenomenal_engine/memory.py",
     "bytes": 5460,
-    "sha256": "6e2c6ba0215cd2a2cd8961f1fbb2aee88896dfa9ec8300569e3ec64af65d4ef0"
+    "sha256": "301c0660894fe5616ddfecb65daa83733b3aef34498c30d75616674006d9ecb1"
   },
   {
     "path": "phenomenal_engine/mod_loader.py",
@@ -287,7 +287,7 @@
   {
     "path": "pyproject.toml",
     "bytes": 396,
-    "sha256": "3104d95118995c9e3071fc9608f9e5069ca35237af3c2f86467df0d48fed708c"
+    "sha256": "6bd07f51522aa885b9d2aaab41e18da40c2c6d03aa7cce01da26f1a4566b2fb6"
   },
   {
     "path": "runtime/.gitkeep",
