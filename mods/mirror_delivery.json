@@ -48,7 +48,12 @@
       "crew emergency authority key",
       "one-use physical challenge token for the Mir vault activation interlock"
     ],
-    "starting_condition": "hours from departure at the Cislunar Exchange, with the Mir vault already bolted into Morrowglass and the other three courier crews scattered across separate docks"
+    "starting_condition": "hours from departure at the Cislunar Exchange, with the Mir vault already bolted into Morrowglass and the other three courier crews scattered across separate docks",
+    "default_identity": {
+      "name": "Jun Zan",
+      "alias": "Captain Zan",
+      "title": "Captain"
+    }
   },
   "mission_directive": {
     "issuer": "Heliograph",
@@ -1155,6 +1160,7 @@
   },
   "memory_rules": {
     "protected_facts": [
+      "the player captain's chosen identity and alias",
       "whether Mir has ever been activated",
       "the payload's pristine or divergent status",
       "crew injuries and deaths",
@@ -1176,6 +1182,7 @@
     ]
   },
   "llm_directives": [
+    "Address the viewpoint character using memory.player_identity. Never infer or import the human user's real-world/account name into fiction.",
     "Call the payload MIRROR in formal contexts and Mir in ordinary crew speech when natural.",
     "Do not make Mir speak, think, dream, signal, manipulate systems, or secretly observe anything while mirror_payload_status is sealed_pristine.",
     "Do not pressure the player to activate Mir. Present genuine reasons both to preserve the seal and to break it.",
