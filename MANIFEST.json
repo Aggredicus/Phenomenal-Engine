@@ -15,6 +15,11 @@
     "sha256": "bec2d66ebdd272bef38c10eaa36875a3c04e0e332f916c090d7fee5be4d4e180"
   },
   {
+    "path": ".github/workflows/publish-v0.4.1.yml",
+    "bytes": 2742,
+    "sha256": "fa850e810e7b5c0cfa1676d3a9417b202de3d2f8e22da18063f0bb0086a84808"
+  },
+  {
     "path": ".gitignore",
     "bytes": 501,
     "sha256": "a3d0a41fe7ae1c02d575e98734885423ebaefe187108a74b4ec3729a3a40892f"
@@ -48,6 +53,11 @@
     "path": "RELEASE_NOTES_v0.4.0.md",
     "bytes": 3576,
     "sha256": "c68a5c96c69d59add727f6d638845aa27ee7af9a2e68ca3a8adf5e14e2ecb9bc"
+  },
+  {
+    "path": "RELEASE_NOTES_v0.4.1.md",
+    "bytes": 830,
+    "sha256": "77018057f062deb44fb32724851111bbd5850093216b55ccac092e3fd9a70620"
   },
   {
     "path": "SECURITY.md",
@@ -292,7 +302,7 @@
   {
     "path": "pyproject.toml",
     "bytes": 396,
-    "sha256": "6bd07f51522aa885b9d2aaab41e18da40c2c6d03aa7cce01da26f1a4566b2fb6"
+    "sha256": "5d946421f898065fc1cf726f4427bb56858122ec61d5b77b939ab6d9d259b351"
   },
   {
     "path": "runtime/.gitkeep",

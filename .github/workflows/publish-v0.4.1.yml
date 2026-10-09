@@ -1,0 +1,86 @@
+name: Publish Phenomenal Engine v0.4.1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/publish-v0.4.1.yml"
+      - "RELEASE_NOTES_v0.4.1.md"
+      - "pyproject.toml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-v0.4.1
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.repository == 'Aggredicus/Phenomenal-Engine'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Verify release version
+        run: |
+          python - <<'PY'
+          import tomllib
+          from pathlib import Path
+          data = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))
+          assert data["project"]["version"] == "0.4.1"
+          print("Release version is 0.4.1")
+          PY
+
+      - name: Validate bundled mods
+        run: python -m phenomenal_engine validate mods
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Smoke-test persistent campaign
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          python -m phenomenal_engine play mods/mirror_delivery.json "$tmp/mirror.json" "Begin." --seed release-ci --idempotency-key release-1
+          python -m phenomenal_engine play mods/mirror_delivery.json "$tmp/mirror.json" "Inspect the ledger." --idempotency-key release-2
+          python -m phenomenal_engine status "$tmp/mirror.json"
+
+      - name: Verify Codespaces remains optional
+        run: |
+          python -m phenomenal_engine start > /tmp/startup.json
+          python - <<'PY'
+          import json
+          data = json.load(open("/tmp/startup.json", encoding="utf-8"))
+          assert data["codespaces"]["choice"] == "offer"
+          assert data["codespaces"]["default_enabled"] is False
+          assert data["codespaces"]["created"] is False
+          print("Codespaces remains opt-in.")
+          PY
+
+      - name: Verify canonical manifest
+        run: python scripts/manifest.py --check
+
+      - name: Publish v0.4.1 tag and GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="v0.4.1"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "$tag release already exists; nothing to do."
+            exit 0
+          fi
+          gh release create "$tag" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Phenomenal Engine $tag" \
+            --notes-file "RELEASE_NOTES_v0.4.1.md"
