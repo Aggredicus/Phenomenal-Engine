@@ -25,21 +25,6 @@
     "sha256": "a3d0a41fe7ae1c02d575e98734885423ebaefe187108a74b4ec3729a3a40892f"
   },
   {
-    "path": "adapters/google_sheets/appsscript.json",
-    "bytes": 267,
-    "sha256": "74fd68e670d1bd1c727920740f6783d80f6c2497fd3522877e52a3eb5b6a46cc"
-  },
-  {
-    "path": "adapters/google_sheets/director_bridge.gs",
-    "bytes": 3299,
-    "sha256": "6d3aa50a5a02f0d1627263cb06b26b3021ae2255d993918e264f3d488d169bd1"
-  },
-  {
-    "path": "adapters/google_sheets/README.md",
-    "bytes": 709,
-    "sha256": "5224e44a0cd63ea23b35a1b9a89d707457c19a33c0cdfcb9aaffd0cc3563872a"
-  },
-  {
     "path": "AGENT_BOOTLOADER.md",
     "bytes": 7133,
     "sha256": "693feeaff4ff410369aec59f6a3c07c26202398256927b14168b9e9b2b99c200"
@@ -48,6 +33,61 @@
     "path": "CHANGELOG.md",
     "bytes": 4023,
     "sha256": "3aaf1c6992eaa238d2045d4db863d5346cb8d368cb1ec80ee68291ad58e9145f"
+  },
+  {
+    "path": "LICENSE",
+    "bytes": 1067,
+    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
+  },
+  {
+    "path": "MOD_AUTHOR_PROMPT.md",
+    "bytes": 3009,
+    "sha256": "ca059dd71e886c55f997341db2bae65a56e33e0c5d81ee15084f05f937c111ba"
+  },
+  {
+    "path": "README.md",
+    "bytes": 10628,
+    "sha256": "8da666a81b182394b0a995298ba09cfc207fe294862858ad0e7df387bef75e2d"
+  },
+  {
+    "path": "RELEASE_NOTES_v0.4.0.md",
+    "bytes": 3576,
+    "sha256": "c68a5c96c69d59add727f6d638845aa27ee7af9a2e68ca3a8adf5e14e2ecb9bc"
+  },
+  {
+    "path": "RELEASE_NOTES_v0.4.1.md",
+    "bytes": 830,
+    "sha256": "77018057f062deb44fb32724851111bbd5850093216b55ccac092e3fd9a70620"
+  },
+  {
+    "path": "SECURITY.md",
+    "bytes": 5495,
+    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
+  },
+  {
+    "path": "START_HERE.md",
+    "bytes": 5410,
+    "sha256": "1d9ba2314eb2c21a017a3edc828aa2fb33b59155f466e52675ad144f1becbb92"
+  },
+  {
+    "path": "SUPPORT.md",
+    "bytes": 3815,
+    "sha256": "d9656e1362405071199acc6199edcc92ada2c37a641fce470916f58725213d9c"
+  },
+  {
+    "path": "adapters/google_sheets/README.md",
+    "bytes": 709,
+    "sha256": "5224e44a0cd63ea23b35a1b9a89d707457c19a33c0cdfcb9aaffd0cc3563872a"
+  },
+  {
+    "path": "adapters/google_sheets/appsscript.json",
+    "bytes": 267,
+    "sha256": "74fd68e670d1bd1c727920740f6783d80f6c2497fd3522877e52a3eb5b6a46cc"
+  },
+  {
+    "path": "adapters/google_sheets/director_bridge.gs",
+    "bytes": 3299,
+    "sha256": "6d3aa50a5a02f0d1627263cb06b26b3021ae2255d993918e264f3d488d169bd1"
   },
   {
     "path": "docs/chatbot_quickstart.md",
@@ -153,16 +193,6 @@
     "path": "examples/run_demo.py",
     "bytes": 843,
     "sha256": "6023192173b88106338739f61c3f147e270e518f51c1ef49766e7e205a7be9ce"
-  },
-  {
-    "path": "LICENSE",
-    "bytes": 1067,
-    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
-  },
-  {
-    "path": "MOD_AUTHOR_PROMPT.md",
-    "bytes": 3009,
-    "sha256": "ca059dd71e886c55f997341db2bae65a56e33e0c5d81ee15084f05f937c111ba"
   },
   {
     "path": "mods/great_labyrinth_of_egypt.json",
@@ -275,21 +305,6 @@
     "sha256": "5d946421f898065fc1cf726f4427bb56858122ec61d5b77b939ab6d9d259b351"
   },
   {
-    "path": "README.md",
-    "bytes": 10628,
-    "sha256": "8da666a81b182394b0a995298ba09cfc207fe294862858ad0e7df387bef75e2d"
-  },
-  {
-    "path": "RELEASE_NOTES_v0.4.0.md",
-    "bytes": 3576,
-    "sha256": "c68a5c96c69d59add727f6d638845aa27ee7af9a2e68ca3a8adf5e14e2ecb9bc"
-  },
-  {
-    "path": "RELEASE_NOTES_v0.4.1.md",
-    "bytes": 830,
-    "sha256": "77018057f062deb44fb32724851111bbd5850093216b55ccac092e3fd9a70620"
-  },
-  {
     "path": "runtime/.gitkeep",
     "bytes": 0,
     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -323,21 +338,6 @@
     "path": "scripts/manifest.py",
     "bytes": 2346,
     "sha256": "0e622e592ef68c133ef3cfc0dca6216a567440bc2a5ca58ff42895d2c86a2f8d"
-  },
-  {
-    "path": "SECURITY.md",
-    "bytes": 5495,
-    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
-  },
-  {
-    "path": "START_HERE.md",
-    "bytes": 5410,
-    "sha256": "1d9ba2314eb2c21a017a3edc828aa2fb33b59155f466e52675ad144f1becbb92"
-  },
-  {
-    "path": "SUPPORT.md",
-    "bytes": 3815,
-    "sha256": "d9656e1362405071199acc6199edcc92ada2c37a641fce470916f58725213d9c"
   },
   {
     "path": "tests/test_director.py",
