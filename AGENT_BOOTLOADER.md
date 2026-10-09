@@ -14,6 +14,8 @@ discover or create one campaign and begin/resume play.
 
 Before the first authoritative turn, establish:
 
+- the viewpoint character identity from the authoritative save or mod default; never infer it from the human user's account/profile/real-world identity;
+
 - repository read capability;
 - repository/save write capability;
 - trusted Python execution capability;
@@ -45,6 +47,12 @@ python -m phenomenal_engine play MOD SAVE "PLAYER ACTION" \
 or the `continue` alias.
 
 Never use `step` as the continuing campaign loop. `step` is stateless and exists for diagnostics.
+
+## Authoritative runtime gate
+
+A chatbot response is **not** an authoritative Phenomenal Engine turn unless the engine was actually executed against the selected mod and campaign save and returned `persisted: true`. If execution is unavailable, pause gameplay and say so rather than improvising canon. Repository familiarity, prior chat context, or prose consistency are not substitutes for runtime execution.
+
+The mod and structured save outrank improvised narration. If prior prose conflicts with either, report the drift and reconcile it before continuing.
 
 ## Required turn loop
 

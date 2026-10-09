@@ -49,6 +49,20 @@ class TestPersistentPlay(unittest.TestCase):
             self.assertIsNotNone(memory["last_scene_packet"])
             self.assertIn("actions", memory["rng_streams"])
 
+    def test_mirror_delivery_defaults_to_captain_zan_without_real_world_identity(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            save = Path(tmp) / "mirror.json"
+            self.run_cli([
+                "play", str(self.mod), str(save), "Begin.",
+                "--idempotency-key", "identity-turn",
+            ])
+            memory = load_memory(save)
+            self.assertEqual(memory["player_identity"]["name"], "Jun Zan")
+            self.assertEqual(memory["player_identity"]["alias"], "Captain Zan")
+            self.assertEqual(memory["player_identity"]["title"], "Captain")
+            serialized = json.dumps(memory)
+            self.assertNotIn("Dillon Lee", serialized)
+
     def test_idempotency_key_prevents_duplicate_turn(self):
         with tempfile.TemporaryDirectory() as tmp:
             save = Path(tmp) / "mirror.json"

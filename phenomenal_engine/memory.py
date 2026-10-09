@@ -18,7 +18,7 @@ def event_hash(event_without_hash: dict) -> str:
 def _copy_json(value):
     return json.loads(json.dumps(value))
 
-def new_memory(mod: dict, seed: int | str) -> dict:
+def new_memory(mod: dict, seed: int | str, player_identity: dict | None = None) -> dict:
     characters = {
         item["id"]: _copy_json(item)
         for item in mod.get("characters", [])
@@ -32,6 +32,11 @@ def new_memory(mod: dict, seed: int | str) -> dict:
         quest.setdefault("status", item.get("initial_status", "open"))
         quests[item["id"]] = quest
 
+    identity = _copy_json(player_identity or mod.get("player_setup", {}).get("default_identity", {}))
+    identity.setdefault("name", "Captain")
+    identity.setdefault("alias", identity["name"])
+    identity.setdefault("title", "Captain")
+
     memory = {
         "schema_version": SCHEMA_VERSION,
         "engine_version": ENGINE_VERSION,
@@ -44,6 +49,7 @@ def new_memory(mod: dict, seed: int | str) -> dict:
         "master_seed": str(seed),
         "rng_streams": {},
         "world_state": _copy_json(mod.get("starting_state", {})),
+        "player_identity": identity,
         "characters": characters,
         "relationships": {},
         "quests": quests,
@@ -135,6 +141,7 @@ def load_memory(path: str | Path) -> dict:
     if not verify_ledger(data):
         raise ValueError("memory ledger hash chain failed verification")
     data.setdefault("state_version", int(data.get("turn", 0)))
+    data.setdefault("player_identity", {"name": "Captain", "alias": "Captain", "title": "Captain"})
     data.setdefault("last_scene_packet", None)
     data.setdefault("story_state", {"world_pulse": 0, "threads": {}, "npc_agendas": {}, "world_events": {}, "ambient_history": []})
     data.setdefault("player_experience", initial_player_experience())

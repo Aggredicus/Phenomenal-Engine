@@ -21,8 +21,8 @@
   },
   {
     "path": "AGENT_BOOTLOADER.md",
-    "bytes": 6418,
-    "sha256": "008233c9b18a78aedb9949095b6f7373b17156333bdebc0c7e66369e99e70d85"
+    "bytes": 7133,
+    "sha256": "693feeaff4ff410369aec59f6a3c07c26202398256927b14168b9e9b2b99c200"
   },
   {
     "path": "CHANGELOG.md",
@@ -191,8 +191,8 @@
   },
   {
     "path": "mods/mirror_delivery.json",
-    "bytes": 56443,
-    "sha256": "3b25ea79f324564d505e09c0355a0aae6a9c8006f97fa52fcacfa0c2960d0a59"
+    "bytes": 56758,
+    "sha256": "b188ee71532f7bd70a382a5339f887b2306adb6aa931f57795e9a595f836d91a"
   },
   {
     "path": "mods/orbital_swarm_trail.json",
@@ -241,8 +241,8 @@
   },
   {
     "path": "phenomenal_engine/memory.py",
-    "bytes": 5460,
-    "sha256": "301c0660894fe5616ddfecb65daa83733b3aef34498c30d75616674006d9ecb1"
+    "bytes": 5875,
+    "sha256": "c7905ceb0e0afdf4b1d78b4424a75f51de96510fa657e40840dbc74c097b0da6"
   },
   {
     "path": "phenomenal_engine/mod_loader.py",
@@ -311,8 +311,8 @@
   },
   {
     "path": "schemas/memory.schema.json",
-    "bytes": 1703,
-    "sha256": "30fa95b1be1a730c0e156c06d13654a81305240a6cd1c5cd370e82d7f485476f"
+    "bytes": 2150,
+    "sha256": "2e6d2d41968205dd3a62e29fb5c21aab0aa316ae7ba894c052509e72c9d75910"
   },
   {
     "path": "schemas/mod.schema.json",
@@ -346,8 +346,8 @@
   },
   {
     "path": "tests/test_persistent_play.py",
-    "bytes": 3983,
-    "sha256": "0843edd4627afb26a63f4a59357ff2423fc8b4ba348d37d17259cb8290c757ab"
+    "bytes": 4693,
+    "sha256": "2f6ef4f760e0aa24b3a1540a30165ffcbdd4d311ee0226afbe7d09d2d932c6be"
   },
   {
     "path": "tests/test_physics.py",
