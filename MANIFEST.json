@@ -25,21 +25,6 @@
     "sha256": "a3d0a41fe7ae1c02d575e98734885423ebaefe187108a74b4ec3729a3a40892f"
   },
   {
-    "path": "adapters/google_sheets/appsscript.json",
-    "bytes": 267,
-    "sha256": "74fd68e670d1bd1c727920740f6783d80f6c2497fd3522877e52a3eb5b6a46cc"
-  },
-  {
-    "path": "adapters/google_sheets/director_bridge.gs",
-    "bytes": 3299,
-    "sha256": "6d3aa50a5a02f0d1627263cb06b26b3021ae2255d993918e264f3d488d169bd1"
-  },
-  {
-    "path": "adapters/google_sheets/README.md",
-    "bytes": 709,
-    "sha256": "5224e44a0cd63ea23b35a1b9a89d707457c19a33c0cdfcb9aaffd0cc3563872a"
-  },
-  {
     "path": "AGENT_BOOTLOADER.md",
     "bytes": 8664,
     "sha256": "0a9d93b4cd76319ef17cd1ae5969ca5669406a538154bc74721062e32944ca81"
@@ -50,6 +35,76 @@
     "sha256": "3aaf1c6992eaa238d2045d4db863d5346cb8d368cb1ec80ee68291ad58e9145f"
   },
   {
+    "path": "LICENSE",
+    "bytes": 1067,
+    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
+  },
+  {
+    "path": "MOD_AUTHOR_PROMPT.md",
+    "bytes": 3009,
+    "sha256": "ca059dd71e886c55f997341db2bae65a56e33e0c5d81ee15084f05f937c111ba"
+  },
+  {
+    "path": "README.md",
+    "bytes": 12472,
+    "sha256": "19fb0a4d67d3ff1a4d730d9026d52998ffe1d88dd65d76aed4e3843866a5f3fb"
+  },
+  {
+    "path": "RELEASE_NOTES_v0.4.0.md",
+    "bytes": 3576,
+    "sha256": "c68a5c96c69d59add727f6d638845aa27ee7af9a2e68ca3a8adf5e14e2ecb9bc"
+  },
+  {
+    "path": "RELEASE_NOTES_v0.4.1.md",
+    "bytes": 830,
+    "sha256": "77018057f062deb44fb32724851111bbd5850093216b55ccac092e3fd9a70620"
+  },
+  {
+    "path": "SECURITY.md",
+    "bytes": 6329,
+    "sha256": "d49a1640742c21434a4dca9099d423cf60faa7af94b4f56aeaf85296d2d52502"
+  },
+  {
+    "path": "START_HERE.md",
+    "bytes": 7784,
+    "sha256": "e744f5911c7a3c5e2e15255aca4655ec04a7f577df5ed95836a6ed80e68e17c4"
+  },
+  {
+    "path": "SUPPORT.md",
+    "bytes": 3815,
+    "sha256": "d9656e1362405071199acc6199edcc92ada2c37a641fce470916f58725213d9c"
+  },
+  {
+    "path": "adapters/google_sheets/README.md",
+    "bytes": 709,
+    "sha256": "5224e44a0cd63ea23b35a1b9a89d707457c19a33c0cdfcb9aaffd0cc3563872a"
+  },
+  {
+    "path": "adapters/google_sheets/appsscript.json",
+    "bytes": 267,
+    "sha256": "74fd68e670d1bd1c727920740f6783d80f6c2497fd3522877e52a3eb5b6a46cc"
+  },
+  {
+    "path": "adapters/google_sheets/director_bridge.gs",
+    "bytes": 3299,
+    "sha256": "6d3aa50a5a02f0d1627263cb06b26b3021ae2255d993918e264f3d488d169bd1"
+  },
+  {
+    "path": "docs/CONSENT_GATE_SPEC.md",
+    "bytes": 3705,
+    "sha256": "6802c319fb05633f1e884adbd771ca4b26ba5ed7bca985288cafc697ba905f1a"
+  },
+  {
+    "path": "docs/NEW_CHAT_PLAYTEST.md",
+    "bytes": 4362,
+    "sha256": "8427689eb7a1ac720a5fc8b082df8c0e1d324ca801366bb708104d720fe4a0ea"
+  },
+  {
+    "path": "docs/PLAYER_COVENANT.md",
+    "bytes": 14630,
+    "sha256": "765091be9ea978c1c1d90ceee27bc26823dfca3b13b1aad446b6f8e79b53fb69"
+  },
+  {
     "path": "docs/chatbot_quickstart.md",
     "bytes": 3448,
     "sha256": "2408ee2e036fc9b9b1c70b4263fe82ea9c1965649cfedda2860e080caf94ee09"
@@ -58,11 +113,6 @@
     "path": "docs/codespaces_and_saves.md",
     "bytes": 4268,
     "sha256": "3f8fdd755ff44bbc5586c2d6bf7b5454b7f18b5b7db63281d2a4c4e36e5547fd"
-  },
-  {
-    "path": "docs/CONSENT_GATE_SPEC.md",
-    "bytes": 3705,
-    "sha256": "6802c319fb05633f1e884adbd771ca4b26ba5ed7bca985288cafc697ba905f1a"
   },
   {
     "path": "docs/director_json.md",
@@ -125,19 +175,9 @@
     "sha256": "0d1e6ee4fcd43f0d96db9421ee909fa67f93832e2fef1fa7d279d07652f728b1"
   },
   {
-    "path": "docs/NEW_CHAT_PLAYTEST.md",
-    "bytes": 4362,
-    "sha256": "8427689eb7a1ac720a5fc8b082df8c0e1d324ca801366bb708104d720fe4a0ea"
-  },
-  {
     "path": "docs/phenomenology.md",
     "bytes": 1081,
     "sha256": "33d42769427c1ff6319ffa264e14163cace31e4f9a7e2c9c12eed5c19fc93452"
-  },
-  {
-    "path": "docs/PLAYER_COVENANT.md",
-    "bytes": 14630,
-    "sha256": "765091be9ea978c1c1d90ceee27bc26823dfca3b13b1aad446b6f8e79b53fb69"
   },
   {
     "path": "docs/progressive_turns.md",
@@ -183,16 +223,6 @@
     "path": "examples/run_demo.py",
     "bytes": 843,
     "sha256": "6023192173b88106338739f61c3f147e270e518f51c1ef49766e7e205a7be9ce"
-  },
-  {
-    "path": "LICENSE",
-    "bytes": 1067,
-    "sha256": "865a90815da167fc9ad381884d06b611efb231eafc5cce01926ef943b9010b8d"
-  },
-  {
-    "path": "MOD_AUTHOR_PROMPT.md",
-    "bytes": 3009,
-    "sha256": "ca059dd71e886c55f997341db2bae65a56e33e0c5d81ee15084f05f937c111ba"
   },
   {
     "path": "mods/great_labyrinth_of_egypt.json",
@@ -325,21 +355,6 @@
     "sha256": "5d946421f898065fc1cf726f4427bb56858122ec61d5b77b939ab6d9d259b351"
   },
   {
-    "path": "README.md",
-    "bytes": 12472,
-    "sha256": "19fb0a4d67d3ff1a4d730d9026d52998ffe1d88dd65d76aed4e3843866a5f3fb"
-  },
-  {
-    "path": "RELEASE_NOTES_v0.4.0.md",
-    "bytes": 3576,
-    "sha256": "c68a5c96c69d59add727f6d638845aa27ee7af9a2e68ca3a8adf5e14e2ecb9bc"
-  },
-  {
-    "path": "RELEASE_NOTES_v0.4.1.md",
-    "bytes": 830,
-    "sha256": "77018057f062deb44fb32724851111bbd5850093216b55ccac092e3fd9a70620"
-  },
-  {
     "path": "runtime/.gitkeep",
     "bytes": 0,
     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -378,21 +393,6 @@
     "path": "scripts/manifest.py",
     "bytes": 2346,
     "sha256": "0e622e592ef68c133ef3cfc0dca6216a567440bc2a5ca58ff42895d2c86a2f8d"
-  },
-  {
-    "path": "SECURITY.md",
-    "bytes": 6329,
-    "sha256": "d49a1640742c21434a4dca9099d423cf60faa7af94b4f56aeaf85296d2d52502"
-  },
-  {
-    "path": "START_HERE.md",
-    "bytes": 7784,
-    "sha256": "e744f5911c7a3c5e2e15255aca4655ec04a7f577df5ed95836a6ed80e68e17c4"
-  },
-  {
-    "path": "SUPPORT.md",
-    "bytes": 3815,
-    "sha256": "d9656e1362405071199acc6199edcc92ada2c37a641fce470916f58725213d9c"
   },
   {
     "path": "tests/test_chat_playtest.py",
