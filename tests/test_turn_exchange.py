@@ -126,7 +126,7 @@ class TurnExchangeTests(unittest.TestCase):
             {"expected_blob_sha": "bad"},
         ]:
             with self.subTest(bad=bad):
-                with self.assertRaises((TurnExchangeError, ValueError)):
+                with self.assertRaises((TurnExchangeError, GitHubSaveError, ValueError)):
                     propose_turn(dict(self.request, **bad))
 
 
