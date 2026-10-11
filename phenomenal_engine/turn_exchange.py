@@ -17,7 +17,7 @@ from pathlib import Path
 
 from .consent import covenant_digest
 from .engine import Engine
-from .github_saves import BRANCH, REPOSITORY, decode_state, encode_state, remote_path
+from .github_saves import BRANCH, REPOSITORY, GitHubSaveError, decode_state, encode_state, remote_path
 from .memory import find_event_by_idempotency_key, validate_memory_for_mod
 from .mod_loader import load_mod
 
