@@ -19,6 +19,88 @@ from .physics import planck_budget
 from .travel import plan_route, visible_map
 from .map_ui import serve_map_ui
 from .director import build_director_state, load_director_command, validate_director_command
+from .consent import (
+    ConsentError, AGREEMENT_VERSION, SAVE_DISCLOSURE, covenant_digest,
+    covenant_text, create_receipt, default_receipt_path, load_receipt, write_receipt,
+)
+
+
+def _require_covenant(args, save_path):
+    receipt_path = Path(args.consent_receipt) if args.consent_receipt else default_receipt_path(save_path)
+    try:
+        return load_receipt(receipt_path, save_path=save_path)
+    except ConsentError as exc:
+        print(json.dumps({
+            "status": "consent_required", "persisted": False,
+            "receipt_path": str(receipt_path), "reason": str(exc),
+        }, ensure_ascii=False))
+        raise SystemExit(3) from exc
+
+
+def cmd_covenant(args):
+    result = {
+        "status": "review_draft", "version": AGREEMENT_VERSION,
+        "sha256": covenant_digest(), "disclosure": SAVE_DISCLOSURE,
+        "notice": "A local acceptance receipt is not GitHub-authenticated; the official service must independently validate identity and repository visibility.",
+    }
+    if args.full:
+        result["terms"] = covenant_text()
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+
+
+def cmd_accept_covenant(args):
+    save_path = Path(args.save)
+    receipt_path = Path(args.receipt) if args.receipt else default_receipt_path(save_path)
+    try:
+        receipt = create_receipt(
+            save_path=save_path,
+            account_id=args.account_id, repository=args.repository,
+            visibility=args.visibility, storage_choice=args.storage_choice,
+            publication_understood=args.publication_understood,
+            rules_and_compute_accepted=args.rules_accepted,
+            agreement_accepted=args.agree, age_18_or_older=args.adult,
+        )
+        if receipt_path.exists() and not args.renew:
+            raise ConsentError("receipt already exists; --renew requires fresh explicit acknowledgements")
+        if receipt_path.exists():
+            # Preserve the older receipt in the same folder before replacing it.
+            old = receipt_path.read_text(encoding="utf-8")
+            backup = receipt_path.with_name(receipt_path.name + ".previous")
+            if backup.exists():
+                raise ConsentError("previous-receipt backup exists; archive it before renewal")
+            backup.write_text(old, encoding="utf-8")
+            receipt_path.unlink()
+        write_receipt(receipt_path, receipt)
+    except (ConsentError, OSError) as exc:
+        print(json.dumps({"status": "consent_invalid", "persisted": False, "reason": str(exc)}, ensure_ascii=False))
+        raise SystemExit(3) from exc
+    print(json.dumps({
+        "status": "accepted_locally_unverified",
+        "receipt_path": str(receipt_path),
+        "agreement_version": receipt["agreement_version"],
+        "agreement_sha256": receipt["agreement_sha256"],
+        "repository": receipt["repository"],
+        "visibility": receipt["visibility"],
+        "warning": "Repository visibility and GitHub account ownership have NOT been verified by this CLI.",
+    }, ensure_ascii=False, indent=2))
+
+
+def cmd_consent_status(args):
+    save_path = Path(args.save)
+    receipt_path = Path(args.receipt) if args.receipt else default_receipt_path(save_path)
+    try:
+        receipt = load_receipt(receipt_path, save_path=save_path)
+    except ConsentError as exc:
+        print(json.dumps({"status": "consent_required", "reason": str(exc)}, ensure_ascii=False))
+        raise SystemExit(3) from exc
+    print(json.dumps({
+        "status": "accepted_locally_unverified",
+        "repository": receipt["repository"], "visibility": receipt["visibility"],
+        "agreement_version": receipt["agreement_version"],
+        "agreement_sha256": receipt["agreement_sha256"],
+        "accepted_at_utc": receipt["accepted_at_utc"],
+    }, ensure_ascii=False, indent=2))
+
 
 def cmd_validate(args):
     p = Path(args.path)
@@ -53,6 +135,7 @@ def cmd_planck(args):
 def cmd_new_save(args):
     mod = load_mod(args.mod)
     output = Path(args.output)
+    _require_covenant(args, output)
     if output.exists() and not args.force:
         raise FileExistsError(f"save already exists: {output}; pass --force to replace it")
     memory = new_memory(mod, args.seed)
@@ -87,6 +170,7 @@ def cmd_step(args):
 def cmd_play(args):
     mod = load_mod(args.mod)
     save_path = Path(args.save)
+    _require_covenant(args, save_path)
     created = not save_path.exists()
 
     if created:
@@ -187,6 +271,7 @@ def cmd_start(args):
     print(json.dumps({
         "status": "setup_choices",
         "runtime_policy": "prefer_existing_trusted_runtime",
+        "consent": {"required": True, "version": AGREEMENT_VERSION, "sha256": covenant_digest(), "default_accepted": False},
         "codespaces": codespaces,
         "mods": available_mods,
         "next_step": (
@@ -286,6 +371,7 @@ def main(argv=None):
     p.add_argument("output")
     p.add_argument("--seed", default="story-seed")
     p.add_argument("--force", action="store_true")
+    p.add_argument("--consent-receipt", default=None)
     p.set_defaults(func=cmd_new_save)
 
     p = sub.add_parser("step", help="run a stateless one-turn diagnostic simulation")
@@ -308,7 +394,31 @@ def main(argv=None):
     add_resolution_args(p)
     p.add_argument("--idempotency-key", default=None)
     p.add_argument("--allow-mod-version-mismatch", action="store_true")
+    p.add_argument("--consent-receipt", default=None)
     p.set_defaults(func=cmd_play)
+
+    p = sub.add_parser("covenant", help="view the current player covenant review draft")
+    p.add_argument("--full", action="store_true", help="include the full draft agreement")
+    p.set_defaults(func=cmd_covenant)
+
+    p = sub.add_parser("accept-covenant", help="record explicit local acceptance (not GitHub-attested)")
+    p.add_argument("save")
+    p.add_argument("--account-id", required=True)
+    p.add_argument("--repository", required=True)
+    p.add_argument("--visibility", choices=("public", "private"), required=True)
+    p.add_argument("--storage-choice", choices=("public", "private"), required=True)
+    p.add_argument("--publication-understood", action="store_true")
+    p.add_argument("--rules-accepted", action="store_true")
+    p.add_argument("--agree", action="store_true")
+    p.add_argument("--adult", action="store_true", help="affirm age 18 or older")
+    p.add_argument("--receipt", default=None)
+    p.add_argument("--renew", action="store_true", help="explicitly renew accepted terms")
+    p.set_defaults(func=cmd_accept_covenant)
+
+    p = sub.add_parser("consent-status", help="inspect a locally stored consent receipt")
+    p.add_argument("save")
+    p.add_argument("--receipt", default=None)
+    p.set_defaults(func=cmd_consent_status)
 
     p = sub.add_parser("start", help="offer adventures and optional Codespaces setup without provisioning compute")
     p.add_argument("--mods", default="mods", help="directory containing adventure mods")

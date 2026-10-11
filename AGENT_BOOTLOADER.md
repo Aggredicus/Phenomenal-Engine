@@ -35,6 +35,20 @@ When Python execution is available, run `python -m phenomenal_engine start` to o
 
 Only create a Codespace through a supported integration after **separate, informed opt-in** and confirmation of possible charges. A suggestion or even the CLI `--codespaces` flag is not authorization to provision infrastructure.
 
+## Required player consent
+
+Read `docs/PLAYER_COVENANT.md`, the current review draft, before
+campaign creation. Obtain an explicit public/private storage selection and
+all necessary acknowledgements; refuse play if not accepted. Run
+`python -m phenomenal_engine covenant --full` to show the current agreement
+version and digest. An action such as "Play Phenomenal Engine" is **not** consent.
+
+The local `accept-covenant` CLI records only player-declared information;
+it cannot authenticate GitHub identity or visibility. For official connected
+play, verify those with GitHub before accepting/publishing a save. Do not
+store credentials or raw ChatGPT transcripts in public campaign JSON.
+A change to the agreement digest requires renewed consent.
+
 ## Persistent command
 
 For a normal campaign use:

@@ -98,6 +98,21 @@ Version 0.2.0 adds:
 
 Integrations should preserve the previous known-good save if a write fails.
 
+## Mandatory consent for public or private saves
+
+The review-branch CLI blocks `play` and `new-save` without a matching
+Covenant receipt. It checks the receipt format, affirmative acknowledgements,
+selected visibility, save filename, and the current terms hash. This is a
+local enforcement layer, not proof of identity or publication authorization.
+A trusted official integration must obtain authenticated GitHub visibility
+and account identity independently, protect save writes against version
+conflicts, and fail closed if any check fails.
+
+Public campaign JSON may contain hidden state and player-entered text.
+Do not publish secrets, identifying information about nonconsenting people,
+moderation evidence, or dangerous material as part of an audit log.
+An unsigned hash chain is not an independent attestation of authenticity.
+
 ## Save privacy
 
 Public forks are public data.

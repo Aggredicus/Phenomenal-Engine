@@ -12,6 +12,23 @@ Do not give the language model a general-purpose credentialed shell.
 
 Expose narrow, typed game operations and enforce authorization outside the model.
 
+## Required covenant and publication controls
+
+The current `docs/PLAYER_COVENANT.md` is a **draft pending legal review**.
+Before an official service starts a campaign it must:
+- return the complete current agreement via `consent.get_current_terms()`;
+- authenticate the player's GitHub account;
+- verify the selected save repository visibility and authorizations;
+- obtain separate affirmative consent for storage choice, public persistence,
+  conduct/compute rules, and age eligibility, never through prechecked defaults;
+- provide `consent.accept(...)` and `consent.status(...)` operations;
+- reject unverified/mismatched consent and require renewed consent on terms changes;
+- keep abuse evidence private and separate from public campaign state.
+
+The local CLI's `accepted_locally_unverified` response is *not* equivalent
+to authenticated provider-backed acceptance. Normal gameplay does not
+automatically publish to upstream and cannot use a public fork for private saves.
+
 ## Required capabilities
 
 A full Player Mode integration needs:

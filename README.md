@@ -6,6 +6,21 @@ Phenomenal Engine is a **simulation-first chatbot RPG engine**. Python adjudicat
 
 > **Deterministic causality where the model knows the state; probability where the world, action, or observer is genuinely uncertain.**
 
+## Fresh-chat Mirror Delivery playtest (review branch)
+
+For an honest first playtest, see [docs/NEW_CHAT_PLAYTEST.md](docs/NEW_CHAT_PLAYTEST.md).
+It includes a one-command local launcher, explicit draft-consent acknowledgement,
+a fresh non-overwriting save, a confirmed Python `scene_packet`, and a prompt
+for beginning a new ChatGPT conversation. The launcher **does not** upload public
+GitHub saves or connect an existing Codespace terminal to a new chat.
+
+```bash
+python scripts/chat_playtest.py --new --once
+```
+
+This is a technical test of the Python engine and consent gate; no legal
+agreement has been activated as an official hosted-service policy.
+
 ## Player quickstart
 
 ### 1. Fork this repository
