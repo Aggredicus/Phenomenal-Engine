@@ -79,6 +79,10 @@ These commands only print JSON choices. Even `--codespaces` **does not provision
 
 See `docs/codespaces_and_saves.md` and [GitHub's current Codespaces pricing](https://github.com/pricing).
 
+## Opt-in public GitHub campaign saves
+
+A separate, fail-closed authenticated GitHub save backend is available through the existing Python runtime: [Public GitHub campaign saves](docs/github_public_saves.md). It publishes only to the dedicated public campaign-saves branch after per-campaign consent, first-publication confirmation, GitHub identity/visibility checks, and a verified commit. It does **not** provision Codespaces or automatically connect a ChatGPT terminal. No campaign is published by installation.
+
 ## Persistent play is now implemented
 
 Version 0.2.0 adds a stateful turn command:

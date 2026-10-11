@@ -99,6 +99,10 @@ For a Codespace/local test, use `runtime/<campaign>.json`. Those files are ignor
 
 Do not silently publish a campaign to a public fork.
 
+### Explicit public GitHub saves (optional, no Codespaces)
+
+When the player specifically chooses public campaign persistence to Aggredicus/Phenomenal-Engine, read docs/github_public_saves.md and show the exact field/visibility disclosure and full Covenant before accepting consent. The new Python command module is phenomenal_engine.github_saves (preview, play, status). Public publication requires the local receipt, provider-authenticated matching GitHub user, an existing public campaign-saves branch, and --confirm-first-publication for a new campaign. This does not publish anything during preview or automatically connect a chatbot to Python. Only narrate a new authoritative turn after persisted=true and remote_verified=true are returned. Codespaces remains optional/off.
+
 ## 4. Discover or create a campaign
 
 If a campaign is already available, resume it.
