@@ -89,7 +89,8 @@ class TestPublicGitHubSaves(unittest.TestCase):
         self.assertFalse(result["published"])
         self.assertIn("rng_streams", result["public_json_top_level_fields"])
         self.assertIn("event_ledger", result["public_json_top_level_fields"])
-        self.assertIn("last_scene_packet", result["public_json_top_level_fields"])
+        self.assertNotIn("last_scene_packet", result["public_json_top_level_fields"])
+        self.assertTrue(result["reconstructed_on_load"])
         self.assertEqual(result["branch"], BRANCH)
         self.assertEqual(result["codespaces"], "disabled; not used by this command")
 
