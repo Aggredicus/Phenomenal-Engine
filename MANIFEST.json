@@ -46,8 +46,8 @@
   },
   {
     "path": "README.md",
-    "bytes": 10628,
-    "sha256": "8da666a81b182394b0a995298ba09cfc207fe294862858ad0e7df387bef75e2d"
+    "bytes": 11286,
+    "sha256": "cf37e43b106b674b3181ea2947af22ca4d16a21fa127e43bc0de5d073a1c1a7e"
   },
   {
     "path": "RELEASE_NOTES_v0.4.0.md",
@@ -93,6 +93,11 @@
     "path": "docs/CONSENT_GATE_SPEC.md",
     "bytes": 3705,
     "sha256": "6802c319fb05633f1e884adbd771ca4b26ba5ed7bca985288cafc697ba905f1a"
+  },
+  {
+    "path": "docs/NEW_CHAT_PLAYTEST.md",
+    "bytes": 4362,
+    "sha256": "8427689eb7a1ac720a5fc8b082df8c0e1d324ca801366bb708104d720fe4a0ea"
   },
   {
     "path": "docs/PLAYER_COVENANT.md",
@@ -350,9 +355,19 @@
     "sha256": "eb11cc691a7a11d9daa65595fe991641f2fe4b9e49c18e11e46f936e1b8045c9"
   },
   {
+    "path": "scripts/chat_playtest.py",
+    "bytes": 5680,
+    "sha256": "dd5bd9ec26707a0c86bbf08f3c1baa70b36b06a06266a35e9368267cca7ea82e"
+  },
+  {
     "path": "scripts/manifest.py",
     "bytes": 2346,
     "sha256": "0e622e592ef68c133ef3cfc0dca6216a567440bc2a5ca58ff42895d2c86a2f8d"
+  },
+  {
+    "path": "tests/test_chat_playtest.py",
+    "bytes": 1944,
+    "sha256": "b682c59895a10faed4474fb1200eade0ff5743df57d4c6cc1ed1fa11d0b5a242"
   },
   {
     "path": "tests/test_consent.py",
