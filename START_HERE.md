@@ -32,6 +32,22 @@ python -m phenomenal_engine start --codespaces
 
 `--codespaces` gives **manual setup instructions**, not a newly created machine.
 
+## Mandatory consent gate (review implementation)
+
+Before any `new-save` or `play` command, show the Player Covenant from
+`python -m phenomenal_engine covenant --full` and disclose the exact public/private
+save destination and fields to be stored. The `start` command never implies
+acceptance. Players must explicitly accept using `accept-covenant`, including
+storage choice, public-retention risks, conduct/compute rules, and adult eligibility.
+Declining or failing validation blocks the turn without generating RNG results.
+Each consent receipt binds a save filename and Covenant SHA-256 digest.
+
+**Trust boundary:** The CLI records *locally asserted* consent. It does not
+authenticate a GitHub account or independently verify visibility. An official
+service must perform those checks with the provider and persist the confirmed
+save remotely before narrating. Until then, this is a review-stage consent
+implementation, not a legally approved public-service launch.
+
 ## 1. Determine capabilities
 
 Check three capabilities separately:
