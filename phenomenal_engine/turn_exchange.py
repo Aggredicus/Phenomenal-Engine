@@ -144,7 +144,7 @@ def main(argv=None) -> int:
         result = propose_turn(request)
         print(json.dumps(result, ensure_ascii=False, separators=(",", ":")))
         return 0
-    except (TurnExchangeError, ValueError, OSError) as exc:
+    except (TurnExchangeError, GitHubSaveError, ValueError, OSError) as exc:
         print(json.dumps({"status": "proposal_refused", "persisted": False, "reason": str(exc)}), file=sys.stderr)
         return 3
 
