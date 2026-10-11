@@ -23,6 +23,10 @@ A player's request should produce meaningful reading immediately while an author
 
 The presentation is **progressive disclosure**, not a fake loading animation. A quick turn should resolve immediately without needless interludes. A prolonged turn may receive a few context-grounded beats between actual stages. Avoid empty spinner loops or repetitive filler.
 
+### Optimized transport-neutral exchange
+
+The [fast tokenless turn protocol](fast_tokenless_turns.md) isolates in-memory Python computation from GitHub connected-app writes, with no user-supplied token, no on-device install, and no Codespaces. It retains the prelude/result distinction and requires a real trusted execution bridge before a turn can advance.
+
 ## Latency recommendations
 
 - Persistent typed bridge: `campaign.status`, `campaign.preview`, `campaign.run_turn` with bounded inputs and outputs. Authenticate the GitHub identity and verify the public destination; keep the Python engine resident when supported.

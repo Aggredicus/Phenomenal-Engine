@@ -15,6 +15,10 @@ An authoritative campaign JSON includes:
 
 The complete ChatGPT transcript, credentials such as GITHUB_TOKEN, and the local consent receipt are **not automatically included**. Do not supply personal secrets or private third-party information as in-game actions. The basic secret scanner is not complete. Public Git history and third-party copies may remain available after deleting a save.
 
+## Optimized connected-app alternative (no player token or local installation)
+
+If a trusted server-side Python executor is available, prefer [fast tokenless turns](fast_tokenless_turns.md) instead of using a player-provided GitHub token. The already authenticated connected GitHub app handles save reads/conditional writes/readback; Python only computes the next state, in memory. The new public format stores the verified last scene in its ledger once and reconstructs last_scene_packet when loading older or newer files. **This code does not currently connect an autonomous Python runtime to ChatGPT; do not claim it is live until verified.**
+
 ## Technical prerequisites
 
 1. Use Python 3.11+ in an already trusted runtime with the repository checked out. Do not run untrusted Python/mods with privileged credentials.

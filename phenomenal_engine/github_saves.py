@@ -54,10 +54,27 @@ def local_path(campaign: str) -> Path:
     return Path("runtime") / (campaign + ".json")
 
 
+def _last_ledger_scene(state: dict):
+    """The last committed scene is already included in the hashed event ledger."""
+    for event in reversed(state.get("event_ledger", [])):
+        if event.get("kind") == "player_action":
+            payload = event.get("payload", {})
+            if not isinstance(payload, dict) or not isinstance(payload.get("scene_packet"), dict):
+                raise GitHubSaveError("last action is missing its authoritative scene packet")
+            return payload["scene_packet"]
+    return None
+
+
 def encode_state(memory: dict) -> bytes:
     if not verify_ledger(memory):
         raise GitHubSaveError("event ledger failed verification")
-    payload = (json.dumps(memory, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    last = _last_ledger_scene(memory)
+    if memory.get("last_scene_packet") != last:
+        raise GitHubSaveError("last_scene_packet disagrees with the hashed event ledger")
+    # Public saves need only one scene copy. Decode recreates the derived field
+    # after verification; no event payload, RNG state, or game fact is discarded.
+    packed = {key: value for key, value in memory.items() if key != "last_scene_packet"}
+    payload = (json.dumps(packed, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
     if len(payload) > MAX_SAVE_BYTES:
         raise GitHubSaveError("public save exceeds the configured 900 KB limit")
     if _SECRET.search(payload.decode("utf-8")):
@@ -74,6 +91,10 @@ def decode_state(raw: bytes) -> dict:
         raise GitHubSaveError("remote campaign is not valid JSON") from exc
     if not isinstance(value, dict) or not verify_ledger(value):
         raise GitHubSaveError("remote campaign ledger is missing or invalid")
+    last = _last_ledger_scene(value)
+    if "last_scene_packet" in value and value["last_scene_packet"] != last:
+        raise GitHubSaveError("public save scene packet is inconsistent with its ledger")
+    value["last_scene_packet"] = last
     return value
 
 
@@ -176,13 +197,14 @@ def save_campaign(api: GitHubAPI, campaign: str, state: dict, prior_sha: str | N
 def public_preview(campaign: str, mod_path: str) -> dict:
     path = remote_path(campaign)
     mod = load_mod(mod_path)
-    fields = sorted(new_memory(mod, "preview-not-persisted").keys())
+    fields = sorted(set(new_memory(mod, "preview-not-persisted")) - {"last_scene_packet"})
     return {
         "status": "preview_only", "published": False,
         "repository": REPOSITORY, "visibility": "PUBLIC", "branch": BRANCH,
         "path": path, "url": f"https://github.com/{REPOSITORY}/blob/{BRANCH}/{path}",
         "mod": {"id": mod["id"], "title": mod["title"], "version": mod["version"]},
         "public_json_top_level_fields": fields,
+        "reconstructed_on_load": ["last_scene_packet (from the verified event ledger)"],
         "save_disclosure": SAVE_DISCLOSURE,
         "additional_public_metadata": [
             "publication destination and current covenant version/digest",

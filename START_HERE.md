@@ -99,6 +99,10 @@ For a Codespace/local test, use `runtime/<campaign>.json`. Those files are ignor
 
 Do not silently publish a campaign to a public fork.
 
+### Efficient connected-app gameplay
+
+When an approved, trusted Python executor is available, prefer the tokenless, computation-only protocol documented in docs/fast_tokenless_turns.md. Read the authorized GitHub save with its blob SHA, invoke phenomenal_engine.turn_exchange once, conditionally update the exact campaign via the connected GitHub app, verify remote readback, then narrate. Do not ask the player for a PAT, require a local install, create a per-turn workflow file or bypass blocked GitHub operations. The protocol does not itself furnish a Python execution bridge, and its proposal is NOT a persisted turn.
+
 ### Explicit public GitHub saves (optional, no Codespaces)
 
 When the player specifically chooses public campaign persistence to Aggredicus/Phenomenal-Engine, read docs/github_public_saves.md and show the exact field/visibility disclosure and full Covenant before accepting consent. The new Python command module is phenomenal_engine.github_saves (preview, play, status). Public publication requires the local receipt, provider-authenticated matching GitHub user, an existing public campaign-saves branch, and --confirm-first-publication for a new campaign. This does not publish anything during preview or automatically connect a chatbot to Python. Only narrate a new authoritative turn after persisted=true and remote_verified=true are returned. Codespaces remains optional/off.

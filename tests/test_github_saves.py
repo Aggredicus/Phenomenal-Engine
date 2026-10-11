@@ -89,7 +89,8 @@ class TestPublicGitHubSaves(unittest.TestCase):
         self.assertFalse(result["published"])
         self.assertIn("rng_streams", result["public_json_top_level_fields"])
         self.assertIn("event_ledger", result["public_json_top_level_fields"])
-        self.assertIn("last_scene_packet", result["public_json_top_level_fields"])
+        self.assertNotIn("last_scene_packet", result["public_json_top_level_fields"])
+        self.assertTrue(result["reconstructed_on_load"])
         self.assertEqual(result["branch"], BRANCH)
         self.assertEqual(result["codespaces"], "disabled; not used by this command")
 
@@ -192,6 +193,47 @@ class TestPublicGitHubSaves(unittest.TestCase):
             with self.assertRaisesRegex(GitHubSaveError, "ledger"):
                 self.play(api, receipt, idempotency_key="turn-2")
             self.assertEqual(api.commits, 1)
+
+
+
+    def test_scene_is_stored_only_once_and_reconstructed(self):
+        with tempfile.TemporaryDirectory() as folder:
+            api = FakeGitHub()
+            receipt = self.receipt("test_public_alpha", folder)
+            self.play(api, receipt)
+            raw = json.loads(api.bytes)
+            self.assertNotIn("last_scene_packet", raw)
+            self.assertIn("scene_packet", raw["event_ledger"][-1]["payload"])
+            revived = decode_state(api.bytes)
+            self.assertEqual(
+                revived["last_scene_packet"],
+                revived["event_ledger"][-1]["payload"]["scene_packet"],
+            )
+            self.assertEqual(encode_state(revived), api.bytes)
+
+    def test_legacy_pretty_save_retains_full_scene_on_decode(self):
+        with tempfile.TemporaryDirectory() as folder:
+            api = FakeGitHub()
+            receipt = self.receipt("test_public_alpha", folder)
+            self.play(api, receipt)
+            revived = decode_state(api.bytes)
+            legacy = json.dumps(revived, indent=2, ensure_ascii=False).encode("utf-8")
+            same = decode_state(legacy)
+            self.assertEqual(same, revived)
+            self.assertEqual(same["last_scene_packet"], revived["last_scene_packet"])
+
+    def test_inconsistent_legacy_scene_is_rejected(self):
+        with tempfile.TemporaryDirectory() as folder:
+            api = FakeGitHub()
+            receipt = self.receipt("test_public_alpha", folder)
+            self.play(api, receipt)
+            old = decode_state(api.bytes)
+            old["last_scene_packet"] = {"turn": 10000}
+            with self.assertRaisesRegex(GitHubSaveError, "disagrees"):
+                encode_state(old)
+            raw = json.dumps(old).encode("utf-8")
+            with self.assertRaisesRegex(GitHubSaveError, "inconsistent"):
+                decode_state(raw)
 
 
 if __name__ == "__main__":
