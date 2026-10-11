@@ -7,6 +7,7 @@ from pathlib import Path
 
 from phenomenal_engine.cli import main
 from phenomenal_engine.memory import load_memory
+from phenomenal_engine.consent import default_receipt_path
 
 
 class TestPersistentPlay(unittest.TestCase):
@@ -15,6 +16,20 @@ class TestPersistentPlay(unittest.TestCase):
         self.mod = self.base / "mods" / "mirror_delivery.json"
 
     def run_cli(self, argv):
+        if argv[0] in {"play", "new-save"}:
+            save = Path(argv[2])
+            if not default_receipt_path(save).exists():
+                # Unit fixtures provide explicit local consent, not GitHub identity proof.
+                with redirect_stdout(io.StringIO()):
+                    main([
+                        "accept-covenant", str(save),
+                        "--account-id", "ci-fixture",
+                        "--repository", "example/phenomenal-engine",
+                        "--visibility", "public",
+                        "--storage-choice", "public",
+                        "--publication-understood",
+                        "--rules-accepted", "--agree", "--adult",
+                    ])
         buf = io.StringIO()
         with redirect_stdout(buf):
             main(argv)
