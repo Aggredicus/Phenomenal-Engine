@@ -57,7 +57,7 @@ def local_path(campaign: str) -> Path:
 def encode_state(memory: dict) -> bytes:
     if not verify_ledger(memory):
         raise GitHubSaveError("event ledger failed verification")
-    payload = (json.dumps(memory, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    payload = (json.dumps(memory, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
     if len(payload) > MAX_SAVE_BYTES:
         raise GitHubSaveError("public save exceeds the configured 900 KB limit")
     if _SECRET.search(payload.decode("utf-8")):
