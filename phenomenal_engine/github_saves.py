@@ -204,6 +204,7 @@ def public_preview(campaign: str, mod_path: str) -> dict:
         "path": path, "url": f"https://github.com/{REPOSITORY}/blob/{BRANCH}/{path}",
         "mod": {"id": mod["id"], "title": mod["title"], "version": mod["version"]},
         "public_json_top_level_fields": fields,
+        "reconstructed_on_load": ["last_scene_packet (from the verified event ledger)"],
         "save_disclosure": SAVE_DISCLOSURE,
         "additional_public_metadata": [
             "publication destination and current covenant version/digest",
