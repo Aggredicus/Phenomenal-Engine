@@ -79,6 +79,10 @@ These commands only print JSON choices. Even `--codespaces` **does not provision
 
 See `docs/codespaces_and_saves.md` and [GitHub's current Codespaces pricing](https://github.com/pricing).
 
+## Faster gameplay (no player token or local installation)
+
+See [Fast tokenless turns](docs/fast_tokenless_turns.md). The Python simulation is separated from GitHub persistence: a trusted host would perform **one in-memory Python engine step**, while the already authorized GitHub connected app reads and conditionally writes the save. Compact, deduplicated public JSON is about **53% smaller** on the measured Mirror Delivery turn-1 save. The new computation-only protocol does **not** provide an automatic Python executor by itself; a supported hosted execution bridge is still required before a ChatGPT turn can be fully autonomous. Codespaces remains optional/off.
+
 ## Opt-in public GitHub campaign saves
 
 A separate, fail-closed authenticated GitHub save backend is available through the existing Python runtime: [Public GitHub campaign saves](docs/github_public_saves.md). It publishes only to the dedicated public campaign-saves branch after per-campaign consent, first-publication confirmation, GitHub identity/visibility checks, and a verified commit. It does **not** provision Codespaces or automatically connect a ChatGPT terminal. No campaign is published by installation.
