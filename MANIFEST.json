@@ -6,8 +6,8 @@
   },
   {
     "path": ".github/workflows/ci.yml",
-    "bytes": 1783,
-    "sha256": "9111d4c06aa902e4a5b642ab4e48da82bf3793b3d074379a8c2663316f634482"
+    "bytes": 2067,
+    "sha256": "12189f9fe2447135f90760d84ed90663a94baa9834ef4b2bd6e88904cecb17b9"
   },
   {
     "path": ".github/workflows/publish-v0.4.0.yml",
@@ -26,8 +26,8 @@
   },
   {
     "path": "AGENT_BOOTLOADER.md",
-    "bytes": 7133,
-    "sha256": "693feeaff4ff410369aec59f6a3c07c26202398256927b14168b9e9b2b99c200"
+    "bytes": 7881,
+    "sha256": "15c870240fb762b87a7ff5b0eef7b65205b8eaf5bdced18cfba3bf55b1d73fa7"
   },
   {
     "path": "CHANGELOG.md",
@@ -61,13 +61,13 @@
   },
   {
     "path": "SECURITY.md",
-    "bytes": 5495,
-    "sha256": "175c26e08efa516b4219a61055dc00f344e334430b484f8b06527d78327c1d7f"
+    "bytes": 6329,
+    "sha256": "d49a1640742c21434a4dca9099d423cf60faa7af94b4f56aeaf85296d2d52502"
   },
   {
     "path": "START_HERE.md",
-    "bytes": 5410,
-    "sha256": "1d9ba2314eb2c21a017a3edc828aa2fb33b59155f466e52675ad144f1becbb92"
+    "bytes": 6379,
+    "sha256": "532e49a8a9e381b384c0a573d2536c58c29ba752b73e75af36c706b099d0085e"
   },
   {
     "path": "SUPPORT.md",
@@ -88,6 +88,16 @@
     "path": "adapters/google_sheets/director_bridge.gs",
     "bytes": 3299,
     "sha256": "6d3aa50a5a02f0d1627263cb06b26b3021ae2255d993918e264f3d488d169bd1"
+  },
+  {
+    "path": "docs/CONSENT_GATE_SPEC.md",
+    "bytes": 3705,
+    "sha256": "6802c319fb05633f1e884adbd771ca4b26ba5ed7bca985288cafc697ba905f1a"
+  },
+  {
+    "path": "docs/PLAYER_COVENANT.md",
+    "bytes": 14630,
+    "sha256": "765091be9ea978c1c1d90ceee27bc26823dfca3b13b1aad446b6f8e79b53fb69"
   },
   {
     "path": "docs/chatbot_quickstart.md",
@@ -116,8 +126,8 @@
   },
   {
     "path": "docs/integration_contract.md",
-    "bytes": 6653,
-    "sha256": "4b35bc909595bfd7e4444601d7dc22e50db28576c7a568965b68de8785753aa7"
+    "bytes": 7631,
+    "sha256": "173b4bbca995cb8883aa3cb7295ee5031d80be5ab22b78405681e1473dc07a85"
   },
   {
     "path": "docs/living_world_storytelling.md",
@@ -221,8 +231,13 @@
   },
   {
     "path": "phenomenal_engine/cli.py",
-    "bytes": 13769,
-    "sha256": "1f909b96763cba87e10f9c6d70342007a44477dd30db447257d9f1c94989ba78"
+    "bytes": 19145,
+    "sha256": "7bf272c558400e7073f62ef00b6c869c95ffcf4de56f0d6c9b174ed74a83da94"
+  },
+  {
+    "path": "phenomenal_engine/consent.py",
+    "bytes": 6084,
+    "sha256": "6d118bbc775f829a9b66fe1cffb677607b2f205ecd81287fbe0de33c806064df"
   },
   {
     "path": "phenomenal_engine/director.py",
@@ -340,6 +355,11 @@
     "sha256": "0e622e592ef68c133ef3cfc0dca6216a567440bc2a5ca58ff42895d2c86a2f8d"
   },
   {
+    "path": "tests/test_consent.py",
+    "bytes": 5441,
+    "sha256": "be14ca7a927ad5bbc65e9d87224a1bb1e8099b9f0341405f11d99c66c33ba066"
+  },
+  {
     "path": "tests/test_director.py",
     "bytes": 3181,
     "sha256": "f1c6f8bea0cc65569b5dbc7f04fba09292a35386f4e0fb5134efaa49ac770c51"
@@ -356,8 +376,8 @@
   },
   {
     "path": "tests/test_persistent_play.py",
-    "bytes": 4693,
-    "sha256": "2f6ef4f760e0aa24b3a1540a30165ffcbdd4d311ee0226afbe7d09d2d932c6be"
+    "bytes": 5478,
+    "sha256": "ea017beefbaef46c2b7b0b161addb23d2027614de2d564561c58de3de0200dcc"
   },
   {
     "path": "tests/test_physics.py",
