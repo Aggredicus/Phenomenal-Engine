@@ -54,10 +54,27 @@ def local_path(campaign: str) -> Path:
     return Path("runtime") / (campaign + ".json")
 
 
+def _last_ledger_scene(state: dict):
+    """The last committed scene is already included in the hashed event ledger."""
+    for event in reversed(state.get("event_ledger", [])):
+        if event.get("kind") == "player_action":
+            payload = event.get("payload", {})
+            if not isinstance(payload, dict) or not isinstance(payload.get("scene_packet"), dict):
+                raise GitHubSaveError("last action is missing its authoritative scene packet")
+            return payload["scene_packet"]
+    return None
+
+
 def encode_state(memory: dict) -> bytes:
     if not verify_ledger(memory):
         raise GitHubSaveError("event ledger failed verification")
-    payload = (json.dumps(memory, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
+    last = _last_ledger_scene(memory)
+    if memory.get("last_scene_packet") != last:
+        raise GitHubSaveError("last_scene_packet disagrees with the hashed event ledger")
+    # Public saves need only one scene copy. Decode recreates the derived field
+    # after verification; no event payload, RNG state, or game fact is discarded.
+    packed = {key: value for key, value in memory.items() if key != "last_scene_packet"}
+    payload = (json.dumps(packed, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
     if len(payload) > MAX_SAVE_BYTES:
         raise GitHubSaveError("public save exceeds the configured 900 KB limit")
     if _SECRET.search(payload.decode("utf-8")):
@@ -74,6 +91,10 @@ def decode_state(raw: bytes) -> dict:
         raise GitHubSaveError("remote campaign is not valid JSON") from exc
     if not isinstance(value, dict) or not verify_ledger(value):
         raise GitHubSaveError("remote campaign ledger is missing or invalid")
+    last = _last_ledger_scene(value)
+    if "last_scene_packet" in value and value["last_scene_packet"] != last:
+        raise GitHubSaveError("public save scene packet is inconsistent with its ledger")
+    value["last_scene_packet"] = last
     return value
 
 
