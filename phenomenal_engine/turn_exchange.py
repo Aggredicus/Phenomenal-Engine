@@ -118,7 +118,7 @@ def propose_turn(request: dict) -> dict:
         "expected_blob_sha": expected_sha,
         "proposed_blob_sha": git_blob_sha(proposed_bytes),
         "proposed_save_json": proposed_bytes.decode("utf-8"),
-        "scene_packet_location": "proposed_save_json.last_scene_packet",
+        "scene_packet_location": "proposed_save_json.event_ledger[-1].payload.scene_packet",
         "idempotency_key": key,
         "instructions": (
             "The trusted connected GitHub tool must update this exact path with "
