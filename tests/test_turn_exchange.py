@@ -65,10 +65,12 @@ class TurnExchangeTests(unittest.TestCase):
         result = propose_turn(self.request)
         raw = result["proposed_save_json"]
         state = decode_state(raw.encode("utf-8"))
-        self.assertEqual(raw, json.dumps(state, ensure_ascii=False, separators=(",", ":")) + "\n")
+        packed = {k: v for k, v in state.items() if k != "last_scene_packet"}
+        self.assertEqual(raw, json.dumps(packed, ensure_ascii=False, separators=(",", ":")) + "\n")
         pretty = json.dumps(state, ensure_ascii=False, indent=2) + "\n"
-        self.assertLess(len(raw.encode("utf-8")), len(pretty.encode("utf-8")) * 0.85)
-        self.assertEqual(json.loads(raw), state)
+        self.assertLess(len(raw.encode("utf-8")), len(pretty.encode("utf-8")) * 0.60)
+        self.assertEqual(json.loads(raw), packed)
+        self.assertEqual(state["last_scene_packet"], state["event_ledger"][-1]["payload"]["scene_packet"])
 
     def test_duplicate_does_not_run_again(self):
         result = propose_turn(self.request)
