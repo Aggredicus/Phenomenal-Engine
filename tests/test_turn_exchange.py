@@ -82,7 +82,8 @@ class TurnExchangeTests(unittest.TestCase):
         )
         duplicate = propose_turn(req)
         self.assertEqual(duplicate["status"], "duplicate")
-        self.assertTrue(duplicate["persisted"])  # caller says source is already a verified remote file
+        self.assertFalse(duplicate["persisted"])  # Python never attests to a remote write
+        self.assertFalse(duplicate["remote_verified"])
         self.assertFalse(duplicate["requires_write"])
         self.assertEqual(duplicate["turn"], 2)
         self.assertEqual(duplicate["scene_packet"]["action"], req["action"])
