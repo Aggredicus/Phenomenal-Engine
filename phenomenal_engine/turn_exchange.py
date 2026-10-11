@@ -100,8 +100,8 @@ def propose_turn(request: dict) -> dict:
         if duplicate.get("payload", {}).get("action") != action:
             raise TurnExchangeError("idempotency key was previously used with a different action")
         return {
-            "status": "duplicate", "persisted": True, "requires_write": False,
-            "authoritative_if_source_verified": True,
+            "status": "duplicate", "persisted": False, "requires_write": False,
+            "remote_verified": False, "authoritative_if_source_verified": True,
             "turn": state["turn"], "state_version": state["state_version"],
             "scene_packet": duplicate.get("payload", {}).get("scene_packet"),
             "expected_blob_sha": expected_sha,
