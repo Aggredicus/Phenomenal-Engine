@@ -49,7 +49,7 @@ python -m phenomenal_engine.turn_exchange < request.json
 
 It emits either:
 - **proposal** with proposed compact state JSON, resulting blob SHA, and the *original* expected SHA; **persisted=false** and **remote_verified=false**, so the story outcome must not be narrated yet.
-- **duplicate** with the already committed scene, no write required, after the source save was validated.
+- **duplicate** with the scene already in the supplied source, no new write required; Python still returns persisted=false and the connected app must verify that source really came from GitHub before narration.
 - **proposal_refused** for inconsistent metadata, stale revision, wrong mod, mismatched consent, invalid hash, tampered ledger or unsafe content.
 
 The actual commit and verification are **GitHub connected-app operations**, not Python REST requests. Only after a successful conditional update with original SHA and readback of the new blob can the external orchestrator report a canonical \`scene_packet\` to narration.
