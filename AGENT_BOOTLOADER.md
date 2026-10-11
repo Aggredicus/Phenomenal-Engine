@@ -68,6 +68,10 @@ A chatbot response is **not** an authoritative Phenomenal Engine turn unless the
 
 The mod and structured save outrank improvised narration. If prior prose conflicts with either, report the drift and reconcile it before continuing.
 
+### Opt-in public GitHub backend
+
+For public saved campaigns in Aggredicus/Phenomenal-Engine, use the dedicated implementation documented in docs/github_public_saves.md. Never commit an unconsented save, a token, or the local receipt. The command python -m phenomenal_engine.github_saves preview reveals the public destination and data categories without publishing. A first turn requires the PLAYER to review the full Player Covenant, accept all required acknowledgements, and separately confirm the first publication. The play command authenticates the account/repository and verifies GitHub persistence before returning a scene packet. A GitHub write tool without trusted Python execution still cannot run a genuine turn. Codespaces remains disabled unless separately requested.
+
 ## Required turn loop
 
 1. Load exactly one mod.
