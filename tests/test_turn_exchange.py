@@ -5,7 +5,7 @@ import unittest
 
 from phenomenal_engine.engine import Engine
 from phenomenal_engine.github_saves import (
-    BRANCH, REPOSITORY, decode_state, encode_state, remote_path,
+    BRANCH, REPOSITORY, GitHubSaveError, decode_state, encode_state, remote_path,
 )
 from phenomenal_engine.consent import covenant_digest
 from phenomenal_engine.memory import new_memory, verify_ledger
