@@ -197,7 +197,7 @@ def save_campaign(api: GitHubAPI, campaign: str, state: dict, prior_sha: str | N
 def public_preview(campaign: str, mod_path: str) -> dict:
     path = remote_path(campaign)
     mod = load_mod(mod_path)
-    fields = sorted(new_memory(mod, "preview-not-persisted").keys())
+    fields = sorted(set(new_memory(mod, "preview-not-persisted")) - {"last_scene_packet"})
     return {
         "status": "preview_only", "published": False,
         "repository": REPOSITORY, "visibility": "PUBLIC", "branch": BRANCH,
