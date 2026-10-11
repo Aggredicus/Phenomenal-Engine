@@ -26,8 +26,8 @@
   },
   {
     "path": "AGENT_BOOTLOADER.md",
-    "bytes": 7881,
-    "sha256": "15c870240fb762b87a7ff5b0eef7b65205b8eaf5bdced18cfba3bf55b1d73fa7"
+    "bytes": 8664,
+    "sha256": "0a9d93b4cd76319ef17cd1ae5969ca5669406a538154bc74721062e32944ca81"
   },
   {
     "path": "CHANGELOG.md",
@@ -46,8 +46,8 @@
   },
   {
     "path": "README.md",
-    "bytes": 11286,
-    "sha256": "cf37e43b106b674b3181ea2947af22ca4d16a21fa127e43bc0de5d073a1c1a7e"
+    "bytes": 11802,
+    "sha256": "2ae4d36117fd160fdb4ec33c01c27def3260cacc6a47ff7710e64ebc7c8e7002"
   },
   {
     "path": "RELEASE_NOTES_v0.4.0.md",
@@ -66,8 +66,8 @@
   },
   {
     "path": "START_HERE.md",
-    "bytes": 6379,
-    "sha256": "532e49a8a9e381b384c0a573d2536c58c29ba752b73e75af36c706b099d0085e"
+    "bytes": 7160,
+    "sha256": "152983027f4393fad3c8e2f5ece1f2efbd87b26b01d90836eb829e20a7bdde26"
   },
   {
     "path": "SUPPORT.md",
@@ -123,6 +123,11 @@
     "path": "docs/game_theory_and_ai_ethics.md",
     "bytes": 4138,
     "sha256": "e2a0f17b8df9a406b4a49f46dd37871de932ce26c29f4f87ce6e78597543743c"
+  },
+  {
+    "path": "docs/github_public_saves.md",
+    "bytes": 6119,
+    "sha256": "764a4facc55f5f44f1ba96ccc81276c8306dc456f1b3e1ca8c9eec2d9450e4f2"
   },
   {
     "path": "docs/image_pipeline.md",
@@ -260,6 +265,11 @@
     "sha256": "1f56560270f6830314680d3f29540464befe5421d99959c41d535e767ed21f80"
   },
   {
+    "path": "phenomenal_engine/github_saves.py",
+    "bytes": 14079,
+    "sha256": "fedf7aa228acdaf7476a286eac14c5528bd0c61dd37343657e88d88796546d84"
+  },
+  {
     "path": "phenomenal_engine/image_jobs.py",
     "bytes": 2055,
     "sha256": "261d79147db756ee99cc6cc385089acd619a0011b53596897873a2ea98bc19b5"
@@ -383,6 +393,11 @@
     "path": "tests/test_game_theory.py",
     "bytes": 658,
     "sha256": "58aeb3d70d877dba0e1641a1b92a7018dd8740e41df585a360f374346a78dcf1"
+  },
+  {
+    "path": "tests/test_github_saves.py",
+    "bytes": 8735,
+    "sha256": "cb0e6b02040b099e86d72b705c9f85d433591372b3633239dd34b5a6518f3f8f"
   },
   {
     "path": "tests/test_mods.py",
