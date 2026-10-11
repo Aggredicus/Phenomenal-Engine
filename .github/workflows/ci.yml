@@ -37,6 +37,10 @@ jobs:
         run: |
           set -euo pipefail
           tmp="$(mktemp -d)"
+          python -m phenomenal_engine accept-covenant "$tmp/mirror.json" \
+            --account-id ci-fixture --repository test-org/test-repo \
+            --visibility public --storage-choice public \
+            --publication-understood --rules-accepted --agree --adult >/dev/null
           python -m phenomenal_engine play mods/mirror_delivery.json "$tmp/mirror.json" "Begin." --seed ci --idempotency-key ci-1 >/dev/null
           python -m phenomenal_engine play mods/mirror_delivery.json "$tmp/mirror.json" "Inspect the Mir vault seal." --idempotency-key ci-2 >/dev/null
           python -m phenomenal_engine status "$tmp/mirror.json" >/dev/null
