@@ -5,9 +5,10 @@ import hashlib, json, os, tempfile, uuid
 
 from .story import initial_player_experience, initial_story_state
 from .travel import initial_travel_state
+from .economy import initial_economy
 
 SCHEMA_VERSION = "1.0.0"
-ENGINE_VERSION = "0.5.0"
+ENGINE_VERSION = "0.6.0"
 
 def canonical_json(obj) -> str:
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
@@ -67,6 +68,9 @@ def new_memory(mod: dict, seed: int | str, player_identity: dict | None = None) 
         "player_experience": initial_player_experience(),
         "travel_state": initial_travel_state(mod),
     }
+    economy = initial_economy(mod, int(memory["world_state"].get("world_time_minutes", 0)))
+    if economy is not None:
+        memory["economy"] = economy
     append_event(
         memory,
         "campaign_created",
@@ -80,7 +84,7 @@ def append_event(memory: dict, kind: str, payload: dict) -> dict:
         "index": len(memory["event_ledger"]),
         "turn": memory.get("turn", 0),
         "kind": kind,
-        "payload": payload,
+        "payload": _copy_json(payload),
         "prev_hash": prev,
     }
     body["hash"] = event_hash(body)

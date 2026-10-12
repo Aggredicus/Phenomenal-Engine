@@ -448,6 +448,9 @@ def advance_story(mod: dict, memory: dict, action: str, outcome: dict, rng) -> d
             mode = skill_modes.get(assessment.get("skill_id"), mode)
             if mode != "travel":
                 control = None
+    if outcome.get("economy_result"):
+        mode = "craft" if outcome["economy_result"]["kind"] in {"service", "work_job"} else "explore" if outcome["economy_result"]["kind"] == "visit_sector" else "social"
+        control = None
     _update_experience(memory, action, mode)
 
     travel_update = None

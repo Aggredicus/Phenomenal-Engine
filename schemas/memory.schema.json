@@ -131,6 +131,10 @@
           }
         }
       }
+    },
+    "economy": {
+      "type": "object",
+      "description": "Persistent station credits, inventory, vendors, accepted jobs, and market clocks; optional for older saves."
     }
   }
 }

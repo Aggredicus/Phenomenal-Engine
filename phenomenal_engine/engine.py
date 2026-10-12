@@ -1,4 +1,5 @@
 from __future__ import annotations
+from copy import deepcopy
 from .rng import derive_stream, PCG32
 from .probability import sample_skill_check, consequence_severity, hazard_probability
 from .memory import append_event, ENGINE_VERSION
@@ -6,6 +7,7 @@ from .narrative import build_scene_packet, PhenomenologyFrame
 from .image_jobs import should_generate, enqueue
 from .story import advance_story
 from .adjudication import prepare_adjudication, player_profile
+from .economy import prepare_command, resolve_assessment, execute_command, settle_economy
 
 class Engine:
     def __init__(self, mod: dict, memory: dict, queue_path: str | None = None):
@@ -20,7 +22,19 @@ class Engine:
     def _persist_rng(self):
         self.memory["rng_streams"] = {k: v.state_dict() for k, v in self.streams.items()}
 
-    def step(
+    def step(self, action, *args, economy_command=None, **kwargs):
+        if economy_command is None:
+            return self._step(action, *args, **kwargs)
+        # Transactions run against a private candidate. Any validation, capacity
+        # or resource error leaves caller memory and RNG untouched.
+        worker = Engine(self.mod, deepcopy(self.memory), self.queue_path)
+        packet = worker._step(action, *args, economy_command=economy_command, **kwargs)
+        self.memory.clear()
+        self.memory.update(worker.memory)
+        self.streams = worker.streams
+        return packet
+
+    def _step(
         self,
         action: str,
         skill: float = 0.0,
@@ -31,11 +45,18 @@ class Engine:
         idempotency_key: str | None = None,
         adjudication: dict | None = None,
         require_adjudication: bool = False,
+        economy_command: dict | None = None,
     ) -> dict:
+        adjudication_request = deepcopy(adjudication)
+        if economy_command is not None:
+            plan = prepare_command(self.mod, self.memory, economy_command)
+            adjudication = resolve_assessment(plan, adjudication)
         assessment = prepare_adjudication(
             self.mod, self.memory, action, adjudication, strict=require_adjudication,
             skill=skill, difficulty=difficulty, context=context,
         )
+        adopting_economy = bool(self.mod.get("economy_profile") and "economy" not in self.memory)
+        economy_before = settle_economy(self.mod, self.memory)
         # Assessment errors must never consume RNG, initialize profiles or increment a turn.
         if "player_profile" not in self.memory:
             self.memory["player_profile"] = player_profile(self.mod, self.memory)[0]
@@ -65,6 +86,10 @@ class Engine:
         else:
             outcome = self._resolve_check(assessment)
         outcome["adjudication"] = assessment
+        if adopting_economy:
+            outcome["economy_initialization"] = deepcopy(self.memory["economy"]["initialization"])
+        if economy_command is not None:
+            outcome["economy_result"] = execute_command(self.mod, self.memory, economy_command, outcome)
         hazard_rate = float(self.memory.get("world_state", {}).get("ambient_hazard_rate", 0.0))
         hazard_p = hazard_probability(hazard_rate, 1.0)
         hazard_u = self.streams["world"].random()
@@ -97,6 +122,7 @@ class Engine:
             outcome,
             self.streams["story"],
         )
+        story_update["economy_developments"] = economy_before + settle_economy(self.mod, self.memory)
         packet = build_scene_packet(
             self.mod,
             self.memory,
@@ -110,7 +136,8 @@ class Engine:
             "resolution": outcome,
             "story_update": story_update,
             "scene_packet": packet,
-            "adjudication_request": adjudication,
+            "adjudication_request": adjudication_request,
+            "economy_command": economy_command,
         }
         if idempotency_key:
             event_payload["idempotency_key"] = idempotency_key

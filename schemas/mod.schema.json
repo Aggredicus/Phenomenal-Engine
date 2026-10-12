@@ -154,6 +154,12 @@
           }
         }
       }
+    },
+    "economy_profile": {
+      "type": "string",
+      "enum": [
+        "mirror_delivery"
+      ]
     }
   }
 }

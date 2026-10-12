@@ -1,3 +1,19 @@
+# v0.6.0 — Living station economies
+
+- Added 9 station economies, 18 named vendors, 39 recurring job templates,
+  12 item types and distinct Gate/Nacre exploration districts.
+- Added bounded markets, stock/demand flows, scarcity/event/reputation prices,
+  finite vendor budgets, cargo capacity, credits and daily crew provisioning.
+- Added escrowed work/delivery quests, progress, deadlines, abandonment,
+  once-only rewards and station reputation.
+- Added paid inspections/refueling/repairs/cooling, owned-supply use, typed
+  economic commands and immutable quote previews for connected gameplay.
+- Added deterministic ongoing activity with logarithmic time catch-up,
+  observer-safe station projections and Nacre Center travel aliases.
+- Fixed historical event/sensory snapshot aliasing during in-memory turns.
+- Old saves initialize documented resources before their next new action;
+  development does not rewrite their campaign or advance a turn.
+
 # v0.5.0 — Explicit action adjudication
 
 - Added recorded character skills, explained challenge ratings and bounded,

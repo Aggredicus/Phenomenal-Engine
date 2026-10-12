@@ -88,3 +88,10 @@ These are *payload* byte comparisons, not end-to-end latency measurements. JSON 
 ## Limits
 
 The public save still includes cumulative event history and will grow with turn count. Removing *old* scene packets, compressing them further, or replacing the ledger with append-only shards needs a separate backwards-compatible migration and performance benchmark. Do not erase events or hashes simply to hit a payload target.
+
+## Station economy turns (v0.6.0)
+
+An authorized `economy_command` can accompany the action. Preview returns the
+validated quote and authored assessment; bind quote/odds hashes before proposal.
+Local markets, quest rewards, service effects and inventory are recorded by the
+same one-turn worker and conditional GitHub save. See [Station economies](station_economy.md).

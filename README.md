@@ -1,4 +1,4 @@
-# Phenomenal Engine v0.5.0
+# Phenomenal Engine v0.6.0
 
 **Fork it. Connect a write-capable chatbot AI. Say: `Play Phenomenal Engine.`**
 
@@ -78,6 +78,15 @@ python -m phenomenal_engine start --codespaces    # manual setup instructions on
 These commands only print JSON choices. Even `--codespaces` **does not provision or enable a Codespace remotely**; the user must choose to create one in GitHub after reviewing costs.
 
 See `docs/codespaces_and_saves.md` and [GitHub's current Codespaces pricing](https://github.com/pricing).
+
+## Living station economies
+
+[Station economies](docs/station_economy.md) provide 9 persistent markets,
+18 named vendors, 39 recurring job templates, 12 tradable supplies, local
+exploration districts, inventory/credits, delivery quests, once-only rewards,
+and paid ship servicing. Earth Escape Gate and Nacre Station have distinct
+businesses and local work. World time changes demand, stock and station activity;
+read-only market views and exact quotes come before authoritative transactions.
 
 ## Variable action odds and reliable routine tasks
 

@@ -72,6 +72,21 @@ The mod and structured save outrank improvised narration. If prior prose conflic
 
 For public saved campaigns in Aggredicus/Phenomenal-Engine, use the dedicated implementation documented in docs/github_public_saves.md. Never commit an unconsented save, a token, or the local receipt. The command python -m phenomenal_engine.github_saves preview reveals the public destination and data categories without publishing. A first turn requires the PLAYER to review the full Player Covenant, accept all required acknowledgements, and separately confirm the first publication. The play command authenticates the account/repository and verifies GitHub persistence before returning a scene packet. A GitHub write tool without trusted Python execution still cannot run a genuine turn. Codespaces remains disabled unless separately requested.
 
+## Station economy and quest rewards
+
+Read [Station economies](docs/station_economy.md) on arrival. The current scene
+packet's `station_economy` lists observable businesses, NPCs, districts, exact
+quotes, local services, job offers, inventory and credits. Offer concrete
+exploration and work without inventing goods, fees or rewards. Use an explicit
+`economy_command` matching the player's choice. Read-only preview reveals costs,
+time, cargo limits, odds and quote hashes before commitment. Work uses authored
+skills/difficulty and explained modifiers. Pay quests only through validated
+objective completion and `claim_reward`; retries never duplicate rewards.
+A typed service applies its recorded fee, time, parts and readiness effects.
+Do not treat a bare service request as completed maintenance. Keep Mir isolated.
+Existing saves adopt the documented resource baseline only on their next actual
+turn, without editing old history or consuming time during inspection.
+
 ## Required turn loop
 
 Before executing a new connected turn, follow [Action adjudication](docs/action_adjudication.md).

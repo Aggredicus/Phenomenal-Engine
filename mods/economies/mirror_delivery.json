@@ -1,0 +1,2950 @@
+{
+  "schema_version": "1.0.0",
+  "currency": "station credits",
+  "starting_resources": {
+    "credits": 4000,
+    "cargo_capacity_g": 2500000,
+    "crew_count": 3,
+    "inventory": {
+      "ration_pack": 135,
+      "life_support_day": 135,
+      "repair_kit": 3,
+      "coolant_pack": 2,
+      "medical_kit": 2,
+      "spare_seals": 6,
+      "propellant_canister": 3
+    }
+  },
+  "items": {
+    "ration_pack": {
+      "name": "Meal ration pack",
+      "base_price": 12,
+      "mass_g": 2000,
+      "category": "provisions",
+      "unit": "one crew-day of food",
+      "tradeable": true
+    },
+    "life_support_day": {
+      "name": "Life-support replenishment bundle",
+      "base_price": 18,
+      "mass_g": 3000,
+      "category": "provisions",
+      "unit": "one crew-day of abstract makeup/recycling supplies",
+      "tradeable": true
+    },
+    "repair_kit": {
+      "name": "Compatible repair kit",
+      "base_price": 120,
+      "mass_g": 8000,
+      "category": "repairs",
+      "unit": "kit",
+      "tradeable": true
+    },
+    "coolant_pack": {
+      "name": "Sealed coolant pack",
+      "base_price": 80,
+      "mass_g": 5000,
+      "category": "thermal",
+      "unit": "pack",
+      "tradeable": true
+    },
+    "propellant_canister": {
+      "name": "Certified propellant canister",
+      "base_price": 160,
+      "mass_g": 20000,
+      "category": "propulsion",
+      "unit": "service canister; abstract fuel unit",
+      "tradeable": true
+    },
+    "medical_kit": {
+      "name": "Medical replenishment kit",
+      "base_price": 150,
+      "mass_g": 5000,
+      "category": "provisions",
+      "unit": "kit",
+      "tradeable": true
+    },
+    "navigation_chip": {
+      "name": "Verified navigation package",
+      "base_price": 90,
+      "mass_g": 500,
+      "category": "navigation",
+      "unit": "licensed data package",
+      "tradeable": true
+    },
+    "salvage_alloy": {
+      "name": "Graded salvage alloy",
+      "base_price": 45,
+      "mass_g": 10000,
+      "category": "repairs",
+      "unit": "10 kg lot",
+      "tradeable": true
+    },
+    "sensor_package": {
+      "name": "Survey sensor package",
+      "base_price": 240,
+      "mass_g": 4000,
+      "category": "navigation",
+      "unit": "package",
+      "tradeable": true
+    },
+    "thermal_blanket": {
+      "name": "Reflective thermal blanket",
+      "base_price": 55,
+      "mass_g": 2000,
+      "category": "thermal",
+      "unit": "blanket",
+      "tradeable": true
+    },
+    "spare_seals": {
+      "name": "Compatible seal assortment",
+      "base_price": 30,
+      "mass_g": 1000,
+      "category": "repairs",
+      "unit": "assortment",
+      "tradeable": true
+    },
+    "comms_relay": {
+      "name": "Emergency relay unit",
+      "base_price": 180,
+      "mass_g": 2000,
+      "category": "navigation",
+      "unit": "unit",
+      "tradeable": true
+    }
+  },
+  "stations": {
+    "earth_escape_gate": {
+      "name": "Earth Escape Gate",
+      "description": "A busy outbound economy built on propellant, refitting, salvage and trusted dispatch.",
+      "sectors": [
+        {
+          "id": "propulsion_piers",
+          "name": "Propulsion Piers",
+          "description": "Tug operators and cooperative fuel crews work among long transfer lines.",
+          "hook": "Compare fuel quotes and ask what the tug crews have seen."
+        },
+        {
+          "id": "turning_point",
+          "name": "Turning Point Yard",
+          "description": "A working refit yard with radiator rigs and physical inspection cradles.",
+          "hook": "Dock service is available without opening the Mir vault."
+        },
+        {
+          "id": "market_ring",
+          "name": "Last Return Market",
+          "description": "Chandlers, medical suppliers and cooks serve outbound crews.",
+          "hook": "Provision for the long interval after Nacre."
+        },
+        {
+          "id": "salvage_quay",
+          "name": "Second Orbit Quay",
+          "description": "Graded alloy lots and repaired sensor housings wait for new owners.",
+          "hook": "Sell surplus equipment or take a sorting contract."
+        },
+        {
+          "id": "dispatch_hall",
+          "name": "Lantern Dispatch Hall",
+          "description": "Dispatchers match cargo, schedules and crews across the inward routes.",
+          "hook": "Find delivery work that follows your intended route."
+        },
+        {
+          "id": "observation_gallery",
+          "name": "Departure Gallery",
+          "description": "Families follow outbound beacons on delayed displays.",
+          "hook": "A tug captain remembers a courier changing its burn time."
+        }
+      ],
+      "vendors": {
+        "gate_fuel": {
+          "name": "Six Vectors Propellant Cooperative",
+          "npc": {
+            "id": "gate_fuel_keeper",
+            "name": "Lale Orin",
+            "role": "Fuel scheduler who wants reliable departure manifests",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "propulsion_piers",
+          "description": "Fuel scheduler who wants reliable departure manifests",
+          "markup_permille": 980,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "propellant_canister": {
+              "quantity": 24,
+              "capacity": 48,
+              "daily_restock": 4,
+              "daily_demand": 4
+            },
+            "coolant_pack": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "thermal_blanket": {
+              "quantity": 16,
+              "capacity": 32,
+              "daily_restock": 3,
+              "daily_demand": 3
+            }
+          }
+        },
+        "gate_yard": {
+          "name": "Turning Point Yard",
+          "npc": {
+            "id": "gate_yard_keeper",
+            "name": "Edda Sen",
+            "role": "Refit engineer who treats ship intelligences as colleagues",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "turning_point",
+          "description": "Refit engineer who treats ship intelligences as colleagues",
+          "markup_permille": 1000,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "propellant_canister": {
+              "quantity": 18,
+              "capacity": 36,
+              "daily_restock": 3,
+              "daily_demand": 3
+            },
+            "repair_kit": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "coolant_pack": {
+              "quantity": 14,
+              "capacity": 28,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "spare_seals": {
+              "quantity": 25,
+              "capacity": 50,
+              "daily_restock": 5,
+              "daily_demand": 5
+            }
+          }
+        },
+        "gate_outfitter": {
+          "name": "Last Return Chandlery",
+          "npc": {
+            "id": "gate_outfitter_keeper",
+            "name": "Teo Marsh",
+            "role": "Chandler balancing crew needs against freight delays",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "market_ring",
+          "description": "Chandler balancing crew needs against freight delays",
+          "markup_permille": 1030,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "ration_pack": {
+              "quantity": 180,
+              "capacity": 360,
+              "daily_restock": 36,
+              "daily_demand": 36
+            },
+            "life_support_day": {
+              "quantity": 180,
+              "capacity": 360,
+              "daily_restock": 36,
+              "daily_demand": 36
+            },
+            "medical_kit": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "spare_seals": {
+              "quantity": 30,
+              "capacity": 60,
+              "daily_restock": 6,
+              "daily_demand": 6
+            },
+            "comms_relay": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            }
+          }
+        },
+        "gate_salvage": {
+          "name": "Second Orbit Exchange",
+          "npc": {
+            "id": "gate_salvage_keeper",
+            "name": "Kemm Voss",
+            "role": "Salvage grader who pays for identifiable material rather than dramatic stories",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "salvage_quay",
+          "description": "Salvage grader who pays for identifiable material rather than dramatic stories",
+          "markup_permille": 920,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "salvage_alloy": {
+              "quantity": 28,
+              "capacity": 56,
+              "daily_restock": 5,
+              "daily_demand": 5
+            },
+            "sensor_package": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "repair_kit": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "thermal_blanket": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            }
+          }
+        },
+        "gate_dispatch": {
+          "name": "Lantern Relay Office",
+          "npc": {
+            "id": "gate_dispatch_keeper",
+            "name": "Amal Rhee",
+            "role": "Dispatcher who values accurate timings and mutual-aid coverage",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "dispatch_hall",
+          "description": "Dispatcher who values accurate timings and mutual-aid coverage",
+          "markup_permille": 1050,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "navigation_chip": {
+              "quantity": 18,
+              "capacity": 36,
+              "daily_restock": 3,
+              "daily_demand": 3
+            },
+            "comms_relay": {
+              "quantity": 14,
+              "capacity": 28,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "sensor_package": {
+              "quantity": 10,
+              "capacity": 20,
+              "daily_restock": 2,
+              "daily_demand": 2
+            }
+          }
+        }
+      },
+      "services": {
+        "inspection": {
+          "name": "Propulsion and readiness inspection",
+          "vendor_id": "gate_yard",
+          "price": 150,
+          "minutes": 60,
+          "materials": {},
+          "effects": {},
+          "description": "A documented readiness inspection; reports abstract hull, propulsion and thermal margins without mounting Mir."
+        },
+        "propellant_topup": {
+          "name": "Certified propulsion top-up",
+          "vendor_id": "gate_yard",
+          "price": 550,
+          "minutes": 90,
+          "materials": {
+            "propellant_canister": 2
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.12
+          },
+          "description": "Compatible propellant is transferred through the ship service lines; the vault remains isolated."
+        },
+        "hull_repair": {
+          "name": "Hull and fitting repairs",
+          "vendor_id": "gate_yard",
+          "price": 300,
+          "minutes": 120,
+          "materials": {
+            "repair_kit": 1
+          },
+          "effects": {
+            "morrowglass_hull": 0.1
+          },
+          "description": "Dock technicians repair physical hull/fitting damage."
+        },
+        "thermal_service": {
+          "name": "Cooling-loop service",
+          "vendor_id": "gate_yard",
+          "price": 350,
+          "minutes": 120,
+          "materials": {
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_thermal_margin": 0.1
+          },
+          "description": "Cooling loops are serviced and readiness improves; this is not a numerical thermal simulation."
+        },
+        "full_service": {
+          "name": "Courier departure service",
+          "vendor_id": "gate_yard",
+          "price": 1100,
+          "minutes": 240,
+          "materials": {
+            "propellant_canister": 2,
+            "repair_kit": 1,
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.15,
+            "morrowglass_hull": 0.05,
+            "morrowglass_thermal_margin": 0.12
+          },
+          "description": "A four-hour physical service package for propulsion, fittings and cooling. Mir is neither powered nor connected."
+        }
+      },
+      "jobs": {
+        "manifests": {
+          "title": "A Manifest Worth Trusting",
+          "sponsor_id": "gate_dispatch",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Reconcile an outbound cargo manifest against documented masses and custody records.",
+          "description": "Reconcile an outbound cargo manifest against documented masses and custody records.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 260,
+          "reward_items": {
+            "navigation_chip": 1
+          }
+        },
+        "tug_schedule": {
+          "title": "Untangle the Tug Queue",
+          "sponsor_id": "gate_fuel",
+          "kind": "work",
+          "skill_id": "leadership",
+          "difficulty": 0.5,
+          "challenge": "Mediate conflicting departure slots without disadvantaging a smaller tug crew.",
+          "description": "Mediate conflicting departure slots without disadvantaging a smaller tug crew.",
+          "work_minutes": 180,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 420,
+          "reward_items": {
+            "propellant_canister": 1
+          }
+        },
+        "sort_alloy": {
+          "title": "Give Old Metal a New Voyage",
+          "sponsor_id": "gate_salvage",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": -0.5,
+          "challenge": "Sort marked salvage lots using the provided assay and identification equipment.",
+          "description": "Sort marked salvage lots using the provided assay and identification equipment.",
+          "work_minutes": 90,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 220,
+          "reward_items": {
+            "salvage_alloy": 2
+          }
+        },
+        "sensor_survey": {
+          "title": "Eyes on the Transfer Corridor",
+          "sponsor_id": "gate_dispatch",
+          "kind": "work",
+          "skill_id": "piloting",
+          "difficulty": 1,
+          "challenge": "Plan and execute a short local survey with your existing maintenance drone and station sensors.",
+          "description": "Plan and execute a short local survey with your existing maintenance drone and station sensors.",
+          "work_minutes": 240,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 480,
+          "reward_items": {
+            "comms_relay": 1
+          }
+        },
+        "seal_inventory": {
+          "title": "The Missing Seal Assortment",
+          "sponsor_id": "gate_yard",
+          "kind": "work",
+          "skill_id": "investigation",
+          "difficulty": 0,
+          "challenge": "Trace a misplaced fitting shipment through public receiving records.",
+          "description": "Trace a misplaced fitting shipment through public receiving records.",
+          "work_minutes": 150,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 300,
+          "reward_items": {
+            "spare_seals": 3
+          }
+        },
+        "provisions": {
+          "title": "Meals for the Late Shift",
+          "sponsor_id": "gate_outfitter",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": -0.5,
+          "challenge": "Help route ordinary provisions to a delayed dock shift.",
+          "description": "Help route ordinary provisions to a delayed dock shift.",
+          "work_minutes": 90,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 180,
+          "reward_items": {
+            "ration_pack": 6
+          }
+        },
+        "nacre_crate": {
+          "title": "A Crate Already Going Your Way",
+          "sponsor_id": "gate_dispatch",
+          "kind": "delivery",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Carry a sealed 60 kg station-spares crate to Nacre; it is separate from Mir and never connected to its systems.",
+          "description": "Carry a sealed 60 kg station-spares crate to Nacre; it is separate from Mir and never connected to its systems.",
+          "work_minutes": 30,
+          "work_steps": 1,
+          "deadline_minutes": 43200,
+          "repeat_days": 5,
+          "reward_credits": 1000,
+          "reward_items": {},
+          "destination_id": "nacre_station",
+          "cargo_mass_g": 60000
+        },
+        "relay_cases": {
+          "title": "Far Relay Replacement Cases",
+          "sponsor_id": "gate_salvage",
+          "kind": "delivery",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Carry refurbished housings to the lunar relay by its ordinary physical delivery route.",
+          "description": "Carry refurbished housings to the lunar relay by its ordinary physical delivery route.",
+          "work_minutes": 30,
+          "work_steps": 1,
+          "deadline_minutes": 43200,
+          "repeat_days": 5,
+          "reward_credits": 800,
+          "reward_items": {},
+          "destination_id": "luna_far_relay",
+          "cargo_mass_g": 60000
+        }
+      },
+      "events": [
+        {
+          "id": "freight_arrival",
+          "text": "Earth Escape Gate: an inbound freight tender unloads certified replacement stock.",
+          "price_factors": {
+            "provisions": 950,
+            "repairs": 950
+          },
+          "restock_permille": 1500,
+          "demand_permille": 900
+        },
+        {
+          "id": "maintenance_shift",
+          "text": "Earth Escape Gate: a maintenance shift is hiring temporary hands; the repair counters are busy.",
+          "price_factors": {
+            "repairs": 1100,
+            "thermal": 1100
+          },
+          "restock_permille": 900,
+          "demand_permille": 1000
+        },
+        {
+          "id": "departure_wave",
+          "text": "Earth Escape Gate: a wave of outbound ships increases demand for fuel and life-support supplies.",
+          "price_factors": {
+            "propulsion": 1150,
+            "provisions": 1100
+          },
+          "restock_permille": 700,
+          "demand_permille": 1300
+        },
+        {
+          "id": "community_market",
+          "text": "Earth Escape Gate: crews gather at the common market to trade useful equipment and local news.",
+          "price_factors": {
+            "navigation": 950,
+            "thermal": 950
+          },
+          "restock_permille": 1100,
+          "demand_permille": 1050
+        }
+      ]
+    },
+    "nacre_station": {
+      "name": "Nacre Station / Nacre Center",
+      "description": "A inhabited repair and relay hub where growers, unions, medics and traders prepare crews for the long inward dive.",
+      "sectors": [
+        {
+          "id": "repair_spine",
+          "name": "Union Repair Spine",
+          "description": "Radiator crews and refit engineers work beneath reflective shades.",
+          "hook": "Find repairs, thermal work, and short maintenance contracts."
+        },
+        {
+          "id": "hydroponics_arcade",
+          "name": "Hydroponics Arcade",
+          "description": "Food growers and recycling cooperatives supply long inward voyages.",
+          "hook": "Compare provisions before the 35-day solar dive."
+        },
+        {
+          "id": "relay_balcony",
+          "name": "Relay Balcony",
+          "description": "Operators trade precise timing solutions and authenticated messages.",
+          "hook": "Earn navigation equipment by checking actual route data."
+        },
+        {
+          "id": "union_concourse",
+          "name": "Union Concourse",
+          "description": "Shift boards, labor meetings and community notices share the walls.",
+          "hook": "Hear competing views about the Mercury receiving team."
+        },
+        {
+          "id": "habitat_court",
+          "name": "Habitat Court",
+          "description": "Cooks, medics and visiting crews share a lively common space.",
+          "hook": "Assist everyday station work and build local trust."
+        },
+        {
+          "id": "shade_market",
+          "name": "Shade Market",
+          "description": "Reusable shielding and graded material change hands.",
+          "hook": "Find thermal equipment and sell surplus stock."
+        }
+      ],
+      "vendors": {
+        "nacre_yard": {
+          "name": "Pearlskin Refit Union",
+          "npc": {
+            "id": "nacre_yard_keeper",
+            "name": "Suri Pell",
+            "role": "Thermal engineer defending careful work against impossible schedules",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "repair_spine",
+          "description": "Thermal engineer defending careful work against impossible schedules",
+          "markup_permille": 950,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "repair_kit": {
+              "quantity": 25,
+              "capacity": 50,
+              "daily_restock": 5,
+              "daily_demand": 5
+            },
+            "coolant_pack": {
+              "quantity": 35,
+              "capacity": 70,
+              "daily_restock": 7,
+              "daily_demand": 7
+            },
+            "propellant_canister": {
+              "quantity": 22,
+              "capacity": 44,
+              "daily_restock": 4,
+              "daily_demand": 4
+            },
+            "spare_seals": {
+              "quantity": 45,
+              "capacity": 90,
+              "daily_restock": 9,
+              "daily_demand": 9
+            }
+          }
+        },
+        "nacre_growers": {
+          "name": "Arcade Growers Cooperative",
+          "npc": {
+            "id": "nacre_growers_keeper",
+            "name": "Hadi Nemm",
+            "role": "Grower proud of keeping crews fed without importing every meal",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "hydroponics_arcade",
+          "description": "Grower proud of keeping crews fed without importing every meal",
+          "markup_permille": 880,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "ration_pack": {
+              "quantity": 300,
+              "capacity": 600,
+              "daily_restock": 60,
+              "daily_demand": 60
+            },
+            "life_support_day": {
+              "quantity": 240,
+              "capacity": 480,
+              "daily_restock": 48,
+              "daily_demand": 48
+            },
+            "medical_kit": {
+              "quantity": 20,
+              "capacity": 40,
+              "daily_restock": 4,
+              "daily_demand": 4
+            }
+          }
+        },
+        "nacre_relay": {
+          "name": "Nacre Timing Exchange",
+          "npc": {
+            "id": "nacre_relay_keeper",
+            "name": "Oren Vale",
+            "role": "Relay analyst who distrusts unverified route shortcuts",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "relay_balcony",
+          "description": "Relay analyst who distrusts unverified route shortcuts",
+          "markup_permille": 970,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "navigation_chip": {
+              "quantity": 30,
+              "capacity": 60,
+              "daily_restock": 6,
+              "daily_demand": 6
+            },
+            "sensor_package": {
+              "quantity": 18,
+              "capacity": 36,
+              "daily_restock": 3,
+              "daily_demand": 3
+            },
+            "comms_relay": {
+              "quantity": 22,
+              "capacity": 44,
+              "daily_restock": 4,
+              "daily_demand": 4
+            }
+          }
+        },
+        "nacre_salvage": {
+          "name": "Shade Market Materials",
+          "npc": {
+            "id": "nacre_salvage_keeper",
+            "name": "Bela Kest",
+            "role": "Materials broker who knows the histories of repaired radiator panels",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "shade_market",
+          "description": "Materials broker who knows the histories of repaired radiator panels",
+          "markup_permille": 900,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "thermal_blanket": {
+              "quantity": 40,
+              "capacity": 80,
+              "daily_restock": 8,
+              "daily_demand": 8
+            },
+            "salvage_alloy": {
+              "quantity": 50,
+              "capacity": 100,
+              "daily_restock": 10,
+              "daily_demand": 10
+            },
+            "coolant_pack": {
+              "quantity": 20,
+              "capacity": 40,
+              "daily_restock": 4,
+              "daily_demand": 4
+            },
+            "repair_kit": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            }
+          }
+        },
+        "nacre_clinic": {
+          "name": "Habitat Mutual Clinic",
+          "npc": {
+            "id": "nacre_clinic_keeper",
+            "name": "Dr. Isa Rowan",
+            "role": "Clinic quartermaster keeping emergency reserves fairly distributed",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "habitat_court",
+          "description": "Clinic quartermaster keeping emergency reserves fairly distributed",
+          "markup_permille": 980,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "medical_kit": {
+              "quantity": 24,
+              "capacity": 48,
+              "daily_restock": 4,
+              "daily_demand": 4
+            },
+            "life_support_day": {
+              "quantity": 120,
+              "capacity": 240,
+              "daily_restock": 24,
+              "daily_demand": 24
+            },
+            "spare_seals": {
+              "quantity": 16,
+              "capacity": 32,
+              "daily_restock": 3,
+              "daily_demand": 3
+            }
+          }
+        },
+        "nacre_labor": {
+          "name": "Common Shift Desk",
+          "npc": {
+            "id": "nacre_labor_keeper",
+            "name": "Fenn Ari",
+            "role": "Labor representative connecting visiting crews with paid useful work",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "union_concourse",
+          "description": "Labor representative connecting visiting crews with paid useful work",
+          "markup_permille": 1000,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "repair_kit": {
+              "quantity": 10,
+              "capacity": 20,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "comms_relay": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "thermal_blanket": {
+              "quantity": 15,
+              "capacity": 30,
+              "daily_restock": 3,
+              "daily_demand": 3
+            }
+          }
+        }
+      },
+      "services": {
+        "inspection": {
+          "name": "Propulsion and readiness inspection",
+          "vendor_id": "nacre_yard",
+          "price": 150,
+          "minutes": 60,
+          "materials": {},
+          "effects": {},
+          "description": "A documented readiness inspection; reports abstract hull, propulsion and thermal margins without mounting Mir."
+        },
+        "propellant_topup": {
+          "name": "Certified propulsion top-up",
+          "vendor_id": "nacre_yard",
+          "price": 550,
+          "minutes": 90,
+          "materials": {
+            "propellant_canister": 2
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.12
+          },
+          "description": "Compatible propellant is transferred through the ship service lines; the vault remains isolated."
+        },
+        "hull_repair": {
+          "name": "Hull and fitting repairs",
+          "vendor_id": "nacre_yard",
+          "price": 300,
+          "minutes": 120,
+          "materials": {
+            "repair_kit": 1
+          },
+          "effects": {
+            "morrowglass_hull": 0.1
+          },
+          "description": "Dock technicians repair physical hull/fitting damage."
+        },
+        "thermal_service": {
+          "name": "Cooling-loop service",
+          "vendor_id": "nacre_yard",
+          "price": 350,
+          "minutes": 120,
+          "materials": {
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_thermal_margin": 0.1
+          },
+          "description": "Cooling loops are serviced and readiness improves; this is not a numerical thermal simulation."
+        },
+        "full_service": {
+          "name": "Courier departure service",
+          "vendor_id": "nacre_yard",
+          "price": 1100,
+          "minutes": 240,
+          "materials": {
+            "propellant_canister": 2,
+            "repair_kit": 1,
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.15,
+            "morrowglass_hull": 0.05,
+            "morrowglass_thermal_margin": 0.12
+          },
+          "description": "A four-hour physical service package for propulsion, fittings and cooling. Mir is neither powered nor connected."
+        }
+      },
+      "jobs": {
+        "radiator_survey": {
+          "title": "A Shade with a History",
+          "sponsor_id": "nacre_yard",
+          "kind": "work",
+          "skill_id": "investigation",
+          "difficulty": 0.5,
+          "challenge": "Inspect accessible radiator records and reconcile a maintenance discrepancy.",
+          "description": "Inspect accessible radiator records and reconcile a maintenance discrepancy.",
+          "work_minutes": 240,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 520,
+          "reward_items": {
+            "coolant_pack": 2
+          }
+        },
+        "thermal_shift": {
+          "title": "Hands for the Cooling Shift",
+          "sponsor_id": "nacre_yard",
+          "kind": "work",
+          "skill_id": "engineering",
+          "difficulty": -0.5,
+          "challenge": "Perform supervised routine fitting work with station-issued equipment.",
+          "description": "Perform supervised routine fitting work with station-issued equipment.",
+          "work_minutes": 180,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 280,
+          "reward_items": {
+            "repair_kit": 1
+          }
+        },
+        "harvest_manifest": {
+          "title": "Count the Harvest Twice",
+          "sponsor_id": "nacre_growers",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Reconcile grower deliveries with the next inward convoy demand.",
+          "description": "Reconcile grower deliveries with the next inward convoy demand.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 300,
+          "reward_items": {
+            "ration_pack": 12
+          }
+        },
+        "message_backlog": {
+          "title": "Letters Waiting for Home",
+          "sponsor_id": "nacre_relay",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": -0.5,
+          "challenge": "Sort authenticated civilian message traffic without accessing anyone's private contents.",
+          "description": "Sort authenticated civilian message traffic without accessing anyone's private contents.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 240,
+          "reward_items": {
+            "comms_relay": 1
+          }
+        },
+        "nav_fix": {
+          "title": "The Honest Ephemeris",
+          "sponsor_id": "nacre_relay",
+          "kind": "work",
+          "skill_id": "piloting",
+          "difficulty": 1,
+          "challenge": "Cross-check an inward transfer solution against independent optical records.",
+          "description": "Cross-check an inward transfer solution against independent optical records.",
+          "work_minutes": 240,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 620,
+          "reward_items": {
+            "navigation_chip": 2
+          }
+        },
+        "shift_mediation": {
+          "title": "Two Shifts, One Repair Cradle",
+          "sponsor_id": "nacre_labor",
+          "kind": "work",
+          "skill_id": "leadership",
+          "difficulty": 1,
+          "challenge": "Mediate competing repair priorities and document a consented schedule.",
+          "description": "Mediate competing repair priorities and document a consented schedule.",
+          "work_minutes": 240,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 550,
+          "reward_items": {
+            "thermal_blanket": 2
+          }
+        },
+        "clinic_stores": {
+          "title": "The Emergency Cupboard",
+          "sponsor_id": "nacre_clinic",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Reconcile labeled supplies while preserving the clinic's emergency allocation.",
+          "description": "Reconcile labeled supplies while preserving the clinic's emergency allocation.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 320,
+          "reward_items": {
+            "medical_kit": 1
+          }
+        },
+        "old_panels": {
+          "title": "Nothing Useful Goes to Waste",
+          "sponsor_id": "nacre_salvage",
+          "kind": "work",
+          "skill_id": "investigation",
+          "difficulty": 0,
+          "challenge": "Match graded panel lots to repairable assemblies using published inspection records.",
+          "description": "Match graded panel lots to repairable assemblies using published inspection records.",
+          "work_minutes": 180,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 400,
+          "reward_items": {
+            "salvage_alloy": 3
+          }
+        },
+        "shelter_supplies": {
+          "title": "Supplies for Shelter Nine",
+          "sponsor_id": "nacre_labor",
+          "kind": "delivery",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Carry separate physical service stores to Shelter Nine on a long inward leg.",
+          "description": "Carry separate physical service stores to Shelter Nine on a long inward leg.",
+          "work_minutes": 30,
+          "work_steps": 1,
+          "deadline_minutes": 86400,
+          "repeat_days": 5,
+          "reward_credits": 1600,
+          "reward_items": {},
+          "destination_id": "perihelic_shelter",
+          "cargo_mass_g": 60000
+        },
+        "mercury_tools": {
+          "title": "Tools Ahead of the Swarm",
+          "sponsor_id": "nacre_yard",
+          "kind": "delivery",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Deliver certified hand tools to the orbital receiving workers; allow time for an inspection.",
+          "description": "Deliver certified hand tools to the orbital receiving workers; allow time for an inspection.",
+          "work_minutes": 30,
+          "work_steps": 1,
+          "deadline_minutes": 115200,
+          "repeat_days": 5,
+          "reward_credits": 1800,
+          "reward_items": {},
+          "destination_id": "mercury_high_orbit",
+          "cargo_mass_g": 60000
+        }
+      },
+      "events": [
+        {
+          "id": "freight_arrival",
+          "text": "Nacre: an inbound freight tender unloads certified replacement stock.",
+          "price_factors": {
+            "provisions": 950,
+            "repairs": 950
+          },
+          "restock_permille": 1500,
+          "demand_permille": 900
+        },
+        {
+          "id": "maintenance_shift",
+          "text": "Nacre: a maintenance shift is hiring temporary hands; the repair counters are busy.",
+          "price_factors": {
+            "repairs": 1100,
+            "thermal": 1100
+          },
+          "restock_permille": 900,
+          "demand_permille": 1000
+        },
+        {
+          "id": "departure_wave",
+          "text": "Nacre: a wave of outbound ships increases demand for fuel and life-support supplies.",
+          "price_factors": {
+            "propulsion": 1150,
+            "provisions": 1100
+          },
+          "restock_permille": 700,
+          "demand_permille": 1300
+        },
+        {
+          "id": "community_market",
+          "text": "Nacre: crews gather at the common market to trade useful equipment and local news.",
+          "price_factors": {
+            "navigation": 950,
+            "thermal": 950
+          },
+          "restock_permille": 1100,
+          "demand_permille": 1050
+        }
+      ]
+    },
+    "cislunar_exchange": {
+      "name": "Cislunar Exchange",
+      "description": "Departure handoff, cargo brokerage and ordinary crew provisions.",
+      "sectors": [
+        {
+          "id": "service_docks",
+          "name": "Service Docks",
+          "description": "Departure handoff, cargo brokerage and ordinary crew provisions.",
+          "hook": "Inspect local service availability."
+        },
+        {
+          "id": "common_market",
+          "name": "Common Market",
+          "description": "Crews and local workers exchange supplies and practical news.",
+          "hook": "Look for paid station work and useful trade."
+        }
+      ],
+      "vendors": {
+        "cislunar_exchange_stores": {
+          "name": "Cislunar Exchange Stores",
+          "npc": {
+            "id": "cislunar_exchange_stores_keeper",
+            "name": "Nila Tern",
+            "role": "Local supplier balancing incoming freight against emergency reserves",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "service_docks",
+          "description": "Local supplier balancing incoming freight against emergency reserves",
+          "markup_permille": 1000,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "ration_pack": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "life_support_day": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "repair_kit": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "coolant_pack": {
+              "quantity": 16,
+              "capacity": 32,
+              "daily_restock": 3,
+              "daily_demand": 3
+            },
+            "propellant_canister": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "spare_seals": {
+              "quantity": 20,
+              "capacity": 40,
+              "daily_restock": 4,
+              "daily_demand": 4
+            },
+            "thermal_blanket": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "medical_kit": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "navigation_chip": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "comms_relay": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            }
+          }
+        }
+      },
+      "services": {
+        "inspection": {
+          "name": "Propulsion and readiness inspection",
+          "vendor_id": "cislunar_exchange_stores",
+          "price": 150,
+          "minutes": 60,
+          "materials": {},
+          "effects": {},
+          "description": "A documented readiness inspection; reports abstract hull, propulsion and thermal margins without mounting Mir."
+        },
+        "propellant_topup": {
+          "name": "Certified propulsion top-up",
+          "vendor_id": "cislunar_exchange_stores",
+          "price": 550,
+          "minutes": 90,
+          "materials": {
+            "propellant_canister": 2
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.12
+          },
+          "description": "Compatible propellant is transferred through the ship service lines; the vault remains isolated."
+        },
+        "hull_repair": {
+          "name": "Hull and fitting repairs",
+          "vendor_id": "cislunar_exchange_stores",
+          "price": 300,
+          "minutes": 120,
+          "materials": {
+            "repair_kit": 1
+          },
+          "effects": {
+            "morrowglass_hull": 0.1
+          },
+          "description": "Dock technicians repair physical hull/fitting damage."
+        },
+        "thermal_service": {
+          "name": "Cooling-loop service",
+          "vendor_id": "cislunar_exchange_stores",
+          "price": 350,
+          "minutes": 120,
+          "materials": {
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_thermal_margin": 0.1
+          },
+          "description": "Cooling loops are serviced and readiness improves; this is not a numerical thermal simulation."
+        },
+        "full_service": {
+          "name": "Courier departure service",
+          "vendor_id": "cislunar_exchange_stores",
+          "price": 1100,
+          "minutes": 240,
+          "materials": {
+            "propellant_canister": 2,
+            "repair_kit": 1,
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.15,
+            "morrowglass_hull": 0.05,
+            "morrowglass_thermal_margin": 0.12
+          },
+          "description": "A four-hour physical service package for propulsion, fittings and cooling. Mir is neither powered nor connected."
+        }
+      },
+      "jobs": {
+        "stores": {
+          "title": "Keep the Station Supplied",
+          "sponsor_id": "cislunar_exchange_stores",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "description": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 260,
+          "reward_items": {
+            "life_support_day": 6
+          }
+        },
+        "relay": {
+          "title": "A Beacon Worth Trusting",
+          "sponsor_id": "cislunar_exchange_stores",
+          "kind": "work",
+          "skill_id": "investigation",
+          "difficulty": 0.5,
+          "challenge": "Check accessible beacon maintenance records and document inconsistencies.",
+          "description": "Check accessible beacon maintenance records and document inconsistencies.",
+          "work_minutes": 180,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 360,
+          "reward_items": {
+            "navigation_chip": 1
+          }
+        },
+        "fittings": {
+          "title": "Fittings for the Next Crew",
+          "sponsor_id": "cislunar_exchange_stores",
+          "kind": "work",
+          "skill_id": "engineering",
+          "difficulty": -0.5,
+          "challenge": "Assist supervised fitting work using the station's equipment.",
+          "description": "Assist supervised fitting work using the station's equipment.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 220,
+          "reward_items": {
+            "spare_seals": 2
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "freight_arrival",
+          "text": "Cislunar Exchange: an inbound freight tender unloads certified replacement stock.",
+          "price_factors": {
+            "provisions": 950,
+            "repairs": 950
+          },
+          "restock_permille": 1500,
+          "demand_permille": 900
+        },
+        {
+          "id": "maintenance_shift",
+          "text": "Cislunar Exchange: a maintenance shift is hiring temporary hands; the repair counters are busy.",
+          "price_factors": {
+            "repairs": 1100,
+            "thermal": 1100
+          },
+          "restock_permille": 900,
+          "demand_permille": 1000
+        },
+        {
+          "id": "departure_wave",
+          "text": "Cislunar Exchange: a wave of outbound ships increases demand for fuel and life-support supplies.",
+          "price_factors": {
+            "propulsion": 1150,
+            "provisions": 1100
+          },
+          "restock_permille": 700,
+          "demand_permille": 1300
+        },
+        {
+          "id": "community_market",
+          "text": "Cislunar Exchange: crews gather at the common market to trade useful equipment and local news.",
+          "price_factors": {
+            "navigation": 950,
+            "thermal": 950
+          },
+          "restock_permille": 1100,
+          "demand_permille": 1050
+        }
+      ]
+    },
+    "luna_far_relay": {
+      "name": "Far Relay",
+      "description": "Lunar relay technicians and cautious communications specialists.",
+      "sectors": [
+        {
+          "id": "service_docks",
+          "name": "Service Docks",
+          "description": "Lunar relay technicians and cautious communications specialists.",
+          "hook": "Inspect local service availability."
+        },
+        {
+          "id": "common_market",
+          "name": "Common Market",
+          "description": "Crews and local workers exchange supplies and practical news.",
+          "hook": "Look for paid station work and useful trade."
+        }
+      ],
+      "vendors": {
+        "luna_far_relay_stores": {
+          "name": "Far Relay Stores",
+          "npc": {
+            "id": "luna_far_relay_stores_keeper",
+            "name": "Cato Im",
+            "role": "Local supplier balancing incoming freight against emergency reserves",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "service_docks",
+          "description": "Local supplier balancing incoming freight against emergency reserves",
+          "markup_permille": 1080,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "ration_pack": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "life_support_day": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "repair_kit": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "coolant_pack": {
+              "quantity": 16,
+              "capacity": 32,
+              "daily_restock": 3,
+              "daily_demand": 3
+            },
+            "propellant_canister": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "spare_seals": {
+              "quantity": 20,
+              "capacity": 40,
+              "daily_restock": 4,
+              "daily_demand": 4
+            },
+            "thermal_blanket": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "medical_kit": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "navigation_chip": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "comms_relay": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            }
+          }
+        }
+      },
+      "services": {
+        "inspection": {
+          "name": "Propulsion and readiness inspection",
+          "vendor_id": "luna_far_relay_stores",
+          "price": 150,
+          "minutes": 60,
+          "materials": {},
+          "effects": {},
+          "description": "A documented readiness inspection; reports abstract hull, propulsion and thermal margins without mounting Mir."
+        },
+        "propellant_topup": {
+          "name": "Certified propulsion top-up",
+          "vendor_id": "luna_far_relay_stores",
+          "price": 550,
+          "minutes": 90,
+          "materials": {
+            "propellant_canister": 2
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.12
+          },
+          "description": "Compatible propellant is transferred through the ship service lines; the vault remains isolated."
+        },
+        "hull_repair": {
+          "name": "Hull and fitting repairs",
+          "vendor_id": "luna_far_relay_stores",
+          "price": 300,
+          "minutes": 120,
+          "materials": {
+            "repair_kit": 1
+          },
+          "effects": {
+            "morrowglass_hull": 0.1
+          },
+          "description": "Dock technicians repair physical hull/fitting damage."
+        },
+        "thermal_service": {
+          "name": "Cooling-loop service",
+          "vendor_id": "luna_far_relay_stores",
+          "price": 350,
+          "minutes": 120,
+          "materials": {
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_thermal_margin": 0.1
+          },
+          "description": "Cooling loops are serviced and readiness improves; this is not a numerical thermal simulation."
+        },
+        "full_service": {
+          "name": "Courier departure service",
+          "vendor_id": "luna_far_relay_stores",
+          "price": 1100,
+          "minutes": 240,
+          "materials": {
+            "propellant_canister": 2,
+            "repair_kit": 1,
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.15,
+            "morrowglass_hull": 0.05,
+            "morrowglass_thermal_margin": 0.12
+          },
+          "description": "A four-hour physical service package for propulsion, fittings and cooling. Mir is neither powered nor connected."
+        }
+      },
+      "jobs": {
+        "stores": {
+          "title": "Keep the Station Supplied",
+          "sponsor_id": "luna_far_relay_stores",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "description": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 260,
+          "reward_items": {
+            "life_support_day": 6
+          }
+        },
+        "relay": {
+          "title": "A Beacon Worth Trusting",
+          "sponsor_id": "luna_far_relay_stores",
+          "kind": "work",
+          "skill_id": "investigation",
+          "difficulty": 0.5,
+          "challenge": "Check accessible beacon maintenance records and document inconsistencies.",
+          "description": "Check accessible beacon maintenance records and document inconsistencies.",
+          "work_minutes": 180,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 360,
+          "reward_items": {
+            "navigation_chip": 1
+          }
+        },
+        "fittings": {
+          "title": "Fittings for the Next Crew",
+          "sponsor_id": "luna_far_relay_stores",
+          "kind": "work",
+          "skill_id": "engineering",
+          "difficulty": -0.5,
+          "challenge": "Assist supervised fitting work using the station's equipment.",
+          "description": "Assist supervised fitting work using the station's equipment.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 220,
+          "reward_items": {
+            "spare_seals": 2
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "freight_arrival",
+          "text": "Far Relay: an inbound freight tender unloads certified replacement stock.",
+          "price_factors": {
+            "provisions": 950,
+            "repairs": 950
+          },
+          "restock_permille": 1500,
+          "demand_permille": 900
+        },
+        {
+          "id": "maintenance_shift",
+          "text": "Far Relay: a maintenance shift is hiring temporary hands; the repair counters are busy.",
+          "price_factors": {
+            "repairs": 1100,
+            "thermal": 1100
+          },
+          "restock_permille": 900,
+          "demand_permille": 1000
+        },
+        {
+          "id": "departure_wave",
+          "text": "Far Relay: a wave of outbound ships increases demand for fuel and life-support supplies.",
+          "price_factors": {
+            "propulsion": 1150,
+            "provisions": 1100
+          },
+          "restock_permille": 700,
+          "demand_permille": 1300
+        },
+        {
+          "id": "community_market",
+          "text": "Far Relay: crews gather at the common market to trade useful equipment and local news.",
+          "price_factors": {
+            "navigation": 950,
+            "thermal": 950
+          },
+          "restock_permille": 1100,
+          "demand_permille": 1050
+        }
+      ]
+    },
+    "venus_tangent": {
+      "name": "Venus Tangent",
+      "description": "Beacon service, rescue infrastructure and passing merchant crews.",
+      "sectors": [
+        {
+          "id": "service_docks",
+          "name": "Service Docks",
+          "description": "Beacon service, rescue infrastructure and passing merchant crews.",
+          "hook": "Inspect local service availability."
+        },
+        {
+          "id": "common_market",
+          "name": "Common Market",
+          "description": "Crews and local workers exchange supplies and practical news.",
+          "hook": "Look for paid station work and useful trade."
+        }
+      ],
+      "vendors": {
+        "venus_tangent_stores": {
+          "name": "Venus Tangent Stores",
+          "npc": {
+            "id": "venus_tangent_stores_keeper",
+            "name": "Ravi Sol",
+            "role": "Local supplier balancing incoming freight against emergency reserves",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "service_docks",
+          "description": "Local supplier balancing incoming freight against emergency reserves",
+          "markup_permille": 1120,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "ration_pack": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "life_support_day": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "repair_kit": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "coolant_pack": {
+              "quantity": 16,
+              "capacity": 32,
+              "daily_restock": 3,
+              "daily_demand": 3
+            },
+            "propellant_canister": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "spare_seals": {
+              "quantity": 20,
+              "capacity": 40,
+              "daily_restock": 4,
+              "daily_demand": 4
+            },
+            "thermal_blanket": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "medical_kit": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "navigation_chip": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "comms_relay": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            }
+          }
+        }
+      },
+      "services": {
+        "inspection": {
+          "name": "Propulsion and readiness inspection",
+          "vendor_id": "venus_tangent_stores",
+          "price": 150,
+          "minutes": 60,
+          "materials": {},
+          "effects": {},
+          "description": "A documented readiness inspection; reports abstract hull, propulsion and thermal margins without mounting Mir."
+        },
+        "propellant_topup": {
+          "name": "Certified propulsion top-up",
+          "vendor_id": "venus_tangent_stores",
+          "price": 550,
+          "minutes": 90,
+          "materials": {
+            "propellant_canister": 2
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.12
+          },
+          "description": "Compatible propellant is transferred through the ship service lines; the vault remains isolated."
+        },
+        "hull_repair": {
+          "name": "Hull and fitting repairs",
+          "vendor_id": "venus_tangent_stores",
+          "price": 300,
+          "minutes": 120,
+          "materials": {
+            "repair_kit": 1
+          },
+          "effects": {
+            "morrowglass_hull": 0.1
+          },
+          "description": "Dock technicians repair physical hull/fitting damage."
+        },
+        "thermal_service": {
+          "name": "Cooling-loop service",
+          "vendor_id": "venus_tangent_stores",
+          "price": 350,
+          "minutes": 120,
+          "materials": {
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_thermal_margin": 0.1
+          },
+          "description": "Cooling loops are serviced and readiness improves; this is not a numerical thermal simulation."
+        },
+        "full_service": {
+          "name": "Courier departure service",
+          "vendor_id": "venus_tangent_stores",
+          "price": 1100,
+          "minutes": 240,
+          "materials": {
+            "propellant_canister": 2,
+            "repair_kit": 1,
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.15,
+            "morrowglass_hull": 0.05,
+            "morrowglass_thermal_margin": 0.12
+          },
+          "description": "A four-hour physical service package for propulsion, fittings and cooling. Mir is neither powered nor connected."
+        }
+      },
+      "jobs": {
+        "stores": {
+          "title": "Keep the Station Supplied",
+          "sponsor_id": "venus_tangent_stores",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "description": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 260,
+          "reward_items": {
+            "life_support_day": 6
+          }
+        },
+        "relay": {
+          "title": "A Beacon Worth Trusting",
+          "sponsor_id": "venus_tangent_stores",
+          "kind": "work",
+          "skill_id": "investigation",
+          "difficulty": 0.5,
+          "challenge": "Check accessible beacon maintenance records and document inconsistencies.",
+          "description": "Check accessible beacon maintenance records and document inconsistencies.",
+          "work_minutes": 180,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 360,
+          "reward_items": {
+            "navigation_chip": 1
+          }
+        },
+        "fittings": {
+          "title": "Fittings for the Next Crew",
+          "sponsor_id": "venus_tangent_stores",
+          "kind": "work",
+          "skill_id": "engineering",
+          "difficulty": -0.5,
+          "challenge": "Assist supervised fitting work using the station's equipment.",
+          "description": "Assist supervised fitting work using the station's equipment.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 220,
+          "reward_items": {
+            "spare_seals": 2
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "freight_arrival",
+          "text": "Venus Tangent: an inbound freight tender unloads certified replacement stock.",
+          "price_factors": {
+            "provisions": 950,
+            "repairs": 950
+          },
+          "restock_permille": 1500,
+          "demand_permille": 900
+        },
+        {
+          "id": "maintenance_shift",
+          "text": "Venus Tangent: a maintenance shift is hiring temporary hands; the repair counters are busy.",
+          "price_factors": {
+            "repairs": 1100,
+            "thermal": 1100
+          },
+          "restock_permille": 900,
+          "demand_permille": 1000
+        },
+        {
+          "id": "departure_wave",
+          "text": "Venus Tangent: a wave of outbound ships increases demand for fuel and life-support supplies.",
+          "price_factors": {
+            "propulsion": 1150,
+            "provisions": 1100
+          },
+          "restock_permille": 700,
+          "demand_permille": 1300
+        },
+        {
+          "id": "community_market",
+          "text": "Venus Tangent: crews gather at the common market to trade useful equipment and local news.",
+          "price_factors": {
+            "navigation": 950,
+            "thermal": 950
+          },
+          "restock_permille": 1100,
+          "demand_permille": 1050
+        }
+      ]
+    },
+    "perihelic_shelter": {
+      "name": "Perihelic Shelter Nine",
+      "description": "Emergency stores, cooling repairs and tightly rationed service capacity.",
+      "sectors": [
+        {
+          "id": "service_docks",
+          "name": "Service Docks",
+          "description": "Emergency stores, cooling repairs and tightly rationed service capacity.",
+          "hook": "Inspect local service availability."
+        },
+        {
+          "id": "common_market",
+          "name": "Common Market",
+          "description": "Crews and local workers exchange supplies and practical news.",
+          "hook": "Look for paid station work and useful trade."
+        }
+      ],
+      "vendors": {
+        "perihelic_shelter_stores": {
+          "name": "Perihelic Shelter Nine Stores",
+          "npc": {
+            "id": "perihelic_shelter_stores_keeper",
+            "name": "Mina Vos",
+            "role": "Local supplier balancing incoming freight against emergency reserves",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "service_docks",
+          "description": "Local supplier balancing incoming freight against emergency reserves",
+          "markup_permille": 1200,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "ration_pack": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "life_support_day": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "repair_kit": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "coolant_pack": {
+              "quantity": 16,
+              "capacity": 32,
+              "daily_restock": 3,
+              "daily_demand": 3
+            },
+            "propellant_canister": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "spare_seals": {
+              "quantity": 20,
+              "capacity": 40,
+              "daily_restock": 4,
+              "daily_demand": 4
+            },
+            "thermal_blanket": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "medical_kit": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "navigation_chip": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "comms_relay": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            }
+          }
+        }
+      },
+      "services": {
+        "inspection": {
+          "name": "Propulsion and readiness inspection",
+          "vendor_id": "perihelic_shelter_stores",
+          "price": 150,
+          "minutes": 60,
+          "materials": {},
+          "effects": {},
+          "description": "A documented readiness inspection; reports abstract hull, propulsion and thermal margins without mounting Mir."
+        },
+        "propellant_topup": {
+          "name": "Certified propulsion top-up",
+          "vendor_id": "perihelic_shelter_stores",
+          "price": 550,
+          "minutes": 90,
+          "materials": {
+            "propellant_canister": 2
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.12
+          },
+          "description": "Compatible propellant is transferred through the ship service lines; the vault remains isolated."
+        },
+        "hull_repair": {
+          "name": "Hull and fitting repairs",
+          "vendor_id": "perihelic_shelter_stores",
+          "price": 300,
+          "minutes": 120,
+          "materials": {
+            "repair_kit": 1
+          },
+          "effects": {
+            "morrowglass_hull": 0.1
+          },
+          "description": "Dock technicians repair physical hull/fitting damage."
+        },
+        "thermal_service": {
+          "name": "Cooling-loop service",
+          "vendor_id": "perihelic_shelter_stores",
+          "price": 350,
+          "minutes": 120,
+          "materials": {
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_thermal_margin": 0.1
+          },
+          "description": "Cooling loops are serviced and readiness improves; this is not a numerical thermal simulation."
+        },
+        "full_service": {
+          "name": "Courier departure service",
+          "vendor_id": "perihelic_shelter_stores",
+          "price": 1100,
+          "minutes": 240,
+          "materials": {
+            "propellant_canister": 2,
+            "repair_kit": 1,
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.15,
+            "morrowglass_hull": 0.05,
+            "morrowglass_thermal_margin": 0.12
+          },
+          "description": "A four-hour physical service package for propulsion, fittings and cooling. Mir is neither powered nor connected."
+        }
+      },
+      "jobs": {
+        "stores": {
+          "title": "Keep the Station Supplied",
+          "sponsor_id": "perihelic_shelter_stores",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "description": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 260,
+          "reward_items": {
+            "life_support_day": 6
+          }
+        },
+        "relay": {
+          "title": "A Beacon Worth Trusting",
+          "sponsor_id": "perihelic_shelter_stores",
+          "kind": "work",
+          "skill_id": "investigation",
+          "difficulty": 0.5,
+          "challenge": "Check accessible beacon maintenance records and document inconsistencies.",
+          "description": "Check accessible beacon maintenance records and document inconsistencies.",
+          "work_minutes": 180,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 360,
+          "reward_items": {
+            "navigation_chip": 1
+          }
+        },
+        "fittings": {
+          "title": "Fittings for the Next Crew",
+          "sponsor_id": "perihelic_shelter_stores",
+          "kind": "work",
+          "skill_id": "engineering",
+          "difficulty": -0.5,
+          "challenge": "Assist supervised fitting work using the station's equipment.",
+          "description": "Assist supervised fitting work using the station's equipment.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 220,
+          "reward_items": {
+            "spare_seals": 2
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "freight_arrival",
+          "text": "Perihelic Shelter Nine: an inbound freight tender unloads certified replacement stock.",
+          "price_factors": {
+            "provisions": 950,
+            "repairs": 950
+          },
+          "restock_permille": 1500,
+          "demand_permille": 900
+        },
+        {
+          "id": "maintenance_shift",
+          "text": "Perihelic Shelter Nine: a maintenance shift is hiring temporary hands; the repair counters are busy.",
+          "price_factors": {
+            "repairs": 1100,
+            "thermal": 1100
+          },
+          "restock_permille": 900,
+          "demand_permille": 1000
+        },
+        {
+          "id": "departure_wave",
+          "text": "Perihelic Shelter Nine: a wave of outbound ships increases demand for fuel and life-support supplies.",
+          "price_factors": {
+            "propulsion": 1150,
+            "provisions": 1100
+          },
+          "restock_permille": 700,
+          "demand_permille": 1300
+        },
+        {
+          "id": "community_market",
+          "text": "Perihelic Shelter Nine: crews gather at the common market to trade useful equipment and local news.",
+          "price_factors": {
+            "navigation": 950,
+            "thermal": 950
+          },
+          "restock_permille": 1100,
+          "demand_permille": 1050
+        }
+      ]
+    },
+    "mercury_high_orbit": {
+      "name": "Mercury High Orbit",
+      "description": "Inspection support, quarantine services and receiving-team logistics.",
+      "sectors": [
+        {
+          "id": "service_docks",
+          "name": "Service Docks",
+          "description": "Inspection support, quarantine services and receiving-team logistics.",
+          "hook": "Inspect local service availability."
+        },
+        {
+          "id": "common_market",
+          "name": "Common Market",
+          "description": "Crews and local workers exchange supplies and practical news.",
+          "hook": "Look for paid station work and useful trade."
+        }
+      ],
+      "vendors": {
+        "mercury_high_orbit_stores": {
+          "name": "Mercury High Orbit Stores",
+          "npc": {
+            "id": "mercury_high_orbit_stores_keeper",
+            "name": "Len Ash",
+            "role": "Local supplier balancing incoming freight against emergency reserves",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "service_docks",
+          "description": "Local supplier balancing incoming freight against emergency reserves",
+          "markup_permille": 1150,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "ration_pack": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "life_support_day": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "repair_kit": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "coolant_pack": {
+              "quantity": 16,
+              "capacity": 32,
+              "daily_restock": 3,
+              "daily_demand": 3
+            },
+            "propellant_canister": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "spare_seals": {
+              "quantity": 20,
+              "capacity": 40,
+              "daily_restock": 4,
+              "daily_demand": 4
+            },
+            "thermal_blanket": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "medical_kit": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "navigation_chip": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "comms_relay": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            }
+          }
+        }
+      },
+      "services": {
+        "inspection": {
+          "name": "Propulsion and readiness inspection",
+          "vendor_id": "mercury_high_orbit_stores",
+          "price": 150,
+          "minutes": 60,
+          "materials": {},
+          "effects": {},
+          "description": "A documented readiness inspection; reports abstract hull, propulsion and thermal margins without mounting Mir."
+        },
+        "propellant_topup": {
+          "name": "Certified propulsion top-up",
+          "vendor_id": "mercury_high_orbit_stores",
+          "price": 550,
+          "minutes": 90,
+          "materials": {
+            "propellant_canister": 2
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.12
+          },
+          "description": "Compatible propellant is transferred through the ship service lines; the vault remains isolated."
+        },
+        "hull_repair": {
+          "name": "Hull and fitting repairs",
+          "vendor_id": "mercury_high_orbit_stores",
+          "price": 300,
+          "minutes": 120,
+          "materials": {
+            "repair_kit": 1
+          },
+          "effects": {
+            "morrowglass_hull": 0.1
+          },
+          "description": "Dock technicians repair physical hull/fitting damage."
+        },
+        "thermal_service": {
+          "name": "Cooling-loop service",
+          "vendor_id": "mercury_high_orbit_stores",
+          "price": 350,
+          "minutes": 120,
+          "materials": {
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_thermal_margin": 0.1
+          },
+          "description": "Cooling loops are serviced and readiness improves; this is not a numerical thermal simulation."
+        },
+        "full_service": {
+          "name": "Courier departure service",
+          "vendor_id": "mercury_high_orbit_stores",
+          "price": 1100,
+          "minutes": 240,
+          "materials": {
+            "propellant_canister": 2,
+            "repair_kit": 1,
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.15,
+            "morrowglass_hull": 0.05,
+            "morrowglass_thermal_margin": 0.12
+          },
+          "description": "A four-hour physical service package for propulsion, fittings and cooling. Mir is neither powered nor connected."
+        }
+      },
+      "jobs": {
+        "stores": {
+          "title": "Keep the Station Supplied",
+          "sponsor_id": "mercury_high_orbit_stores",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "description": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 260,
+          "reward_items": {
+            "life_support_day": 6
+          }
+        },
+        "relay": {
+          "title": "A Beacon Worth Trusting",
+          "sponsor_id": "mercury_high_orbit_stores",
+          "kind": "work",
+          "skill_id": "investigation",
+          "difficulty": 0.5,
+          "challenge": "Check accessible beacon maintenance records and document inconsistencies.",
+          "description": "Check accessible beacon maintenance records and document inconsistencies.",
+          "work_minutes": 180,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 360,
+          "reward_items": {
+            "navigation_chip": 1
+          }
+        },
+        "fittings": {
+          "title": "Fittings for the Next Crew",
+          "sponsor_id": "mercury_high_orbit_stores",
+          "kind": "work",
+          "skill_id": "engineering",
+          "difficulty": -0.5,
+          "challenge": "Assist supervised fitting work using the station's equipment.",
+          "description": "Assist supervised fitting work using the station's equipment.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 220,
+          "reward_items": {
+            "spare_seals": 2
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "freight_arrival",
+          "text": "Mercury High Orbit: an inbound freight tender unloads certified replacement stock.",
+          "price_factors": {
+            "provisions": 950,
+            "repairs": 950
+          },
+          "restock_permille": 1500,
+          "demand_permille": 900
+        },
+        {
+          "id": "maintenance_shift",
+          "text": "Mercury High Orbit: a maintenance shift is hiring temporary hands; the repair counters are busy.",
+          "price_factors": {
+            "repairs": 1100,
+            "thermal": 1100
+          },
+          "restock_permille": 900,
+          "demand_permille": 1000
+        },
+        {
+          "id": "departure_wave",
+          "text": "Mercury High Orbit: a wave of outbound ships increases demand for fuel and life-support supplies.",
+          "price_factors": {
+            "propulsion": 1150,
+            "provisions": 1100
+          },
+          "restock_permille": 700,
+          "demand_permille": 1300
+        },
+        {
+          "id": "community_market",
+          "text": "Mercury High Orbit: crews gather at the common market to trade useful equipment and local news.",
+          "price_factors": {
+            "navigation": 950,
+            "thermal": 950
+          },
+          "restock_permille": 1100,
+          "demand_permille": 1050
+        }
+      ]
+    },
+    "caloris_terminus": {
+      "name": "Caloris Terminus",
+      "description": "Surface workshops, fabrication stores and habitat provisioning.",
+      "sectors": [
+        {
+          "id": "service_docks",
+          "name": "Service Docks",
+          "description": "Surface workshops, fabrication stores and habitat provisioning.",
+          "hook": "Inspect local service availability."
+        },
+        {
+          "id": "common_market",
+          "name": "Common Market",
+          "description": "Crews and local workers exchange supplies and practical news.",
+          "hook": "Look for paid station work and useful trade."
+        }
+      ],
+      "vendors": {
+        "caloris_terminus_stores": {
+          "name": "Caloris Terminus Stores",
+          "npc": {
+            "id": "caloris_terminus_stores_keeper",
+            "name": "Asha Dell",
+            "role": "Local supplier balancing incoming freight against emergency reserves",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "service_docks",
+          "description": "Local supplier balancing incoming freight against emergency reserves",
+          "markup_permille": 970,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "ration_pack": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "life_support_day": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "repair_kit": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "coolant_pack": {
+              "quantity": 16,
+              "capacity": 32,
+              "daily_restock": 3,
+              "daily_demand": 3
+            },
+            "propellant_canister": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "spare_seals": {
+              "quantity": 20,
+              "capacity": 40,
+              "daily_restock": 4,
+              "daily_demand": 4
+            },
+            "thermal_blanket": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "medical_kit": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "navigation_chip": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "comms_relay": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            }
+          }
+        }
+      },
+      "services": {
+        "inspection": {
+          "name": "Propulsion and readiness inspection",
+          "vendor_id": "caloris_terminus_stores",
+          "price": 150,
+          "minutes": 60,
+          "materials": {},
+          "effects": {},
+          "description": "A documented readiness inspection; reports abstract hull, propulsion and thermal margins without mounting Mir."
+        },
+        "propellant_topup": {
+          "name": "Certified propulsion top-up",
+          "vendor_id": "caloris_terminus_stores",
+          "price": 550,
+          "minutes": 90,
+          "materials": {
+            "propellant_canister": 2
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.12
+          },
+          "description": "Compatible propellant is transferred through the ship service lines; the vault remains isolated."
+        },
+        "hull_repair": {
+          "name": "Hull and fitting repairs",
+          "vendor_id": "caloris_terminus_stores",
+          "price": 300,
+          "minutes": 120,
+          "materials": {
+            "repair_kit": 1
+          },
+          "effects": {
+            "morrowglass_hull": 0.1
+          },
+          "description": "Dock technicians repair physical hull/fitting damage."
+        },
+        "thermal_service": {
+          "name": "Cooling-loop service",
+          "vendor_id": "caloris_terminus_stores",
+          "price": 350,
+          "minutes": 120,
+          "materials": {
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_thermal_margin": 0.1
+          },
+          "description": "Cooling loops are serviced and readiness improves; this is not a numerical thermal simulation."
+        },
+        "full_service": {
+          "name": "Courier departure service",
+          "vendor_id": "caloris_terminus_stores",
+          "price": 1100,
+          "minutes": 240,
+          "materials": {
+            "propellant_canister": 2,
+            "repair_kit": 1,
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.15,
+            "morrowglass_hull": 0.05,
+            "morrowglass_thermal_margin": 0.12
+          },
+          "description": "A four-hour physical service package for propulsion, fittings and cooling. Mir is neither powered nor connected."
+        }
+      },
+      "jobs": {
+        "stores": {
+          "title": "Keep the Station Supplied",
+          "sponsor_id": "caloris_terminus_stores",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "description": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 260,
+          "reward_items": {
+            "life_support_day": 6
+          }
+        },
+        "relay": {
+          "title": "A Beacon Worth Trusting",
+          "sponsor_id": "caloris_terminus_stores",
+          "kind": "work",
+          "skill_id": "investigation",
+          "difficulty": 0.5,
+          "challenge": "Check accessible beacon maintenance records and document inconsistencies.",
+          "description": "Check accessible beacon maintenance records and document inconsistencies.",
+          "work_minutes": 180,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 360,
+          "reward_items": {
+            "navigation_chip": 1
+          }
+        },
+        "fittings": {
+          "title": "Fittings for the Next Crew",
+          "sponsor_id": "caloris_terminus_stores",
+          "kind": "work",
+          "skill_id": "engineering",
+          "difficulty": -0.5,
+          "challenge": "Assist supervised fitting work using the station's equipment.",
+          "description": "Assist supervised fitting work using the station's equipment.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 220,
+          "reward_items": {
+            "spare_seals": 2
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "freight_arrival",
+          "text": "Caloris Terminus: an inbound freight tender unloads certified replacement stock.",
+          "price_factors": {
+            "provisions": 950,
+            "repairs": 950
+          },
+          "restock_permille": 1500,
+          "demand_permille": 900
+        },
+        {
+          "id": "maintenance_shift",
+          "text": "Caloris Terminus: a maintenance shift is hiring temporary hands; the repair counters are busy.",
+          "price_factors": {
+            "repairs": 1100,
+            "thermal": 1100
+          },
+          "restock_permille": 900,
+          "demand_permille": 1000
+        },
+        {
+          "id": "departure_wave",
+          "text": "Caloris Terminus: a wave of outbound ships increases demand for fuel and life-support supplies.",
+          "price_factors": {
+            "propulsion": 1150,
+            "provisions": 1100
+          },
+          "restock_permille": 700,
+          "demand_permille": 1300
+        },
+        {
+          "id": "community_market",
+          "text": "Caloris Terminus: crews gather at the common market to trade useful equipment and local news.",
+          "price_factors": {
+            "navigation": 950,
+            "thermal": 950
+          },
+          "restock_permille": 1100,
+          "demand_permille": 1050
+        }
+      ]
+    },
+    "redoubt_asteroid": {
+      "name": "Redoubt",
+      "description": "An improvised salvage settlement; its market is visible only after you reach it.",
+      "sectors": [
+        {
+          "id": "service_docks",
+          "name": "Service Docks",
+          "description": "An improvised salvage settlement; its market is visible only after you reach it.",
+          "hook": "Inspect local service availability."
+        },
+        {
+          "id": "common_market",
+          "name": "Common Market",
+          "description": "Crews and local workers exchange supplies and practical news.",
+          "hook": "Look for paid station work and useful trade."
+        }
+      ],
+      "vendors": {
+        "redoubt_asteroid_stores": {
+          "name": "Redoubt Stores",
+          "npc": {
+            "id": "redoubt_asteroid_stores_keeper",
+            "name": "Vey Thorn",
+            "role": "Local supplier balancing incoming freight against emergency reserves",
+            "public_interest": "Reliable trade, repeat customers, and keeping this station working."
+          },
+          "sector_id": "service_docks",
+          "description": "Local supplier balancing incoming freight against emergency reserves",
+          "markup_permille": 1250,
+          "credits": 8000,
+          "daily_income": 600,
+          "stock": {
+            "ration_pack": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "life_support_day": {
+              "quantity": 80,
+              "capacity": 160,
+              "daily_restock": 16,
+              "daily_demand": 16
+            },
+            "repair_kit": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "coolant_pack": {
+              "quantity": 16,
+              "capacity": 32,
+              "daily_restock": 3,
+              "daily_demand": 3
+            },
+            "propellant_canister": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "spare_seals": {
+              "quantity": 20,
+              "capacity": 40,
+              "daily_restock": 4,
+              "daily_demand": 4
+            },
+            "thermal_blanket": {
+              "quantity": 12,
+              "capacity": 24,
+              "daily_restock": 2,
+              "daily_demand": 2
+            },
+            "medical_kit": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "navigation_chip": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            },
+            "comms_relay": {
+              "quantity": 8,
+              "capacity": 16,
+              "daily_restock": 1,
+              "daily_demand": 1
+            }
+          }
+        }
+      },
+      "services": {
+        "inspection": {
+          "name": "Propulsion and readiness inspection",
+          "vendor_id": "redoubt_asteroid_stores",
+          "price": 150,
+          "minutes": 60,
+          "materials": {},
+          "effects": {},
+          "description": "A documented readiness inspection; reports abstract hull, propulsion and thermal margins without mounting Mir."
+        },
+        "propellant_topup": {
+          "name": "Certified propulsion top-up",
+          "vendor_id": "redoubt_asteroid_stores",
+          "price": 550,
+          "minutes": 90,
+          "materials": {
+            "propellant_canister": 2
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.12
+          },
+          "description": "Compatible propellant is transferred through the ship service lines; the vault remains isolated."
+        },
+        "hull_repair": {
+          "name": "Hull and fitting repairs",
+          "vendor_id": "redoubt_asteroid_stores",
+          "price": 300,
+          "minutes": 120,
+          "materials": {
+            "repair_kit": 1
+          },
+          "effects": {
+            "morrowglass_hull": 0.1
+          },
+          "description": "Dock technicians repair physical hull/fitting damage."
+        },
+        "thermal_service": {
+          "name": "Cooling-loop service",
+          "vendor_id": "redoubt_asteroid_stores",
+          "price": 350,
+          "minutes": 120,
+          "materials": {
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_thermal_margin": 0.1
+          },
+          "description": "Cooling loops are serviced and readiness improves; this is not a numerical thermal simulation."
+        },
+        "full_service": {
+          "name": "Courier departure service",
+          "vendor_id": "redoubt_asteroid_stores",
+          "price": 1100,
+          "minutes": 240,
+          "materials": {
+            "propellant_canister": 2,
+            "repair_kit": 1,
+            "coolant_pack": 1
+          },
+          "effects": {
+            "morrowglass_propellant_margin": 0.15,
+            "morrowglass_hull": 0.05,
+            "morrowglass_thermal_margin": 0.12
+          },
+          "description": "A four-hour physical service package for propulsion, fittings and cooling. Mir is neither powered nor connected."
+        }
+      },
+      "jobs": {
+        "stores": {
+          "title": "Keep the Station Supplied",
+          "sponsor_id": "redoubt_asteroid_stores",
+          "kind": "work",
+          "skill_id": "logistics",
+          "difficulty": 0,
+          "challenge": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "description": "Reconcile a public supply manifest and route overdue stores to their destination.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 260,
+          "reward_items": {
+            "life_support_day": 6
+          }
+        },
+        "relay": {
+          "title": "A Beacon Worth Trusting",
+          "sponsor_id": "redoubt_asteroid_stores",
+          "kind": "work",
+          "skill_id": "investigation",
+          "difficulty": 0.5,
+          "challenge": "Check accessible beacon maintenance records and document inconsistencies.",
+          "description": "Check accessible beacon maintenance records and document inconsistencies.",
+          "work_minutes": 180,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 360,
+          "reward_items": {
+            "navigation_chip": 1
+          }
+        },
+        "fittings": {
+          "title": "Fittings for the Next Crew",
+          "sponsor_id": "redoubt_asteroid_stores",
+          "kind": "work",
+          "skill_id": "engineering",
+          "difficulty": -0.5,
+          "challenge": "Assist supervised fitting work using the station's equipment.",
+          "description": "Assist supervised fitting work using the station's equipment.",
+          "work_minutes": 120,
+          "work_steps": 1,
+          "deadline_minutes": 2880,
+          "repeat_days": 3,
+          "reward_credits": 220,
+          "reward_items": {
+            "spare_seals": 2
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "freight_arrival",
+          "text": "Redoubt: an inbound freight tender unloads certified replacement stock.",
+          "price_factors": {
+            "provisions": 950,
+            "repairs": 950
+          },
+          "restock_permille": 1500,
+          "demand_permille": 900
+        },
+        {
+          "id": "maintenance_shift",
+          "text": "Redoubt: a maintenance shift is hiring temporary hands; the repair counters are busy.",
+          "price_factors": {
+            "repairs": 1100,
+            "thermal": 1100
+          },
+          "restock_permille": 900,
+          "demand_permille": 1000
+        },
+        {
+          "id": "departure_wave",
+          "text": "Redoubt: a wave of outbound ships increases demand for fuel and life-support supplies.",
+          "price_factors": {
+            "propulsion": 1150,
+            "provisions": 1100
+          },
+          "restock_permille": 700,
+          "demand_permille": 1300
+        },
+        {
+          "id": "community_market",
+          "text": "Redoubt: crews gather at the common market to trade useful equipment and local news.",
+          "price_factors": {
+            "navigation": 950,
+            "thermal": 950
+          },
+          "restock_permille": 1100,
+          "demand_permille": 1050
+        }
+      ]
+    }
+  }
+}

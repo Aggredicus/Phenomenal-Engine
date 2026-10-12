@@ -136,6 +136,13 @@
         "command_validation_does_not_execute"
       ],
       "additionalProperties": true
+    },
+    "station_economy": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Observer-visible current-station projection with markets, sectors, services and job board."
     }
   },
   "additionalProperties": false

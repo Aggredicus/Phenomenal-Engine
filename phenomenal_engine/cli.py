@@ -12,6 +12,7 @@ from .memory import (
 from .engine import Engine
 from .rng import PCG32
 from .adjudication import load_adjudication, prepare_adjudication
+from .economy import station_snapshot, prepare_command
 from .game_theory import (
     AlwaysCooperate, AlwaysDefect, TitForTat, GenerousTitForTat,
     WinStayLoseShift, GrimTrigger, RandomStrategy, round_robin, evolve_memory_one
@@ -164,6 +165,7 @@ def cmd_step(args):
         args.context,
         significance=args.significance,
         adjudication=load_adjudication(args.adjudication),
+        economy_command=load_adjudication(args.economy_command),
     )
     if args.save:
         save_memory(args.save, memory)
@@ -190,6 +192,8 @@ def cmd_play(args):
         payload = duplicate.get("payload", {})
         if payload.get("action") != args.action or payload.get("adjudication_request") != load_adjudication(args.adjudication):
             raise ValueError("idempotency key reused with different action or adjudication")
+        if payload.get("economy_command") != load_adjudication(args.economy_command):
+            raise ValueError("idempotency key reused with different economy command")
         print(json.dumps({
             "status": "duplicate",
             "campaign_id": memory["session_id"],
@@ -212,6 +216,7 @@ def cmd_play(args):
         significance=args.significance,
         idempotency_key=args.idempotency_key,
         adjudication=load_adjudication(args.adjudication),
+        economy_command=load_adjudication(args.economy_command),
     )
     save_memory(save_path, memory)
     print(json.dumps({
@@ -345,6 +350,17 @@ def add_resolution_args(p):
     p.add_argument("--significance", type=float, default=0.5)
     p.add_argument("--queue", default=None)
     p.add_argument("--adjudication", default=None, help="JSON assessment or path; explains automatic scope or skill/difficulty/modifiers/stakes")
+    p.add_argument("--economy-command", default=None, help="Typed station interaction JSON or path; quote before a purchase or service")
+
+
+def cmd_economy(args):
+    mod = load_mod(args.mod)
+    memory = load_memory(args.save)
+    validate_memory_for_mod(memory, mod)
+    result = prepare_command(mod, memory, load_adjudication(args.command)) if args.command else station_snapshot(mod, memory)
+    print(json.dumps({"status": "economy_quote" if args.command else "station_economy",
+                      "persisted": False, "no_rng_consumed": True, "no_state_mutated": True,
+                      "result": result}, indent=2, ensure_ascii=False))
 
 
 def cmd_preview_action(args):
@@ -494,6 +510,12 @@ def main(argv=None):
     p.add_argument("action")
     p.add_argument("--adjudication", default=None)
     p.set_defaults(func=cmd_preview_action)
+
+    p = sub.add_parser("economy", help="read station markets, jobs, services, cargo and credits without advancing a turn")
+    p.add_argument("mod")
+    p.add_argument("save")
+    p.add_argument("--command", default=None, help="optional typed command to quote without executing")
+    p.set_defaults(func=cmd_economy)
 
     args = ap.parse_args(argv)
     args.func(args)

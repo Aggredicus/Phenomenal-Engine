@@ -26,13 +26,13 @@
   },
   {
     "path": "AGENT_BOOTLOADER.md",
-    "bytes": 9464,
-    "sha256": "afa5f67cfb38bc57b52061354128ac0d3e9b20c9bca63d3e0946d9e522bcb846"
+    "bytes": 10436,
+    "sha256": "c0c63b3be1b751be495f68f1c047e1ae7f504718f79b32949360d4f7ef0e5aba"
   },
   {
     "path": "CHANGELOG.md",
-    "bytes": 5053,
-    "sha256": "9fd2b90c4e047666309ecf797e7713ee518c0a68f4caf3bedf95d96331a11e0d"
+    "bytes": 6008,
+    "sha256": "ac9d2aa1f6fe5c75acc02f4514efec5b84cf4264a4cb1a77102047f05ac80fdb"
   },
   {
     "path": "LICENSE",
@@ -46,8 +46,8 @@
   },
   {
     "path": "README.md",
-    "bytes": 12999,
-    "sha256": "082318b5e9631d5974839d7c4ef8f13cb4d2bf79969c093171386d1bf3be2a7e"
+    "bytes": 13493,
+    "sha256": "0712c8fd2218f1d42a00f64f9636cd308cf97d33bd3e2407b878c1b7862130f0"
   },
   {
     "path": "RELEASE_NOTES_v0.4.0.md",
@@ -66,8 +66,8 @@
   },
   {
     "path": "START_HERE.md",
-    "bytes": 8170,
-    "sha256": "0f54b6d39d0d6025b51209c9328f7328ba48b2b2e670ce414f82a25658212206"
+    "bytes": 8404,
+    "sha256": "7dab8c7f63e1b1ebde96c66c7240c467bd8a0985b020aa30696ed963dddc11be"
   },
   {
     "path": "SUPPORT.md",
@@ -106,8 +106,8 @@
   },
   {
     "path": "docs/action_adjudication.md",
-    "bytes": 8332,
-    "sha256": "c1c3f447cd1f521394a248f06a086be17bf688340aa93182b233ef9e830a05fc"
+    "bytes": 8454,
+    "sha256": "e1e2d0b8317c6f68a62ddb17bcffb3a6901b688bf73c0f7dab61c965135d62c9"
   },
   {
     "path": "docs/chatbot_quickstart.md",
@@ -126,8 +126,8 @@
   },
   {
     "path": "docs/fast_tokenless_turns.md",
-    "bytes": 6847,
-    "sha256": "2c507404e3a4dd72071c13b4fb5b5a1d5aacfe1c41b5fcea99941c3cac522f5e"
+    "bytes": 7217,
+    "sha256": "3d38e1725b40374784b16bc63f33cd2670c8994e7c5cfe7e666a3a19af39729a"
   },
   {
     "path": "docs/game_theory_and_ai_ethics.md",
@@ -200,6 +200,11 @@
     "sha256": "2728b412571c3801c498bbc0f3ce8a24da6ea02883c531ac4d16ed6e9c197939"
   },
   {
+    "path": "docs/station_economy.md",
+    "bytes": 9040,
+    "sha256": "e12aeaaf378d30d4847d4510253ab68703adbb387c58b466ac01b44feef7b805"
+  },
+  {
     "path": "docs/travel_graph.md",
     "bytes": 6900,
     "sha256": "92b219045e275780489b34b715611e22b12804dcc80b787afc177b7c918610e4"
@@ -235,9 +240,24 @@
     "sha256": "a626c83f720422ca0ba9ff743f1ae609f747b4031bf4eae1d4ae65bd93fd041a"
   },
   {
+    "path": "examples/mirror_delivery_service_command.json",
+    "bytes": 82,
+    "sha256": "3e3bec15d56f9b5f113191b35cdc2fd810bcd6b8467661b9f8aa2d8cf9db0074"
+  },
+  {
+    "path": "examples/mirror_delivery_visit_market.json",
+    "bytes": 59,
+    "sha256": "12842827ba1255923a87b51df0ae0a031a7c6cd0806bf45986d9d61a1f65fe71"
+  },
+  {
     "path": "examples/run_demo.py",
     "bytes": 843,
     "sha256": "6023192173b88106338739f61c3f147e270e518f51c1ef49766e7e205a7be9ce"
+  },
+  {
+    "path": "mods/economies/mirror_delivery.json",
+    "bytes": 101100,
+    "sha256": "75fd6e7c923cb89c931aecdd003ec14e71d4fc54815822491cec09835936d6ab"
   },
   {
     "path": "mods/great_labyrinth_of_egypt.json",
@@ -246,8 +266,8 @@
   },
   {
     "path": "mods/mirror_delivery.json",
-    "bytes": 57404,
-    "sha256": "4e4cc33c2e092fb2bb0e6e6a1bfb59642688e2cb676e73a6c39bc4ff6c2c276a"
+    "bytes": 57492,
+    "sha256": "fbeb504ae2b86cb6cca9cf24a3eb0b93dca6a61120be346225d58650b48d283c"
   },
   {
     "path": "mods/orbital_swarm_trail.json",
@@ -257,7 +277,7 @@
   {
     "path": "phenomenal_engine/__init__.py",
     "bytes": 124,
-    "sha256": "9942ef0286ccf85fca492b4298c18eaa14c788ad111fd31ce61fafbe5648cf05"
+    "sha256": "bdae6b073102b3ded4a498a271fe1665d42a6f9e1166a5b708ceaa10e8ef9a64"
   },
   {
     "path": "phenomenal_engine/__main__.py",
@@ -266,13 +286,13 @@
   },
   {
     "path": "phenomenal_engine/adjudication.py",
-    "bytes": 9174,
-    "sha256": "d6aecfe08b1184c75e99829f1003d3518bb0b6e587c38e1bff6e7eb3cd3630ad"
+    "bytes": 9420,
+    "sha256": "9bd34a323a91639220ec79095adffd90cfed0b51ed7f6ea9bee059cfaa5afb49"
   },
   {
     "path": "phenomenal_engine/cli.py",
-    "bytes": 20526,
-    "sha256": "a3af7e6fd44684d90b91576a8d6987d7959087da3b710aaf25806619def12a0f"
+    "bytes": 21848,
+    "sha256": "6af3725c31b189f505ce069e3ef80c7eb624f82a71075f3511e886b7e9d24c3a"
   },
   {
     "path": "phenomenal_engine/consent.py",
@@ -281,13 +301,18 @@
   },
   {
     "path": "phenomenal_engine/director.py",
-    "bytes": 9190,
-    "sha256": "7e16f7809ab7fb42e908da3142a1232843f3fad0d344ef5dc4af0dd0e610a0dd"
+    "bytes": 9326,
+    "sha256": "1eed5cb75ae44d02cb70bf0be0ba5d60b7dd9dba87f2f36507ba1176dc621690"
+  },
+  {
+    "path": "phenomenal_engine/economy.py",
+    "bytes": 29042,
+    "sha256": "e7df40ac0ffad96ef79faadd49695399ec98647fa031351cea81be5844c60a61"
   },
   {
     "path": "phenomenal_engine/engine.py",
-    "bytes": 6308,
-    "sha256": "1d09ae84ea9240fbba69720dbb39bdc87bb3b14d165c4384b7a482350e9542e9"
+    "bytes": 7897,
+    "sha256": "ae83be7b6c5168552d3f41047d6f1aa26d46a1aed74f2e54ec3b891dbce97b1d"
   },
   {
     "path": "phenomenal_engine/game_theory.py",
@@ -296,8 +321,8 @@
   },
   {
     "path": "phenomenal_engine/github_saves.py",
-    "bytes": 15911,
-    "sha256": "88152a30f380bfdead65cdf724302e87d5dfeba9d9669973a3936dfa6e6da763"
+    "bytes": 16352,
+    "sha256": "4f14af9ebcefce75a47b3f112f89752105c4e8d321ce38d4f4b1f0d5fb47d6d9"
   },
   {
     "path": "phenomenal_engine/image_jobs.py",
@@ -311,18 +336,18 @@
   },
   {
     "path": "phenomenal_engine/memory.py",
-    "bytes": 5995,
-    "sha256": "312a37549592c34c55e35d055497e4e859b9d1eee9aadc701f3d5cd3cebb52eb"
+    "bytes": 6200,
+    "sha256": "e89eaa34762e7cdac7ab689bd37349f967b7c4a29e8f6bca77438631d169ffa9"
   },
   {
     "path": "phenomenal_engine/mod_loader.py",
-    "bytes": 2637,
-    "sha256": "89d65a331d78bd7fbed19b11c7a0a2b1bafecc4176b3cc17959090b5eb79f761"
+    "bytes": 2979,
+    "sha256": "6d5541fbebe52b7a9ec7db584d217b60c6c8fff69006d46bb801a33420faa992"
   },
   {
     "path": "phenomenal_engine/narrative.py",
-    "bytes": 5158,
-    "sha256": "451de3cfbd4ac48d896e6d9e56984d56f5ae4ccd1492559911c9f56e997484db"
+    "bytes": 5330,
+    "sha256": "b8dbb7a40b51c5028a9574f5cc8cfdbd1966aaf70885ca9585c0a7964bccbbbf"
   },
   {
     "path": "phenomenal_engine/perception.py",
@@ -346,8 +371,8 @@
   },
   {
     "path": "phenomenal_engine/story.py",
-    "bytes": 21446,
-    "sha256": "1f0f850fb1cea56a0f66aa4433f82bec2dfee9f98e034fa1c67e40e287db18c7"
+    "bytes": 21678,
+    "sha256": "a94f4bfcba7d1ae8f9fbd56b5c69e86208123dafccdbd6049d1db4a07c48456d"
   },
   {
     "path": "phenomenal_engine/travel.py",
@@ -356,8 +381,8 @@
   },
   {
     "path": "phenomenal_engine/turn_exchange.py",
-    "bytes": 8479,
-    "sha256": "b2add84d83d36893f1740958664fd0f377160bcdba797a75dcbe65cbfaa15e50"
+    "bytes": 9344,
+    "sha256": "786fb460c208aab97a2c1a16685321ad3e5f8e3e2549371f8422e8d41e839f09"
   },
   {
     "path": "phenomenal_engine/turn_streaming.py",
@@ -372,7 +397,7 @@
   {
     "path": "pyproject.toml",
     "bytes": 396,
-    "sha256": "29b45e2766ece8e4c1aa43bcf60f58d33156a5a433e438ef7ae1dc86b1024c04"
+    "sha256": "9a01df3d4fbf5ca3260dd01853c254c8f03185e8e637aec282bd09d87b174e42"
   },
   {
     "path": "runtime/.gitkeep",
@@ -391,23 +416,28 @@
   },
   {
     "path": "schemas/director_state.schema.json",
-    "bytes": 2956,
-    "sha256": "1bc4c0d63c4394bb1d177a9a9e3fc31cb8985e0998e933012c105a870664849d"
+    "bytes": 3160,
+    "sha256": "33a18c66ec8ef9612b95285d1352dad6e90145781889b72fe2c7d4634aee63af"
+  },
+  {
+    "path": "schemas/economy_command.schema.json",
+    "bytes": 5153,
+    "sha256": "920922f055bb7008eeb0beda8f0fe380f4d4c72a37eaa2f9ac5e30d46b44e311"
   },
   {
     "path": "schemas/memory.schema.json",
-    "bytes": 2498,
-    "sha256": "982e4ae98e9d375020a30fcfbda9660ac74ce42739cbd8a2d31752150407dddf"
+    "bytes": 2677,
+    "sha256": "2c86d55cdbf163455840e155ff2a515934a608df2eeea27350660ab85029d787"
   },
   {
     "path": "schemas/mod.schema.json",
-    "bytes": 3005,
-    "sha256": "f51dba0b61a10a2459bd9327444d48ef960c93e687ffc5b484445613c9c07a8f"
+    "bytes": 3111,
+    "sha256": "4a56b70a265af83e9e2e9c1150b1e9d02f6164a3bebb7a51cdc25141f3cb4719"
   },
   {
     "path": "schemas/scene_packet.schema.json",
-    "bytes": 268,
-    "sha256": "eb11cc691a7a11d9daa65595fe991641f2fe4b9e49c18e11e46f936e1b8045c9"
+    "bytes": 494,
+    "sha256": "f5d3147878fdab98557bde1b2cf6fd66a36345572f5ba5374dcf51bdca214198"
   },
   {
     "path": "scripts/chat_playtest.py",
@@ -438,6 +468,11 @@
     "path": "tests/test_director.py",
     "bytes": 3181,
     "sha256": "f1c6f8bea0cc65569b5dbc7f04fba09292a35386f4e0fb5134efaa49ac770c51"
+  },
+  {
+    "path": "tests/test_economy.py",
+    "bytes": 15506,
+    "sha256": "bda41863cdf870c99f5dbc87ad6e7a5e7ca6640b5bc333743ba6dd6a543d720b"
   },
   {
     "path": "tests/test_game_theory.py",

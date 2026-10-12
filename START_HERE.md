@@ -124,6 +124,8 @@ Bundled mods:
 - `mods/orbital_swarm_trail.json`
 - `mods/mirror_delivery.json`
 
+Read [Station economies](docs/station_economy.md) for markets, local jobs, inventory, rewards and service interactions. Inspect the current station read-only before presenting choices; execute only the player-selected typed command.
+
 ## 5. Authoritative turn command
 
 Use:

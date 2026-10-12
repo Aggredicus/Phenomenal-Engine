@@ -21,6 +21,7 @@ from .github_saves import BRANCH, REPOSITORY, GitHubSaveError, decode_state, enc
 from .memory import find_event_by_idempotency_key, validate_memory_for_mod
 from .mod_loader import load_mod
 from .adjudication import prepare_adjudication
+from .economy import prepare_command, resolve_assessment
 
 MODS = {
     "mirror_delivery": "mirror_delivery.json",
@@ -105,6 +106,8 @@ def propose_turn(request: dict) -> dict:
             raise TurnExchangeError("idempotency key was previously used with a different action")
         if duplicate.get("payload", {}).get("adjudication_request") != request.get("adjudication"):
             raise TurnExchangeError("idempotency key was previously used with a different adjudication")
+        if duplicate.get("payload", {}).get("economy_command") != request.get("economy_command"):
+            raise TurnExchangeError("idempotency key was previously used with a different economy command")
         return {
             "status": "duplicate", "persisted": False, "requires_write": False,
             "remote_verified": False, "authoritative_if_source_verified": True,
@@ -114,7 +117,14 @@ def propose_turn(request: dict) -> dict:
             "repository": REPOSITORY, "branch": BRANCH, "path": path,
         }
 
-    assessment = prepare_adjudication(mod, state, action, request.get("adjudication"), strict=True)
+    economy_plan = None
+    raw_assessment = request.get("adjudication")
+    if request.get("economy_command") is not None:
+        economy_plan = prepare_command(mod, state, request["economy_command"])
+        raw_assessment = resolve_assessment(economy_plan, raw_assessment)
+        if request.get("expected_economy_sha256") is not None and request["expected_economy_sha256"] != economy_plan["quote_sha256"]:
+            raise TurnExchangeError("economy quote changed since preview")
+    assessment = prepare_adjudication(mod, state, action, raw_assessment, strict=True)
     assessment_digest = hashlib.sha256(json.dumps(assessment, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()).hexdigest()
     expected_digest = request.get("expected_adjudication_sha256")
     if expected_digest is not None and expected_digest != assessment_digest:
@@ -123,9 +133,11 @@ def propose_turn(request: dict) -> dict:
         return {"status": "adjudication_preview", "persisted": False, "remote_verified": False,
                 "requires_write": False, "no_rng_consumed": True, "no_state_mutated": True,
                 "state_version": state["state_version"], "expected_blob_sha": expected_sha,
-                "adjudication": assessment, "adjudication_sha256": assessment_digest}
+                "adjudication": assessment, "adjudication_sha256": assessment_digest,
+                "economy_quote": economy_plan}
     packet = Engine(mod, state).step(action, idempotency_key=key,
-                                  adjudication=request.get("adjudication"), require_adjudication=True)
+                                  adjudication=request.get("adjudication"), require_adjudication=True,
+                                  economy_command=request.get("economy_command"))
     proposed_bytes = encode_state(state)  # bounds, secret scan, hash-chain verification
     return {
         "status": "proposal", "persisted": False, "requires_write": True,

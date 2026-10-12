@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Phenomenal Engine Station Economy Command",
+  "description": "Typed intents only. Python verifies local catalog, resources, deadlines, prices, objective completion and all transactional preconditions.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "sector_id"
+      ],
+      "properties": {
+        "kind": {
+          "const": "visit_sector"
+        },
+        "sector_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expected_unit_price",
+        "item_id",
+        "kind",
+        "quantity",
+        "vendor_id"
+      ],
+      "properties": {
+        "kind": {
+          "const": "buy"
+        },
+        "item_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "expected_unit_price": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000000
+        },
+        "vendor_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "quantity": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expected_unit_price",
+        "item_id",
+        "kind",
+        "quantity",
+        "vendor_id"
+      ],
+      "properties": {
+        "kind": {
+          "const": "sell"
+        },
+        "item_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "expected_unit_price": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000000
+        },
+        "vendor_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "quantity": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expected_price",
+        "kind",
+        "service_id"
+      ],
+      "properties": {
+        "kind": {
+          "const": "service"
+        },
+        "expected_price": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000000
+        },
+        "service_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "job_id",
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "accept_job"
+        },
+        "job_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "job_id",
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "work_job"
+        },
+        "job_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "job_id",
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "deliver_job"
+        },
+        "job_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "job_id",
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "claim_reward"
+        },
+        "job_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "job_id",
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "abandon_job"
+        },
+        "job_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "minutes"
+      ],
+      "properties": {
+        "kind": {
+          "const": "wait"
+        },
+        "minutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10080
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_id",
+        "kind",
+        "quantity"
+      ],
+      "properties": {
+        "kind": {
+          "const": "use_item"
+        },
+        "item_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "quantity": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      }
+    }
+  ]
+}

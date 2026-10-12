@@ -33,6 +33,7 @@ OPTIONAL_TYPES = {
     "clocks": list,
     "encounters": list,
     "player_setup": dict,
+    "economy_profile": str,
 }
 
 def validate_mod(mod: dict) -> list[str]:
@@ -66,6 +67,12 @@ def validate_mod(mod: dict) -> list[str]:
             player_profile(mod, {})
         except AdjudicationError as exc:
             errors.append(str(exc))
+    if "economy_profile" in mod and isinstance(mod["economy_profile"], str):
+        from .economy import load_profile, EconomyError
+        try:
+            load_profile(mod)
+        except (EconomyError, KeyError, OSError, ValueError, TypeError) as exc:
+            errors.append("invalid economy: " + str(exc))
     return errors
 
 def load_mod(path: str | Path) -> dict:

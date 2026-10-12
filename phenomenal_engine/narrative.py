@@ -1,7 +1,9 @@
 from __future__ import annotations
 from dataclasses import dataclass
+from copy import deepcopy
 from .story import experience_directives, visible_story_state
 from .travel import visible_map
+from .economy import station_snapshot
 
 def _light_word(lux: float) -> str:
     if lux < 0.01: return "near-total darkness"
@@ -58,7 +60,7 @@ def build_scene_packet(
     frame = frame or PhenomenologyFrame()
     story_update = story_update or {}
     story_design = mod.get("story_design", {})
-    return {
+    return deepcopy({
         "schema_version": "1.0.0",
         "mod_id": mod["id"],
         "turn": memory["turn"],
@@ -70,6 +72,7 @@ def build_scene_packet(
         "story_state": visible_story_state(memory),
         "world_map": visible_map(mod, memory),
         "story_update": story_update,
+        "station_economy": station_snapshot(mod, memory) if mod.get("economy_profile") else None,
         "presentation": {
             "mechanics_visibility": story_design.get("mechanics_visibility", "submerged"),
             "default_scene_style": story_design.get("default_scene_style", "immersive"),
@@ -95,4 +98,4 @@ def build_scene_packet(
             *story_update.get("experience_directives", experience_directives(memory)),
         ],
         "image_prompt_directives": mod.get("image_direction", {}),
-    }
+    })

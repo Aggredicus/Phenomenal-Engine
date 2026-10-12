@@ -73,7 +73,9 @@ Sending an invitation is not securing agreement. Requesting dock service is not
 repairing/refueling a ship. Reading available information does not reveal a
 hidden truth. These scopes consume no **action** RNG; a consequential turn still
 advances the background story and samples a separately reported world hazard.
-Unsupported inventories, purchases and service orders are still unsupported.
+For actual inventory, purchases and completed service orders, use the explicit
+validated commands in [Station economies](station_economy.md); a bare routine
+inquiry does not authorize a transaction.
 
 ## Skill check
 

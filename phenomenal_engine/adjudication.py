@@ -81,7 +81,10 @@ def _check(mod, memory, spec, temperature, profile, profile_source):
     if target is not None:
         _text(target, "target ID", 80)
         if target not in memory.get("characters", {}):
-            raise AdjudicationError("unknown NPC target")
+            from .economy import station_snapshot
+            station = station_snapshot(mod, memory) if mod.get("economy_profile") else None
+            if not station or target not in {vendor["npc"]["id"] for vendor in station["vendors"]}:
+                raise AdjudicationError("unknown NPC target")
     modifiers = spec.get("modifiers", [])
     if not isinstance(modifiers, list) or len(modifiers) > 8:
         raise AdjudicationError("modifiers must be a list of at most eight entries")
