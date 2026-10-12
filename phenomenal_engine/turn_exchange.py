@@ -20,6 +20,7 @@ from .engine import Engine
 from .github_saves import BRANCH, REPOSITORY, GitHubSaveError, decode_state, encode_state, remote_path
 from .memory import find_event_by_idempotency_key, validate_memory_for_mod
 from .mod_loader import load_mod
+from .adjudication import prepare_adjudication
 
 MODS = {
     "mirror_delivery": "mirror_delivery.json",
@@ -51,6 +52,9 @@ def propose_turn(request: dict) -> dict:
     """Perform exactly one in-memory engine step, but NEVER claim remote persistence."""
     if not isinstance(request, dict):
         raise TurnExchangeError("request must be an object")
+    operation = request.get("operation", "propose")
+    if operation not in {"propose", "preview"}:
+        raise TurnExchangeError("operation must be propose or preview")
     campaign = request.get("campaign_id")
     if not isinstance(campaign, str):
         raise TurnExchangeError("missing campaign ID")
@@ -99,6 +103,8 @@ def propose_turn(request: dict) -> dict:
     if duplicate is not None:
         if duplicate.get("payload", {}).get("action") != action:
             raise TurnExchangeError("idempotency key was previously used with a different action")
+        if duplicate.get("payload", {}).get("adjudication_request") != request.get("adjudication"):
+            raise TurnExchangeError("idempotency key was previously used with a different adjudication")
         return {
             "status": "duplicate", "persisted": False, "requires_write": False,
             "remote_verified": False, "authoritative_if_source_verified": True,
@@ -108,7 +114,18 @@ def propose_turn(request: dict) -> dict:
             "repository": REPOSITORY, "branch": BRANCH, "path": path,
         }
 
-    packet = Engine(mod, state).step(action, idempotency_key=key)
+    assessment = prepare_adjudication(mod, state, action, request.get("adjudication"), strict=True)
+    assessment_digest = hashlib.sha256(json.dumps(assessment, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()).hexdigest()
+    expected_digest = request.get("expected_adjudication_sha256")
+    if expected_digest is not None and expected_digest != assessment_digest:
+        raise TurnExchangeError("adjudication changed since preview; show revised odds before rolling")
+    if operation == "preview":
+        return {"status": "adjudication_preview", "persisted": False, "remote_verified": False,
+                "requires_write": False, "no_rng_consumed": True, "no_state_mutated": True,
+                "state_version": state["state_version"], "expected_blob_sha": expected_sha,
+                "adjudication": assessment, "adjudication_sha256": assessment_digest}
+    packet = Engine(mod, state).step(action, idempotency_key=key,
+                                  adjudication=request.get("adjudication"), require_adjudication=True)
     proposed_bytes = encode_state(state)  # bounds, secret scan, hash-chain verification
     return {
         "status": "proposal", "persisted": False, "requires_write": True,
@@ -120,6 +137,8 @@ def propose_turn(request: dict) -> dict:
         "proposed_save_json": proposed_bytes.decode("utf-8"),
         "scene_packet_location": "proposed_save_json.event_ledger[-1].payload.scene_packet",
         "idempotency_key": key,
+        "adjudication_sha256": assessment_digest,
+        "resolution": packet["simulation_outcome"],
         "instructions": (
             "The trusted connected GitHub tool must update this exact path with "
             "expected_blob_sha, then read back proposed_blob_sha; only after "

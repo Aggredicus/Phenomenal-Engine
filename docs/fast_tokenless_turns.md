@@ -27,6 +27,14 @@ In contrast, the legacy direct REST runner checks repo, branch and identity, the
 
 ## Exact computation-only Python interface
 
+As of v0.5.0, new turns require an `adjudication` object in addition to the
+fields below. See [Action adjudication](action_adjudication.md) and
+`examples/diplomacy_assessment.json`. Use `operation: preview` to display the
+prepared odds without RNG/state changes, then bind them on the proposal with
+`expected_adjudication_sha256`. Authored deterministic rules need no override.
+The proposal's `resolution` permits provisional math/progress output before
+the GitHub commit; canonical consequences still require verified readback.
+
 The executor receives a single JSON object on standard input; the mod is whitelisted and loaded from the trusted engine checkout:
 
 ~~~json

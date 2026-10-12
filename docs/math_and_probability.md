@@ -17,11 +17,18 @@ A computer can model those separately.
 Use an explicit algorithm and save its state. Separate streams (`actions`, `world`, `encounters`, `images`) prevent adding a cosmetic random draw from changing tomorrow's weather.
 
 ### 2. Logistic action resolution
+
+For implemented character strengths, situational ratings, validated modifiers,
+automatic tasks and pre-roll previews, see [Action adjudication](action_adjudication.md).
 For skill `s`, difficulty `d`, context `c`, and temperature `tau`:
 
 `P(success) = sigmoid((s + c - d) / tau)`
 
 This behaves like a smooth contest rather than a hard target number.
+
+In v0.5.0, margin and degree use the same uniform draw as success. There is no
+independently sampled Gaussian margin. Automatic task scopes have no action
+roll, and background hazard draws use the separate world stream.
 
 ### 3. Hazard functions
 Rare events are better represented as processes in time:

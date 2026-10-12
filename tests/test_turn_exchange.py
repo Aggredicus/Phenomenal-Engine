@@ -40,6 +40,8 @@ class TurnExchangeTests(unittest.TestCase):
             "save_json": raw,
             "action": "I inspect the ship and review the other crews.",
             "idempotency_key": "turn-002",
+            "adjudication": {"mode": "automatic", "task": "read_available_information",
+                             "reason": "Review already available ship records and crew dossiers"},
         }
 
     def test_no_token_required_and_no_fake_publication(self):
@@ -94,6 +96,40 @@ class TurnExchangeTests(unittest.TestCase):
                    expected_blob_sha=first["proposed_blob_sha"],
                    expected_state_version=2, action="I fire the engine.")
         with self.assertRaisesRegex(TurnExchangeError, "different action"):
+            propose_turn(req)
+
+    def test_missing_assessment_is_refused_without_mutating_source(self):
+        req = dict(self.request)
+        del req["adjudication"]
+        before = copy.deepcopy(req)
+        with self.assertRaisesRegex(ValueError, "adjudication_required"):
+            propose_turn(req)
+        self.assertEqual(req, before)
+
+    def test_preview_and_checked_proposal_use_identical_odds(self):
+        assessment = {"mode": "check", "skill_id": "diplomacy", "difficulty": 0,
+                      "difficulty_reason": "Routine request to a willing counterpart", "modifiers": [],
+                      "stakes": {"success": "Agreement", "partial_success": "Counteroffer", "failure": "Refusal"}}
+        req = dict(self.request, adjudication=assessment)
+        before = copy.deepcopy(req)
+        preview = propose_turn(dict(req, operation="preview"))
+        self.assertTrue(preview["no_rng_consumed"])
+        self.assertFalse(preview["requires_write"])
+        self.assertEqual(req, before)
+        p = preview["adjudication"]["success_probability"]
+        self.assertGreater(p, 0.8)
+        proposal = propose_turn(dict(req, expected_adjudication_sha256=preview["adjudication_sha256"]))
+        self.assertEqual(proposal["resolution"]["success_probability"], p)
+        altered = dict(assessment, difficulty=2)
+        with self.assertRaisesRegex(TurnExchangeError, "changed since preview"):
+            propose_turn(dict(req, adjudication=altered, expected_adjudication_sha256=preview["adjudication_sha256"]))
+
+    def test_changed_assessment_on_retry_cannot_reroll(self):
+        first = propose_turn(self.request)
+        req = dict(self.request, save_json=first["proposed_save_json"],
+                   expected_blob_sha=first["proposed_blob_sha"], expected_state_version=2,
+                   adjudication={"mode": "automatic", "task": "send_message", "reason": "Different task"})
+        with self.assertRaisesRegex(TurnExchangeError, "different adjudication"):
             propose_turn(req)
 
     def test_modified_bytes_are_rejected_before_rng(self):

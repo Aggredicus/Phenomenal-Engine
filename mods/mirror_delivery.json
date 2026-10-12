@@ -53,6 +53,26 @@
       "name": "Jun Zan",
       "alias": "Captain Zan",
       "title": "Captain"
+    },
+    "character_profile": {
+      "name": "Courier captain baseline",
+      "source": "Authored starting training; independent of the human player identity.",
+      "skills": {
+        "general": 0,
+        "piloting": 2,
+        "leadership": 1,
+        "diplomacy": 1,
+        "logistics": 1,
+        "investigation": 1,
+        "engineering": 0
+      },
+      "rating_guide": {
+        "0": "untrained",
+        "1": "trained",
+        "2": "expert",
+        "3": "exceptional"
+      },
+      "rule": "Only relevant, recorded skills apply. Crew assistance is an explained situational modifier, not automatic access to every crew skill."
     }
   },
   "mission_directive": {

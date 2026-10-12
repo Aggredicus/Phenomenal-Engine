@@ -22,6 +22,8 @@ def logistic_success_probability(
     ceiling: float = 0.99,
 ) -> float:
     """Smooth success odds instead of arbitrary target numbers."""
+    if any(type(v) not in (int, float) or not math.isfinite(v) for v in (skill, difficulty, context, temperature)):
+        raise ValueError("resolution inputs must be finite numbers")
     if temperature <= 0:
         raise ValueError("temperature must be positive")
     p = sigmoid((skill + context - difficulty) / temperature)
@@ -67,12 +69,23 @@ def sample_skill_check(
 ) -> dict:
     p = logistic_success_probability(skill, difficulty, context, temperature)
     u = rng.random()
-    margin = (skill + context - difficulty) + rng.normal(0, 0.20 * temperature)
+    # One draw determines both success and quality. Use the clamped probability
+    # threshold so the margin sign agrees even at the probability floor/ceiling.
+    bounded_u = clamp(u, 1e-15, 1 - 1e-15)
+    margin = temperature * (math.log(p / (1 - p)) - math.log(bounded_u / (1 - bounded_u)))
+    success = u < p
+    if success:
+        degree = "exceptional_success" if u < 0.1 * p else "success"
+    else:
+        fraction = (u - p) / (1 - p)
+        degree = "partial_success" if fraction < 0.2 else "major_setback" if fraction >= 0.8 else "failure"
     return {
         "success_probability": p,
         "uniform_draw": u,
-        "success": u < p,
+        "success": success,
         "margin": margin,
+        "draw_margin": p - u,
+        "degree": degree,
         "confidence": abs(p - 0.5) * 2,
     }
 

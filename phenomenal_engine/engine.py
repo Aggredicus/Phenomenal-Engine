@@ -1,10 +1,11 @@
 from __future__ import annotations
 from .rng import derive_stream, PCG32
 from .probability import sample_skill_check, consequence_severity, hazard_probability
-from .memory import append_event
+from .memory import append_event, ENGINE_VERSION
 from .narrative import build_scene_packet, PhenomenologyFrame
 from .image_jobs import should_generate, enqueue
-from .story import advance_story, matching_action_rule
+from .story import advance_story
+from .adjudication import prepare_adjudication, player_profile
 
 class Engine:
     def __init__(self, mod: dict, memory: dict, queue_path: str | None = None):
@@ -28,11 +29,19 @@ class Engine:
         frame: PhenomenologyFrame | None = None,
         significance: float = 0.5,
         idempotency_key: str | None = None,
+        adjudication: dict | None = None,
+        require_adjudication: bool = False,
     ) -> dict:
+        assessment = prepare_adjudication(
+            self.mod, self.memory, action, adjudication, strict=require_adjudication,
+            skill=skill, difficulty=difficulty, context=context,
+        )
+        # Assessment errors must never consume RNG, initialize profiles or increment a turn.
+        if "player_profile" not in self.memory:
+            self.memory["player_profile"] = player_profile(self.mod, self.memory)[0]
+        self.memory["engine_version"] = ENGINE_VERSION
         self.memory["turn"] += 1
-        action_rng = self.streams["actions"]
-        action_rule = matching_action_rule(self.mod, self.memory, action)
-        if action_rule is not None and action_rule.get("deterministic", False):
+        if assessment["mode"] == "automatic":
             outcome = {
                 "success_probability": 1.0,
                 "uniform_draw": None,
@@ -40,25 +49,28 @@ class Engine:
                 "margin": 1.0,
                 "confidence": 1.0,
                 "deterministic": True,
-                "rule_id": action_rule["id"],
+                "rule_id": assessment.get("rule_id"),
+                "degree": "automatic_success",
             }
             outcome["consequence_severity"] = 0.0
+        elif assessment["mode"] == "group":
+            results = [self._resolve_check(check) for check in assessment["checks"]]
+            successes = [result["success"] for result in results]
+            success = all(successes) if assessment["success_policy"] == "all" else any(successes)
+            outcome = {"success_probability": assessment["success_probability"],
+                       "uniform_draw": None, "success": success,
+                       "degree": "success" if all(successes) else "partial_success" if any(successes) else "failure",
+                       "checks": results, "consequence_severity": max(result["consequence_severity"] for result in results),
+                       "margin": None, "confidence": None}
         else:
-            outcome = sample_skill_check(
-                action_rng,
-                skill,
-                difficulty,
-                context,
-                self.mod["simulation_profile"].get("skill_temperature", 1.0),
-            )
-            outcome["consequence_severity"] = consequence_severity(
-                action_rng,
-                base=max(0.1, abs(outcome["margin"]) + 0.5),
-            )
+            outcome = self._resolve_check(assessment)
+        outcome["adjudication"] = assessment
         hazard_rate = float(self.memory.get("world_state", {}).get("ambient_hazard_rate", 0.0))
-        outcome["ambient_hazard_triggered"] = (
-            action_rng.random() < hazard_probability(hazard_rate, 1.0)
-        )
+        hazard_p = hazard_probability(hazard_rate, 1.0)
+        hazard_u = self.streams["world"].random()
+        outcome["ambient_hazard_triggered"] = hazard_u < hazard_p
+        outcome["ambient_hazard"] = {"rate_per_pulse": hazard_rate, "duration_pulses": 1.0,
+                                     "probability": hazard_p, "uniform_draw": hazard_u}
 
         ws = self.memory.setdefault("world_state", {})
         ws["tension"] = max(
@@ -98,6 +110,7 @@ class Engine:
             "resolution": outcome,
             "story_update": story_update,
             "scene_packet": packet,
+            "adjudication_request": adjudication,
         }
         if idempotency_key:
             event_payload["idempotency_key"] = idempotency_key
@@ -115,3 +128,14 @@ class Engine:
         self.memory["state_version"] = previous_version + 1
         self.memory["last_scene_packet"] = packet
         return packet
+
+    def _resolve_check(self, assessment):
+        outcome = sample_skill_check(self.streams["actions"], assessment["skill"],
+                                     assessment["difficulty"], assessment["context"], assessment["temperature"])
+        outcome["consequence_severity"] = 0.0 if outcome["success"] else consequence_severity(
+            self.streams["actions"], base=max(0.1, abs(outcome["margin"]) + 0.5))
+        outcome["target_id"] = assessment.get("target_id")
+        stakes = assessment.get("stakes", {})
+        stake_key = "success" if outcome["success"] else "partial_success" if outcome["degree"] == "partial_success" else "failure"
+        outcome["narrative_stakes"] = stakes.get(stake_key)
+        return outcome

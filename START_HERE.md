@@ -143,6 +143,12 @@ Do **not** use the stateless `step` command for a continuing campaign.
 
 ## 6. Required turn loop
 
+Use the explicit assessments and read-only odds preview documented in
+[Action adjudication](docs/action_adjudication.md) before new connected turns.
+Routine available actions should succeed automatically; uncertain actions use
+recorded character strengths, situational challenge and explained modifiers.
+The connected bridge refuses unassessed new turns instead of silently using 50%.
+
 For every consequential player action:
 
 1. generate one unique idempotency key;

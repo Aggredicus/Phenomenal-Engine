@@ -1,0 +1,60 @@
+{
+  "mode": "group",
+  "success_policy": "all",
+  "checks": [
+    {
+      "skill_id": "diplomacy",
+      "difficulty": 1,
+      "difficulty_reason": "Agreement imposes a check-in commitment on a captain with a demanding departure schedule.",
+      "modifiers": [
+        {
+          "value": 0.5,
+          "reason": "The proposal explicitly preserves separate payloads and custody records.",
+          "source": "payload_isolation_clarification"
+        }
+      ],
+      "stakes": {
+        "success": "The counterpart agrees to the proposed communications arrangement.",
+        "partial_success": "The counterpart offers limited assistance subject to an explicit condition.",
+        "failure": "The counterpart declines this arrangement or asks for a materially different proposal."
+      },
+      "target_id": "ren_ivo"
+    },
+    {
+      "skill_id": "diplomacy",
+      "difficulty": 0,
+      "difficulty_reason": "The proposal preserves independent payload custody while coordinating communications.",
+      "modifiers": [
+        {
+          "value": 0.5,
+          "reason": "The proposal explicitly preserves separate payloads and custody records.",
+          "source": "payload_isolation_clarification"
+        }
+      ],
+      "stakes": {
+        "success": "The counterpart agrees to the proposed communications arrangement.",
+        "partial_success": "The counterpart offers limited assistance subject to an explicit condition.",
+        "failure": "The counterpart declines this arrangement or asks for a materially different proposal."
+      },
+      "target_id": "sister_cairn"
+    },
+    {
+      "skill_id": "diplomacy",
+      "difficulty": 0.5,
+      "difficulty_reason": "The proposal offers crew assistance without giving another captain command authority.",
+      "modifiers": [
+        {
+          "value": 0.5,
+          "reason": "The proposal explicitly preserves separate payloads and custody records.",
+          "source": "payload_isolation_clarification"
+        }
+      ],
+      "stakes": {
+        "success": "The counterpart agrees to the proposed communications arrangement.",
+        "partial_success": "The counterpart offers limited assistance subject to an explicit condition.",
+        "failure": "The counterpart declines this arrangement or asks for a materially different proposal."
+      },
+      "target_id": "mara_ves"
+    }
+  ]
+}

@@ -124,6 +124,7 @@ def build_director_state(mod: dict, memory: dict) -> dict:
         "fleet": _fleet_records(mod, memory),
         "mir_copies": _mir_copy_records(mod, memory),
         "characters": list(memory.get("characters", {}).values()),
+        "player_profile": memory.get("player_profile", mod.get("player_setup", {}).get("character_profile", {"skills": {"general": 0}})),
         "story": {
             "quests": list(memory.get("quests", {}).values()),
             "threads": list(story.get("threads", {}).values()),

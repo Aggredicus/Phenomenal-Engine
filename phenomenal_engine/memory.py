@@ -7,7 +7,7 @@ from .story import initial_player_experience, initial_story_state
 from .travel import initial_travel_state
 
 SCHEMA_VERSION = "1.0.0"
-ENGINE_VERSION = "0.4.0"
+ENGINE_VERSION = "0.5.0"
 
 def canonical_json(obj) -> str:
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
@@ -50,6 +50,7 @@ def new_memory(mod: dict, seed: int | str, player_identity: dict | None = None) 
         "rng_streams": {},
         "world_state": _copy_json(mod.get("starting_state", {})),
         "player_identity": identity,
+        "player_profile": _copy_json(mod.get("player_setup", {}).get("character_profile", {"skills": {"general": 0}})),
         "characters": characters,
         "relationships": {},
         "quests": quests,

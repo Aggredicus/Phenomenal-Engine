@@ -1,3 +1,19 @@
+# v0.5.0 — Explicit action adjudication
+
+- Added recorded character skills, explained challenge ratings and bounded,
+  auditable situational modifiers.
+- Added automatic routine task scopes, read-only odds previews, and distinct
+  per-NPC checks with mixed/group outcomes.
+- Connected turns now refuse missing assessments instead of silently using 50%.
+- Success, margin and degree share one draw; automatic tasks preserve action
+  RNG, and background hazard probability/draw are visible on the world stream.
+- Added CLI/public-backend assessment inputs, retry assessment checks, schemas,
+  examples, regression tests and migration documentation.
+- Explicit task/skill assessments prevent incidental journey words from
+  misclassifying service inquiries and diplomacy as travel.
+- Existing campaign ledgers remain intact; shops and service transactions are
+  still separate unimplemented mechanics.
+
 # Changelog
 
 ## 0.4.0 — 2026-10-07

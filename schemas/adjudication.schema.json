@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Phenomenal Engine Action Adjudication",
+  "description": "Trusted director inputs, separate from untrusted player text. Python enforces known skills/targets, finite ratings and distinct modifier sources.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "task",
+        "reason"
+      ],
+      "properties": {
+        "mode": {
+          "const": "automatic"
+        },
+        "task": {
+          "enum": [
+            "read_available_information",
+            "send_message",
+            "request_service",
+            "observe_public_area",
+            "routine_movement"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "skill_id",
+        "difficulty",
+        "difficulty_reason",
+        "stakes",
+        "mode"
+      ],
+      "properties": {
+        "skill_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "difficulty": {
+          "type": "number",
+          "minimum": -2,
+          "maximum": 4
+        },
+        "difficulty_reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "modifiers": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "value",
+              "reason",
+              "source"
+            ],
+            "properties": {
+              "value": {
+                "type": "number",
+                "minimum": -0.5,
+                "maximum": 0.5
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 600
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              }
+            }
+          }
+        },
+        "target_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "stakes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "success",
+            "partial_success",
+            "failure"
+          ],
+          "properties": {
+            "success": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 600
+            },
+            "partial_success": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 600
+            },
+            "failure": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 600
+            }
+          }
+        },
+        "mode": {
+          "const": "check"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "checks",
+        "success_policy"
+      ],
+      "properties": {
+        "mode": {
+          "const": "group"
+        },
+        "success_policy": {
+          "enum": [
+            "all",
+            "any"
+          ]
+        },
+        "checks": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/check"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "skill_id",
+        "difficulty",
+        "difficulty_reason",
+        "stakes"
+      ],
+      "properties": {
+        "skill_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "difficulty": {
+          "type": "number",
+          "minimum": -2,
+          "maximum": 4
+        },
+        "difficulty_reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "modifiers": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "value",
+              "reason",
+              "source"
+            ],
+            "properties": {
+              "value": {
+                "type": "number",
+                "minimum": -0.5,
+                "maximum": 0.5
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 600
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              }
+            }
+          }
+        },
+        "target_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "stakes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "success",
+            "partial_success",
+            "failure"
+          ],
+          "properties": {
+            "success": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 600
+            },
+            "partial_success": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 600
+            },
+            "failure": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 600
+            }
+          }
+        }
+      }
+    }
+  }
+}

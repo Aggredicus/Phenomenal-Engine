@@ -74,6 +74,17 @@ For public saved campaigns in Aggredicus/Phenomenal-Engine, use the dedicated im
 
 ## Required turn loop
 
+Before executing a new connected turn, follow [Action adjudication](docs/action_adjudication.md).
+Supply an explicit `adjudication`: automatic for an available routine task,
+or a character skill check with explained difficulty, bounded situational
+modifiers and success/partial/failure stakes. Show the read-only preview before
+rolling and bind it with `expected_adjudication_sha256`. Never omit these inputs
+and repeatedly apply a neutral 50% check. Evaluate different NPC motivations
+with separate group checks; do not infer unanimous agreement from one roll.
+Reward effective choices and preparation equally regardless of prose length.
+Show provisional math when requested, then narrate outcomes after verified save.
+Automatic service inquiries do not repair ships or invent unimplemented shops.
+
 1. Load exactly one mod.
 2. Load or create exactly one campaign save.
 3. Generate a unique idempotency key for the intended turn.

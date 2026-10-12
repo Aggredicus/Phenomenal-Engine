@@ -1,4 +1,4 @@
-# Phenomenal Engine v0.4.0
+# Phenomenal Engine v0.5.0
 
 **Fork it. Connect a write-capable chatbot AI. Say: `Play Phenomenal Engine.`**
 
@@ -78,6 +78,15 @@ python -m phenomenal_engine start --codespaces    # manual setup instructions on
 These commands only print JSON choices. Even `--codespaces` **does not provision or enable a Codespace remotely**; the user must choose to create one in GitHub after reviewing costs.
 
 See `docs/codespaces_and_saves.md` and [GitHub's current Codespaces pricing](https://github.com/pricing).
+
+## Variable action odds and reliable routine tasks
+
+See [Action adjudication](docs/action_adjudication.md). Connected turns require
+an explicit automatic-task assessment or explained skill/difficulty/modifier
+check. Captain Zan has an authored character skill profile; trained and expert
+characters succeed more often at ordinary challenges. Read-only previews show
+the odds before rolling, NPC negotiations can use separate checks, and outcome
+quality follows the actual success roll. Existing campaign history is preserved.
 
 ## Faster gameplay (no player token or local installation)
 

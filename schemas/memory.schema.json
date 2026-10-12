@@ -114,6 +114,23 @@
         }
       },
       "additionalProperties": true
+    },
+    "player_profile": {
+      "type": "object",
+      "required": [
+        "skills"
+      ],
+      "properties": {
+        "skills": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 3
+          }
+        }
+      }
     }
   }
 }

@@ -27,6 +27,7 @@ from .memory import (
     verify_ledger,
 )
 from .mod_loader import load_mod
+from .adjudication import load_adjudication
 
 REPOSITORY = "Aggredicus/Phenomenal-Engine"
 BRANCH = "campaign-saves"
@@ -228,6 +229,7 @@ def run_turn(
     api: GitHubAPI, *, campaign: str, mod_path: str, action: str,
     idempotency_key: str, seed: str = "story-seed",
     consent_path: str | None = None, confirm_first_publication: bool = False,
+    adjudication: dict | None = None,
 ) -> dict:
     """One fully remote-persisted turn. Never returns a new scene before verified commit."""
     path = remote_path(campaign)
@@ -255,6 +257,9 @@ def run_turn(
             raise GitHubSaveError("existing save lacks matching public destination metadata")
     duplicate = find_event_by_idempotency_key(memory, idempotency_key)
     if duplicate is not None:
+        payload = duplicate.get("payload", {})
+        if payload.get("action") != action or payload.get("adjudication_request") != adjudication:
+            raise GitHubSaveError("idempotency key reused with different action or adjudication")
         return {
             "status": "duplicate", "persisted": True, "created": False,
             "campaign_id": memory["session_id"], "turn": memory["turn"],
@@ -269,7 +274,7 @@ def run_turn(
             "public": True, "agreement_version": AGREEMENT_VERSION,
             "agreement_sha256": covenant_digest(),
         }
-    packet = Engine(mod, memory).step(action, idempotency_key=idempotency_key)
+    packet = Engine(mod, memory).step(action, idempotency_key=idempotency_key, adjudication=adjudication)
     commit = save_campaign(api, campaign, memory, sha)
     return {
         "status": "ok", "persisted": True, "created": created,
@@ -296,6 +301,7 @@ def main(argv=None) -> int:
             p.add_argument("--seed", default="story-seed")
             p.add_argument("--consent-receipt", default=None)
             p.add_argument("--confirm-first-publication", action="store_true")
+            p.add_argument("--adjudication", default=None, help="JSON assessment or path")
     args = parser.parse_args(argv)
     try:
         if args.command == "preview":
@@ -318,6 +324,7 @@ def main(argv=None) -> int:
                 action=args.action, idempotency_key=args.idempotency_key,
                 seed=args.seed, consent_path=args.consent_receipt,
                 confirm_first_publication=args.confirm_first_publication,
+                adjudication=load_adjudication(args.adjudication),
             )
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0

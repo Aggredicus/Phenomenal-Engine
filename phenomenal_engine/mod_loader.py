@@ -32,6 +32,7 @@ OPTIONAL_TYPES = {
     "locations": list,
     "clocks": list,
     "encounters": list,
+    "player_setup": dict,
 }
 
 def validate_mod(mod: dict) -> list[str]:
@@ -59,6 +60,12 @@ def validate_mod(mod: dict) -> list[str]:
         tier = thread.get("tier", "side")
         if tier not in {"main", "faction", "side", "local", "emergent"}:
             errors.append(f"unsupported story thread tier: {tier}")
+    if isinstance(mod.get("player_setup"), dict) and "character_profile" in mod["player_setup"]:
+        from .adjudication import player_profile, AdjudicationError
+        try:
+            player_profile(mod, {})
+        except AdjudicationError as exc:
+            errors.append(str(exc))
     return errors
 
 def load_mod(path: str | Path) -> dict:

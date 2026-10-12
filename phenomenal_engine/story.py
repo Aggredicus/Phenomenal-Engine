@@ -429,6 +429,25 @@ def advance_story(mod: dict, memory: dict, action: str, outcome: dict, rng) -> d
 
     control = _travel_control(action)
     mode = "travel" if control else classify_action(action)
+    assessment = outcome.get("adjudication", {})
+    if assessment.get("source") == "director":
+        # An explicit task/skill outranks incidental words such as "journey" in
+        # a service request or "travel together" in a diplomatic proposal.
+        task_modes = {"read_available_information": "investigate", "send_message": "social",
+                      "request_service": "social", "observe_public_area": "explore",
+                      "routine_movement": "travel"}
+        skill_modes = {"diplomacy": "social", "leadership": "social", "logistics": "craft",
+                       "investigation": "investigate", "engineering": "craft", "piloting": "travel"}
+        if assessment.get("mode") == "automatic":
+            mode = task_modes[assessment["task"]]
+            if mode != "travel":
+                control = None
+        elif assessment.get("mode") == "group":
+            mode, control = "social", None
+        else:
+            mode = skill_modes.get(assessment.get("skill_id"), mode)
+            if mode != "travel":
+                control = None
     _update_experience(memory, action, mode)
 
     travel_update = None

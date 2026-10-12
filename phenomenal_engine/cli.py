@@ -11,6 +11,7 @@ from .memory import (
 )
 from .engine import Engine
 from .rng import PCG32
+from .adjudication import load_adjudication, prepare_adjudication
 from .game_theory import (
     AlwaysCooperate, AlwaysDefect, TitForTat, GenerousTitForTat,
     WinStayLoseShift, GrimTrigger, RandomStrategy, round_robin, evolve_memory_one
@@ -162,6 +163,7 @@ def cmd_step(args):
         args.difficulty,
         args.context,
         significance=args.significance,
+        adjudication=load_adjudication(args.adjudication),
     )
     if args.save:
         save_memory(args.save, memory)
@@ -185,6 +187,9 @@ def cmd_play(args):
 
     duplicate = find_event_by_idempotency_key(memory, args.idempotency_key)
     if duplicate is not None:
+        payload = duplicate.get("payload", {})
+        if payload.get("action") != args.action or payload.get("adjudication_request") != load_adjudication(args.adjudication):
+            raise ValueError("idempotency key reused with different action or adjudication")
         print(json.dumps({
             "status": "duplicate",
             "campaign_id": memory["session_id"],
@@ -206,6 +211,7 @@ def cmd_play(args):
         args.context,
         significance=args.significance,
         idempotency_key=args.idempotency_key,
+        adjudication=load_adjudication(args.adjudication),
     )
     save_memory(save_path, memory)
     print(json.dumps({
@@ -338,6 +344,17 @@ def add_resolution_args(p):
     p.add_argument("--context", type=float, default=0.0)
     p.add_argument("--significance", type=float, default=0.5)
     p.add_argument("--queue", default=None)
+    p.add_argument("--adjudication", default=None, help="JSON assessment or path; explains automatic scope or skill/difficulty/modifiers/stakes")
+
+
+def cmd_preview_action(args):
+    mod = load_mod(args.mod)
+    memory = load_memory(args.save)
+    validate_memory_for_mod(memory, mod)
+    assessment = prepare_adjudication(mod, memory, args.action, load_adjudication(args.adjudication), strict=True)
+    print(json.dumps({"status": "adjudication_preview", "no_rng_consumed": True,
+                      "no_state_mutated": True, "persisted": False,
+                      "adjudication": assessment}, indent=2, ensure_ascii=False))
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="phenomenal-engine")
@@ -470,6 +487,13 @@ def main(argv=None):
     p = sub.add_parser("status", help="verify and inspect a persistent campaign save")
     p.add_argument("save")
     p.set_defaults(func=cmd_status)
+
+    p = sub.add_parser("preview-action", help="show character strength, difficulty, modifiers and odds without rolling")
+    p.add_argument("mod")
+    p.add_argument("save")
+    p.add_argument("action")
+    p.add_argument("--adjudication", default=None)
+    p.set_defaults(func=cmd_preview_action)
 
     args = ap.parse_args(argv)
     args.func(args)
