@@ -11,13 +11,13 @@
   },
   {
     "path": ".github/workflows/publish-v0.4.0.yml",
-    "bytes": 2742,
-    "sha256": "bec2d66ebdd272bef38c10eaa36875a3c04e0e332f916c090d7fee5be4d4e180"
+    "bytes": 2676,
+    "sha256": "57db869f23e8e5832dbf53c40178f395398bf13511b2108393cd0e3fe0066bc3"
   },
   {
     "path": ".github/workflows/publish-v0.4.1.yml",
-    "bytes": 2742,
-    "sha256": "fa850e810e7b5c0cfa1676d3a9417b202de3d2f8e22da18063f0bb0086a84808"
+    "bytes": 2676,
+    "sha256": "c92ffdba087035cf7dc54198a2ccbdabfae03d67268d52fca399b667e59b227f"
   },
   {
     "path": ".gitignore",
@@ -31,8 +31,8 @@
   },
   {
     "path": "CHANGELOG.md",
-    "bytes": 4925,
-    "sha256": "abc7be56901fb9519b50e565b7cba43c0a3683ebd0e61be1aac6d474bb962078"
+    "bytes": 5053,
+    "sha256": "9fd2b90c4e047666309ecf797e7713ee518c0a68f4caf3bedf95d96331a11e0d"
   },
   {
     "path": "LICENSE",

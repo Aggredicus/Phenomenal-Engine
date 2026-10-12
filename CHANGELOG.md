@@ -11,6 +11,8 @@
   examples, regression tests and migration documentation.
 - Explicit task/skill assessments prevent incidental journey words from
   misclassifying service inquiries and diplomacy as travel.
+- Historical v0.4 release publishers are manual-only so later version bumps
+  do not automatically queue obsolete release jobs.
 - Existing campaign ledgers remain intact; shops and service transactions are
   still separate unimplemented mechanics.
 

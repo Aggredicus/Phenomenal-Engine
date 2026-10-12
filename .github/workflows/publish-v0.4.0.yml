@@ -1,13 +1,7 @@
 name: Publish Phenomenal Engine v0.4.0
 
+# Historical release publisher: invoke deliberately from a matching-version checkout.
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/publish-v0.4.0.yml"
-      - "RELEASE_NOTES_v0.4.0.md"
-      - "pyproject.toml"
   workflow_dispatch:
 
 permissions:
