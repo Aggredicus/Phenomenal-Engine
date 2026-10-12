@@ -113,13 +113,13 @@ def _check(mod, memory, spec, temperature, profile, profile_source):
 
 
 def prepare_adjudication(mod, memory, action, assessment=None, *, strict=False,
-                         skill=0.0, difficulty=0.0, context=0.0):
+                         skill=0.0, difficulty=0.0, context=0.0, apply_action_rules=True):
     """Preview inputs and odds. Validate everything before any engine mutation."""
     _text(action, "action", 2000)
     temperature = _number(mod.get("simulation_profile", {}).get("skill_temperature", 1.0),
                           "temperature", 0.01, 10)
     profile, profile_source = player_profile(mod, memory)
-    rule = matching_action_rule(mod, memory, action)
+    rule = matching_action_rule(mod, memory, action) if apply_action_rules else None
     if rule is not None and rule.get("deterministic", False):
         # Authored state guards/interlocks outrank a director's convenience assessment.
         if assessment is not None:

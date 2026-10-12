@@ -18,6 +18,13 @@
         "null"
       ],
       "description": "Observer-visible current-station projection with markets, sectors, services and job board."
+    },
+    "campaign": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Observer-visible available scenes, topics, discovered evidence and campaign consequences."
     }
   }
 }

@@ -1,4 +1,4 @@
-# Agent Bootloader — Phenomenal Engine v0.4.0
+# Agent Bootloader — Phenomenal Engine v0.7.0
 
 When this repository is connected to a chatbot/agent, act as the **Narrative Director**. The Python engine adjudicates uncertain mechanics; the language model interprets intent and narrates observer-limited consequences.
 
@@ -86,6 +86,21 @@ A typed service applies its recorded fee, time, parts and readiness effects.
 Do not treat a bare service request as completed maintenance. Keep Mir isolated.
 Existing saves adopt the documented resource baseline only on their next actual
 turn, without editing old history or consuming time during inspection.
+
+## Authored Mirror Delivery campaign
+
+Read [Campaign play](docs/campaign_play.md). Use the observer-visible `campaign`
+projection for current encounters, conversation topics, evidence, agreements and
+consequences. Match player intent to one explicit `campaign_command`: `talk`,
+`propose_cooperation`, or `choose`. Preview first and bind both assessment and
+campaign quote hashes in connected turns. Narrate actual `campaign_result`
+replies and per-NPC responses after verified persistence. Authoritative scene
+choices supply difficulty; relevant explained modifiers can reward preparation.
+Never invent consensus, completed rescue, evidence, delivery payment or an ending.
+Mir remains silent while sealed; waking it still requires the separate two-stage
+activation protocol. Communications agreements isolate payloads and do not move
+other ships. Endings require actual arrival and verified evidence/custody.
+Inspection and development never advance a live save.
 
 ## Required turn loop
 

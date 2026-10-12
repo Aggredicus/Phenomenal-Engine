@@ -26,13 +26,13 @@
   },
   {
     "path": "AGENT_BOOTLOADER.md",
-    "bytes": 10436,
-    "sha256": "c0c63b3be1b751be495f68f1c047e1ae7f504718f79b32949360d4f7ef0e5aba"
+    "bytes": 11400,
+    "sha256": "09bd83c56145c4df7110619e9bce8cd7c79b321c0c5ccce00583aca62a153581"
   },
   {
     "path": "CHANGELOG.md",
-    "bytes": 6008,
-    "sha256": "ac9d2aa1f6fe5c75acc02f4514efec5b84cf4264a4cb1a77102047f05ac80fdb"
+    "bytes": 6967,
+    "sha256": "243f7eb1767ec8b1da8d7c7290c09f334152774e83ce66a6b6971302912af32e"
   },
   {
     "path": "LICENSE",
@@ -46,8 +46,8 @@
   },
   {
     "path": "README.md",
-    "bytes": 13493,
-    "sha256": "0712c8fd2218f1d42a00f64f9636cd308cf97d33bd3e2407b878c1b7862130f0"
+    "bytes": 14061,
+    "sha256": "c4fd21f0703c08f4be0cafd0bae9a6c33771d0a58e030765d4bdb49dcce68d35"
   },
   {
     "path": "RELEASE_NOTES_v0.4.0.md",
@@ -110,6 +110,11 @@
     "sha256": "e1e2d0b8317c6f68a62ddb17bcffb3a6901b688bf73c0f7dab61c965135d62c9"
   },
   {
+    "path": "docs/campaign_play.md",
+    "bytes": 7134,
+    "sha256": "35bbdfe5fd0b6d3e659ebc6327ceb6e6dde8787063cca915dd1cc8d6664b80d6"
+  },
+  {
     "path": "docs/chatbot_quickstart.md",
     "bytes": 3448,
     "sha256": "2408ee2e036fc9b9b1c70b4263fe82ea9c1965649cfedda2860e080caf94ee09"
@@ -126,8 +131,8 @@
   },
   {
     "path": "docs/fast_tokenless_turns.md",
-    "bytes": 7217,
-    "sha256": "3d38e1725b40374784b16bc63f33cd2670c8994e7c5cfe7e666a3a19af39729a"
+    "bytes": 7797,
+    "sha256": "ae9983379803925dc0178046c3a2ad39fdebc506e64ec28256bbfd1c04d93ac8"
   },
   {
     "path": "docs/game_theory_and_ai_ethics.md",
@@ -235,6 +240,21 @@
     "sha256": "80f19a83ac1c102ddd429d733451351c4da192886be91b301af99e0f68822f7e"
   },
   {
+    "path": "examples/mirror_delivery_cairn_talk.json",
+    "bytes": 72,
+    "sha256": "a5b2897a0daac15c10a0d92367ac0b526b5bbf444ec980594edf47e77ec1d37a"
+  },
+  {
+    "path": "examples/mirror_delivery_campaign_choice.json",
+    "bytes": 79,
+    "sha256": "33fe00e33a57e0005534da3ed1894261ba0d43148d5ac860afcdbf0c02b39de4"
+  },
+  {
+    "path": "examples/mirror_delivery_cooperation_command.json",
+    "bytes": 137,
+    "sha256": "0d03947375e4b3fea1594e4b843df9c6ff4f00e85b20646de588c38576dd2cab"
+  },
+  {
     "path": "examples/mirror_delivery_director_state.json",
     "bytes": 4330,
     "sha256": "a626c83f720422ca0ba9ff743f1ae609f747b4031bf4eae1d4ae65bd93fd041a"
@@ -255,6 +275,11 @@
     "sha256": "6023192173b88106338739f61c3f147e270e518f51c1ef49766e7e205a7be9ce"
   },
   {
+    "path": "mods/campaigns/mirror_delivery.json",
+    "bytes": 102394,
+    "sha256": "10427852f6e7d659927901970ed81c69f48c2b69da6a65a2041a31c1acc60e40"
+  },
+  {
     "path": "mods/economies/mirror_delivery.json",
     "bytes": 101100,
     "sha256": "75fd6e7c923cb89c931aecdd003ec14e71d4fc54815822491cec09835936d6ab"
@@ -266,8 +291,8 @@
   },
   {
     "path": "mods/mirror_delivery.json",
-    "bytes": 57492,
-    "sha256": "fbeb504ae2b86cb6cca9cf24a3eb0b93dca6a61120be346225d58650b48d283c"
+    "bytes": 57533,
+    "sha256": "39cf2eac7b0616c7c928cf8abc607ea3673be046b555c27aac66abcdee0edbef"
   },
   {
     "path": "mods/orbital_swarm_trail.json",
@@ -277,7 +302,7 @@
   {
     "path": "phenomenal_engine/__init__.py",
     "bytes": 124,
-    "sha256": "bdae6b073102b3ded4a498a271fe1665d42a6f9e1166a5b708ceaa10e8ef9a64"
+    "sha256": "19e72e4b17eda9a7794d96fcfa2a775371f8261b052a9a488ce2fad63ea27078"
   },
   {
     "path": "phenomenal_engine/__main__.py",
@@ -286,13 +311,18 @@
   },
   {
     "path": "phenomenal_engine/adjudication.py",
-    "bytes": 9420,
-    "sha256": "9bd34a323a91639220ec79095adffd90cfed0b51ed7f6ea9bee059cfaa5afb49"
+    "bytes": 9477,
+    "sha256": "777f6132d1ee9fe21f8ed7a1b9161f67460d64fc3fde05874106107e95c3c515"
+  },
+  {
+    "path": "phenomenal_engine/campaign.py",
+    "bytes": 26848,
+    "sha256": "9f56598e05da74ad1a0dc4f96c53ffd4f2c6b629baf90009dac66a9b930912c8"
   },
   {
     "path": "phenomenal_engine/cli.py",
-    "bytes": 21848,
-    "sha256": "6af3725c31b189f505ce069e3ef80c7eb624f82a71075f3511e886b7e9d24c3a"
+    "bytes": 23124,
+    "sha256": "69302da734c5371924d11ca24b9f874fe45ddadeca54001b1ee550d013945dc3"
   },
   {
     "path": "phenomenal_engine/consent.py",
@@ -301,8 +331,8 @@
   },
   {
     "path": "phenomenal_engine/director.py",
-    "bytes": 9326,
-    "sha256": "1eed5cb75ae44d02cb70bf0be0ba5d60b7dd9dba87f2f36507ba1176dc621690"
+    "bytes": 9457,
+    "sha256": "670bdf2da4cf720531ae53927f1230ff15640e5aabed83e4511a7db40ed43214"
   },
   {
     "path": "phenomenal_engine/economy.py",
@@ -311,8 +341,8 @@
   },
   {
     "path": "phenomenal_engine/engine.py",
-    "bytes": 7897,
-    "sha256": "ae83be7b6c5168552d3f41047d6f1aa26d46a1aed74f2e54ec3b891dbce97b1d"
+    "bytes": 9041,
+    "sha256": "c2dd13f395dfd6cffd8db32fc3e95af6442091ff4e04e3ad05767aa4c252ee80"
   },
   {
     "path": "phenomenal_engine/game_theory.py",
@@ -321,13 +351,18 @@
   },
   {
     "path": "phenomenal_engine/github_saves.py",
-    "bytes": 16352,
-    "sha256": "4f14af9ebcefce75a47b3f112f89752105c4e8d321ce38d4f4b1f0d5fb47d6d9"
+    "bytes": 17402,
+    "sha256": "2d1cae0d610f725f833074d50542859c8eae38e4bdf3c1b5f7bfcf2ab02bc7c3"
   },
   {
     "path": "phenomenal_engine/image_jobs.py",
     "bytes": 2055,
     "sha256": "261d79147db756ee99cc6cc385089acd619a0011b53596897873a2ea98bc19b5"
+  },
+  {
+    "path": "phenomenal_engine/ledger_archive.py",
+    "bytes": 2551,
+    "sha256": "a2d247fd320ff9c9d933048da3f614edc727bbc8d509c7f05a114316fe3c0cd9"
   },
   {
     "path": "phenomenal_engine/map_ui.py",
@@ -336,18 +371,18 @@
   },
   {
     "path": "phenomenal_engine/memory.py",
-    "bytes": 6200,
-    "sha256": "e89eaa34762e7cdac7ab689bd37349f967b7c4a29e8f6bca77438631d169ffa9"
+    "bytes": 6674,
+    "sha256": "3bdcd4b32c8232ab7c2cf774df09b42810c0ab573abd4532206f2c49cdefd668"
   },
   {
     "path": "phenomenal_engine/mod_loader.py",
-    "bytes": 2979,
-    "sha256": "6d5541fbebe52b7a9ec7db584d217b60c6c8fff69006d46bb801a33420faa992"
+    "bytes": 3328,
+    "sha256": "bd6718f4fe0410b5f9390e26f0d074043c550cd03c9f36da13dc00fc71fcea01"
   },
   {
     "path": "phenomenal_engine/narrative.py",
-    "bytes": 5330,
-    "sha256": "b8dbb7a40b51c5028a9574f5cc8cfdbd1966aaf70885ca9585c0a7964bccbbbf"
+    "bytes": 5455,
+    "sha256": "b4a8f6b71f24bfb3af88c402e52acb78d75f3e59f819b5bcfe86ad026bb1031c"
   },
   {
     "path": "phenomenal_engine/perception.py",
@@ -371,8 +406,8 @@
   },
   {
     "path": "phenomenal_engine/story.py",
-    "bytes": 21678,
-    "sha256": "a94f4bfcba7d1ae8f9fbd56b5c69e86208123dafccdbd6049d1db4a07c48456d"
+    "bytes": 22285,
+    "sha256": "491678ba5fd31c14c18d2f175bfa323620f6530d181a3d865318b0d6bcf02bcb"
   },
   {
     "path": "phenomenal_engine/travel.py",
@@ -381,8 +416,8 @@
   },
   {
     "path": "phenomenal_engine/turn_exchange.py",
-    "bytes": 9344,
-    "sha256": "786fb460c208aab97a2c1a16685321ad3e5f8e3e2549371f8422e8d41e839f09"
+    "bytes": 10453,
+    "sha256": "d04b058118236157e9aee23a32533af1fa85e795558cd1c8e990289bfd29622f"
   },
   {
     "path": "phenomenal_engine/turn_streaming.py",
@@ -397,7 +432,7 @@
   {
     "path": "pyproject.toml",
     "bytes": 396,
-    "sha256": "9a01df3d4fbf5ca3260dd01853c254c8f03185e8e637aec282bd09d87b174e42"
+    "sha256": "e84a7bd92d2875e45896cb48576881d4100f215dbe7c1ddf32cfaeef78ea8d66"
   },
   {
     "path": "runtime/.gitkeep",
@@ -408,6 +443,11 @@
     "path": "schemas/adjudication.schema.json",
     "bytes": 5722,
     "sha256": "32fb758e8e023e7206bb5fac0280d1c7e53b6a5aecf62631125c338928ab6be1"
+  },
+  {
+    "path": "schemas/campaign_command.schema.json",
+    "bytes": 1730,
+    "sha256": "1dd7285b48e8bf47a17d86c24aff16239725eb849c98a354900ccd5c10bd07d1"
   },
   {
     "path": "schemas/director_command.schema.json",
@@ -426,18 +466,18 @@
   },
   {
     "path": "schemas/memory.schema.json",
-    "bytes": 2677,
-    "sha256": "2c86d55cdbf163455840e155ff2a515934a608df2eeea27350660ab85029d787"
+    "bytes": 3047,
+    "sha256": "99f7e5912d918c8be2b296325cdbdc54a9f0189c0bda50b4ce455a9b1bae3121"
   },
   {
     "path": "schemas/mod.schema.json",
-    "bytes": 3111,
-    "sha256": "4a56b70a265af83e9e2e9c1150b1e9d02f6164a3bebb7a51cdc25141f3cb4719"
+    "bytes": 3288,
+    "sha256": "570e9356658046c065c4fa606d54092b30cdd49e5fd35bc7f76109be3253141a"
   },
   {
     "path": "schemas/scene_packet.schema.json",
-    "bytes": 494,
-    "sha256": "f5d3147878fdab98557bde1b2cf6fd66a36345572f5ba5374dcf51bdca214198"
+    "bytes": 690,
+    "sha256": "e02acdf4589be8089e3f41a4e957974b6a887a8ff4b5e28651a38f3a116be9f0"
   },
   {
     "path": "scripts/chat_playtest.py",
@@ -453,6 +493,11 @@
     "path": "tests/test_adjudication.py",
     "bytes": 10810,
     "sha256": "ea9d13427b7891a06bca72ebe3568561528c3c18cb51f5b3160952812a93c436"
+  },
+  {
+    "path": "tests/test_campaign.py",
+    "bytes": 17152,
+    "sha256": "72b515cfdde59cf5a6df770816e624876db6bb9ea18683f4f6d1f8f7dee96419"
   },
   {
     "path": "tests/test_chat_playtest.py",
@@ -483,6 +528,11 @@
     "path": "tests/test_github_saves.py",
     "bytes": 10652,
     "sha256": "cdb05056233c9f9d241f6e6e89bc5bb8f7c5c8718492fcf914930c22a1fddb20"
+  },
+  {
+    "path": "tests/test_ledger_archive.py",
+    "bytes": 3168,
+    "sha256": "09459a13d4a5299049113b9a81463252e39885a599e980a4608723d5eec9baca"
   },
   {
     "path": "tests/test_mods.py",

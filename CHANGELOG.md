@@ -1,3 +1,18 @@
+# v0.7.0 — Complete Mirror Delivery campaign
+
+- Added 25 scenes, 58 choices, 13 NPC conversation topics and six ending paths.
+- Added persistent courier agreements, individual responses, faction standing,
+  discovered evidence, crew decisions, rescues and optional investigation routes.
+- Added typed campaign actions and read-only, hash-bound connected previews;
+  authored checks accept explained preparation modifiers and safe alternatives.
+- Added physical-share verification at Mercury, actual custody receipts,
+  finite once-only mission rewards and consequence-specific epilogues.
+- Added bounded, lossless archives for longer public ledgers, retaining every
+  event and hash with compatibility in both save loaders.
+- Kept sealed Mir silent and activation separate from typed scene/market prose.
+- Older campaigns initialize the new layer only on their next executed turn;
+  development leaves historical ledgers and live campaign saves untouched.
+
 # v0.6.0 — Living station economies
 
 - Added 9 station economies, 18 named vendors, 39 recurring job templates,

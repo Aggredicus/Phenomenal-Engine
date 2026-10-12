@@ -196,6 +196,8 @@ def _advance_npc_agendas(memory: dict, mod: dict, rng, pulses: int) -> list[dict
     turn = int(memory.get("turn", 0))
     for _ in range(pulses):
         for definition in mod.get("npc_agendas", []):
+            if mod.get("campaign_profile") and definition.get("character_id") in memory.get("campaign", {}).get("arrivals", {}):
+                continue
             if not isinstance(definition, dict) or not definition.get("id"):
                 continue
             state = story["npc_agendas"].setdefault(
@@ -315,6 +317,8 @@ def _advance_world_events(memory: dict, mod: dict, rng) -> list[dict]:
     ws = memory.setdefault("world_state", {})
     for definition in mod.get("world_events", []):
         if not isinstance(definition, dict) or not definition.get("id"):
+            continue
+        if definition["id"] == "amber_silence" and memory.get("campaign", {}).get("arrivals", {}).get("ren_ivo", {}).get("available"):
             continue
         state = story["world_events"].setdefault(
             definition["id"], {"id": definition["id"], "triggered": False, "last_checked_turn": 0}
@@ -451,6 +455,8 @@ def advance_story(mod: dict, memory: dict, action: str, outcome: dict, rng) -> d
     if outcome.get("economy_result"):
         mode = "craft" if outcome["economy_result"]["kind"] in {"service", "work_job"} else "explore" if outcome["economy_result"]["kind"] == "visit_sector" else "social"
         control = None
+    if outcome.get("campaign_result"):
+        mode, control = "social", None
     _update_experience(memory, action, mode)
 
     travel_update = None
@@ -525,7 +531,9 @@ def advance_story(mod: dict, memory: dict, action: str, outcome: dict, rng) -> d
 
     story = memory["story_state"]
 
-    choice_developments = _apply_action_rules(mod, memory, action)
+    # A typed choice is authoritative; incidental words cannot execute a
+    # second action (especially the separate Mir activation protocol).
+    choice_developments = [] if outcome.get("campaign_result") or outcome.get("economy_result") else _apply_action_rules(mod, memory, action)
 
     breadcrumbs = []
     for definition in mod.get("story_threads", []):

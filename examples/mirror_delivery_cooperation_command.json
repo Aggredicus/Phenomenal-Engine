@@ -1,0 +1,9 @@
+{
+  "kind": "propose_cooperation",
+  "policy": "emergency_comms",
+  "npc_ids": [
+    "ren_ivo",
+    "sister_cairn",
+    "mara_ves"
+  ]
+}

@@ -13,6 +13,7 @@ from .engine import Engine
 from .rng import PCG32
 from .adjudication import load_adjudication, prepare_adjudication
 from .economy import station_snapshot, prepare_command
+from . import campaign
 from .game_theory import (
     AlwaysCooperate, AlwaysDefect, TitForTat, GenerousTitForTat,
     WinStayLoseShift, GrimTrigger, RandomStrategy, round_robin, evolve_memory_one
@@ -166,6 +167,7 @@ def cmd_step(args):
         significance=args.significance,
         adjudication=load_adjudication(args.adjudication),
         economy_command=load_adjudication(args.economy_command),
+        campaign_command=load_adjudication(args.campaign_command),
     )
     if args.save:
         save_memory(args.save, memory)
@@ -194,6 +196,8 @@ def cmd_play(args):
             raise ValueError("idempotency key reused with different action or adjudication")
         if payload.get("economy_command") != load_adjudication(args.economy_command):
             raise ValueError("idempotency key reused with different economy command")
+        if payload.get("campaign_command") != load_adjudication(args.campaign_command):
+            raise ValueError("idempotency key reused with different campaign command")
         print(json.dumps({
             "status": "duplicate",
             "campaign_id": memory["session_id"],
@@ -217,6 +221,7 @@ def cmd_play(args):
         idempotency_key=args.idempotency_key,
         adjudication=load_adjudication(args.adjudication),
         economy_command=load_adjudication(args.economy_command),
+        campaign_command=load_adjudication(args.campaign_command),
     )
     save_memory(save_path, memory)
     print(json.dumps({
@@ -351,6 +356,17 @@ def add_resolution_args(p):
     p.add_argument("--queue", default=None)
     p.add_argument("--adjudication", default=None, help="JSON assessment or path; explains automatic scope or skill/difficulty/modifiers/stakes")
     p.add_argument("--economy-command", default=None, help="Typed station interaction JSON or path; quote before a purchase or service")
+    p.add_argument("--campaign-command", default=None, help="Typed conversation, cooperation or scene choice JSON/path")
+
+
+def cmd_campaign(args):
+    mod = load_mod(args.mod)
+    memory = load_memory(args.save)
+    validate_memory_for_mod(memory, mod)
+    result = campaign.prepare_command(mod, memory, load_adjudication(args.command)) if args.command else campaign.campaign_view(mod, memory)
+    print(json.dumps({"status": "campaign_quote" if args.command else "campaign_view",
+                      "persisted": False, "no_rng_consumed": True, "no_state_mutated": True,
+                      "result": result}, indent=2, ensure_ascii=False))
 
 
 def cmd_economy(args):
@@ -516,6 +532,12 @@ def main(argv=None):
     p.add_argument("save")
     p.add_argument("--command", default=None, help="optional typed command to quote without executing")
     p.set_defaults(func=cmd_economy)
+
+    p = sub.add_parser("campaign", help="read local encounters, topics, evidence and campaign consequences")
+    p.add_argument("mod")
+    p.add_argument("save")
+    p.add_argument("--command", default=None, help="optional typed campaign command to preview")
+    p.set_defaults(func=cmd_campaign)
 
     args = ap.parse_args(argv)
     args.func(args)

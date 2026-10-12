@@ -34,6 +34,7 @@ OPTIONAL_TYPES = {
     "encounters": list,
     "player_setup": dict,
     "economy_profile": str,
+    "campaign_profile": str,
 }
 
 def validate_mod(mod: dict) -> list[str]:
@@ -73,6 +74,12 @@ def validate_mod(mod: dict) -> list[str]:
             load_profile(mod)
         except (EconomyError, KeyError, OSError, ValueError, TypeError) as exc:
             errors.append("invalid economy: " + str(exc))
+    if "campaign_profile" in mod and isinstance(mod["campaign_profile"], str):
+        from .campaign import load_profile, CampaignError
+        try:
+            load_profile(mod)
+        except (CampaignError, KeyError, OSError, ValueError, TypeError) as exc:
+            errors.append("invalid campaign: " + str(exc))
     return errors
 
 def load_mod(path: str | Path) -> dict:

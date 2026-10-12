@@ -6,9 +6,10 @@ import hashlib, json, os, tempfile, uuid
 from .story import initial_player_experience, initial_story_state
 from .travel import initial_travel_state
 from .economy import initial_economy
+from .campaign import initial_campaign
 
 SCHEMA_VERSION = "1.0.0"
-ENGINE_VERSION = "0.6.0"
+ENGINE_VERSION = "0.7.0"
 
 def canonical_json(obj) -> str:
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
@@ -71,6 +72,9 @@ def new_memory(mod: dict, seed: int | str, player_identity: dict | None = None) 
     economy = initial_economy(mod, int(memory["world_state"].get("world_time_minutes", 0)))
     if economy is not None:
         memory["economy"] = economy
+    campaign = initial_campaign(mod, int(memory["world_state"].get("world_time_minutes", 0)))
+    if campaign is not None:
+        memory["campaign"] = campaign
     append_event(
         memory,
         "campaign_created",
@@ -143,11 +147,15 @@ def load_memory(path: str | Path) -> dict:
     data = json.loads(Path(path).read_text(encoding="utf-8"))
     if not isinstance(data, dict):
         raise ValueError("memory file must contain a JSON object")
+    from .ledger_archive import restore_archived_ledger
+    restore_archived_ledger(data)
     if not verify_ledger(data):
         raise ValueError("memory ledger hash chain failed verification")
     data.setdefault("state_version", int(data.get("turn", 0)))
     data.setdefault("player_identity", {"name": "Captain", "alias": "Captain", "title": "Captain"})
-    data.setdefault("last_scene_packet", None)
+    if "last_scene_packet" not in data:
+        data["last_scene_packet"] = next((event.get("payload", {}).get("scene_packet")
+            for event in reversed(data["event_ledger"]) if event.get("kind") == "player_action"), None)
     data.setdefault("story_state", {"world_pulse": 0, "threads": {}, "npc_agendas": {}, "world_events": {}, "ambient_history": []})
     data.setdefault("player_experience", initial_player_experience())
     data.setdefault("travel_state", {"known_nodes": [], "known_routes": [], "visited_nodes": [], "route_overrides": {}, "dynamic_nodes": {}, "dynamic_routes": {}, "last_route": None})

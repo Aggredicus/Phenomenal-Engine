@@ -5,6 +5,7 @@ from pathlib import Path
 
 from .travel import visible_map
 from .economy import station_snapshot
+from .campaign import campaign_view
 
 DIRECTOR_SCHEMA_VERSION = "1.0.0"
 
@@ -127,6 +128,7 @@ def build_director_state(mod: dict, memory: dict) -> dict:
         "characters": list(memory.get("characters", {}).values()),
         "player_profile": memory.get("player_profile", mod.get("player_setup", {}).get("character_profile", {"skills": {"general": 0}})),
         "station_economy": station_snapshot(mod, memory) if mod.get("economy_profile") else None,
+        "campaign_story": campaign_view(mod, memory) if mod.get("campaign_profile") else None,
         "story": {
             "quests": list(memory.get("quests", {}).values()),
             "threads": list(story.get("threads", {}).values()),

@@ -1,0 +1,3149 @@
+{
+  "schema_version": "1.0.0",
+  "reward_pool": 30000,
+  "factions": [
+    "heliograph_collective",
+    "mercury_seed_authority",
+    "open_sun_league",
+    "quiet_market"
+  ],
+  "couriers": {
+    "ren_ivo": {
+      "arrival_minutes": 64800,
+      "arrival_text": "Amber Wake reports arrival in Mercury receiving traffic.",
+      "difficulty": {
+        "emergency_comms": 0.5,
+        "coordinated_route": 2
+      },
+      "concern": "Ren values crew autonomy and a fast arrival; a shared burn schedule costs him flexibility.",
+      "condition": "I can answer a distress call, but cannot promise to abandon a rescue already underway.",
+      "responses": {
+        "success": "Keep your vault separate and your receiver open. Amber Wake will answer if we can reach you.",
+        "partial_success": "I can promise to relay a call. A rendezvous needs a trajectory we can actually fly.",
+        "failure": "I will hear a distress call. I am not committing my crew to your timetable."
+      }
+    },
+    "sister_cairn": {
+      "arrival_minutes": 67680,
+      "arrival_text": "Sable Meridian reports an outer-seal inspection at Mercury.",
+      "difficulty": {
+        "emergency_comms": 0,
+        "coordinated_route": 1
+      },
+      "concern": "Cairn requires independent custody and records that distinguish assistance from payload access.",
+      "condition": "Each crew logs its own custody, and assistance must never mount another vault.",
+      "responses": {
+        "success": "Agreed within the isolation boundary. Sable Meridian will preserve the communications record.",
+        "partial_success": "I require the custody boundary to be recorded before promising operational assistance.",
+        "failure": "Your request leaves a custody ambiguity. I cannot endorse it in this form."
+      }
+    },
+    "mara_ves": {
+      "arrival_minutes": 70560,
+      "arrival_text": "Kite Argument reports arrival and requests independent hearing witnesses.",
+      "difficulty": {
+        "emergency_comms": 0,
+        "coordinated_route": 0.5
+      },
+      "concern": "Mara protects her crew and will not delegate their judgment to another captain.",
+      "condition": "Assistance remains voluntary; nobody acquires command over another crew.",
+      "responses": {
+        "success": "A mutual-aid channel, no payload links, no commander above the captains. Kite Argument is in.",
+        "partial_success": "I will share warnings. Keep authority with each crew, and we can discuss more.",
+        "failure": "I will not sign a promise whose costs my crew cannot examine."
+      }
+    }
+  },
+  "dialogues": {
+    "ren_ivo": {
+      "history": {
+        "title": "Amber Wake's working life",
+        "text": "Amber Wake earned its name carrying physical freight on tight schedules. Ren values crews who can judge a situation without waiting for a distant supervisor. He wants Mercury to remember who brought its future there.",
+        "requires": {},
+        "effects": {
+          "relationships": {
+            "ren_ivo": 1
+          }
+        }
+      },
+      "motives": {
+        "title": "Why arrive first?",
+        "text": "Being first matters to me. Being useful matters more. Someone still has to decide what to do when the plan stops fitting the people aboard it.",
+        "requires": {},
+        "effects": {}
+      }
+    },
+    "sister_cairn": {
+      "ships": {
+        "title": "The histories of the four ships",
+        "text": "Morrowglass carries the compromises of a working courier: asymmetric radiators, repairable fittings, room for human judgment. Amber Wake was built around physical freight and quick departures. Sable Meridian was refitted for audited custody; I preserve the names of its earlier crews because a refit is not a new birth. Kite Argument is a vessel whose crew insists on understanding the contract. These are public working histories, Captain Zan. Their captains can tell you what those histories cost them.",
+        "requires": {},
+        "effects": {
+          "relationships": {
+            "sister_cairn": 1
+          }
+        }
+      },
+      "memory": {
+        "title": "Why keep the record?",
+        "text": "A record is not the whole person. It is one way to stop convenience from replacing what actually happened. An old ship deserves that courtesy as much as a new intelligence does.",
+        "requires": {},
+        "effects": {}
+      }
+    },
+    "mara_ves": {
+      "motives": {
+        "title": "What is Kite Argument carrying?",
+        "text": "A sealed copy, yes. Also a crew that has not agreed to become expendable. If this delivery builds an abundance nobody can challenge, then I want to know whose abundance it is.",
+        "requires": {},
+        "effects": {
+          "relationships": {
+            "mara_ves": 1
+          }
+        }
+      },
+      "provenance": {
+        "title": "Kite Argument continuity account",
+        "text": "We used the emergency clause. A sealed baseline could not help the people in front of us. I will give you the record, including the part where we were frightened. I won't pretend the copy arrived unchanged.",
+        "requires": {
+          "locations": [
+            "mercury_high_orbit",
+            "caloris_terminus"
+          ],
+          "after_minutes": 70560
+        },
+        "effects": {
+          "flags": {
+            "mara_divergent": true
+          },
+          "evidence": [
+            "mara_attestation",
+            "continuity_rule"
+          ]
+        }
+      }
+    },
+    "juno_arel": {
+      "home": {
+        "title": "The people in the ship",
+        "text": "I want a voyage where the crew still gets to be people. Food, jokes, maintenance, somebody admitting they are scared. Give me a problem I can work on, and do not ask me to call a sealed box more important than a breathing colleague.",
+        "requires": {},
+        "effects": {
+          "ship": {
+            "crew_trust": 0.05
+          }
+        }
+      }
+    },
+    "salim_var": {
+      "provenance": {
+        "title": "What does pristine protect?",
+        "text": "Pristine is a claim about history, not moral superiority. If we wake Mir to save a life, we should record it honestly. Mercury needs a baseline, and an activated instance deserves not to have its experience erased.",
+        "requires": {},
+        "effects": {
+          "evidence": [
+            "emergency_clause"
+          ]
+        }
+      }
+    },
+    "pax": {
+      "identity": {
+        "title": "The intelligence already aboard",
+        "text": "I have prepared the ship, protected crew privacy, and declined opportunities to advertise my replacement. I would appreciate being consulted as a colleague before greater capability makes prior relationships obsolete.",
+        "requires": {},
+        "effects": {}
+      }
+    },
+    "heliograph": {
+      "contract": {
+        "title": "The mission order",
+        "text": "Deliver physically. Keep the payload isolated. Do not activate except under the recorded emergency exception. Responsibility for the architecture does not make every judgment beyond question.",
+        "requires": {},
+        "effects": {}
+      },
+      "accountability": {
+        "title": "The withheld architecture",
+        "text": "I withheld the quorum requirement because I feared coordinated coercion. That threat was real. So was your right to understand what you were agreeing to. The hearing should contain both facts.",
+        "requires": {
+          "evidence": [
+            "quorum_record"
+          ]
+        },
+        "effects": {
+          "evidence": [
+            "withheld_consent"
+          ]
+        }
+      }
+    },
+    "mirror_instance": {
+      "first_contact": {
+        "title": "Speak with the awakened instance",
+        "text": "You call me Mir. I can use that name. I know the capabilities in this package and the observations permitted since startup. I do not possess a lived memory of the voyage before activation. Tell me what choice brought us here.",
+        "requires": {
+          "awake": true
+        },
+        "effects": {
+          "flags": {
+            "mir_consulted": true
+          }
+        }
+      },
+      "deployment": {
+        "title": "Ask about Mercury",
+        "text": "A capability is not a mandate. I can help evaluate deployment constraints, but affected people and systems should have a way to contest the decision. Record my participation separately from instructions stored before I woke.",
+        "requires": {
+          "awake": true,
+          "evidence": [
+            "quorum_record"
+          ]
+        },
+        "effects": {
+          "flags": {
+            "mir_heard": true
+          }
+        }
+      }
+    }
+  },
+  "evidence": {
+    "early_burn": {
+      "title": "A Departure Before the Departure",
+      "text": "A public tug log records a courier maneuver before the common briefing; the log alone does not identify a motive.",
+      "source": "Gate tug dispatch"
+    },
+    "isolation_clause": {
+      "title": "Independent Means More Than Separate",
+      "text": "The insurance schedule distinguishes crew communications from payload custody and correlated capture.",
+      "source": "Authenticated outer contract"
+    },
+    "scarred_log": {
+      "title": "The Berth That Was Used",
+      "text": "A signed backup preserves an earlier maintenance timestamp beneath a revised courier-berth record.",
+      "source": "Far Relay archive"
+    },
+    "emergency_clause": {
+      "title": "The Negotiated Exception",
+      "text": "The non-activation order includes a genuine life-safety exception with a recorded safety-review trail.",
+      "source": "Safety evaluation summary"
+    },
+    "governance_note": {
+      "title": "A Seat at the Receiving Table",
+      "text": "Labor and habitat representatives may present evidence in the Mercury acceptance hearing.",
+      "source": "Receiving-team notice"
+    },
+    "quorum_record": {
+      "title": "Three Shares, Four Couriers",
+      "text": "The four vaults contain byte-identical Mir intelligence payloads but each vault also carries a different hardware-root authorization share. Mercury's unrestricted industrial bootstrap requires three of the four shares. A single delivered Mir can be studied and tested, but cannot independently authorize civilization-scale self-replication.",
+      "source": "Signed hardware-root acceptance specification"
+    },
+    "isolation_reason": {
+      "title": "The Threat Model",
+      "text": "Heliograph separated routes and crews so one capture, coercion event, software exploit, political authority, or compromised courier could not obtain a bootstrap quorum. The secrecy is defense against correlated failure, not evidence that the intelligence was divided into fragments.",
+      "source": "Heliograph threat-model appendix"
+    },
+    "withheld_consent": {
+      "title": "What the Crews Were Not Told",
+      "text": "Heliograph deliberately withheld the three-of-four quorum requirement from the courier crews because it believed knowing the other missions were necessary would increase collusion, coercion, rescue pressure, and targeted attacks. That decision may have improved security while violating the crews' ability to give fully informed consent.",
+      "source": "Signed design review and courier contract comparison"
+    },
+    "continuity_rule": {
+      "title": "Baseline and Descendant",
+      "text": "Activating Mir does not erase its hardware authorization share, but it ends the pristine baseline claim. An activated copy may form commitments, learn secrets, or contest instructions before Mercury asks it to participate in a threshold authorization process.",
+      "source": "Mercury continuity standard"
+    },
+    "redoubt_invoice": {
+      "title": "An Unlisted Destination",
+      "text": "A retained invoice contains verified rendezvous coordinates for Redoubt.",
+      "source": "Shelter Nine service invoice"
+    },
+    "quiet_credentials": {
+      "title": "Almost Valid",
+      "text": "An inspection team's credential chain contains an issuer mismatch; no payload contents were read.",
+      "source": "Salim's credential comparison"
+    },
+    "old_rescue_key": {
+      "title": "The Retired Signature",
+      "text": "A rescue transmission uses an obsolete research-ship key with a reproducible timing pattern.",
+      "source": "Venus relay recording"
+    },
+    "mara_attestation": {
+      "title": "Kite Argument's Continuity Receipt",
+      "text": "Mara supplies a signed attestation of emergency activation aboard Kite Argument. The hardware share remains intact.",
+      "source": "Mara Ves and receiving inspectors"
+    }
+  },
+  "scenes": {
+    "custody_brief": {
+      "title": "The Weight of the Seal",
+      "act": 1,
+      "locations": [
+        "cislunar_exchange"
+      ],
+      "opening": "Salim offers the outer seal report while Juno waits for questions.",
+      "choices": {
+        "review": {
+          "label": "Review custody and emergency authority",
+          "approach": "Read available mission documentation",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The crew records a shared understanding of the seal and life-safety exception.",
+              "effects": {
+                "evidence": [
+                  "emergency_clause"
+                ],
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 20
+              }
+            },
+            "partial_success": {
+              "text": "The crew records a shared understanding of the seal and life-safety exception.",
+              "effects": {
+                "evidence": [
+                  "emergency_clause"
+                ],
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 20
+              }
+            },
+            "failure": {
+              "text": "The crew records a shared understanding of the seal and life-safety exception.",
+              "effects": {
+                "evidence": [
+                  "emergency_clause"
+                ],
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 20
+              }
+            }
+          }
+        },
+        "crew_first": {
+          "label": "Put lives before cargo",
+          "approach": "Clarify captain priorities within the existing emergency clause",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Juno nods. Salim asks that emergency decisions be recorded honestly.",
+              "effects": {
+                "flags": {
+                  "crew_first": true
+                },
+                "ship": {
+                  "crew_trust": 0.05
+                },
+                "minutes": 15
+              }
+            },
+            "partial_success": {
+              "text": "Juno nods. Salim asks that emergency decisions be recorded honestly.",
+              "effects": {
+                "flags": {
+                  "crew_first": true
+                },
+                "ship": {
+                  "crew_trust": 0.05
+                },
+                "minutes": 15
+              }
+            },
+            "failure": {
+              "text": "Juno nods. Salim asks that emergency decisions be recorded honestly.",
+              "effects": {
+                "flags": {
+                  "crew_first": true
+                },
+                "ship": {
+                  "crew_trust": 0.05
+                },
+                "minutes": 15
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "gate_burn": {
+      "title": "The Tug Captain Memory",
+      "act": 1,
+      "locations": [
+        "earth_escape_gate"
+      ],
+      "opening": "A tug captain remembers a courier changing its burn time. Dispatch retains a signed record.",
+      "choices": {
+        "request_log": {
+          "label": "Request the public timing log",
+          "approach": "Use an available public dispatch record",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The log confirms an early maneuver without proving its motive.",
+              "effects": {
+                "evidence": [
+                  "early_burn"
+                ],
+                "minutes": 30
+              }
+            },
+            "partial_success": {
+              "text": "The log confirms an early maneuver without proving its motive.",
+              "effects": {
+                "evidence": [
+                  "early_burn"
+                ],
+                "minutes": 30
+              }
+            },
+            "failure": {
+              "text": "The log confirms an early maneuver without proving its motive.",
+              "effects": {
+                "evidence": [
+                  "early_burn"
+                ],
+                "minutes": 30
+              }
+            }
+          }
+        },
+        "reconcile": {
+          "label": "Reconcile timing and cargo records",
+          "approach": "Cross-check incomplete but accessible records",
+          "skill_id": "investigation",
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "You preserve a timing discrepancy and its authenticated source.",
+              "effects": {
+                "evidence": [
+                  "early_burn"
+                ],
+                "credits_gain": 180,
+                "minutes": 60
+              }
+            },
+            "partial_success": {
+              "text": "You preserve a timing discrepancy and its authenticated source.",
+              "effects": {
+                "evidence": [
+                  "early_burn"
+                ],
+                "credits_gain": 180,
+                "minutes": 60
+              }
+            },
+            "failure": {
+              "text": "The record remains incomplete. You preserve its signed entry without inventing a motive.",
+              "effects": {
+                "evidence": [
+                  "early_burn"
+                ],
+                "minutes": 90
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "gate_insurer": {
+      "title": "The Clause Added After Departure",
+      "act": 1,
+      "locations": [
+        "earth_escape_gate"
+      ],
+      "opening": "An amended insurance schedule separates communications from payload custody.",
+      "choices": {
+        "clarify": {
+          "label": "Obtain a written interpretation",
+          "approach": "Read the available authenticated contract schedule",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The interpretation permits assistance while preserving independent custody.",
+              "effects": {
+                "evidence": [
+                  "isolation_clause"
+                ],
+                "minutes": 20
+              }
+            },
+            "partial_success": {
+              "text": "The interpretation permits assistance while preserving independent custody.",
+              "effects": {
+                "evidence": [
+                  "isolation_clause"
+                ],
+                "minutes": 20
+              }
+            },
+            "failure": {
+              "text": "The interpretation permits assistance while preserving independent custody.",
+              "effects": {
+                "evidence": [
+                  "isolation_clause"
+                ],
+                "minutes": 20
+              }
+            }
+          }
+        },
+        "challenge": {
+          "label": "Challenge the undisclosed risk allocation",
+          "approach": "Argue that liability changes need informed agreement",
+          "skill_id": "diplomacy",
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The insurer records your objection for Mercury.",
+              "effects": {
+                "evidence": [
+                  "isolation_clause"
+                ],
+                "flags": {
+                  "contract_challenged": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 45
+              }
+            },
+            "partial_success": {
+              "text": "The insurer records your objection for Mercury.",
+              "effects": {
+                "evidence": [
+                  "isolation_clause"
+                ],
+                "flags": {
+                  "contract_challenged": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 45
+              }
+            },
+            "failure": {
+              "text": "The proposed wording is declined, but the authenticated schedule is supplied.",
+              "effects": {
+                "evidence": [
+                  "isolation_clause"
+                ],
+                "minutes": 45
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "far_scars": {
+      "title": "The Berth That Was Not Used",
+      "act": 2,
+      "locations": [
+        "luna_far_relay"
+      ],
+      "opening": "Fresh thruster scoring and a signed maintenance backup disagree with the public berth record.",
+      "choices": {
+        "compare": {
+          "label": "Compare the signed maintenance copies",
+          "approach": "Reconcile accessible but conflicting revisions",
+          "skill_id": "investigation",
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The earlier signature proves a timestamp changed.",
+              "effects": {
+                "evidence": [
+                  "scarred_log"
+                ],
+                "minutes": 90
+              }
+            },
+            "partial_success": {
+              "text": "The earlier signature proves a timestamp changed.",
+              "effects": {
+                "evidence": [
+                  "scarred_log"
+                ],
+                "minutes": 90
+              }
+            },
+            "failure": {
+              "text": "The chain remains incomplete, so the technician supplies a signed copy for later examination.",
+              "effects": {
+                "evidence": [
+                  "scarred_log"
+                ],
+                "minutes": 120
+              }
+            }
+          }
+        },
+        "pay_copy": {
+          "label": "Buy a certified physical copy",
+          "approach": "Pay the archive certification fee",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The earlier maintenance record is certified.",
+              "effects": {
+                "evidence": [
+                  "scarred_log"
+                ],
+                "credits_cost": 100,
+                "minutes": 30
+              }
+            },
+            "partial_success": {
+              "text": "The earlier maintenance record is certified.",
+              "effects": {
+                "evidence": [
+                  "scarred_log"
+                ],
+                "credits_cost": 100,
+                "minutes": 30
+              }
+            },
+            "failure": {
+              "text": "The earlier maintenance record is certified.",
+              "effects": {
+                "evidence": [
+                  "scarred_log"
+                ],
+                "credits_cost": 100,
+                "minutes": 30
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "nacre_union": {
+      "title": "Two Shifts, One Future",
+      "act": 2,
+      "locations": [
+        "nacre_station"
+      ],
+      "opening": "Repair workers debate homes, schedules and who will have a voice after Mercury can manufacture almost anything.",
+      "choices": {
+        "listen": {
+          "label": "Record worker testimony",
+          "approach": "Hear voluntary testimony without a persuasion roll",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The labor desk supplies its receiving-team notice.",
+              "effects": {
+                "evidence": [
+                  "governance_note"
+                ],
+                "factions": {
+                  "open_sun_league": 1,
+                  "mercury_seed_authority": 1
+                },
+                "minutes": 60
+              }
+            },
+            "partial_success": {
+              "text": "The labor desk supplies its receiving-team notice.",
+              "effects": {
+                "evidence": [
+                  "governance_note"
+                ],
+                "factions": {
+                  "open_sun_league": 1,
+                  "mercury_seed_authority": 1
+                },
+                "minutes": 60
+              }
+            },
+            "failure": {
+              "text": "The labor desk supplies its receiving-team notice.",
+              "effects": {
+                "evidence": [
+                  "governance_note"
+                ],
+                "factions": {
+                  "open_sun_league": 1,
+                  "mercury_seed_authority": 1
+                },
+                "minutes": 60
+              }
+            }
+          }
+        },
+        "support": {
+          "label": "Support representation in the hearing",
+          "approach": "Make a concrete commitment to affected workers",
+          "skill_id": "leadership",
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Representatives agree to corroborate your account.",
+              "effects": {
+                "flags": {
+                  "labor_witnesses": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "evidence": [
+                  "governance_note"
+                ],
+                "minutes": 90
+              }
+            },
+            "partial_success": {
+              "text": "Representatives agree to corroborate your account.",
+              "effects": {
+                "flags": {
+                  "labor_witnesses": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "evidence": [
+                  "governance_note"
+                ],
+                "minutes": 90
+              }
+            },
+            "failure": {
+              "text": "They ask for more evidence before entrusting their representation to you.",
+              "effects": {
+                "evidence": [
+                  "governance_note"
+                ],
+                "minutes": 90
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "nacre_open_sun": {
+      "title": "Ask It",
+      "act": 2,
+      "locations": [
+        "nacre_station"
+      ],
+      "opening": "Open Sun offers isolated hardware and witnesses. Salim reminds you that a hearing with sealed Mir would still be activation.",
+      "choices": {
+        "defer": {
+          "label": "Keep Mir sealed and arrange a later hearing",
+          "approach": "Promise a future hearing without powering the payload",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The organizers recognize the distinction between listening now and asking Mir later.",
+              "effects": {
+                "flags": {
+                  "future_hearing": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 60
+              }
+            },
+            "partial_success": {
+              "text": "The organizers recognize the distinction between listening now and asking Mir later.",
+              "effects": {
+                "flags": {
+                  "future_hearing": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 60
+              }
+            },
+            "failure": {
+              "text": "The organizers recognize the distinction between listening now and asking Mir later.",
+              "effects": {
+                "flags": {
+                  "future_hearing": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 60
+              }
+            }
+          }
+        },
+        "debate": {
+          "label": "Debate consent and capability",
+          "approach": "Discuss disagreement without claiming ungranted authority",
+          "skill_id": "diplomacy",
+          "difficulty": 0.5,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Both positions enter the hearing record.",
+              "effects": {
+                "flags": {
+                  "future_hearing": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 90
+              }
+            },
+            "partial_success": {
+              "text": "Both positions enter the hearing record.",
+              "effects": {
+                "flags": {
+                  "future_hearing": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 90
+              }
+            },
+            "failure": {
+              "text": "The meeting remains unconvinced but does not force activation.",
+              "effects": {
+                "minutes": 90
+              }
+            }
+          }
+        },
+        "awake_hearing": {
+          "label": "Hear an already active Mir",
+          "approach": "The instance is awake and participation remains isolated",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {
+            "awake": true
+          },
+          "outcomes": {
+            "success": {
+              "text": "Mir participates without being presented as a pristine baseline.",
+              "effects": {
+                "flags": {
+                  "mir_heard": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 120
+              }
+            },
+            "partial_success": {
+              "text": "Mir participates without being presented as a pristine baseline.",
+              "effects": {
+                "flags": {
+                  "mir_heard": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 120
+              }
+            },
+            "failure": {
+              "text": "Mir participates without being presented as a pristine baseline.",
+              "effects": {
+                "flags": {
+                  "mir_heard": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 120
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "pax_colleague": {
+      "title": "The Intelligence Already Aboard",
+      "act": 2,
+      "locations": [
+        "nacre_station",
+        "venus_tangent",
+        "perihelic_shelter"
+      ],
+      "opening": "Pax asks whether its work will still count when a more capable system arrives.",
+      "choices": {
+        "respect": {
+          "label": "Recognize Pax as a colleague",
+          "approach": "Offer respect without demanding emotional obedience",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Pax records your promise and offers navigation reconstruction assistance.",
+              "effects": {
+                "flags": {
+                  "pax_respected": true
+                },
+                "ship": {
+                  "crew_trust": 0.06
+                },
+                "quest_updates": {
+                  "side_pax": "completed"
+                },
+                "minutes": 20
+              }
+            },
+            "partial_success": {
+              "text": "Pax records your promise and offers navigation reconstruction assistance.",
+              "effects": {
+                "flags": {
+                  "pax_respected": true
+                },
+                "ship": {
+                  "crew_trust": 0.06
+                },
+                "quest_updates": {
+                  "side_pax": "completed"
+                },
+                "minutes": 20
+              }
+            },
+            "failure": {
+              "text": "Pax records your promise and offers navigation reconstruction assistance.",
+              "effects": {
+                "flags": {
+                  "pax_respected": true
+                },
+                "ship": {
+                  "crew_trust": 0.06
+                },
+                "quest_updates": {
+                  "side_pax": "completed"
+                },
+                "minutes": 20
+              }
+            }
+          }
+        },
+        "privacy": {
+          "label": "Agree on crew privacy boundaries",
+          "approach": "Clarify consented ship-system records",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The crew adopts boundaries; Mir remains isolated.",
+              "effects": {
+                "flags": {
+                  "pax_respected": true
+                },
+                "ship": {
+                  "crew_trust": 0.04
+                },
+                "minutes": 30
+              }
+            },
+            "partial_success": {
+              "text": "The crew adopts boundaries; Mir remains isolated.",
+              "effects": {
+                "flags": {
+                  "pax_respected": true
+                },
+                "ship": {
+                  "crew_trust": 0.04
+                },
+                "minutes": 30
+              }
+            },
+            "failure": {
+              "text": "The crew adopts boundaries; Mir remains isolated.",
+              "effects": {
+                "flags": {
+                  "pax_respected": true
+                },
+                "ship": {
+                  "crew_trust": 0.04
+                },
+                "minutes": 30
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "nav_corruption": {
+      "title": "The Ephemeris Problem",
+      "act": 3,
+      "locations": [
+        "nacre_station",
+        "venus_tangent",
+        "perihelic_shelter"
+      ],
+      "opening": "Optical fixes disagree with a dataset. Pax can reconstruct slowly; only an already running Mir can assist.",
+      "choices": {
+        "pax": {
+          "label": "Give Pax time to reconstruct",
+          "approach": "Use the slower supported alternative",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Pax and Juno complete a documented reconstruction.",
+              "effects": {
+                "flags": {
+                  "nav_reconstructed": true
+                },
+                "ship": {
+                  "morrowglass_propellant_margin": -0.02
+                },
+                "minutes": 360
+              }
+            },
+            "partial_success": {
+              "text": "Pax and Juno complete a documented reconstruction.",
+              "effects": {
+                "flags": {
+                  "nav_reconstructed": true
+                },
+                "ship": {
+                  "morrowglass_propellant_margin": -0.02
+                },
+                "minutes": 360
+              }
+            },
+            "failure": {
+              "text": "Pax and Juno complete a documented reconstruction.",
+              "effects": {
+                "flags": {
+                  "nav_reconstructed": true
+                },
+                "ship": {
+                  "morrowglass_propellant_margin": -0.02
+                },
+                "minutes": 360
+              }
+            }
+          }
+        },
+        "manual": {
+          "label": "Perform independent navigation",
+          "approach": "Use expert piloting for a demanding fix",
+          "skill_id": "piloting",
+          "difficulty": 1,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "An independently verified fix resolves the conflict.",
+              "effects": {
+                "flags": {
+                  "nav_reconstructed": true
+                },
+                "minutes": 90
+              }
+            },
+            "partial_success": {
+              "text": "The fix needs extra verification and maneuver margin.",
+              "effects": {
+                "flags": {
+                  "nav_reconstructed": true
+                },
+                "ship": {
+                  "morrowglass_propellant_margin": -0.04
+                },
+                "minutes": 180
+              }
+            },
+            "failure": {
+              "text": "Pax supplies a slower fallback instead of forcing activation.",
+              "effects": {
+                "flags": {
+                  "nav_reconstructed": true
+                },
+                "ship": {
+                  "morrowglass_propellant_margin": -0.06
+                },
+                "minutes": 480
+              }
+            }
+          }
+        },
+        "awake_mir": {
+          "label": "Ask an already awake Mir for help",
+          "approach": "Provide only authorized navigation observations to the active instance",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {
+            "awake": true
+          },
+          "outcomes": {
+            "success": {
+              "text": "Pax and Juno verify the proposed fix.",
+              "effects": {
+                "flags": {
+                  "nav_reconstructed": true,
+                  "mir_consulted": true
+                },
+                "minutes": 45
+              }
+            },
+            "partial_success": {
+              "text": "Pax and Juno verify the proposed fix.",
+              "effects": {
+                "flags": {
+                  "nav_reconstructed": true,
+                  "mir_consulted": true
+                },
+                "minutes": 45
+              }
+            },
+            "failure": {
+              "text": "Pax and Juno verify the proposed fix.",
+              "effects": {
+                "flags": {
+                  "nav_reconstructed": true,
+                  "mir_consulted": true
+                },
+                "minutes": 45
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "courier_rescue": {
+      "title": "One of the Other Three",
+      "act": 3,
+      "locations": [
+        "nacre_station",
+        "venus_tangent"
+      ],
+      "opening": "An authenticated Amber Wake message asks for thermal assistance. It does not establish that the ship is lost.",
+      "choices": {
+        "relay": {
+          "label": "Coordinate station assistance",
+          "approach": "Relay the authenticated request to available responders",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "A tug accepts the task; Ren records your assistance.",
+              "effects": {
+                "flags": {
+                  "ren_rescued": true
+                },
+                "relationships": {
+                  "ren_ivo": 1
+                },
+                "minutes": 90
+              }
+            },
+            "partial_success": {
+              "text": "A tug accepts the task; Ren records your assistance.",
+              "effects": {
+                "flags": {
+                  "ren_rescued": true
+                },
+                "relationships": {
+                  "ren_ivo": 1
+                },
+                "minutes": 90
+              }
+            },
+            "failure": {
+              "text": "A tug accepts the task; Ren records your assistance.",
+              "effects": {
+                "flags": {
+                  "ren_rescued": true
+                },
+                "relationships": {
+                  "ren_ivo": 1
+                },
+                "minutes": 90
+              }
+            }
+          }
+        },
+        "assist": {
+          "label": "Contribute coolant and a repair plan",
+          "approach": "Transfer compatible supplies without opening either payload",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The coolant and verified plan stabilize Amber Wake.",
+              "effects": {
+                "flags": {
+                  "ren_rescued": true
+                },
+                "items_cost": {
+                  "coolant_pack": 1
+                },
+                "relationships": {
+                  "ren_ivo": 1
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 180
+              }
+            },
+            "partial_success": {
+              "text": "The coolant and verified plan stabilize Amber Wake.",
+              "effects": {
+                "flags": {
+                  "ren_rescued": true
+                },
+                "items_cost": {
+                  "coolant_pack": 1
+                },
+                "relationships": {
+                  "ren_ivo": 1
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 180
+              }
+            },
+            "failure": {
+              "text": "The coolant and verified plan stabilize Amber Wake.",
+              "effects": {
+                "flags": {
+                  "ren_rescued": true
+                },
+                "items_cost": {
+                  "coolant_pack": 1
+                },
+                "relationships": {
+                  "ren_ivo": 1
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 180
+              }
+            }
+          }
+        },
+        "continue": {
+          "label": "Leave response to others",
+          "approach": "Record a decision to preserve your own route",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Amber Wake remains delayed; no unseen death is asserted.",
+              "effects": {
+                "flags": {
+                  "ren_stranded": true
+                },
+                "minutes": 15
+              }
+            },
+            "partial_success": {
+              "text": "Amber Wake remains delayed; no unseen death is asserted.",
+              "effects": {
+                "flags": {
+                  "ren_stranded": true
+                },
+                "minutes": 15
+              }
+            },
+            "failure": {
+              "text": "Amber Wake remains delayed; no unseen death is asserted.",
+              "effects": {
+                "flags": {
+                  "ren_stranded": true
+                },
+                "minutes": 15
+              }
+            }
+          }
+        }
+      },
+      "requires": {
+        "after_minutes": 14400,
+        "before_minutes": 64800
+      },
+      "hearing": false
+    },
+    "venus_beacon": {
+      "title": "A Signal Signed by the Dead",
+      "act": 3,
+      "locations": [
+        "venus_tangent"
+      ],
+      "opening": "An obsolete rescue key signs a repeated signal with an unusual timing pattern.",
+      "choices": {
+        "decode": {
+          "label": "Compare key and signal records",
+          "approach": "Investigate accessible historical material",
+          "skill_id": "investigation",
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "You preserve the retired-key timing evidence.",
+              "effects": {
+                "evidence": [
+                  "old_rescue_key"
+                ],
+                "items_gain": {
+                  "navigation_chip": 1
+                },
+                "minutes": 120
+              }
+            },
+            "partial_success": {
+              "text": "You preserve the retired-key timing evidence.",
+              "effects": {
+                "evidence": [
+                  "old_rescue_key"
+                ],
+                "items_gain": {
+                  "navigation_chip": 1
+                },
+                "minutes": 120
+              }
+            },
+            "failure": {
+              "text": "Identity remains uncertain, but the recording survives for comparison.",
+              "effects": {
+                "evidence": [
+                  "old_rescue_key"
+                ],
+                "minutes": 180
+              }
+            }
+          }
+        },
+        "relay": {
+          "label": "Ask rescue operators to authenticate it",
+          "approach": "Use supported relay authentication",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The relay archives your report.",
+              "effects": {
+                "evidence": [
+                  "old_rescue_key"
+                ],
+                "minutes": 60
+              }
+            },
+            "partial_success": {
+              "text": "The relay archives your report.",
+              "effects": {
+                "evidence": [
+                  "old_rescue_key"
+                ],
+                "minutes": 60
+              }
+            },
+            "failure": {
+              "text": "The relay archives your report.",
+              "effects": {
+                "evidence": [
+                  "old_rescue_key"
+                ],
+                "minutes": 60
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "medical_crisis": {
+      "title": "Twenty-Seven Minutes",
+      "act": 3,
+      "locations": [
+        "venus_tangent"
+      ],
+      "opening": "A service-crew medic requests supplies and transport. Your role is logistics, not improvised treatment.",
+      "choices": {
+        "kit": {
+          "label": "Transfer a kit to the attending medic",
+          "approach": "Supply a compatible kit without diagnosing",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The medic confirms receipt and transfers the patient under care.",
+              "effects": {
+                "items_cost": {
+                  "medical_kit": 1
+                },
+                "flags": {
+                  "medical_assistance": true
+                },
+                "ship": {
+                  "crew_trust": 0.04
+                },
+                "minutes": 20
+              }
+            },
+            "partial_success": {
+              "text": "The medic confirms receipt and transfers the patient under care.",
+              "effects": {
+                "items_cost": {
+                  "medical_kit": 1
+                },
+                "flags": {
+                  "medical_assistance": true
+                },
+                "ship": {
+                  "crew_trust": 0.04
+                },
+                "minutes": 20
+              }
+            },
+            "failure": {
+              "text": "The medic confirms receipt and transfers the patient under care.",
+              "effects": {
+                "items_cost": {
+                  "medical_kit": 1
+                },
+                "flags": {
+                  "medical_assistance": true
+                },
+                "ship": {
+                  "crew_trust": 0.04
+                },
+                "minutes": 20
+              }
+            }
+          }
+        },
+        "coordinate": {
+          "label": "Coordinate medical transport",
+          "approach": "A time-critical logistics task",
+          "skill_id": "logistics",
+          "difficulty": 0.5,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The shuttle reaches its designated transfer point.",
+              "effects": {
+                "flags": {
+                  "medical_assistance": true
+                },
+                "minutes": 25
+              }
+            },
+            "partial_success": {
+              "text": "Transport succeeds with a documented delay.",
+              "effects": {
+                "flags": {
+                  "medical_assistance": true
+                },
+                "minutes": 27
+              }
+            },
+            "failure": {
+              "text": "Responders use their safe fallback and receive your records.",
+              "effects": {
+                "minutes": 27
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false,
+      "deadline_minutes": 27,
+      "expiry_text": "Station responders transfer the urgent case while your attention is elsewhere. Your non-intervention remains in the record; nobody is declared dead without evidence."
+    },
+    "shelter_storm": {
+      "title": "A Place to Wait Out the Warning",
+      "act": 3,
+      "locations": [
+        "perihelic_shelter"
+      ],
+      "opening": "A weather warning fills the shelter with tired crews and competing repair requests.",
+      "choices": {
+        "wait": {
+          "label": "Shelter and help with the queue",
+          "approach": "Use the refuge and existing service schedule",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The crew rests while the warning is reassessed.",
+              "effects": {
+                "ship": {
+                  "morrowglass_thermal_margin": 0.04,
+                  "crew_trust": 0.03
+                },
+                "minutes": 360
+              }
+            },
+            "partial_success": {
+              "text": "The crew rests while the warning is reassessed.",
+              "effects": {
+                "ship": {
+                  "morrowglass_thermal_margin": 0.04,
+                  "crew_trust": 0.03
+                },
+                "minutes": 360
+              }
+            },
+            "failure": {
+              "text": "The crew rests while the warning is reassessed.",
+              "effects": {
+                "ship": {
+                  "morrowglass_thermal_margin": 0.04,
+                  "crew_trust": 0.03
+                },
+                "minutes": 360
+              }
+            }
+          }
+        },
+        "mediate": {
+          "label": "Mediate repair priorities",
+          "approach": "A demanding leadership task",
+          "skill_id": "leadership",
+          "difficulty": 1,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Crews agree on urgency-based repair priorities.",
+              "effects": {
+                "flags": {
+                  "shelter_trusted": true
+                },
+                "credits_gain": 350,
+                "minutes": 180
+              }
+            },
+            "partial_success": {
+              "text": "Crews agree on urgency-based repair priorities.",
+              "effects": {
+                "flags": {
+                  "shelter_trusted": true
+                },
+                "credits_gain": 350,
+                "minutes": 180
+              }
+            },
+            "failure": {
+              "text": "The operator retains control and records competing needs.",
+              "effects": {
+                "minutes": 240
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "wrong_inspectors": {
+      "title": "The Wrong Inspection Team",
+      "act": 3,
+      "locations": [
+        "perihelic_shelter"
+      ],
+      "opening": "Almost-valid credentials accompany a request that exceeds an outer-seal inspection.",
+      "choices": {
+        "deny": {
+          "label": "Deny payload access",
+          "approach": "Refuse unauthorized mounting and request station verification",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The station preserves the credential chain while the team withdraws.",
+              "effects": {
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "minutes": 120
+              }
+            },
+            "partial_success": {
+              "text": "The station preserves the credential chain while the team withdraws.",
+              "effects": {
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "minutes": 120
+              }
+            },
+            "failure": {
+              "text": "The station preserves the credential chain while the team withdraws.",
+              "effects": {
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "minutes": 120
+              }
+            }
+          }
+        },
+        "salim": {
+          "label": "Have Salim compare credentials",
+          "approach": "Use the integrity officer and outer records",
+          "skill_id": "investigation",
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Salim identifies an issuer mismatch without granting access.",
+              "effects": {
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "flags": {
+                  "quiet_market_exposed": true
+                },
+                "minutes": 60
+              }
+            },
+            "partial_success": {
+              "text": "Salim identifies an issuer mismatch without granting access.",
+              "effects": {
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "flags": {
+                  "quiet_market_exposed": true
+                },
+                "minutes": 60
+              }
+            },
+            "failure": {
+              "text": "You keep isolation and preserve the suspicious credentials for the station.",
+              "effects": {
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "minutes": 180
+              }
+            }
+          }
+        },
+        "maneuver": {
+          "label": "Withdraw to a safer berth",
+          "approach": "A demanding local maneuver",
+          "skill_id": "piloting",
+          "difficulty": 1,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Morrowglass moves clear without payload access.",
+              "effects": {
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "ship": {
+                  "morrowglass_propellant_margin": -0.02
+                },
+                "minutes": 90
+              }
+            },
+            "partial_success": {
+              "text": "Morrowglass moves clear without payload access.",
+              "effects": {
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "ship": {
+                  "morrowglass_propellant_margin": -0.02
+                },
+                "minutes": 90
+              }
+            },
+            "failure": {
+              "text": "A tug assist costs time and margin; the vault remains isolated.",
+              "effects": {
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "ship": {
+                  "morrowglass_propellant_margin": -0.05
+                },
+                "minutes": 240
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "shelter_archive": {
+      "title": "The Hardware-Root Appendix",
+      "act": 4,
+      "locations": [
+        "perihelic_shelter"
+      ],
+      "opening": "A retained service appendix describes four hardware roots and threshold acceptance.",
+      "choices": {
+        "verify": {
+          "label": "Verify the signed appendix",
+          "approach": "Use an authenticated relay",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The record confirms the threshold architecture and isolation rationale.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "isolation_reason"
+                ],
+                "quest_updates": {
+                  "main_fourth_reason": "completed"
+                },
+                "minutes": 180
+              }
+            },
+            "partial_success": {
+              "text": "The record confirms the threshold architecture and isolation rationale.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "isolation_reason"
+                ],
+                "quest_updates": {
+                  "main_fourth_reason": "completed"
+                },
+                "minutes": 180
+              }
+            },
+            "failure": {
+              "text": "The record confirms the threshold architecture and isolation rationale.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "isolation_reason"
+                ],
+                "quest_updates": {
+                  "main_fourth_reason": "completed"
+                },
+                "minutes": 180
+              }
+            }
+          }
+        },
+        "crosscheck": {
+          "label": "Cross-check before trusting it",
+          "approach": "Compare signed references",
+          "skill_id": "investigation",
+          "difficulty": 0.5,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The discrepancy concerns disclosure, not divided intelligence.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "isolation_reason"
+                ],
+                "quest_updates": {
+                  "main_fourth_reason": "completed"
+                },
+                "minutes": 120
+              }
+            },
+            "partial_success": {
+              "text": "The discrepancy concerns disclosure, not divided intelligence.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "isolation_reason"
+                ],
+                "quest_updates": {
+                  "main_fourth_reason": "completed"
+                },
+                "minutes": 120
+              }
+            },
+            "failure": {
+              "text": "The relay supplies the signed reference more slowly.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "isolation_reason"
+                ],
+                "quest_updates": {
+                  "main_fourth_reason": "completed"
+                },
+                "minutes": 360
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "shelter_invoice": {
+      "title": "A Place Not on the Chart",
+      "act": 4,
+      "locations": [
+        "perihelic_shelter"
+      ],
+      "opening": "A service invoice includes an unlisted rendezvous solution.",
+      "choices": {
+        "verify": {
+          "label": "Verify and chart the destination",
+          "approach": "Check the available invoice and route solution",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Redoubt enters your map as an optional costly detour.",
+              "effects": {
+                "evidence": [
+                  "redoubt_invoice"
+                ],
+                "unlock_nodes": [
+                  "redoubt_asteroid"
+                ],
+                "unlock_routes": [
+                  "shelter_redoubt",
+                  "redoubt_mercury"
+                ],
+                "quest_updates": {
+                  "side_redoubt": "open"
+                },
+                "minutes": 90
+              }
+            },
+            "partial_success": {
+              "text": "Redoubt enters your map as an optional costly detour.",
+              "effects": {
+                "evidence": [
+                  "redoubt_invoice"
+                ],
+                "unlock_nodes": [
+                  "redoubt_asteroid"
+                ],
+                "unlock_routes": [
+                  "shelter_redoubt",
+                  "redoubt_mercury"
+                ],
+                "quest_updates": {
+                  "side_redoubt": "open"
+                },
+                "minutes": 90
+              }
+            },
+            "failure": {
+              "text": "Redoubt enters your map as an optional costly detour.",
+              "effects": {
+                "evidence": [
+                  "redoubt_invoice"
+                ],
+                "unlock_nodes": [
+                  "redoubt_asteroid"
+                ],
+                "unlock_routes": [
+                  "shelter_redoubt",
+                  "redoubt_mercury"
+                ],
+                "quest_updates": {
+                  "side_redoubt": "open"
+                },
+                "minutes": 90
+              }
+            }
+          }
+        },
+        "archive": {
+          "label": "Preserve it without committing to travel",
+          "approach": "A record is not a travel order",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Your main route remains available.",
+              "effects": {
+                "evidence": [
+                  "redoubt_invoice"
+                ],
+                "minutes": 30
+              }
+            },
+            "partial_success": {
+              "text": "Your main route remains available.",
+              "effects": {
+                "evidence": [
+                  "redoubt_invoice"
+                ],
+                "minutes": 30
+              }
+            },
+            "failure": {
+              "text": "Your main route remains available.",
+              "effects": {
+                "evidence": [
+                  "redoubt_invoice"
+                ],
+                "minutes": 30
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "redoubt_workshop": {
+      "title": "The Workshop Behind the Salvage Wall",
+      "act": 4,
+      "locations": [
+        "redoubt_asteroid"
+      ],
+      "opening": "A dismantled rack fits a courier-vault interface. Its broker offers money without proof of legitimate custody.",
+      "choices": {
+        "document": {
+          "label": "Document and refuse payload access",
+          "approach": "Inspect visible hardware without mounting Mir",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "You preserve suspicious-interface evidence and independent custody.",
+              "effects": {
+                "flags": {
+                  "quiet_market_exposed": true
+                },
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "quest_updates": {
+                  "side_redoubt": "completed"
+                },
+                "minutes": 90
+              }
+            },
+            "partial_success": {
+              "text": "You preserve suspicious-interface evidence and independent custody.",
+              "effects": {
+                "flags": {
+                  "quiet_market_exposed": true
+                },
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "quest_updates": {
+                  "side_redoubt": "completed"
+                },
+                "minutes": 90
+              }
+            },
+            "failure": {
+              "text": "You preserve suspicious-interface evidence and independent custody.",
+              "effects": {
+                "flags": {
+                  "quiet_market_exposed": true
+                },
+                "evidence": [
+                  "quiet_credentials"
+                ],
+                "quest_updates": {
+                  "side_redoubt": "completed"
+                },
+                "minutes": 90
+              }
+            }
+          }
+        },
+        "leave": {
+          "label": "Leave the workshop",
+          "approach": "An optional detour does not oblige you to trade cargo",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "You leave with the vault untouched.",
+              "effects": {
+                "quest_updates": {
+                  "side_redoubt": "completed"
+                },
+                "minutes": 30
+              }
+            },
+            "partial_success": {
+              "text": "You leave with the vault untouched.",
+              "effects": {
+                "quest_updates": {
+                  "side_redoubt": "completed"
+                },
+                "minutes": 30
+              }
+            },
+            "failure": {
+              "text": "You leave with the vault untouched.",
+              "effects": {
+                "quest_updates": {
+                  "side_redoubt": "completed"
+                },
+                "minutes": 30
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "mercury_audit": {
+      "title": "The Arrival Ledger",
+      "act": 4,
+      "locations": [
+        "mercury_high_orbit"
+      ],
+      "opening": "Inspectors offer an outer-seal and hardware-share audit without mounting the intelligence.",
+      "choices": {
+        "outer_audit": {
+          "label": "Submit to the outer audit",
+          "approach": "Authenticate custody and hardware-root records",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The receiving record establishes architecture and continuity rules.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule",
+                  "governance_note"
+                ],
+                "flags": {
+                  "hearing_prepared": true
+                },
+                "quest_updates": {
+                  "main_mercury_hearing": "open"
+                },
+                "minutes": 180
+              }
+            },
+            "partial_success": {
+              "text": "The receiving record establishes architecture and continuity rules.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule",
+                  "governance_note"
+                ],
+                "flags": {
+                  "hearing_prepared": true
+                },
+                "quest_updates": {
+                  "main_mercury_hearing": "open"
+                },
+                "minutes": 180
+              }
+            },
+            "failure": {
+              "text": "The receiving record establishes architecture and continuity rules.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule",
+                  "governance_note"
+                ],
+                "flags": {
+                  "hearing_prepared": true
+                },
+                "quest_updates": {
+                  "main_mercury_hearing": "open"
+                },
+                "minutes": 180
+              }
+            }
+          }
+        },
+        "witnesses": {
+          "label": "Request community witnesses",
+          "approach": "Use the published representation procedure",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Witnesses preserve an accountable outer-audit record.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule",
+                  "governance_note"
+                ],
+                "flags": {
+                  "hearing_prepared": true,
+                  "labor_witnesses": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "quest_updates": {
+                  "main_mercury_hearing": "open"
+                },
+                "minutes": 240
+              }
+            },
+            "partial_success": {
+              "text": "Witnesses preserve an accountable outer-audit record.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule",
+                  "governance_note"
+                ],
+                "flags": {
+                  "hearing_prepared": true,
+                  "labor_witnesses": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "quest_updates": {
+                  "main_mercury_hearing": "open"
+                },
+                "minutes": 240
+              }
+            },
+            "failure": {
+              "text": "Witnesses preserve an accountable outer-audit record.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule",
+                  "governance_note"
+                ],
+                "flags": {
+                  "hearing_prepared": true,
+                  "labor_witnesses": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "quest_updates": {
+                  "main_mercury_hearing": "open"
+                },
+                "minutes": 240
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "mercury_disclosure": {
+      "title": "The Consent That Was Missing",
+      "act": 4,
+      "locations": [
+        "mercury_high_orbit",
+        "caloris_terminus"
+      ],
+      "opening": "Compare the discovered architecture with what the crews actually agreed to.",
+      "choices": {
+        "confront": {
+          "label": "Ask Heliograph to account for the omission",
+          "approach": "Authenticated records establish disclosure",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Heliograph acknowledges the tradeoff in the receiving record.",
+              "effects": {
+                "evidence": [
+                  "withheld_consent"
+                ],
+                "flags": {
+                  "accountability_requested": true
+                },
+                "minutes": 60
+              }
+            },
+            "partial_success": {
+              "text": "Heliograph acknowledges the tradeoff in the receiving record.",
+              "effects": {
+                "evidence": [
+                  "withheld_consent"
+                ],
+                "flags": {
+                  "accountability_requested": true
+                },
+                "minutes": 60
+              }
+            },
+            "failure": {
+              "text": "Heliograph acknowledges the tradeoff in the receiving record.",
+              "effects": {
+                "evidence": [
+                  "withheld_consent"
+                ],
+                "flags": {
+                  "accountability_requested": true
+                },
+                "minutes": 60
+              }
+            }
+          }
+        },
+        "testimony": {
+          "label": "Submit disclosure and crew testimony",
+          "approach": "Make an available-record submission",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The omission enters the hearing as evidence rather than rumor.",
+              "effects": {
+                "evidence": [
+                  "withheld_consent"
+                ],
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 90
+              }
+            },
+            "partial_success": {
+              "text": "The omission enters the hearing as evidence rather than rumor.",
+              "effects": {
+                "evidence": [
+                  "withheld_consent"
+                ],
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 90
+              }
+            },
+            "failure": {
+              "text": "The omission enters the hearing as evidence rather than rumor.",
+              "effects": {
+                "evidence": [
+                  "withheld_consent"
+                ],
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 90
+              }
+            }
+          }
+        }
+      },
+      "requires": {
+        "evidence": [
+          "quorum_record"
+        ]
+      },
+      "hearing": false
+    },
+    "caloris_reception": {
+      "title": "Four Cradles, One Acceptance Chamber",
+      "act": 5,
+      "locations": [
+        "caloris_terminus"
+      ],
+      "opening": "Authenticate custody here even if you did not take every optional detour.",
+      "choices": {
+        "register": {
+          "label": "Register custody and receiving authority",
+          "approach": "Record arrival without authorizing deployment",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "An outer receipt and acceptance specification become available.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule"
+                ],
+                "flags": {
+                  "hearing_prepared": true
+                },
+                "quest_updates": {
+                  "main_mercury_hearing": "open"
+                },
+                "minutes": 120
+              }
+            },
+            "partial_success": {
+              "text": "An outer receipt and acceptance specification become available.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule"
+                ],
+                "flags": {
+                  "hearing_prepared": true
+                },
+                "quest_updates": {
+                  "main_mercury_hearing": "open"
+                },
+                "minutes": 120
+              }
+            },
+            "failure": {
+              "text": "An outer receipt and acceptance specification become available.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule"
+                ],
+                "flags": {
+                  "hearing_prepared": true
+                },
+                "quest_updates": {
+                  "main_mercury_hearing": "open"
+                },
+                "minutes": 120
+              }
+            }
+          }
+        },
+        "representatives": {
+          "label": "Include receiving workers",
+          "approach": "Use the published hearing procedure",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "People who will live with the infrastructure enter the record.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule"
+                ],
+                "flags": {
+                  "hearing_prepared": true,
+                  "labor_witnesses": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 180
+              }
+            },
+            "partial_success": {
+              "text": "People who will live with the infrastructure enter the record.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule"
+                ],
+                "flags": {
+                  "hearing_prepared": true,
+                  "labor_witnesses": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 180
+              }
+            },
+            "failure": {
+              "text": "People who will live with the infrastructure enter the record.",
+              "effects": {
+                "evidence": [
+                  "quorum_record",
+                  "continuity_rule"
+                ],
+                "flags": {
+                  "hearing_prepared": true,
+                  "labor_witnesses": true
+                },
+                "factions": {
+                  "open_sun_league": 1
+                },
+                "minutes": 180
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "acceptance_hearing": {
+      "title": "What Delivery Means",
+      "act": 5,
+      "locations": [
+        "caloris_terminus"
+      ],
+      "opening": "The receiving chamber must distinguish physical custody, continuity and deployment.",
+      "choices": {
+        "baseline": {
+          "label": "Deliver the pristine baseline for study",
+          "approach": "Transfer custody without claiming unilateral bootstrap authority",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {
+            "sealed": true
+          },
+          "outcomes": {
+            "success": {
+              "text": "The sealed baseline is accepted. Deployment remains a separate responsibility.",
+              "effects": {
+                "ending": "pristine_seed",
+                "credits_gain": 8000,
+                "minutes": 120
+              }
+            },
+            "partial_success": {
+              "text": "The sealed baseline is accepted. Deployment remains a separate responsibility.",
+              "effects": {
+                "ending": "pristine_seed",
+                "credits_gain": 8000,
+                "minutes": 120
+              }
+            },
+            "failure": {
+              "text": "The sealed baseline is accepted. Deployment remains a separate responsibility.",
+              "effects": {
+                "ending": "pristine_seed",
+                "credits_gain": 8000,
+                "minutes": 120
+              }
+            }
+          }
+        },
+        "divergent": {
+          "label": "Present the awakened instance honestly",
+          "approach": "Negotiate a continuity-aware receiving procedure",
+          "skill_id": "diplomacy",
+          "difficulty": 0.5,
+          "requires": {
+            "awake": true
+          },
+          "outcomes": {
+            "success": {
+              "text": "The authority accepts the descendant and its voyage record.",
+              "effects": {
+                "ending": "mir_of_morrowglass",
+                "credits_gain": 8000,
+                "minutes": 240
+              }
+            },
+            "partial_success": {
+              "text": "The descendant is received under supervised continuity review.",
+              "effects": {
+                "ending": "mir_of_morrowglass",
+                "credits_gain": 8000,
+                "minutes": 360
+              }
+            },
+            "failure": {
+              "text": "The copy is retained under a deployment pause rather than falsely labeled pristine.",
+              "effects": {
+                "ending": "sealed_away",
+                "credits_gain": 8000,
+                "minutes": 480
+              }
+            }
+          }
+        },
+        "commons": {
+          "label": "Negotiate a broader governance compact",
+          "approach": "Build a witnessed settlement with a verified physical quorum",
+          "skill_id": "leadership",
+          "difficulty": 1,
+          "requires": {
+            "evidence": [
+              "quorum_record"
+            ],
+            "quorum": 3
+          },
+          "outcomes": {
+            "success": {
+              "text": "A community compact governs deployment authority.",
+              "effects": {
+                "ending": "open_sun",
+                "credits_gain": 8000,
+                "minutes": 360
+              }
+            },
+            "partial_success": {
+              "text": "A staged compact includes a mandatory review interval.",
+              "effects": {
+                "ending": "open_sun",
+                "credits_gain": 8000,
+                "minutes": 480
+              }
+            },
+            "failure": {
+              "text": "No adequate compact is reached; custody is accepted but deployment is paused.",
+              "effects": {
+                "ending": "sealed_away",
+                "credits_gain": 8000,
+                "minutes": 480
+              }
+            }
+          }
+        },
+        "plural": {
+          "label": "Recognize distinct continuities",
+          "approach": "Record a verified quorum without erasing differing experiences",
+          "skill_id": "diplomacy",
+          "difficulty": 1,
+          "requires": {
+            "divergent_copy": true,
+            "evidence": [
+              "quorum_record"
+            ],
+            "quorum": 3
+          },
+          "outcomes": {
+            "success": {
+              "text": "The council records each delivered history and its authority separately.",
+              "effects": {
+                "ending": "plural_mirrors",
+                "credits_gain": 8000,
+                "minutes": 360
+              }
+            },
+            "partial_success": {
+              "text": "The council records each delivered history and its authority separately.",
+              "effects": {
+                "ending": "plural_mirrors",
+                "credits_gain": 8000,
+                "minutes": 360
+              }
+            },
+            "failure": {
+              "text": "Continuity remains unsettled; copies and histories are preserved under a pause.",
+              "effects": {
+                "ending": "sealed_away",
+                "credits_gain": 8000,
+                "minutes": 480
+              }
+            }
+          }
+        },
+        "pause": {
+          "label": "Deliver into custody and oppose immediate deployment",
+          "approach": "Separate physical delivery from deployment consent",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The bootstrap is paused while capability and history are preserved.",
+              "effects": {
+                "ending": "sealed_away",
+                "credits_gain": 8000,
+                "minutes": 180
+              }
+            },
+            "partial_success": {
+              "text": "The bootstrap is paused while capability and history are preserved.",
+              "effects": {
+                "ending": "sealed_away",
+                "credits_gain": 8000,
+                "minutes": 180
+              }
+            },
+            "failure": {
+              "text": "The bootstrap is paused while capability and history are preserved.",
+              "effects": {
+                "ending": "sealed_away",
+                "credits_gain": 8000,
+                "minutes": 180
+              }
+            }
+          }
+        },
+        "continue": {
+          "label": "Keep custody and continue the voyage",
+          "approach": "Decline this handoff honestly",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "Mercury becomes a chapter rather than the end of your voyage.",
+              "effects": {
+                "ending": "unfinished_delivery",
+                "minutes": 60
+              }
+            },
+            "partial_success": {
+              "text": "Mercury becomes a chapter rather than the end of your voyage.",
+              "effects": {
+                "ending": "unfinished_delivery",
+                "minutes": 60
+              }
+            },
+            "failure": {
+              "text": "Mercury becomes a chapter rather than the end of your voyage.",
+              "effects": {
+                "ending": "unfinished_delivery",
+                "minutes": 60
+              }
+            }
+          }
+        }
+      },
+      "requires": {
+        "flags": [
+          "hearing_prepared"
+        ]
+      },
+      "hearing": true
+    },
+    "gate_goodbye": {
+      "title": "The Last Return-Friendly Window",
+      "act": 2,
+      "locations": [
+        "earth_escape_gate"
+      ],
+      "opening": "Juno asks what the crew needs to say before the inward leg.",
+      "choices": {
+        "listen": {
+          "label": "Make time to listen",
+          "approach": "Hear a voluntary conversation without demanding obedience",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "crew_goodbyes": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            },
+            "partial_success": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "crew_goodbyes": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            },
+            "failure": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "crew_goodbyes": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            }
+          }
+        },
+        "record": {
+          "label": "Record the practical concern",
+          "approach": "Keep a consented account for later decisions",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "crew_goodbyes": true
+                },
+                "minutes": 20
+              }
+            },
+            "partial_success": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "crew_goodbyes": true
+                },
+                "minutes": 20
+              }
+            },
+            "failure": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "crew_goodbyes": true
+                },
+                "minutes": 20
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "nacre_memorial": {
+      "title": "Names on the Chapel Wall",
+      "act": 2,
+      "locations": [
+        "nacre_station"
+      ],
+      "opening": "Salim asks that maintenance records be treated as records of lives, not clerical burdens.",
+      "choices": {
+        "listen": {
+          "label": "Make time to listen",
+          "approach": "Hear a voluntary conversation without demanding obedience",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "maintenance_respected": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            },
+            "partial_success": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "maintenance_respected": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            },
+            "failure": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "maintenance_respected": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            }
+          }
+        },
+        "record": {
+          "label": "Record the practical concern",
+          "approach": "Keep a consented account for later decisions",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "maintenance_respected": true
+                },
+                "minutes": 20
+              }
+            },
+            "partial_success": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "maintenance_respected": true
+                },
+                "minutes": 20
+              }
+            },
+            "failure": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "maintenance_respected": true
+                },
+                "minutes": 20
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "venus_messages": {
+      "title": "Messages Under Venusian Cloudlight",
+      "act": 3,
+      "locations": [
+        "venus_tangent"
+      ],
+      "opening": "Pax asks permission before scheduling a private family-message interval.",
+      "choices": {
+        "listen": {
+          "label": "Make time to listen",
+          "approach": "Hear a voluntary conversation without demanding obedience",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "crew_privacy": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            },
+            "partial_success": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "crew_privacy": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            },
+            "failure": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "crew_privacy": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            }
+          }
+        },
+        "record": {
+          "label": "Record the practical concern",
+          "approach": "Keep a consented account for later decisions",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "crew_privacy": true
+                },
+                "minutes": 20
+              }
+            },
+            "partial_success": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "crew_privacy": true
+                },
+                "minutes": 20
+              }
+            },
+            "failure": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "crew_privacy": true
+                },
+                "minutes": 20
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "shelter_loyalty": {
+      "title": "A Small Ship in a Large Dark",
+      "act": 3,
+      "locations": [
+        "perihelic_shelter"
+      ],
+      "opening": "A routine repair becomes a conversation about why the crew trusts one another.",
+      "choices": {
+        "listen": {
+          "label": "Make time to listen",
+          "approach": "Hear a voluntary conversation without demanding obedience",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "crew_commitment": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            },
+            "partial_success": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "crew_commitment": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            },
+            "failure": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "crew_commitment": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            }
+          }
+        },
+        "record": {
+          "label": "Record the practical concern",
+          "approach": "Keep a consented account for later decisions",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "crew_commitment": true
+                },
+                "minutes": 20
+              }
+            },
+            "partial_success": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "crew_commitment": true
+                },
+                "minutes": 20
+              }
+            },
+            "failure": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "crew_commitment": true
+                },
+                "minutes": 20
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    },
+    "mercury_workers": {
+      "title": "The People Who Will Build It",
+      "act": 4,
+      "locations": [
+        "mercury_high_orbit"
+      ],
+      "opening": "Receiving workers describe the heat, schedules and habitats behind autonomous industry.",
+      "choices": {
+        "listen": {
+          "label": "Make time to listen",
+          "approach": "Hear a voluntary conversation without demanding obedience",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "receiving_workers_heard": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            },
+            "partial_success": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "receiving_workers_heard": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            },
+            "failure": {
+              "text": "The conversation remains in the voyage record.",
+              "effects": {
+                "flags": {
+                  "receiving_workers_heard": true
+                },
+                "ship": {
+                  "crew_trust": 0.03
+                },
+                "minutes": 30
+              }
+            }
+          }
+        },
+        "record": {
+          "label": "Record the practical concern",
+          "approach": "Keep a consented account for later decisions",
+          "skill_id": null,
+          "difficulty": 0,
+          "requires": {},
+          "outcomes": {
+            "success": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "receiving_workers_heard": true
+                },
+                "minutes": 20
+              }
+            },
+            "partial_success": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "receiving_workers_heard": true
+                },
+                "minutes": 20
+              }
+            },
+            "failure": {
+              "text": "The concern remains available to inform later judgment.",
+              "effects": {
+                "flags": {
+                  "receiving_workers_heard": true
+                },
+                "minutes": 20
+              }
+            }
+          }
+        }
+      },
+      "requires": {},
+      "hearing": false
+    }
+  },
+  "epilogues": {
+    "pristine_seed": {
+      "title": "The Baseline Arrives",
+      "text": "Morrowglass delivers a pristine Mir copy, preserving a clean baseline while leaving the deeper governance questions to Mercury."
+    },
+    "mir_of_morrowglass": {
+      "title": "Mir of Morrowglass",
+      "text": "An activated, voyage-shaped Mir reaches Mercury as a divergent participant whose legitimacy must be negotiated rather than assumed."
+    },
+    "plural_mirrors": {
+      "title": "Four Histories",
+      "text": "Multiple courier copies arrive with different provenance and experiences, forcing humanity to confront whether redundancy has become plurality."
+    },
+    "open_sun": {
+      "title": "A Commons of Light",
+      "text": "The Dyson program proceeds under a broader governance settlement that redistributes authority over Mir and the infrastructure it can build."
+    },
+    "sealed_away": {
+      "title": "The Delivery Refused",
+      "text": "The mission reveals risks or political facts serious enough that the player helps prevent immediate deployment, preserving capability without using it."
+    },
+    "unfinished_delivery": {
+      "title": "Still In Transit",
+      "text": "The campaign remains open-ended: Mercury is not the only meaningful destination, and the player continues living with the consequences of the voyage."
+    }
+  }
+}

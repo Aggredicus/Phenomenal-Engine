@@ -87,7 +87,19 @@ These are *payload* byte comparisons, not end-to-end latency measurements. JSON 
 
 ## Limits
 
-The public save still includes cumulative event history and will grow with turn count. Removing *old* scene packets, compressing them further, or replacing the ledger with append-only shards needs a separate backwards-compatible migration and performance benchmark. Do not erase events or hashes simply to hit a payload target.
+Starting in v0.7.0, a cleartext save larger than 600 KB losslessly archives all
+but the newest ledger event as `event_ledger_archive` (`zlib-base64-v1`). The
+newest scene remains ordinary JSON. `decode_state` and local `load_memory`
+expand the archive before verifying every original event hash, restoring the
+complete runtime ledger and derived latest packet. The archive records event
+count, expanded byte count and SHA-256; bounded decompression rejects malformed,
+truncated, trailing or oversized data. Secret scanning happens before compression.
+Plain and legacy saves remain supported. No event or old roll is discarded.
+
+Public transport still has a 900 KB bound and expanded archives a 64 MB bound;
+this extends practical campaign length rather than making storage unlimited.
+Readers must use the decoder before ledger verification or idempotency lookup.
+Normal local saves remain uncompressed JSON.
 
 ## Station economy turns (v0.6.0)
 

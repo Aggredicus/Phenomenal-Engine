@@ -160,6 +160,12 @@
       "enum": [
         "mirror_delivery"
       ]
+    },
+    "campaign_profile": {
+      "enum": [
+        "mirror_delivery"
+      ],
+      "description": "Whitelisted authored campaign profile; optional for other adventures."
     }
   }
 }

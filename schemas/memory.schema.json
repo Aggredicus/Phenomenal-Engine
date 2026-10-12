@@ -135,6 +135,14 @@
     "economy": {
       "type": "object",
       "description": "Persistent station credits, inventory, vendors, accepted jobs, and market clocks; optional for older saves."
+    },
+    "campaign": {
+      "type": "object",
+      "description": "Optional persistent authored campaign: evidence, scenes, contacts, factions, journal, arrivals, receipts and ending."
+    },
+    "event_ledger_archive": {
+      "type": "object",
+      "description": "Optional lossless public transport archive; loaders restore the full ledger before verification."
     }
   }
 }

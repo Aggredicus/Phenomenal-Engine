@@ -1,4 +1,4 @@
-# Phenomenal Engine v0.6.0
+# Phenomenal Engine v0.7.0
 
 **Fork it. Connect a write-capable chatbot AI. Say: `Play Phenomenal Engine.`**
 
@@ -87,6 +87,16 @@ exploration districts, inventory/credits, delivery quests, once-only rewards,
 and paid ship servicing. Earth Escape Gate and Nacre Station have distinct
 businesses and local work. World time changes demand, stock and station activity;
 read-only market views and exact quotes come before authoritative transactions.
+
+## Complete Mirror Delivery campaign
+
+[Campaign play](docs/campaign_play.md) adds 25 authored scenes, 58 choices,
+13 conversation topics and six consequence-driven ending paths across the
+pilgrimage. Courier histories, cooperation, crew relationships, rescues,
+investigation and Mercury hearings use persistent evidence and typed actions.
+Automatic conversations and safe alternatives keep the journey playable;
+uncertain approaches preview character strengths, difficulty and modifiers.
+Existing saved turns remain intact, and station work continues after delivery.
 
 ## Variable action odds and reliable routine tasks
 

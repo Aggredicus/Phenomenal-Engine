@@ -22,6 +22,7 @@ from .memory import find_event_by_idempotency_key, validate_memory_for_mod
 from .mod_loader import load_mod
 from .adjudication import prepare_adjudication
 from .economy import prepare_command, resolve_assessment
+from . import campaign as campaign_story
 
 MODS = {
     "mirror_delivery": "mirror_delivery.json",
@@ -108,6 +109,8 @@ def propose_turn(request: dict) -> dict:
             raise TurnExchangeError("idempotency key was previously used with a different adjudication")
         if duplicate.get("payload", {}).get("economy_command") != request.get("economy_command"):
             raise TurnExchangeError("idempotency key was previously used with a different economy command")
+        if duplicate.get("payload", {}).get("campaign_command") != request.get("campaign_command"):
+            raise TurnExchangeError("idempotency key was previously used with a different campaign command")
         return {
             "status": "duplicate", "persisted": False, "requires_write": False,
             "remote_verified": False, "authoritative_if_source_verified": True,
@@ -118,13 +121,22 @@ def propose_turn(request: dict) -> dict:
         }
 
     economy_plan = None
+    campaign_plan = None
     raw_assessment = request.get("adjudication")
+    if request.get("economy_command") is not None and request.get("campaign_command") is not None:
+        raise TurnExchangeError("choose one typed economy or campaign action per turn")
     if request.get("economy_command") is not None:
         economy_plan = prepare_command(mod, state, request["economy_command"])
         raw_assessment = resolve_assessment(economy_plan, raw_assessment)
         if request.get("expected_economy_sha256") is not None and request["expected_economy_sha256"] != economy_plan["quote_sha256"]:
             raise TurnExchangeError("economy quote changed since preview")
-    assessment = prepare_adjudication(mod, state, action, raw_assessment, strict=True)
+    if request.get("campaign_command") is not None:
+        campaign_plan = campaign_story.prepare_command(mod, state, request["campaign_command"])
+        raw_assessment = campaign_story.resolve_assessment(campaign_plan, raw_assessment)
+        if request.get("expected_campaign_sha256") is not None and request["expected_campaign_sha256"] != campaign_plan["quote_sha256"]:
+            raise TurnExchangeError("campaign choice changed since preview")
+    typed_command = economy_plan is not None or campaign_plan is not None
+    assessment = prepare_adjudication(mod, state, action, raw_assessment, strict=True, apply_action_rules=not typed_command)
     assessment_digest = hashlib.sha256(json.dumps(assessment, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()).hexdigest()
     expected_digest = request.get("expected_adjudication_sha256")
     if expected_digest is not None and expected_digest != assessment_digest:
@@ -134,10 +146,10 @@ def propose_turn(request: dict) -> dict:
                 "requires_write": False, "no_rng_consumed": True, "no_state_mutated": True,
                 "state_version": state["state_version"], "expected_blob_sha": expected_sha,
                 "adjudication": assessment, "adjudication_sha256": assessment_digest,
-                "economy_quote": economy_plan}
+                "economy_quote": economy_plan, "campaign_quote": campaign_plan}
     packet = Engine(mod, state).step(action, idempotency_key=key,
                                   adjudication=request.get("adjudication"), require_adjudication=True,
-                                  economy_command=request.get("economy_command"))
+                                  economy_command=request.get("economy_command"), campaign_command=request.get("campaign_command"))
     proposed_bytes = encode_state(state)  # bounds, secret scan, hash-chain verification
     return {
         "status": "proposal", "persisted": False, "requires_write": True,

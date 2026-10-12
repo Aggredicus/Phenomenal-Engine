@@ -26,6 +26,7 @@ from .memory import (
     find_event_by_idempotency_key, new_memory, validate_memory_for_mod,
     verify_ledger,
 )
+from .ledger_archive import archive_ledger, restore_archived_ledger
 from .mod_loader import load_mod
 from .adjudication import load_adjudication
 
@@ -76,10 +77,17 @@ def encode_state(memory: dict) -> bytes:
     # after verification; no event payload, RNG state, or game fact is discarded.
     packed = {key: value for key, value in memory.items() if key != "last_scene_packet"}
     payload = (json.dumps(packed, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
-    if len(payload) > MAX_SAVE_BYTES:
-        raise GitHubSaveError("public save exceeds the configured 900 KB limit")
+    # Scan the complete cleartext before archiving so compression cannot hide secrets.
     if _SECRET.search(payload.decode("utf-8")):
         raise GitHubSaveError("potential credential or private key detected; refused public publication")
+    if len(payload) > 600_000:
+        try:
+            packed = archive_ledger(packed)
+        except ValueError as exc:
+            raise GitHubSaveError(str(exc)) from exc
+        payload = (json.dumps(packed, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
+    if len(payload) > MAX_SAVE_BYTES:
+        raise GitHubSaveError("public save exceeds the configured 900 KB limit after lossless archiving")
     return payload
 
 
@@ -90,6 +98,11 @@ def decode_state(raw: bytes) -> dict:
         value = json.loads(raw)
     except (ValueError, UnicodeDecodeError) as exc:
         raise GitHubSaveError("remote campaign is not valid JSON") from exc
+    if isinstance(value, dict):
+        try:
+            restore_archived_ledger(value)
+        except ValueError as exc:
+            raise GitHubSaveError(str(exc)) from exc
     if not isinstance(value, dict) or not verify_ledger(value):
         raise GitHubSaveError("remote campaign ledger is missing or invalid")
     last = _last_ledger_scene(value)
@@ -231,6 +244,7 @@ def run_turn(
     consent_path: str | None = None, confirm_first_publication: bool = False,
     adjudication: dict | None = None,
     economy_command: dict | None = None,
+    campaign_command: dict | None = None,
 ) -> dict:
     """One fully remote-persisted turn. Never returns a new scene before verified commit."""
     path = remote_path(campaign)
@@ -263,6 +277,8 @@ def run_turn(
             raise GitHubSaveError("idempotency key reused with different action or adjudication")
         if payload.get("economy_command") != economy_command:
             raise GitHubSaveError("idempotency key reused with different economy command")
+        if payload.get("campaign_command") != campaign_command:
+            raise GitHubSaveError("idempotency key reused with different campaign command")
         return {
             "status": "duplicate", "persisted": True, "created": False,
             "campaign_id": memory["session_id"], "turn": memory["turn"],
@@ -278,7 +294,7 @@ def run_turn(
             "agreement_sha256": covenant_digest(),
         }
     packet = Engine(mod, memory).step(action, idempotency_key=idempotency_key, adjudication=adjudication,
-                                    economy_command=economy_command)
+                                    economy_command=economy_command, campaign_command=campaign_command)
     commit = save_campaign(api, campaign, memory, sha)
     return {
         "status": "ok", "persisted": True, "created": created,
@@ -307,6 +323,7 @@ def main(argv=None) -> int:
             p.add_argument("--confirm-first-publication", action="store_true")
             p.add_argument("--adjudication", default=None, help="JSON assessment or path")
             p.add_argument("--economy-command", default=None, help="typed economy command JSON or path")
+            p.add_argument("--campaign-command", default=None, help="typed campaign command JSON or path")
     args = parser.parse_args(argv)
     try:
         if args.command == "preview":
@@ -331,6 +348,7 @@ def main(argv=None) -> int:
                 confirm_first_publication=args.confirm_first_publication,
                 adjudication=load_adjudication(args.adjudication),
                 economy_command=load_adjudication(args.economy_command),
+                campaign_command=load_adjudication(args.campaign_command),
             )
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
