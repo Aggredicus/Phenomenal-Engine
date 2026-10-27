@@ -1,0 +1,50 @@
+{
+  "profile": "game",
+  "checks": [
+    {
+      "name": "unit",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-q"
+      ],
+      "timeout_seconds": 180
+    },
+    {
+      "name": "mods",
+      "argv": [
+        "python3",
+        "-m",
+        "phenomenal_engine",
+        "validate",
+        "mods"
+      ],
+      "timeout_seconds": 90
+    },
+    {
+      "name": "soak",
+      "argv": [
+        "python3",
+        "scripts/reviewforge_soak.py",
+        "--seeds",
+        "500",
+        "--draws",
+        "100"
+      ],
+      "timeout_seconds": 120
+    },
+    {
+      "name": "manifest",
+      "argv": [
+        "python3",
+        "scripts/manifest.py",
+        "--check"
+      ],
+      "timeout_seconds": 60
+    }
+  ]
+}

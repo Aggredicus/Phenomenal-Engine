@@ -1,0 +1,12 @@
+{
+  "title": "Phenomenal Engine ReviewForge pilot",
+  "intent": "Wide-range PCG32 replay reliability and bounded test gates",
+  "acceptance_criteria": [
+    "Wide randint terminates and stays bounded",
+    "Gaussian cached value serializes and restores",
+    "Existing tests and manifest stay valid",
+    "No player data publishing or Codespaces"
+  ],
+  "rollback": "Close draft PR or revert feature commit; no merge until reviewed",
+  "declared_risk": "high"
+}

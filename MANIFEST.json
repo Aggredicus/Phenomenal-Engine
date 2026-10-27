@@ -20,9 +20,29 @@
     "sha256": "c92ffdba087035cf7dc54198a2ccbdabfae03d67268d52fca399b667e59b227f"
   },
   {
+    "path": ".github/workflows/reviewforge-soak.yml",
+    "bytes": 1043,
+    "sha256": "8659354f25ee8ffa4a3e6e57ccf6b730b530864b87591d39097c0e5b556902e5"
+  },
+  {
     "path": ".gitignore",
     "bytes": 501,
     "sha256": "a3d0a41fe7ae1c02d575e98734885423ebaefe187108a74b4ec3729a3a40892f"
+  },
+  {
+    "path": ".reviewgate/change.json",
+    "bytes": 462,
+    "sha256": "dc9ceabb4b83007c466f12dd36218bbb5078cf3e2831ebeaa2e4e19c50fe222e"
+  },
+  {
+    "path": ".reviewgate/config.json",
+    "bytes": 807,
+    "sha256": "4ce90a6e0590a2ec30c7d71bccdbf479b806afa7ea4959a83752385ddd7873b5"
+  },
+  {
+    "path": "AGENTS.md",
+    "bytes": 932,
+    "sha256": "347fce5e4b0e407c80e4430abd0d9af3430979ed0e446204314ed515d385451e"
   },
   {
     "path": "AGENT_BOOTLOADER.md",
@@ -60,9 +80,19 @@
     "sha256": "77018057f062deb44fb32724851111bbd5850093216b55ccac092e3fd9a70620"
   },
   {
+    "path": "REVIEW.md",
+    "bytes": 640,
+    "sha256": "427f2cc56bec2ef730deed5f8621db338fb3ecdea7c29c25eda66e07388b1dd3"
+  },
+  {
     "path": "SECURITY.md",
     "bytes": 6329,
     "sha256": "d49a1640742c21434a4dca9099d423cf60faa7af94b4f56aeaf85296d2d52502"
+  },
+  {
+    "path": "SPEC.md",
+    "bytes": 731,
+    "sha256": "9023b06fb85b918268ba97f5870d24702bc20993295b419a846929af6c28a60d"
   },
   {
     "path": "START_HERE.md",
@@ -193,6 +223,11 @@
     "path": "docs/progressive_turns.md",
     "bytes": 5242,
     "sha256": "741296e4d6dca2231d2997772e47d37f5a24ebb2160c5283701254cf59411817"
+  },
+  {
+    "path": "docs/reviewforge_pilot.md",
+    "bytes": 1207,
+    "sha256": "fe5e2293c5d4f2633e03b267cdfd22c1e0710b77fb3550800652a9eb10179fc5"
   },
   {
     "path": "docs/roadmap.md",
@@ -401,8 +436,8 @@
   },
   {
     "path": "phenomenal_engine/rng.py",
-    "bytes": 5451,
-    "sha256": "e86d5c675b186181982883ce1d1fe79c25b706b1ff8c065cc17bc9a1f6332442"
+    "bytes": 6332,
+    "sha256": "aec00a0d2f3f51a76304db094bd8895da80549d6c0076f56b1a553efa1803065"
   },
   {
     "path": "phenomenal_engine/story.py",
@@ -490,6 +525,11 @@
     "sha256": "0e622e592ef68c133ef3cfc0dca6216a567440bc2a5ca58ff42895d2c86a2f8d"
   },
   {
+    "path": "scripts/reviewforge_soak.py",
+    "bytes": 1803,
+    "sha256": "2632c2603ebab13a613382f5c24b8ad0862cbc20e4f9e054c53683962f594e91"
+  },
+  {
     "path": "tests/test_adjudication.py",
     "bytes": 10810,
     "sha256": "ea9d13427b7891a06bca72ebe3568561528c3c18cb51f5b3160952812a93c436"
@@ -553,6 +593,11 @@
     "path": "tests/test_probability.py",
     "bytes": 674,
     "sha256": "ef43482cd1d2ae06b5794bb733f5d8c02c07d351d30b5e084d7122b46d6b7f6e"
+  },
+  {
+    "path": "tests/test_reviewforge_rng_regressions.py",
+    "bytes": 1842,
+    "sha256": "9cfcde6dc3813301b9753efb18c12584732f01942486af0a400188da65dde2ef"
   },
   {
     "path": "tests/test_rng.py",
