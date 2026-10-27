@@ -158,8 +158,14 @@ class PCG32:
         obj.state = int(data["state"]) & MASK64
         obj.inc = int(data["inc"]) & MASK64
         cache = data.get("normal_cache")
-        if cache is not None and (type(cache) not in (int, float) or not math.isfinite(cache)):
-            raise ValueError("invalid PCG32 normal_cache")
+        if cache is not None:
+            if type(cache) not in (int, float):
+                raise ValueError("invalid PCG32 normal_cache")
+            try:
+                if not math.isfinite(cache):
+                    raise ValueError("invalid PCG32 normal_cache")
+            except OverflowError as exc:
+                raise ValueError("invalid PCG32 normal_cache") from exc
         obj._normal_cache = cache
         return obj
 

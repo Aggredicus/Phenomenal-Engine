@@ -31,6 +31,21 @@ class ReviewForgeRNGRegressions(unittest.TestCase):
         state.pop("normal_cache")
         self.assertEqual(a.random(), PCG32.from_state_dict(state).random())
 
+    def test_oversized_integer_cache_is_rejected_as_invalid(self):
+        # A valid JSON integer can exceed float range and must not leak OverflowError.
+        state = PCG32(2, 3).state_dict()
+        state["normal_cache"] = 1 << 4096
+        with self.assertRaisesRegex(ValueError, "invalid PCG32 normal_cache"):
+            PCG32.from_state_dict(state)
+
+    def test_cached_normal_survives_json_roundtrip(self):
+        import json
+        original = PCG32(33, 7)
+        original.normal()
+        restored = PCG32.from_state_dict(json.loads(json.dumps(original.state_dict())))
+        self.assertEqual([original.normal() for _ in range(20)],
+                         [restored.normal() for _ in range(20)])
+
     def test_invalid_cache_rejected(self):
         for bad in ("garbage", float("nan"), float("inf"), {}, True):
             state = PCG32(2, 3).state_dict()

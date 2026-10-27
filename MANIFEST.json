@@ -436,8 +436,8 @@
   },
   {
     "path": "phenomenal_engine/rng.py",
-    "bytes": 6332,
-    "sha256": "aec00a0d2f3f51a76304db094bd8895da80549d6c0076f56b1a553efa1803065"
+    "bytes": 6560,
+    "sha256": "9287a959b478ae72866950addc689423a1ece820c7f7dbbf688148c67db34c5b"
   },
   {
     "path": "phenomenal_engine/story.py",
@@ -596,8 +596,8 @@
   },
   {
     "path": "tests/test_reviewforge_rng_regressions.py",
-    "bytes": 1842,
-    "sha256": "9cfcde6dc3813301b9753efb18c12584732f01942486af0a400188da65dde2ef"
+    "bytes": 2555,
+    "sha256": "7eff0baac250fdf459f4d1eeded3ec6ff7b8ca437f32e786922a42066887d733"
   },
   {
     "path": "tests/test_rng.py",
