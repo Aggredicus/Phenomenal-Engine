@@ -42,6 +42,20 @@ class PCG32:
         if b < a:
             raise ValueError("b must be >= a")
         span = b - a + 1
+        if span > (1 << 32):
+            # A 32-bit draw cannot represent every outcome in wider intervals.
+            # Truncate to the required bits, rejecting values outside the span.
+            bits = (span - 1).bit_length()
+            words = (bits + 31) // 32
+            mask = (1 << bits) - 1
+            while True:
+                value = 0
+                for _ in range(words):
+                    value = (value << 32) | self._next_uint32()
+                value &= mask
+                if value < span:
+                    return a + value
+        # Keep <=32-bit seeded sequences bit-for-bit backwards compatible.
         threshold = ((1 << 32) - span) % span
         while True:
             r = self._next_uint32()
@@ -135,14 +149,26 @@ class PCG32:
         return min(n, max(0, int(round(self.normal(mu, math.sqrt(var))))))
 
     def state_dict(self) -> dict:
-        return {"algorithm": "pcg32-xsh-rr", "state": self.state, "inc": self.inc}
+        return {"algorithm": "pcg32-xsh-rr", "state": self.state, "inc": self.inc,
+                "normal_cache": self._normal_cache}
 
     @classmethod
     def from_state_dict(cls, data: dict) -> "PCG32":
         obj = cls(0, 1)
         obj.state = int(data["state"]) & MASK64
         obj.inc = int(data["inc"]) & MASK64
-        obj._normal_cache = None
+        cache = data.get("normal_cache")
+        if cache is not None:
+            if type(cache) not in (int, float):
+                raise ValueError("invalid PCG32 normal_cache")
+            try:
+                # Box-Muller clamps u1 >= 1e-15, so its cached variate
+                # always has magnitude < 8.32. Reject impossible saved values.
+                if not math.isfinite(cache) or abs(cache) > 9.0:
+                    raise ValueError("invalid PCG32 normal_cache")
+            except OverflowError as exc:
+                raise ValueError("invalid PCG32 normal_cache") from exc
+        obj._normal_cache = cache
         return obj
 
 def derive_stream(master_seed: int | str, label: str) -> PCG32:

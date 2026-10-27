@@ -1,0 +1,34 @@
+name: ReviewForge bounded stress pilot
+on:
+  pull_request:
+    paths:
+      - "phenomenal_engine/**"
+      - "tests/**"
+      - "scripts/reviewforge_soak.py"
+      - ".github/workflows/reviewforge-soak.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reviewforge-soak-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bounded-soak:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Complete unit regressions
+        run: python -m unittest discover -s tests -q
+      - name: Validate mods
+        run: python -m phenomenal_engine validate mods
+      - name: Stress reproducible wide ranges and cached normals
+        run: python scripts/reviewforge_soak.py --seeds 8000 --draws 200
+      - name: Verify canonical manifest
+        run: python scripts/manifest.py --check
