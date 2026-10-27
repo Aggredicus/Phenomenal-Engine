@@ -162,7 +162,9 @@ class PCG32:
             if type(cache) not in (int, float):
                 raise ValueError("invalid PCG32 normal_cache")
             try:
-                if not math.isfinite(cache):
+                # Box-Muller clamps u1 >= 1e-15, so its cached variate
+                # always has magnitude < 8.32. Reject impossible saved values.
+                if not math.isfinite(cache) or abs(cache) > 9.0:
                     raise ValueError("invalid PCG32 normal_cache")
             except OverflowError as exc:
                 raise ValueError("invalid PCG32 normal_cache") from exc

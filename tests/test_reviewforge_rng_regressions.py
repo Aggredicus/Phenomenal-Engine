@@ -38,6 +38,14 @@ class ReviewForgeRNGRegressions(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "invalid PCG32 normal_cache"):
             PCG32.from_state_dict(state)
 
+    def test_impossible_finite_normal_cache_is_rejected(self):
+        # Finite JSON numbers can still be impossible Box-Muller cache values.
+        state = PCG32(2, 3).state_dict()
+        for bad in (9.01, -9.01, 1e308, -1e308):
+            state["normal_cache"] = bad
+            with self.subTest(value=bad), self.assertRaisesRegex(ValueError, "invalid PCG32 normal_cache"):
+                PCG32.from_state_dict(state)
+
     def test_cached_normal_survives_json_roundtrip(self):
         import json
         original = PCG32(33, 7)
